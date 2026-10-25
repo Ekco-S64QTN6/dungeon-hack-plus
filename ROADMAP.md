@@ -48,7 +48,7 @@ Working notes, engine facts and test tooling are in `CLAUDE.md`; `PLAN.md` is th
 - [x] M  EOB decorations from `.DEC/.DAT` → generic slots `Wall Deco 29–48` (`eob_wall_deco` job, `tools/eob_decos.py`: EOB's own placement tables from ScummVM, i.e. `_dscWallMapping`, `kEoB1/2DscShapeIndexDOS`, `kEoB1/2DscXDOS`, mapped to DH faces; fixed colours). Darkmoon: 20 EOB2 pieces (webs, hanging skeleton, banners, emblems, windows, ankh…); Waterdeep: 6 EOB1 pieces (webs, gargoyle, spider emblems, plaque), the rest keep DH tapestries. Functional-looking pieces (levers, keyholes, buttons, mouths, niches) and floor furniture are left out. In-game ✔ (`smoke/deco_views.json`: fronts + side panels at depth 1–3). EOB1 BRICK has no deco sheet in the install; `.DEC` ↔ sheet pairs come from the EOB2 `LEVEL*.INF` scripts
 - [x] M  Floors and ceilings: EOB backdrops are 176×120 ✔; Menzo flats projected with DH's view geometry ✔. `Ground-0..7` (pits/holes, floor-ramp art) are re-ramped when a floor's palettes change shape (`reramp` Floor-N, auto-inserted; `check_ramps` now fails otherwise; it caught the bug on floors 0/1/6 of the mix)
 - [x] S  Pit fixture (`savegame_pit`, `smoke/pit_views.json`): re-ramped pits checked in game on the mix's re-ramped, new and original floors
-- [ ] M  Ground sets drawn from the source games (EOB pit art, EOB1 dec 0/1) instead of re-ramped DH pits: needs the 38 Ground-N frames mapped to view positions
+- [x] M  Ground sets (pits) from the source games: frame layout read from the floor/ceiling pit scripts (19 per kind, centre column only); EOB1/2 pits are flag-0x04 decorations EOB draws at the same screen places (BLUE, BRICK, GREEN, DUNG, MEZZ, SILVER, FOREST; DROW/XANATHA/CRIMSON have none), EOB3 Mausoleum pits use the same layout. Mix and classic themes. In game ✔ (`pit_views2`, fixture `savegame_pits2`: 1/2/3 squares + ceiling hole, 8 sets)
 - [ ] M  Menzo RES6 sound effects: 386 headerless 8-bit PCM records, rate unknown and no names; needs a listening pass (or Menzo script RE) to map them to DH sound slots
 
 **Monsters**
@@ -138,5 +138,5 @@ Working notes, engine facts and test tooling are in `CLAUDE.md`; `PLAN.md` is th
 
 ## What's left
 - **Needs the user:** playtesting the mix; EOB2 music (ADL converter, 3 tracks, approximate instruments: worth it?); Menzo's 386 unnamed sound effects (listen and map, or reverse-engineer Menzo's scripts).
-- **Doable, smaller payoff:** Ground sets from EOB pit art; EOB3's own rubble/niche/statue resources for its sets; item icons with a hand-labelled mapping.
+- **Doable, smaller payoff:** EOB3's own rubble/niche/statue resources for its sets; item icons with a hand-labelled mapping.
 - **Large engine projects:** a bytecode assembler (new monster types, items, spells, keyboard shortcuts); Thirdeye as a native runtime; Menzo monster sprites.

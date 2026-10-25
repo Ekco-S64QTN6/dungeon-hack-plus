@@ -444,6 +444,17 @@
    "image": "pool/floors/BLUE_backdrop.png"
   },
   {
+   "type": "eob_pits",
+   "target": "Ground-13",
+   "game": "eob1",
+   "dec": "BLUE.DAT",
+   "sheet": "BLUE.CPS",
+   "pal": "BLUE.PAL",
+   "floor": 0,
+   "ceiling": 1,
+   "backdrop": "pool/floors/BLUE_backdrop.png"
+  },
+  {
    "type": "furniture_from",
    "target": "Eighth Wallset",
    "donor": "Stone"
@@ -595,6 +606,17 @@
    "image": "pool/floors/MEZZ_backdrop.png"
   },
   {
+   "type": "eob_pits",
+   "target": "Ground-2",
+   "game": "eob2",
+   "dec": "MEZZ.DEC",
+   "sheet": "MEZZ1.CPS",
+   "pal": "MEZZ.PAL",
+   "floor": 20,
+   "ceiling": 40,
+   "backdrop": "pool/floors/MEZZ_backdrop.png"
+  },
+  {
    "type": "furniture_from",
    "target": "W12 Wallset",
    "donor": "Marble"
@@ -621,6 +643,17 @@
    "image": "pool/floors/GREEN_backdrop.png"
   },
   {
+   "type": "eob_pits",
+   "target": "Ground-4",
+   "game": "eob1",
+   "dec": "GREEN.DAT",
+   "sheet": "GREEN.CPS",
+   "pal": "GREEN.PAL",
+   "floor": 22,
+   "ceiling": 23,
+   "backdrop": "pool/floors/GREEN_backdrop.png"
+  },
+  {
    "type": "furniture_from",
    "target": "W13 Wallset",
    "donor": "Stone"
@@ -645,6 +678,17 @@
    "type": "floor",
    "target": "Floor-11",
    "image": "pool/floors/DUNG_backdrop.png"
+  },
+  {
+   "type": "eob_pits",
+   "target": "Ground-11",
+   "game": "eob2",
+   "dec": "BROWN.DEC",
+   "sheet": "BROWN1.CPS",
+   "pal": "DUNG.PAL",
+   "floor": 22,
+   "ceiling": 23,
+   "backdrop": "pool/floors/DUNG_backdrop.png"
   },
   {
    "type": "furniture_from",

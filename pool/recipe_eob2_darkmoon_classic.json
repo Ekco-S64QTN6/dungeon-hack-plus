@@ -197,6 +197,17 @@
    "image": "pool/floors/DUNG_backdrop.png"
   },
   {
+   "type": "eob_pits",
+   "target": "Ground-0",
+   "game": "eob2",
+   "dec": "BROWN.DEC",
+   "sheet": "BROWN1.CPS",
+   "pal": "DUNG.PAL",
+   "floor": 22,
+   "ceiling": 23,
+   "backdrop": "pool/floors/DUNG_backdrop.png"
+  },
+  {
    "type": "vmp_walls",
    "target": "Foil Wallset",
    "game": "eob2",
@@ -216,6 +227,17 @@
    "type": "floor",
    "target": "Floor-1",
    "image": "pool/floors/SILVER_backdrop.png"
+  },
+  {
+   "type": "eob_pits",
+   "target": "Ground-1",
+   "game": "eob2",
+   "dec": "SILVER.DEC",
+   "sheet": "SILVER1.CPS",
+   "pal": "SILVER.PAL",
+   "floor": 4,
+   "ceiling": 2,
+   "backdrop": "pool/floors/SILVER_backdrop.png"
   },
   {
    "type": "vmp_walls",
@@ -260,6 +282,17 @@
    "image": "pool/floors/MEZZ_backdrop.png"
   },
   {
+   "type": "eob_pits",
+   "target": "Ground-3",
+   "game": "eob2",
+   "dec": "MEZZ.DEC",
+   "sheet": "MEZZ1.CPS",
+   "pal": "MEZZ.PAL",
+   "floor": 20,
+   "ceiling": 40,
+   "backdrop": "pool/floors/MEZZ_backdrop.png"
+  },
+  {
    "type": "vmp_walls",
    "target": "Wood Wallset",
    "game": "eob2",
@@ -279,6 +312,17 @@
    "type": "floor",
    "target": "Floor-4",
    "image": "pool/floors/FOREST_backdrop.png"
+  },
+  {
+   "type": "eob_pits",
+   "target": "Ground-4",
+   "game": "eob2",
+   "dec": "FOREST.DEC",
+   "sheet": "FOREST.CPS",
+   "pal": "FOREST.PAL",
+   "floor": 1,
+   "ceiling": null,
+   "backdrop": "pool/floors/FOREST_backdrop.png"
   },
   {
    "type": "vmp_deco",

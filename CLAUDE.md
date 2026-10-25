@@ -76,7 +76,7 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   each on its own floor with hue-matched palettes; the other 3 slots keep DH's art.
 * Per external set: walls + door frame (+ slot 36 post, arch), stairs (own art, or `stairs_from` a
   matching DH style), window/shelf/pillars (`furniture_from` the DH style in `mix.FURNITURE_DONOR`),
-  decorations (own, else cosmetic EOB ones in DH's slots), floor backdrop.
+  pits (own EOB1/2/EOB3 art where the set has some), decorations (own, else cosmetic EOB ones in DH's slots), floor backdrop.
 * Doors: every EOB door (22) gets a slot; see-through ones in DH's see-through numbers 3/7/14/17.
 * Generic decorations 29-48, monsters (~half of the slots with an EOB counterpart), portraits (~half,
   same sex group), in-game music per wallset (58 vetted tracks), EOB3 sounds and intro music.
@@ -148,6 +148,9 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   EOB doors/decorations take the palette of the levels they belong to (`EOB1_DOOR_PAL`, `EOB2_DOOR_PAL`).
 * EOB walls: `vmp_walls` copies hand-drawn views 1:1 (ScummVM `_vmpOffsetsDefault` → DH faces).
   Wall types: wt0/wt1 plain, wt2 frame, wt3/wt4 stairs up/down, wt5 decorated.
+* Ground-N (pits): 19 frames per kind (floor pit 0-18, ceiling hole 19-37), drawn only at 8/16/13 (1/2/3
+  squares ahead, at the front wall panel's origin) and 18 (own square). EOB1/2 pits are decorations (flag 0x04)
+  drawn at the same places (`eob_pits` job, `eob_classic.EOB_PITS`); EOB3 Mausoleum pit = the same layout.
 * EOB decorations: `.DEC`/`.DAT` = u16 n, n × 52 B (shape[10], next, flags, x[10], y[10]), u16 nrects,
   rects into the sheet .CPS; `next == 0` ends a chain; placed with ScummVM's tables (`eob_decos.py`).
 * EOB monsters: exact frame rectangles (`tools/eob_monster_layouts.json`); transparency = index 0 only.
@@ -171,10 +174,11 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   diff is weak when only part of the graphics is pinned: review `gate_report.png`.
 * Plans: gate_walk (start, stairs, door at 2 and 1), door_open, stairs_down, ice_stairs, monsters,
   deco_views, pillar_views, doorway (slot 36), arch_window (+ standing in it), pit_views, item_juggle(_pack),
-  audio_rate, heap_levels, heap_levels_deep. Walker keys: `{"key": "F7"}` (held like a real press).
+  audio_rate, heap_levels, heap_levels_deep, pit_views2. Walker keys: `{"key": "F7"}` (held like a real press).
 * Fixtures: `savegame` (Rhenovia, seed 000E6986), `savegame_nomon` (no creatures; start (23,2) N,
   stairs up behind, door (25,6)); variants with the start moved or a record added: `_stairsdown`,
-  `_ice`, `_deco` (14,11), `_pillar` (5,11), `_archwin` (27,11), `_pit` (pit at (23,1)).
+  `_ice`, `_deco` (14,11), `_pillar` (5,11), `_archwin` (27,11), `_pit` (pit at (23,1)), `_pits2` (from `_pit`:
+  start (24,5), floor pit (21,5), the (23,1) record turned into a ceiling hole at (25,5); plan pit_views2).
 * `smoke/save_restore.py BUILD [--no-template]`, `smoke/music_check.py BUILD...` (FluidSynth +
   Ctrl+F6 audio capture; sounding fraction), `smoke/music_tracks.py SPEC|@FILE` (track vetting),
   `smoke/maze_seeds.py` (MAZE hang hunt: 1,000 seeds, none hang), `smoke/mem_margin.py` (start-up cliff).

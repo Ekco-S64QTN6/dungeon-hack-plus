@@ -96,6 +96,32 @@ def set_colours(game, vset):
     return pal[np.array([remap[16 + v] for v in px], np.uint8)][np.frombuffer(bytes(m), np.uint8) > 0]
 
 
+# EOB pit (floor hole) and ceiling hole decorations per set: (decoration file, sheet, palette, floor, ceiling).
+# Found by rendering every flag-0x04 decoration where DH draws its pits; DROW, XANATHA and CRIMSON have
+# none (their floor decorations are pressure plates and rubble), so they keep DH's pits.
+EOB_PITS = {'BLUE': ('BLUE.DAT', 'BLUE.CPS', 'BLUE.PAL', 0, 1), 'BRICK': ('BRICK.DAT', 'BRICK2.CPS', 'BRICK.PAL', 27, 28),
+            'GREEN': ('GREEN.DAT', 'GREEN.CPS', 'GREEN.PAL', 22, 23), 'DUNG': ('BROWN.DEC', 'BROWN1.CPS', 'DUNG.PAL', 22, 23),
+            'MEZZ': ('MEZZ.DEC', 'MEZZ1.CPS', 'MEZZ.PAL', 20, 40), 'SILVER': ('SILVER.DEC', 'SILVER1.CPS', 'SILVER.PAL', 4, 2),
+            'FOREST': ('FOREST.DEC', 'FOREST.CPS', 'FOREST.PAL', 1, None)}
+
+
+def pit_jobs(game, vset, floor):
+    """EOB1/2 set `vset`'s own pit and ceiling hole as Floor-`floor`'s ground set (none: DH's pits stay)."""
+    if vset not in EOB_PITS:
+        return []
+    dec, sheet, epal, fpit, cpit = EOB_PITS[vset]
+    return [{'type': 'eob_pits', 'target': 'Ground-%d' % floor, 'game': game, 'dec': dec, 'sheet': sheet,
+             'pal': epal, 'floor': fpit, 'ceiling': cpit, 'backdrop': 'pool/floors/%s_backdrop.png' % vset}]
+
+
+def eob3_pit_jobs(wall, pal, floor):
+    """EOB3 pits: only the Mausoleum has pit art (same 19-frame layout as Ground-N)."""
+    if wall != 'Mausoleum walls':
+        return []
+    return [{'type': 'panels', 'target': 'Ground-%d' % floor, 'source': res, 'source_palette': pal,
+             'count': 19, 'target_first': first} for res, first in (('Mausoleum pit', 0), ('Mausoleum ceiling pit', 19))]
+
+
 def build(name, theme):
     dh = aesop.ResFile(os.path.join(ROOT, 'base_games', 'dungeon_hack', 'HACK.RES')); n = dh.names()
     pals = {p: aesop.decode_palette(dh.entry(n['wall/floor palette %02d' % p])[2])[1] for p in range(21)}
@@ -114,6 +140,7 @@ def build(name, theme):
                      'plain': [0, 1], 'frame': 2, 'frame_set': frame_set,
                      **({'stairs': '%s Stairs' % wall, 'stairs_set': stairs_set, 'stairs_down': 4, 'stairs_up': 3} if has_stairs else {})})
         jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s_backdrop.png' % vset})
+        jobs += pit_jobs(game, vset, floor)
     for floor, (vset, wall, frame_set, stairs_set) in enumerate(theme['sets']):
         if vset not in ('FOREST',):            # FOREST has no decorated wall type
             jobs.append({'type': 'vmp_deco', 'target': '%s decorations' % wall, 'wallset': '%s Wallset' % wall,
@@ -197,6 +224,7 @@ def build_eob3():
         rules['floor_palettes'][str(floor)] = match
         rules['allow_pairs'].append([match, match])
         jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': path})
+        jobs += eob3_pit_jobs(wall, pal, floor)
         front = 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower()
         Image.fromarray(eob3_front(e3, wall, pal)).save(os.path.join(ROOT, front))
         jobs.append({'type': 'wallset', 'target': '%s Wallset' % dhw, 'texture': front, 'frames': '36,199-217'})

@@ -708,6 +708,22 @@
    "image": "pool/floors/eob3_mausoleum.png"
   },
   {
+   "type": "panels",
+   "target": "Ground-1",
+   "source": "Mausoleum pit",
+   "source_palette": "Mausoleum palette",
+   "count": 19,
+   "target_first": 0
+  },
+  {
+   "type": "panels",
+   "target": "Ground-1",
+   "source": "Mausoleum ceiling pit",
+   "source_palette": "Mausoleum palette",
+   "count": 19,
+   "target_first": 19
+  },
+  {
    "type": "wallset",
    "target": "Wood Wallset",
    "texture": "pool/walls/eob3_mausoleum_front.png",

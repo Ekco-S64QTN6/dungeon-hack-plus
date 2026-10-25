@@ -197,6 +197,17 @@
    "image": "pool/floors/BLUE_backdrop.png"
   },
   {
+   "type": "eob_pits",
+   "target": "Ground-0",
+   "game": "eob1",
+   "dec": "BLUE.DAT",
+   "sheet": "BLUE.CPS",
+   "pal": "BLUE.PAL",
+   "floor": 0,
+   "ceiling": 1,
+   "backdrop": "pool/floors/BLUE_backdrop.png"
+  },
+  {
    "type": "vmp_walls",
    "target": "Foil Wallset",
    "game": "eob1",
@@ -216,6 +227,17 @@
    "type": "floor",
    "target": "Floor-1",
    "image": "pool/floors/BRICK_backdrop.png"
+  },
+  {
+   "type": "eob_pits",
+   "target": "Ground-1",
+   "game": "eob1",
+   "dec": "BRICK.DAT",
+   "sheet": "BRICK2.CPS",
+   "pal": "BRICK.PAL",
+   "floor": 27,
+   "ceiling": 28,
+   "backdrop": "pool/floors/BRICK_backdrop.png"
   },
   {
    "type": "vmp_walls",
@@ -258,6 +280,17 @@
    "type": "floor",
    "target": "Floor-3",
    "image": "pool/floors/GREEN_backdrop.png"
+  },
+  {
+   "type": "eob_pits",
+   "target": "Ground-3",
+   "game": "eob1",
+   "dec": "GREEN.DAT",
+   "sheet": "GREEN.CPS",
+   "pal": "GREEN.PAL",
+   "floor": 22,
+   "ceiling": 23,
+   "backdrop": "pool/floors/GREEN_backdrop.png"
   },
   {
    "type": "vmp_walls",

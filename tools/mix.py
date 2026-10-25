@@ -167,6 +167,7 @@ def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
                 src_job = next(j for j in e3jobs if j['target'] == deco)
                 jobs.append(dict(src_job, target=target, ramp_of=slot + ' Wallset'))
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/eob3_%s.png' % wall.split()[0].lower()})
+            jobs += ec.eob3_pit_jobs(wall, pal, floor)
             jobs.append({'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower(), 'frames': '36,199-217'})
             if not any(j['target'] == '%s Stairs' % old for j in e3jobs):      # EOB3 Forest/Ruins have no stairs
                 jobs.append({'type': 'stairs_from', 'target': '%s Stairs' % slot, 'donor': EOB3_STAIR_DONOR[src]})
@@ -179,6 +180,7 @@ def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
                 jobs.append({'type': 'vmp_deco', 'target': '%s decorations' % slot, 'wallset': '%s Wallset' % slot,
                              'game': game, 'set': vset, 'deco': 5, 'base': 0})
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s_backdrop.png' % vset})
+            jobs += ec.pit_jobs(game, vset, floor)
         jobs.append({'type': 'furniture_from', 'target': '%s Wallset' % slot, 'donor': FURNITURE_DONOR[src]})
 
     # ---- doors (with extra_doors: 16 more door numbers). Every EOB door gets a slot: see-through

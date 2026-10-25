@@ -148,6 +148,34 @@
    ]
   },
   {
+   "type": "fix_unlock_shape",
+   "target": "items"
+  },
+  {
+   "type": "fix_ice_stairs",
+   "target": "Ice Stairs"
+  },
+  {
+   "type": "reramp",
+   "target": "Rock"
+  },
+  {
+   "type": "reramp",
+   "target": "Foil"
+  },
+  {
+   "type": "reramp",
+   "target": "Mine"
+  },
+  {
+   "type": "reramp",
+   "target": "Ice"
+  },
+  {
+   "type": "reramp",
+   "target": "Wood"
+  },
+  {
    "type": "vmp_walls",
    "target": "Rock Wallset",
    "game": "eob1",
@@ -169,6 +197,17 @@
    "image": "pool/floors/BLUE_backdrop.png"
   },
   {
+   "type": "eob_pits",
+   "target": "Ground-0",
+   "game": "eob1",
+   "dec": "BLUE.DAT",
+   "sheet": "BLUE.CPS",
+   "pal": "BLUE.PAL",
+   "floor": 0,
+   "ceiling": 1,
+   "backdrop": "pool/floors/BLUE_backdrop.png"
+  },
+  {
    "type": "vmp_walls",
    "target": "Foil Wallset",
    "game": "eob1",
@@ -188,6 +227,17 @@
    "type": "floor",
    "target": "Floor-1",
    "image": "pool/floors/BRICK_backdrop.png"
+  },
+  {
+   "type": "eob_pits",
+   "target": "Ground-1",
+   "game": "eob1",
+   "dec": "BRICK.DAT",
+   "sheet": "BRICK2.CPS",
+   "pal": "BRICK.PAL",
+   "floor": 27,
+   "ceiling": 28,
+   "backdrop": "pool/floors/BRICK_backdrop.png"
   },
   {
    "type": "vmp_walls",
@@ -232,6 +282,17 @@
    "image": "pool/floors/GREEN_backdrop.png"
   },
   {
+   "type": "eob_pits",
+   "target": "Ground-3",
+   "game": "eob1",
+   "dec": "GREEN.DAT",
+   "sheet": "GREEN.CPS",
+   "pal": "GREEN.PAL",
+   "floor": 22,
+   "ceiling": 23,
+   "backdrop": "pool/floors/GREEN_backdrop.png"
+  },
+  {
    "type": "vmp_walls",
    "target": "Wood Wallset",
    "game": "eob1",
@@ -253,13 +314,192 @@
    "image": "pool/floors/XANATHA_backdrop.png"
   },
   {
+   "type": "vmp_deco",
+   "target": "Rock decorations",
+   "wallset": "Rock Wallset",
+   "game": "eob1",
+   "set": "BLUE",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Foil decorations",
+   "wallset": "Foil Wallset",
+   "game": "eob1",
+   "set": "BRICK",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Mine decorations",
+   "wallset": "Mine Wallset",
+   "game": "eob1",
+   "set": "DROW",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Ice decorations",
+   "wallset": "Ice Wallset",
+   "game": "eob1",
+   "set": "GREEN",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Wood decorations",
+   "wallset": "Wood Wallset",
+   "game": "eob1",
+   "set": "XANATHA",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-00",
+   "kind": "iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-02",
+   "kind": "grate"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-03",
+   "kind": "slab"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-04",
+   "kind": "web"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-05",
+   "kind": "mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-06",
+   "kind": "eye"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-07",
+   "kind": "iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-08",
+   "kind": "grate"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-09",
+   "kind": "slab"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-11",
+   "kind": "web"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-12",
+   "kind": "mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-14",
+   "kind": "eye"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-15",
+   "kind": "iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-16",
+   "kind": "grate"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-17",
+   "kind": "slab"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-18",
+   "kind": "web"
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 29",
+   "game": "eob1",
+   "sheet": "BLUE.CPS",
+   "dec": "BLUE.DAT",
+   "pal": "BLUE.PAL",
+   "index": 7
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 30",
+   "game": "eob1",
+   "sheet": "BLUE.CPS",
+   "dec": "BLUE.DAT",
+   "pal": "BLUE.PAL",
+   "index": 8
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 31",
+   "game": "eob1",
+   "sheet": "BLUE.CPS",
+   "dec": "BLUE.DAT",
+   "pal": "BLUE.PAL",
+   "index": 10
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 32",
+   "game": "eob1",
+   "sheet": "DROW.CPS",
+   "dec": "DROW.DAT",
+   "pal": "DROW.PAL",
+   "index": 14
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 33",
+   "game": "eob1",
+   "sheet": "DROW.CPS",
+   "dec": "DROW.DAT",
+   "pal": "DROW.PAL",
+   "index": 27
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 34",
+   "game": "eob1",
+   "sheet": "XANATHA.CPS",
+   "dec": "XANATHA.DAT",
+   "pal": "XANATHA.PAL",
+   "index": 17
+  },
+  {
    "type": "sprites",
    "target": "Goblin",
    "images": [
     "pool/monsters/eob1_kobold/0.png",
-    "pool/monsters/eob1_kobold/3.png",
     "pool/monsters/eob1_kobold/1.png",
     "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/3.png",
     "pool/monsters/eob1_kobold/4.png",
     "pool/monsters/eob1_kobold/5.png"
    ]
@@ -268,24 +508,24 @@
    "type": "sprites",
    "target": "Ghoul",
    "images": [
-    "pool/monsters/eob1_skeleton/0.png",
-    "pool/monsters/eob1_skeleton/1.png",
-    "pool/monsters/eob1_skeleton/2.png",
-    "pool/monsters/eob1_skeleton/3.png",
-    "pool/monsters/eob1_skeleton/4.png",
-    "pool/monsters/eob1_skeleton/5.png"
-   ]
-  },
-  {
-   "type": "sprites",
-   "target": "Shghoul",
-   "images": [
     "pool/monsters/eob1_zombie/0.png",
     "pool/monsters/eob1_zombie/1.png",
     "pool/monsters/eob1_zombie/2.png",
     "pool/monsters/eob1_zombie/3.png",
     "pool/monsters/eob1_zombie/4.png",
     "pool/monsters/eob1_zombie/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wight",
+   "images": [
+    "pool/monsters/eob1_skeleton/0.png",
+    "pool/monsters/eob1_skeleton/1.png",
+    "pool/monsters/eob1_skeleton/2.png",
+    "pool/monsters/eob1_skeleton/3.png",
+    "pool/monsters/eob1_skeleton/4.png",
+    "pool/monsters/eob1_skeleton/5.png"
    ]
   },
   {
@@ -314,30 +554,6 @@
   },
   {
    "type": "sprites",
-   "target": "Wight",
-   "images": [
-    "pool/monsters/eob1_disbeast/0.png",
-    "pool/monsters/eob1_disbeast/1.png",
-    "pool/monsters/eob1_disbeast/2.png",
-    "pool/monsters/eob1_disbeast/3.png",
-    "pool/monsters/eob1_disbeast/4.png",
-    "pool/monsters/eob1_disbeast/5.png"
-   ]
-  },
-  {
-   "type": "sprites",
-   "target": "Shadewiz",
-   "images": [
-    "pool/monsters/eob1_mflayer/0.png",
-    "pool/monsters/eob1_mflayer/1.png",
-    "pool/monsters/eob1_mflayer/2.png",
-    "pool/monsters/eob1_mflayer/3.png",
-    "pool/monsters/eob1_mflayer/4.png",
-    "pool/monsters/eob1_mflayer/5.png"
-   ]
-  },
-  {
-   "type": "sprites",
    "target": "Wererat",
    "images": [
     "pool/monsters/eob1_hellhound/0.png",
@@ -349,13 +565,145 @@
    ]
   },
   {
+   "type": "sprites",
+   "target": "Undbeast",
+   "images": [
+    "pool/monsters/eob1_disbeast/0.png",
+    "pool/monsters/eob1_disbeast/1.png",
+    "pool/monsters/eob1_disbeast/2.png",
+    "pool/monsters/eob1_disbeast/3.png",
+    "pool/monsters/eob1_disbeast/4.png",
+    "pool/monsters/eob1_disbeast/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Bugbear",
+   "images": [
+    "pool/monsters/eob1_flind/0.png",
+    "pool/monsters/eob1_flind/1.png",
+    "pool/monsters/eob1_flind/2.png",
+    "pool/monsters/eob1_flind/3.png",
+    "pool/monsters/eob1_flind/4.png",
+    "pool/monsters/eob1_flind/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Golem",
+   "images": [
+    "pool/monsters/eob1_golem/0.png",
+    "pool/monsters/eob1_golem/1.png",
+    "pool/monsters/eob1_golem/2.png",
+    "pool/monsters/eob1_golem/3.png",
+    "pool/monsters/eob1_golem/4.png",
+    "pool/monsters/eob1_golem/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Carrion",
+   "images": [
+    "pool/monsters/eob1_leech/0.png",
+    "pool/monsters/eob1_leech/1.png",
+    "pool/monsters/eob1_leech/2.png",
+    "pool/monsters/eob1_leech/3.png",
+    "pool/monsters/eob1_leech/4.png",
+    "pool/monsters/eob1_leech/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Xill",
+   "images": [
+    "pool/monsters/eob1_mantis/0.png",
+    "pool/monsters/eob1_mantis/1.png",
+    "pool/monsters/eob1_mantis/2.png",
+    "pool/monsters/eob1_mantis/3.png",
+    "pool/monsters/eob1_mantis/4.png",
+    "pool/monsters/eob1_mantis/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Knight",
+   "images": [
+    "pool/monsters/eob1_skelwar/0.png",
+    "pool/monsters/eob1_skelwar/1.png",
+    "pool/monsters/eob1_skelwar/2.png",
+    "pool/monsters/eob1_skelwar/3.png",
+    "pool/monsters/eob1_skelwar/4.png",
+    "pool/monsters/eob1_skelwar/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadewar",
+   "images": [
+    "pool/monsters/eob1_drowelf/0.png",
+    "pool/monsters/eob1_drowelf/1.png",
+    "pool/monsters/eob1_drowelf/2.png",
+    "pool/monsters/eob1_drowelf/3.png",
+    "pool/monsters/eob1_drowelf/4.png",
+    "pool/monsters/eob1_drowelf/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadewiz",
+   "images": [
+    "pool/monsters/eob1_shindia/0.png",
+    "pool/monsters/eob1_shindia/1.png",
+    "pool/monsters/eob1_shindia/2.png",
+    "pool/monsters/eob1_shindia/3.png",
+    "pool/monsters/eob1_shindia/4.png",
+    "pool/monsters/eob1_shindia/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Morph",
+   "images": [
+    "pool/monsters/eob1_mflayer/0.png",
+    "pool/monsters/eob1_mflayer/1.png",
+    "pool/monsters/eob1_mflayer/2.png",
+    "pool/monsters/eob1_mflayer/3.png",
+    "pool/monsters/eob1_mflayer/4.png",
+    "pool/monsters/eob1_mflayer/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Troglody",
+   "images": [
+    "pool/monsters/eob1_dwarf/0.png",
+    "pool/monsters/eob1_dwarf/1.png",
+    "pool/monsters/eob1_dwarf/2.png",
+    "pool/monsters/eob1_dwarf/3.png",
+    "pool/monsters/eob1_dwarf/4.png",
+    "pool/monsters/eob1_dwarf/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Spectre",
+   "images": [
+    "pool/monsters/eob1_mage/0.png",
+    "pool/monsters/eob1_mage/1.png",
+    "pool/monsters/eob1_mage/2.png",
+    "pool/monsters/eob1_mage/3.png",
+    "pool/monsters/eob1_mage/4.png",
+    "pool/monsters/eob1_mage/5.png"
+   ]
+  },
+  {
    "type": "force_graphics",
    "target": "kernel (TEST ONLY)",
    "wallset": "Foil Wallset",
    "stairs": "Foil Stairs",
    "floor": "Floor-1",
    "palette": "wall/floor palette 00",
-   "door": "Door-05"
+   "door": "Door-00"
   }
  ]
 }

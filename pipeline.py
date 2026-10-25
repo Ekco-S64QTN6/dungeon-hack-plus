@@ -350,7 +350,8 @@ def job_panels(r, job, pal):
     """Copy EOB3 view-position panels (18 per wall object) 1:1 into a DH resource.
 
     EOB3 PAL_WALLS indices 0xB0-0xBF are re-ranked onto the ramp profile of the DH
-    target; EOB3 fixed colours go to the nearest DH fixed colour.
+    target (for a Ground-N target: Floor-N's floor ramp); EOB3 fixed colours go to the
+    nearest DH fixed colour.
     """
     e3 = eob3_res(); en = e3.names()
     src = aesop.decode_vfx110(e3.entry(en[job['source']])[2])
@@ -369,9 +370,13 @@ def job_panels(r, job, pal):
         rp = np.array(ramp3, np.uint8).reshape(-1, 3)
         lut[176:192] = normalize.quantize_fixed(rp[None, :16], dhbase, range(1, 224))[0]
     else:
-        profile, pals = ramp_profile(r, job.get('ramp_of', job['target']))
-        lut[176:191] = normalize.to_ramp_target(swatch, profile, 240, dither=False, stretch=(0, 100))[0]
-        lut[191] = 255
+        ground = job['target'].startswith('Ground-')        # pits: the floor ramp 224-239 of that floor
+        base = 224 if ground else 240
+        profile, pals = ramp_profile(r, job.get('ramp_of', 'Floor-' + job['target'].split('-')[1] if ground else job['target']))
+        lut[176:191] = normalize.to_ramp_target(swatch, profile, base, dither=False, stretch=(0, 100))[0]
+        lut[191] = base + 15
+        if ground:
+            BUILT_SHAPES[job['target']] = sorted({normalize.ramp_shape(palette_lums(r, p)) for p in pals})
     lut[192:] = normalize.quantize_fixed(fx[None, 192:], dhbase, range(1, 224))[0]
     count = job.get('count', 18)
     for k in range(count):
@@ -922,6 +927,47 @@ def job_eob_wall_deco(r, job, pal):
     r.replace(idx, aesop.encode_shapes(frames))
 
 
+# Ground-N (pits): 19 frames per kind, base + view position like wallsets; only the centre column is
+# drawn: 8 / 16 / 13 = one / two / three squares ahead (at the front wall panel's origin), 18 = the
+# party's own square (whole view). Floor pit = frames 0-18, ceiling hole = 19-37 (floor pit and
+# ceiling pit report 3101 = 0 / 19). EOB draws its pits as decorations of the same squares (eob_decos
+# blocks 13 / 9 / 3 / 16, face D) at the same screen places, so they are copied 1:1.
+PIT_VIEWS = [(8, 13, (24, 8)), (16, 9, (48, 20)), (13, 3, (64, 27)), (18, 16, (0, 0))]   # frame, EOB block, origin
+
+
+def job_eob_pits(r, job, pal):
+    """EOB1/2 floor pit and ceiling hole decorations as a floor's ground set (Ground-N).
+
+    {"target": "Ground-9", "game": "eob1", "dec": "BLUE.DAT", "sheet": "BLUE.CPS", "pal": "BLUE.PAL",
+     "floor": 0, "ceiling": 1, "backdrop": "pool/floors/BLUE_backdrop.png"}   (ceiling may be null)
+    Colours go to the floor ramp (224-238) of Floor-N's real palettes, stretched like the set's own
+    floor backdrop so a pit stays as dark against it as in EOB.
+    """
+    base = gpath(job['game'])
+    decs, rects = eob_decos.parse_dec(open(os.path.join(base, job['dec']), 'rb').read())
+    sheet = np.frombuffer(bytes(westwood.unpack(os.path.join(base, job['sheet']))[0][:64000]), np.uint8).reshape(200, 320)
+    epal = np.array(westwood.eob1_palette(base, job['pal']) if job['game'] == 'eob1'
+                    else westwood.read_pal(os.path.join(base, job['pal'])), np.uint8).reshape(-1, 3)
+    f = int(job['target'].split('-')[1])
+    profile, pals = ramp_profile(r, 'Floor-%d' % f)
+    lohi = tuple(np.percentile(normalize.luminance(load_rgb(job['backdrop'])), (2, 98)))
+    idx = r.names()[job['target']]
+    frames = aesop.decode_shapes(r.entry(idx)[2])
+    for dec, first in ((job['floor'], 0), (job.get('ceiling'), 19)):
+        if dec is None:
+            continue
+        for k, block, (x0, y0) in PIT_VIEWS:
+            w, h = frames[first + k][:2]
+            px, m = eob_decos.render(decs, rects, sheet, dec, block, 'D', job['game'])
+            px, m = px[y0:y0 + h, x0:x0 + w], m[y0:y0 + h, x0:x0 + w]
+            assert px.shape == (h, w), 'pit frame %d is %dx%d' % (first + k, w, h)
+            ramp = normalize.to_ramp_target(epal[px], profile, 224, dither=False, lohi=lohi) * m
+            frames[first + k] = (w, h, bytearray(ramp.astype(np.uint8).tobytes()), bytearray(m.astype(np.uint8).tobytes()))
+    r.replace(idx, aesop.encode_shapes(frames))
+    BUILT_SHAPES[job['target']] = sorted({normalize.ramp_shape(palette_lums(r, p)) for p in pals})
+    print('    %s <- %s %s pit %s / ceiling %s' % (job['target'], job['game'], job['dec'], job['floor'], job.get('ceiling')))
+
+
 def job_vmp_walls(r, job, pal):
     """EOB1/2 hand-drawn walls copied 1:1 from VMP view positions (ScummVM kyra tables).
 
@@ -1114,7 +1160,8 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset,
         'game_music': job_game_music, 'extra_doors': job_extra_doors, 'paint_objects': job_paint_objects,
         'extra_floors': job_extra_floors, 'stairs_from': job_stairs_from,
-        'furniture_from': job_furniture_from, 'heap_probe': job_heap_probe}
+        'furniture_from': job_furniture_from, 'heap_probe': job_heap_probe,
+        'eob_pits': job_eob_pits}
 
 
 def cmd_build(recipe_path, name):

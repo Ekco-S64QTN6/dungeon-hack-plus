@@ -1,0 +1,15 @@
+{
+ "comment": "fixture savegame_pits2: floor pit (21,5) and ceiling hole (25,5) on the corridor y=5, party starts at (24,5). Pit from 3/2/1 squares, ceiling hole from 3/2/1 and from under it",
+ "fixture": "fixtures/savegame_pits2",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {"face": "W", "shot": "1_pit_d3"},
+  {"goto": [23, 5], "face": "W", "shot": "2_pit_d2"},
+  {"goto": [22, 5], "face": "W", "shot": "3_pit_d1"},
+  {"face": "E", "shot": "4_ceil_d3"},
+  {"goto": [23, 5], "face": "E", "shot": "5_ceil_d2"},
+  {"goto": [24, 5], "face": "E", "shot": "6_ceil_d1"},
+  {"goto": [25, 5], "face": "E", "shot": "7_ceil_under"}
+ ]
+}
