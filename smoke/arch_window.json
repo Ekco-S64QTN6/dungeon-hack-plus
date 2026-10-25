@@ -1,0 +1,40 @@
+{
+ "comment": "arch (FEA 23) at (28,9) and window (FEA 24) at (26,12) on level 1 (fixture starts at (27,11))",
+ "fixture": "fixtures/savegame_archwin",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "goto": [
+    27,
+    9
+   ],
+   "face": "E",
+   "shot": "1_arch_d1"
+  },
+  {
+   "goto": [
+    29,
+    9
+   ],
+   "face": "W",
+   "shot": "2_arch_other_side"
+  },
+  {
+   "goto": [
+    27,
+    12
+   ],
+   "face": "W",
+   "shot": "3_window_d1"
+  },
+  {
+   "goto": [
+    27,
+    11
+   ],
+   "face": "S",
+   "shot": "4_window_side"
+  }
+ ]
+}

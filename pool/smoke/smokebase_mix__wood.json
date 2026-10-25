@@ -6,9 +6,9 @@
    "target": "kernel (TEST ONLY)",
    "wallset": "Wood Wallset",
    "stairs": "Wood Stairs",
-   "floor": "Floor-1",
-   "palette": "wall/floor palette 01",
-   "door": "Door-00"
+   "floor": "Floor-3",
+   "palette": "wall/floor palette 07",
+   "door": "Door-02"
   }
  ]
 }

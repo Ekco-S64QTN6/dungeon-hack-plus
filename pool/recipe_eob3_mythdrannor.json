@@ -700,7 +700,7 @@
    "type": "wallset",
    "target": "Marble Wallset",
    "texture": "pool/walls/eob3_marble_front.png",
-   "frames": "36"
+   "frames": "36,198-215"
   },
   {
    "type": "floor",
@@ -711,7 +711,7 @@
    "type": "wallset",
    "target": "Wood Wallset",
    "texture": "pool/walls/eob3_mausoleum_front.png",
-   "frames": "36"
+   "frames": "36,198-215"
   },
   {
    "type": "floor",
@@ -722,7 +722,7 @@
    "type": "wallset",
    "target": "Rock Wallset",
    "texture": "pool/walls/eob3_ruins_front.png",
-   "frames": "36"
+   "frames": "36,198-215"
   },
   {
    "type": "floor",
@@ -733,7 +733,7 @@
    "type": "wallset",
    "target": "Stone Wallset",
    "texture": "pool/walls/eob3_forest_front.png",
-   "frames": "36"
+   "frames": "36,198-215"
   },
   {
    "type": "sprites",

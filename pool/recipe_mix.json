@@ -348,7 +348,7 @@
    "type": "wallset",
    "target": "Eighth Wallset",
    "texture": "pool/walls/menzo_red_v0.png",
-   "frames": "18-36"
+   "frames": "18-36,198-215"
   },
   {
    "type": "floor",
@@ -371,7 +371,7 @@
    "type": "wallset",
    "target": "Wood Wallset",
    "texture": "pool/walls/menzo_purple_v0.png",
-   "frames": "18-36"
+   "frames": "18-36,198-215"
   },
   {
    "type": "floor",
@@ -394,7 +394,7 @@
    "type": "wallset",
    "target": "Ice Wallset",
    "texture": "pool/walls/menzo_wood_v0.png",
-   "frames": "18-36"
+   "frames": "18-36,198-215"
   },
   {
    "type": "floor",
@@ -419,7 +419,7 @@
    "type": "wallset",
    "target": "Marble Wallset",
    "texture": "pool/walls/eob3_forest_front.png",
-   "frames": "36"
+   "frames": "36,198-215"
   },
   {
    "type": "wallset",
@@ -437,7 +437,7 @@
    "type": "wallset",
    "target": "Stone Wallset",
    "texture": "pool/walls/menzo_gold_v0.png",
-   "frames": "18-36"
+   "frames": "18-36,198-215"
   },
   {
    "type": "floor",

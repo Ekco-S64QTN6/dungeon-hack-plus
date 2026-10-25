@@ -138,7 +138,7 @@ def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
                 src_job = next(j for j in e3jobs if j['target'] == deco)
                 jobs.append(dict(src_job, target=target, ramp_of=slot + ' Wallset'))
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/eob3_%s.png' % wall.split()[0].lower()})
-            jobs.append({'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower(), 'frames': '36'})
+            jobs.append({'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower(), 'frames': '36,198-215'})
         else:
             _, game, vset, frame_set, stairs_set = next(s for s in WESTWOOD_SETS if s[0] == src)
             jobs.append({'type': 'vmp_walls', 'target': '%s Wallset' % slot, 'game': game, 'set': vset,

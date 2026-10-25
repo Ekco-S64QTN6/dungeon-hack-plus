@@ -26,6 +26,7 @@ Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
 - [~] M  Memory-margin test (`smoke/mem_margin.py`, Gemini): base and stress both cliff at ~444 KB free conventional memory, XMS on or off. **Caveat (audit):** it only boots level 1 and takes one step, so it mostly measures start-up; it does not prove a worst-case level (many monster types, doors, decos) fits. Extend with a long walk / several levels
 - [x] S  Ear check: **measured** from a DOSBox audio capture of a door opening: the 1.55 s event only fits `DOOR 01` at 8,000 Hz (1.59 s); at 11,025 Hz no door sample is longer than 1.15 s (`smoke_runs/audio_rate_capture.md`)
 - [x] S  Automated in-game checks in place of the quick look: walls, door (3 stages), stairs up/down, floor, monster reskin (stress: the approaching monster renders as the EOB1 kobold, correct scale and anchoring)
+- [ ] S  Bug 1 leak measurement: needs a test-only probe reading `heapfree()` (runtime) into something visible; the fix itself is confirmed in bytecode and runs
 - [ ] S  Human playtest (≈15 min) of `mixed` or `eob3_complete`: feel, pacing, anything the screenshots can't judge
 - [x] **(G)** demo2, demo3, stress, eob3_complete (×4 wallsets), eob1_sewers, eob2_darkmoon and mixed pass the in-game gate (`smoke_runs/gate*/`). The panel pipeline is trusted; the warp pipeline now also reskins door frames (wall object 1). Remaining human playtest is non-blocking
 
@@ -35,7 +36,8 @@ Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
 - [x] M  EOB3 stairs (all sets) → the matching DH stairsets; EOB3 doors (Marble, Mausoleum ×2, Ruins ×2, Temple ×2) → DH Door-xx slots (frame → wallset object 1, 3 stages; drop the Ruins "bashed" block; `tools/eob3_mapping.py`)
 - [x] S  Slot 36 (the door-frame jamb post seen when standing in a doorway facing along the wall): EOB1/2 sets warp a quarter-width slice of their own near front wall onto it (`vmp_walls`), EOB3 sets their exported front panel, Menzo sets their wall face. Identified in game by painting it (`smoke/doorway.json`), then checked
 - [x] M  Wall decorations, keyholes, levers, gem holes, special decos: map EOB3 decoration resources (all 18-panel) onto DH `Wall Deco nn` / `Keyhole nn` / lever resources (`tools/eob3_mapping.py` maps 18 decos, 12 keyholes, 8 levers; `recipe_eob3_decorations.json` built & verified with -118 KB payload savings)
-- [ ] M  Other wallset objects 2–12 (overlays such as cracks and moss): identify which DH script draws each, then source equivalents
+- [x] M  Wallset objects identified in game by painting each a solid fixed colour (`paint_objects` test job, `smoke/arch_window.json` + fixture `savegame_archwin`): object 2 panel 0 = slot 36 (doorway post), 11 = arch face, 4 = window grille (drawn inside object 1, the door frame). EOB/Menzo sets now texture the arch with their own wall; window grilles stay DH art (bars stay bars), re-ramped
+- [ ] S  Objects 3, 5-10, 12 (small details, rubble): not identified yet; re-ramped DH art
 
 **Walls and floors (EOB1/2, Westwood)**
 - [x] M  EOB1/2 *hand-drawn* walls: VMP view-position table from ScummVM kyra (`_vmpOffsetsDefault`, 9 positions = 431 blocks) mapped 1:1 onto DH's 9 faces with exact crop offsets (`westwood.VMP_POS/DH_PANEL/dh_panel`); `vmp_walls` job fills wall object 0 (variants from wt0/wt1), door frame (wt2) and stairs (wt3 up / wt4 down; `frame_set`/`stairs_set` borrow from a sibling set). In-game gate ✔ (EOB2 DUNG on Rock)

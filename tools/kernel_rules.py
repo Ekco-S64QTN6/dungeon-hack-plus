@@ -30,9 +30,9 @@ def locate(kernel):
     p978 = kernel.find(pat)
     loads = {k: st.unpack_from('<H', kernel, _table_operand(kernel, pattern))[0]   # where the code reads them from
              for k, pattern in (('wallset', LOAD_WALLSET), ('stairs', LOAD_STAIRSET))}
-    if p978 < 0 and len(kernel) - 64 * (n_walls(kernel) == 8) in KNOWN_KERNEL_SIZES:
-        # anchor overwritten on purpose (test-only force_graphics); all known kernels (ENG 15446,
-        # FRE/GER 15428 bytes) keep these tables at the same offsets
+    if p978 < 0:
+        # anchor overwritten on purpose (test-only force_graphics): every known kernel (ENG, FRE, GER;
+        # extensions only append) keeps these tables at the same offsets
         return dict(DEFAULT_OFFSETS, door=_door_table(kernel), **loads)
     assert p978 >= 0 and kernel.find(pat, p978 + 1) < 0, 'palette table not found uniquely'
     find = lambda vals: kernel.find(st.pack('<%dI' % len(vals), *vals))

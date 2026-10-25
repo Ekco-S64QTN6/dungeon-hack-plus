@@ -821,6 +821,12 @@ def job_vmp_walls(r, job, pal):
             w, h, _, m = frames[36]
             new, mask = normalize.warp_to_mask(tex, m, w, h)
             frames[36] = (w, h, bytearray(new.tobytes()), m)
+            full = normalize.to_ramp_target(rgb_of(tpx).reshape(th, tw, 3), profile, 240, job.get('dither', False), lohi=tuple(lohi))
+            for k in ARCH_FRAMES:               # object 11 = arch face: the set's own wall
+                if any(frames[k][3]):
+                    w, h, _, m = frames[k]
+                    new, mask = normalize.warp_to_mask(full, m, w, h)
+                    frames[k] = (w, h, bytearray(new.tobytes()), m)
         r.replace(idx, aesop.encode_shapes(frames))
 
     wall_plan, frame_plan = [], []
@@ -843,6 +849,25 @@ def job_vmp_walls(r, job, pal):
                 if p1 is not None:
                     st.append((base_k + p1, ss, wt, pos))
         fill(job['stairs'], st)
+
+
+# Wallset objects, identified in game by painting each a solid fixed colour (job paint_objects,
+# smoke/arch_window.json): 11 (frames 198-215) = arch face around its opening; 4 = window grille,
+# drawn inside object 1 (the door frame). The arch takes the set's own wall; the grille stays (re-ramped)
+# DH art so bars stay bars. Object 8 did not show at the arch or the window; left alone.
+ARCH_FRAMES = range(198, 216)
+
+
+def job_paint_objects(r, job, pal):
+    """TEST ONLY: paint whole wallset objects in solid fixed colours to see which object draws what.
+    {"target": "Mine Wallset", "colors": {"4": 87, ...}}  (object -> fixed palette index 1-223)"""
+    idx = r.names()[job['target']]
+    frames = aesop.decode_shapes(r.entry(idx)[2])
+    for obj, c in job['colors'].items():
+        for k in range(int(obj) * 18, int(obj) * 18 + 18):
+            w, h, px, m = frames[k]
+            frames[k] = (w, h, bytearray(bytes(c if v else 0 for v in m)), m)
+    r.replace(idx, aesop.encode_shapes(frames))
 
 
 def post_slice(tex):
@@ -928,7 +953,7 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'vmp_walls': job_vmp_walls, 'fix_unlock_shape': job_fix_unlock_shape, 'fix_ice_stairs': job_fix_ice_stairs,
         'eob_door': job_eob_door, 'vmp_deco': job_vmp_deco,
         'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset,
-        'game_music': job_game_music, 'extra_doors': job_extra_doors}
+        'game_music': job_game_music, 'extra_doors': job_extra_doors, 'paint_objects': job_paint_objects}
 
 
 def cmd_build(recipe_path, name):
