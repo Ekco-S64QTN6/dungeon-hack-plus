@@ -41,6 +41,10 @@ EOB2_MOTION = {'e2_mouth': 'split'}
 # level palette of the levels each EOB2 door appears on (sets per level from DARKMOON/LEVEL*.INF):
 # L1-3 DUNG (brown), L5-6 MEZZ, L7-9 SILVER, L10-14 AZURE, L15-16 CRIMSON. The glyph door's runes
 # use indices that only CRIMSON.PAL defines (DUNG.PAL makes them white).
+# EOB1 doors drawn in level-band colours take the palette of the levels they belong to: the web
+# (drow levels; its strands are the DROW band, white under BLUE). Iron/grate are level-independent;
+# slab, mouth and eye look natural under BLUE.
+EOB1_DOOR_PAL = {'web': 'DROW.PAL'}
 EOB2_DOOR_PAL = {'e2_iron': 'DUNG.PAL', 'e2_bars': 'DUNG.PAL', 'e2_mouth': 'DUNG.PAL', 'e2_darkmoon': 'MEZZ.PAL',
                  'e2_vines': 'SILVER.PAL', 'e2_cross': 'SILVER.PAL', 'e2_silver': 'AZURE.PAL', 'e2_wood': 'AZURE.PAL',
                  'e2_glyph': 'CRIMSON.PAL'}

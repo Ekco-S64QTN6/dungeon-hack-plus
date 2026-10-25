@@ -1,0 +1,1509 @@
+{
+ "comment": "SMOKE VARIANT (test only)",
+ "jobs": [
+  {
+   "type": "extra_doors",
+   "count": 16,
+   "copy": "Door-05"
+  },
+  {
+   "type": "extra_wallset",
+   "copy": "Rock",
+   "count": 9
+  },
+  {
+   "type": "extra_floors",
+   "copy": "Floor-2",
+   "count": 8
+  },
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Eighth Wallset": [
+     5,
+     12,
+     10
+    ],
+    "W08 Wallset": [
+     11,
+     6,
+     1
+    ],
+    "W09 Wallset": [
+     3,
+     1,
+     11
+    ],
+    "W10 Wallset": [
+     10,
+     7,
+     12
+    ],
+    "W11 Wallset": [
+     6,
+     14,
+     10
+    ],
+    "W12 Wallset": [
+     10,
+     14,
+     7
+    ],
+    "W13 Wallset": [
+     13,
+     11,
+     6
+    ],
+    "W14 Wallset": [
+     1,
+     11,
+     6
+    ],
+    "W15 Wallset": [
+     15,
+     16,
+     20
+    ],
+    "Foil Wallset": [
+     17,
+     19,
+     20
+    ],
+    "Mine Wallset": [
+     3,
+     0,
+     1
+    ],
+    "Wood Wallset": [
+     12,
+     10,
+     7
+    ],
+    "Rock Wallset": [
+     1,
+     11,
+     6
+    ]
+   },
+   "wall_floors": {
+    "Eighth Wallset": [
+     13
+    ],
+    "W08 Wallset": [
+     15
+    ],
+    "W09 Wallset": [
+     8
+    ],
+    "W10 Wallset": [
+     10
+    ],
+    "W11 Wallset": [
+     1
+    ],
+    "W12 Wallset": [
+     2
+    ],
+    "W13 Wallset": [
+     4
+    ],
+    "W14 Wallset": [
+     11
+    ],
+    "W15 Wallset": [
+     5
+    ],
+    "Foil Wallset": [
+     7
+    ],
+    "Mine Wallset": [
+     6
+    ],
+    "Wood Wallset": [
+     9
+    ],
+    "Rock Wallset": [
+     3
+    ],
+    "Marble Wallset": [
+     0
+    ],
+    "Stone Wallset": [
+     0
+    ],
+    "Ice Wallset": [
+     0
+    ]
+   },
+   "floor_palettes": {
+    "13": [
+     5,
+     12,
+     10
+    ],
+    "15": [
+     11,
+     6,
+     1
+    ],
+    "8": [
+     3,
+     1,
+     11
+    ],
+    "10": [
+     10,
+     7,
+     12
+    ],
+    "1": [
+     6,
+     14,
+     10
+    ],
+    "2": [
+     10,
+     14,
+     7
+    ],
+    "4": [
+     13,
+     11,
+     6
+    ],
+    "11": [
+     1,
+     11,
+     6
+    ],
+    "5": [
+     15,
+     16,
+     20
+    ],
+    "7": [
+     17,
+     19,
+     20
+    ],
+    "6": [
+     3,
+     0,
+     1
+    ],
+    "9": [
+     12,
+     10,
+     7
+    ],
+    "3": [
+     1,
+     11,
+     6
+    ]
+   },
+   "allow_pairs": [
+    [
+     [
+      5,
+      12,
+      10
+     ],
+     [
+      5,
+      12,
+      10
+     ]
+    ],
+    [
+     [
+      11,
+      6,
+      1
+     ],
+     [
+      11,
+      6,
+      1
+     ]
+    ],
+    [
+     [
+      3,
+      1,
+      11
+     ],
+     [
+      3,
+      1,
+      11
+     ]
+    ],
+    [
+     [
+      10,
+      7,
+      12
+     ],
+     [
+      10,
+      7,
+      12
+     ]
+    ],
+    [
+     [
+      6,
+      14,
+      10
+     ],
+     [
+      6,
+      14,
+      10
+     ]
+    ],
+    [
+     [
+      10,
+      14,
+      7
+     ],
+     [
+      10,
+      14,
+      7
+     ]
+    ],
+    [
+     [
+      13,
+      11,
+      6
+     ],
+     [
+      13,
+      11,
+      6
+     ]
+    ],
+    [
+     [
+      1,
+      11,
+      6
+     ],
+     [
+      1,
+      11,
+      6
+     ]
+    ],
+    [
+     [
+      15,
+      16,
+      20
+     ],
+     [
+      15,
+      16,
+      20
+     ]
+    ],
+    [
+     [
+      17,
+      19,
+      20
+     ],
+     [
+      17,
+      19,
+      20
+     ]
+    ],
+    [
+     [
+      3,
+      0,
+      1
+     ],
+     [
+      3,
+      0,
+      1
+     ]
+    ],
+    [
+     [
+      12,
+      10,
+      7
+     ],
+     [
+      12,
+      10,
+      7
+     ]
+    ],
+    [
+     [
+      1,
+      11,
+      6
+     ],
+     [
+      1,
+      11,
+      6
+     ]
+    ]
+   ]
+  },
+  {
+   "type": "fix_unlock_shape",
+   "target": "items"
+  },
+  {
+   "type": "fix_ice_stairs",
+   "target": "Ice Stairs"
+  },
+  {
+   "type": "reramp",
+   "target": "Eighth"
+  },
+  {
+   "type": "reramp",
+   "target": "W08"
+  },
+  {
+   "type": "reramp",
+   "target": "W09"
+  },
+  {
+   "type": "reramp",
+   "target": "W10"
+  },
+  {
+   "type": "reramp",
+   "target": "W11"
+  },
+  {
+   "type": "reramp",
+   "target": "W12"
+  },
+  {
+   "type": "reramp",
+   "target": "W13"
+  },
+  {
+   "type": "reramp",
+   "target": "W14"
+  },
+  {
+   "type": "reramp",
+   "target": "W15"
+  },
+  {
+   "type": "reramp",
+   "target": "Foil"
+  },
+  {
+   "type": "reramp",
+   "target": "Mine"
+  },
+  {
+   "type": "reramp",
+   "target": "Wood"
+  },
+  {
+   "type": "reramp",
+   "target": "Rock"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Eighth Wallset",
+   "game": "eob1",
+   "set": "BLUE",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "BLUE",
+   "stairs": "Eighth Stairs",
+   "stairs_set": "BLUE",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-13",
+   "image": "pool/floors/BLUE_backdrop.png"
+  },
+  {
+   "type": "wallset",
+   "target": "W08 Wallset",
+   "texture": "pool/walls/menzo_gold_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "W08 Wallset",
+   "texture": "pool/walls/menzo_gold_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "W08 Wallset",
+   "texture": "pool/walls/menzo_gold_v0.png",
+   "frames": "18-36,198-215"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-15",
+   "image": "pool/floors/menzo_gold.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "W09 Wallset",
+   "game": "eob2",
+   "set": "CRIMSON",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "CRIMSON",
+   "stairs": "W09 Stairs",
+   "stairs_set": "CRIMSON",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-8",
+   "image": "pool/floors/CRIMSON_backdrop.png"
+  },
+  {
+   "type": "wallset",
+   "target": "W10 Wallset",
+   "texture": "pool/walls/menzo_purple_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "W10 Wallset",
+   "texture": "pool/walls/menzo_purple_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "W10 Wallset",
+   "texture": "pool/walls/menzo_purple_v0.png",
+   "frames": "18-36,198-215"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-10",
+   "image": "pool/floors/menzo_purple.png"
+  },
+  {
+   "type": "wallset",
+   "target": "W11 Wallset",
+   "texture": "pool/walls/menzo_cave_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "W11 Wallset",
+   "texture": "pool/walls/menzo_cave_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "W11 Wallset",
+   "texture": "pool/walls/menzo_cave_v0.png",
+   "frames": "18-36,198-215"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-1",
+   "image": "pool/floors/menzo_cave.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "W12 Wallset",
+   "game": "eob2",
+   "set": "MEZZ",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "MEZZ",
+   "stairs": "W12 Stairs",
+   "stairs_set": "MEZZ",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-2",
+   "image": "pool/floors/MEZZ_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "W13 Wallset",
+   "game": "eob1",
+   "set": "GREEN",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "GREEN",
+   "stairs": "W13 Stairs",
+   "stairs_set": "GREEN",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-4",
+   "image": "pool/floors/GREEN_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "W14 Wallset",
+   "game": "eob2",
+   "set": "DUNG",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "DUNG",
+   "stairs": "W14 Stairs",
+   "stairs_set": "DUNG",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-11",
+   "image": "pool/floors/DUNG_backdrop.png"
+  },
+  {
+   "type": "panels",
+   "target": "W15 Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Forest walls",
+   "source_first": 0,
+   "source_palette": "Forest palette"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-5",
+   "image": "pool/floors/eob3_forest.png"
+  },
+  {
+   "type": "wallset",
+   "target": "W15 Wallset",
+   "texture": "pool/walls/eob3_forest_front.png",
+   "frames": "36,198-215"
+  },
+  {
+   "type": "panels",
+   "target": "Foil Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum walls",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Foil Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum skull door",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Foil Stairs",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum stairs down",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Foil Stairs",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum stairs up",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 24",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum plaque",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Foil Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 25",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum wall spikes",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Foil Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 26",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum nameplate",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Foil Wallset"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-7",
+   "image": "pool/floors/eob3_mausoleum.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Foil Wallset",
+   "texture": "pool/walls/eob3_mausoleum_front.png",
+   "frames": "36,198-215"
+  },
+  {
+   "type": "wallset",
+   "target": "Mine Wallset",
+   "texture": "pool/walls/menzo_red_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "Mine Wallset",
+   "texture": "pool/walls/menzo_red_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "Mine Wallset",
+   "texture": "pool/walls/menzo_red_v0.png",
+   "frames": "18-36,198-215"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-6",
+   "image": "pool/floors/menzo_red.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Wood Wallset",
+   "game": "eob1",
+   "set": "XANATHA",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "XANATHA",
+   "stairs": "Wood Stairs",
+   "stairs_set": "BLUE",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Wood decorations",
+   "wallset": "Wood Wallset",
+   "game": "eob1",
+   "set": "XANATHA",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "floor",
+   "target": "Floor-9",
+   "image": "pool/floors/XANATHA_backdrop.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Rock Wallset",
+   "texture": "pool/walls/menzo_wood_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "Rock Wallset",
+   "texture": "pool/walls/menzo_wood_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "Rock Wallset",
+   "texture": "pool/walls/menzo_wood_v0.png",
+   "frames": "18-36,198-215"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-3",
+   "image": "pool/floors/menzo_wood.png"
+  },
+  {
+   "type": "panels",
+   "target": "Door-00",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum Star Trek(TM) door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-02",
+   "kind": "e2_cross"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-03",
+   "kind": "grate"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-04",
+   "kind": "eye"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-07",
+   "kind": "web"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-14",
+   "kind": "e2_bars"
+  },
+  {
+   "type": "panels",
+   "target": "Extra Door 00",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum skull door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 01",
+   "kind": "e2_iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 02",
+   "kind": "e2_vines"
+  },
+  {
+   "type": "panels",
+   "target": "Extra Door 03",
+   "target_first": 0,
+   "count": 54,
+   "source": "Ruins crystal door",
+   "source_first": 18,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Extra Door 04",
+   "target_first": 0,
+   "count": 54,
+   "source": "Marble door",
+   "source_first": 18,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Extra Door 05",
+   "target_first": 0,
+   "count": 54,
+   "source": "Temple mask door",
+   "source_first": 18,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 06",
+   "kind": "e2_wood"
+  },
+  {
+   "type": "panels",
+   "target": "Extra Door 07",
+   "target_first": 0,
+   "count": 54,
+   "source": "Ruins wooden door",
+   "source_first": 18,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 08",
+   "kind": "e2_mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 09",
+   "kind": "iron"
+  },
+  {
+   "type": "panels",
+   "target": "Extra Door 10",
+   "target_first": 0,
+   "count": 54,
+   "source": "Temple gold door",
+   "source_first": 18,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 11",
+   "kind": "e2_glyph"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 12",
+   "kind": "slab"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 13",
+   "kind": "e2_silver"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 14",
+   "kind": "mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 15",
+   "kind": "e2_darkmoon"
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 29",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 40
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 30",
+   "game": "eob1",
+   "sheet": "XANATHA.CPS",
+   "dec": "XANATHA.DAT",
+   "pal": "XANATHA.PAL",
+   "index": 17
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 31",
+   "game": "eob2",
+   "sheet": "MEZZ1.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 6
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 32",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 27
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 33",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 19
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 34",
+   "game": "eob2",
+   "sheet": "MEZZ1.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 12
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 35",
+   "game": "eob1",
+   "sheet": "BLUE.CPS",
+   "dec": "BLUE.DAT",
+   "pal": "BLUE.PAL",
+   "index": 7
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 36",
+   "game": "eob2",
+   "sheet": "SILVER1.CPS",
+   "dec": "SILVER.DEC",
+   "pal": "SILVER.PAL",
+   "index": 7
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 38",
+   "game": "eob1",
+   "sheet": "BLUE.CPS",
+   "dec": "BLUE.DAT",
+   "pal": "BLUE.PAL",
+   "index": 8
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 40",
+   "game": "eob2",
+   "sheet": "BROWN1.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 43
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 41",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 24
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 42",
+   "game": "eob2",
+   "sheet": "BROWN1.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 32
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 43",
+   "game": "eob1",
+   "sheet": "BLUE.CPS",
+   "dec": "BLUE.DAT",
+   "pal": "BLUE.PAL",
+   "index": 10
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 44",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 49
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 45",
+   "game": "eob2",
+   "sheet": "BROWN2.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 8
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 46",
+   "game": "eob1",
+   "sheet": "DROW.CPS",
+   "dec": "DROW.DAT",
+   "pal": "DROW.PAL",
+   "index": 14
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 47",
+   "game": "eob2",
+   "sheet": "SILVER1.CPS",
+   "dec": "SILVER.DEC",
+   "pal": "SILVER.PAL",
+   "index": 21
+  },
+  {
+   "type": "sprites",
+   "target": "Ankheg",
+   "images": [
+    "pool/monsters/eob2_fsnake/0.png",
+    "pool/monsters/eob2_fsnake/1.png",
+    "pool/monsters/eob2_fsnake/2.png",
+    "pool/monsters/eob2_fsnake/3.png",
+    "pool/monsters/eob2_fsnake/4.png",
+    "pool/monsters/eob2_fsnake/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Bugbear",
+   "images": [
+    "pool/monsters/eob1_flind/0.png",
+    "pool/monsters/eob1_flind/1.png",
+    "pool/monsters/eob1_flind/2.png",
+    "pool/monsters/eob1_flind/3.png",
+    "pool/monsters/eob1_flind/4.png",
+    "pool/monsters/eob1_flind/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Carrion",
+   "images": [
+    "pool/monsters/eob2_spider/0.png",
+    "pool/monsters/eob2_spider/1.png",
+    "pool/monsters/eob2_spider/2.png",
+    "pool/monsters/eob2_spider/3.png",
+    "pool/monsters/eob2_spider/4.png",
+    "pool/monsters/eob2_spider/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ghoul",
+   "images": [
+    "pool/monsters/eob1_zombie/0.png",
+    "pool/monsters/eob1_zombie/1.png",
+    "pool/monsters/eob1_zombie/2.png",
+    "pool/monsters/eob1_zombie/3.png",
+    "pool/monsters/eob1_zombie/4.png",
+    "pool/monsters/eob1_zombie/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Hobgob",
+   "images": [
+    "pool/monsters/eob1_kenku/0.png",
+    "pool/monsters/eob1_kenku/1.png",
+    "pool/monsters/eob1_kenku/2.png",
+    "pool/monsters/eob1_kenku/3.png",
+    "pool/monsters/eob1_kenku/4.png",
+    "pool/monsters/eob1_kenku/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Livmuck",
+   "images": [
+    "pool/monsters/eob2_cube/0.png",
+    "pool/monsters/eob2_cube/1.png",
+    "pool/monsters/eob2_cube/2.png",
+    "pool/monsters/eob2_cube/3.png",
+    "pool/monsters/eob2_cube/4.png",
+    "pool/monsters/eob2_cube/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Mummy",
+   "images": [
+    "pool/monsters/eob2_guard1/0.png",
+    "pool/monsters/eob2_guard1/1.png",
+    "pool/monsters/eob2_guard1/2.png",
+    "pool/monsters/eob2_guard1/3.png",
+    "pool/monsters/eob2_guard1/4.png",
+    "pool/monsters/eob2_guard1/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadewar",
+   "images": [
+    "pool/monsters/eob1_drowelf/0.png",
+    "pool/monsters/eob1_drowelf/1.png",
+    "pool/monsters/eob1_drowelf/2.png",
+    "pool/monsters/eob1_drowelf/3.png",
+    "pool/monsters/eob1_drowelf/4.png",
+    "pool/monsters/eob1_drowelf/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadewiz",
+   "images": [
+    "pool/monsters/eob1_shindia/0.png",
+    "pool/monsters/eob1_shindia/1.png",
+    "pool/monsters/eob1_shindia/2.png",
+    "pool/monsters/eob1_shindia/3.png",
+    "pool/monsters/eob1_shindia/4.png",
+    "pool/monsters/eob1_shindia/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Umberhul",
+   "images": [
+    "pool/monsters/eob2_bulette/0.png",
+    "pool/monsters/eob2_bulette/1.png",
+    "pool/monsters/eob2_bulette/2.png",
+    "pool/monsters/eob2_bulette/3.png",
+    "pool/monsters/eob2_bulette/4.png",
+    "pool/monsters/eob2_bulette/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Watchght",
+   "images": [
+    "pool/monsters/eob2_wasp/0.png",
+    "pool/monsters/eob2_wasp/1.png",
+    "pool/monsters/eob2_wasp/2.png",
+    "pool/monsters/eob2_wasp/3.png",
+    "pool/monsters/eob2_wasp/4.png",
+    "pool/monsters/eob2_wasp/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wererat",
+   "images": [
+    "pool/monsters/eob2_wolf/0.png",
+    "pool/monsters/eob2_wolf/1.png",
+    "pool/monsters/eob2_wolf/2.png",
+    "pool/monsters/eob2_wolf/3.png",
+    "pool/monsters/eob2_wolf/4.png",
+    "pool/monsters/eob2_wolf/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wight",
+   "images": [
+    "pool/monsters/eob1_skeleton/0.png",
+    "pool/monsters/eob1_skeleton/1.png",
+    "pool/monsters/eob1_skeleton/2.png",
+    "pool/monsters/eob1_skeleton/3.png",
+    "pool/monsters/eob1_skeleton/4.png",
+    "pool/monsters/eob1_skeleton/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wyvern",
+   "images": [
+    "pool/monsters/eob2_salamndr/0.png",
+    "pool/monsters/eob2_salamndr/1.png",
+    "pool/monsters/eob2_salamndr/2.png",
+    "pool/monsters/eob2_salamndr/3.png",
+    "pool/monsters/eob2_salamndr/4.png",
+    "pool/monsters/eob2_salamndr/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Xill",
+   "images": [
+    "pool/monsters/eob1_mantis/0.png",
+    "pool/monsters/eob1_mantis/1.png",
+    "pool/monsters/eob1_mantis/2.png",
+    "pool/monsters/eob1_mantis/3.png",
+    "pool/monsters/eob1_mantis/4.png",
+    "pool/monsters/eob1_mantis/5.png"
+   ]
+  },
+  {
+   "type": "game_music",
+   "tracks": {
+    "Marble": {
+     "la": "dh:Music Scene One Roland",
+     "ad": "dh:Music Scene One Adlib"
+    },
+    "Wood": {
+     "la": "eob3:CUE5",
+     "ad": "dh:Music End Adlib/Pc"
+    },
+    "Stone": {
+     "la": "dh:Music Scene Two Roland",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    },
+    "Foil": {
+     "la": "eob3:SAGEGH",
+     "ad": "dh:Music Scene One Adlib"
+    },
+    "Ice": {
+     "la": "dh:Music End Roland",
+     "ad": "dh:Music End Adlib/Pc"
+    },
+    "Mine": {
+     "la": "menzo:39",
+     "ad": "dh:Music Scene One Adlib"
+    },
+    "Rock": {
+     "la": "menzo:31",
+     "ad": "dh:Music Scene One Adlib"
+    },
+    "Eighth": {
+     "la": "menzo:93",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    },
+    "W08": {
+     "la": "menzo:42",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    },
+    "W09": {
+     "la": "menzo:41",
+     "ad": "dh:Music End Adlib/Pc"
+    },
+    "W10": {
+     "la": "menzo:46",
+     "ad": "dh:Music End Adlib/Pc"
+    },
+    "W11": {
+     "la": "menzo:90",
+     "ad": "dh:Music End Adlib/Pc"
+    },
+    "W12": {
+     "la": "eob3:CUE1",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    },
+    "W13": {
+     "la": "eob3:MAG",
+     "ad": "dh:Music Scene One Adlib"
+    },
+    "W14": {
+     "la": "menzo:81",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    },
+    "W15": {
+     "la": "eob3:CUE8",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    }
+   }
+  },
+  {
+   "type": "raw",
+   "target": "DOOR 00",
+   "file": "pool/sounds/raw/stdoor1.raw",
+   "comment": "Heavy stone door slide"
+  },
+  {
+   "type": "raw",
+   "target": "S-DOOR",
+   "file": "pool/sounds/raw/stdoor1.raw",
+   "comment": "Stone secret door slide"
+  },
+  {
+   "type": "raw",
+   "target": "DOOR 01",
+   "file": "pool/sounds/raw/wddoor1.raw",
+   "comment": "Heavy wood door creak & open"
+  },
+  {
+   "type": "raw",
+   "target": "DOOR 02",
+   "file": "pool/sounds/raw/wddoor2.raw",
+   "comment": "Heavy wood door latch & close"
+  },
+  {
+   "type": "raw",
+   "target": "S-LEVER",
+   "file": "pool/sounds/raw/wdlever.raw",
+   "comment": "Iron mechanism lever clunk"
+  },
+  {
+   "type": "raw",
+   "target": "S-BUTTON",
+   "file": "pool/sounds/raw/stbutton.raw",
+   "comment": "Stone button mechanical press"
+  },
+  {
+   "type": "raw",
+   "target": "S-LOCK",
+   "file": "pool/sounds/raw/d-lock2.raw",
+   "comment": "Lock tumblers turning"
+  },
+  {
+   "type": "raw",
+   "target": "BONENAGA",
+   "file": "pool/sounds/raw/bonenag1.raw",
+   "comment": "Bone naga hiss and bone rattle"
+  },
+  {
+   "type": "raw",
+   "target": "CHIMERA",
+   "file": "pool/sounds/raw/chimera1.raw",
+   "comment": "Chimera three-headed roar"
+  },
+  {
+   "type": "raw",
+   "target": "CHIMERA ATK",
+   "file": "pool/sounds/raw/chimera2.raw",
+   "comment": "Chimera breath attack"
+  },
+  {
+   "type": "raw",
+   "target": "FEYR",
+   "file": "pool/sounds/raw/feyr2.raw",
+   "comment": "Feyr horrific screech"
+  },
+  {
+   "type": "raw",
+   "target": "GRAVEMIST ATK",
+   "file": "pool/sounds/raw/gravemis.raw",
+   "comment": "Grave mist spectral attack"
+  },
+  {
+   "type": "raw",
+   "target": "GRAVEMIST",
+   "file": "pool/sounds/raw/gravstp2.raw",
+   "comment": "Grave mist creeping sound"
+  },
+  {
+   "type": "raw",
+   "target": "MINOTAUR ATK",
+   "file": "pool/sounds/raw/minotar2.raw",
+   "comment": "Minotaur battle roar"
+  },
+  {
+   "type": "raw",
+   "target": "MOUND",
+   "file": "pool/sounds/raw/mound1.raw",
+   "comment": "Shambling mound shambling squelch"
+  },
+  {
+   "type": "raw",
+   "target": "SLUG",
+   "file": "pool/sounds/raw/slug1a.raw",
+   "comment": "Ogre slug movement"
+  },
+  {
+   "type": "raw",
+   "target": "SLUG ATK",
+   "file": "pool/sounds/raw/slug2a.raw",
+   "comment": "Ogre slug spit attack"
+  },
+  {
+   "type": "raw",
+   "target": "STEEL ATK",
+   "file": "pool/sounds/raw/steel1.raw",
+   "comment": "Steel shadow metallic attack"
+  },
+  {
+   "type": "raw",
+   "target": "TROLL ATK",
+   "file": "pool/sounds/raw/troll2.raw",
+   "comment": "Troll claw swipe"
+  },
+  {
+   "type": "raw",
+   "target": "WATEREL ATK",
+   "file": "pool/sounds/raw/waterel1.raw",
+   "comment": "Water elemental surging wave"
+  },
+  {
+   "type": "raw",
+   "target": "WIGHT",
+   "file": "pool/sounds/raw/white1.raw",
+   "comment": "Wight deathly wail"
+  },
+  {
+   "type": "raw",
+   "target": "WYVERN",
+   "file": "pool/sounds/raw/wyvren1.raw",
+   "comment": "Wyvern cry"
+  },
+  {
+   "type": "raw",
+   "target": "WYVERN ATK",
+   "file": "pool/sounds/raw/wyvren2.raw",
+   "comment": "Wyvern poison stinger attack"
+  },
+  {
+   "type": "xmidi",
+   "res": "OPEN.RES",
+   "target": "Music Scene One Roland",
+   "source": "FORTR",
+   "comment": "EOB3 Myth Drannor Forest Theme (Roland MT-32)"
+  },
+  {
+   "type": "xmidi",
+   "res": "OPEN.RES",
+   "target": "Music Scene One Adlib",
+   "source": "FORAD",
+   "comment": "EOB3 Myth Drannor Forest Theme (AdLib FM)"
+  },
+  {
+   "type": "xmidi",
+   "res": "OPEN.RES",
+   "target": "Music Scene One Pc",
+   "source": "FORPC",
+   "comment": "EOB3 Myth Drannor Forest Theme (PC Speaker)"
+  },
+  {
+   "type": "xmidi",
+   "res": "OPEN.RES",
+   "target": "Music Scene Two Roland",
+   "source": "MAUS",
+   "comment": "EOB3 Mausoleum Crypt Theme (Roland MT-32)"
+  },
+  {
+   "type": "xmidi",
+   "res": "OPEN.RES",
+   "target": "Music Scene Two Adlib/Pc",
+   "source": "MAUAD",
+   "comment": "EOB3 Mausoleum Crypt Theme (AdLib FM)"
+  },
+  {
+   "type": "xmidi",
+   "res": "OPEN.RES",
+   "target": "Music End Roland",
+   "source": "CHGE",
+   "comment": "EOB3 Heroic Finale Theme (Roland MT-32)"
+  },
+  {
+   "type": "xmidi",
+   "res": "OPEN.RES",
+   "target": "Music End Adlib/Pc",
+   "source": "CHGEA",
+   "comment": "EOB3 Heroic Finale Theme (AdLib FM)"
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "W15 Wallset",
+   "stairs": "W15 Stairs",
+   "floor": "Floor-5",
+   "palette": "wall/floor palette 15",
+   "door": "Door-03"
+  }
+ ]
+}

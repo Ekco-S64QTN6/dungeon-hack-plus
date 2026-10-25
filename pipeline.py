@@ -363,7 +363,7 @@ def job_panels(r, job, pal):
     lut[1:176] = normalize.quantize_fixed(fx[None, 1:176], dhbase, range(1, 224))[0]
     src_l = [0.299 * ramp3[i] + 0.587 * ramp3[i + 1] + 0.114 * ramp3[i + 2] for i in range(0, 48, 3)]
     swatch = np.array(ramp3[:45], np.uint8).reshape(1, 15, 3)
-    if job.get('colors', 'fixed' if job['target'].startswith('Door-') else 'ramp') == 'fixed':
+    if job.get('colors', 'fixed' if job['target'].startswith(('Door-', 'Extra Door')) else 'ramp') == 'fixed':
         # doors appear on every wallset (single- and two-ramp levels): use DH fixed colours instead
         rp = np.array(ramp3, np.uint8).reshape(-1, 3)
         lut[176:192] = normalize.quantize_fixed(rp[None, :16], dhbase, range(1, 224))[0]
@@ -522,51 +522,110 @@ LAYOUT_FIXES = []    # resources whose frame ORDER a fix job changes on purpose 
 ADDED = {}           # resources an engine extension added: new name -> original it was copied from
 
 
-def job_extra_wallset(r, job, pal):
-    """ENGINE EXTENSION: an 8th wallset (+ stairs) that "randomize graphics" can pick per level.
-
-    {"copy": "Rock"}   (runs before palette_rules; later jobs fill "Eighth Wallset"/"Eighth Stairs")
-    Adds two resources in free directory slots (copies of the source wallset/stairs) with their
-    names, extends the kernel (kernel_rules.add_wallset: tables appended, loads repointed,
-    rnd(0..7)), gives wallset 7 the source's floor/palette pairing bits (otherwise new-game
-    creation would loop forever looking for a floor), and appends an 8-entry copy of
-    "current pillar"'s per-wallset pillar table (its 7-entry table would be read past the end).
-    """
+def _add_copies(r, pairs):
+    """pairs: [(new name, source name)] -> new resources (copies) in free directory slots, named; -> {name: idx}."""
     names = r.names()
-    if 'Eighth Wallset' in names:
-        return
-    src = job.get('copy', 'Rock')
     free = [i for i, p in enumerate(r.ptrs) if not p]
-    added = {}
-    for idx, kind in zip(free[:2], ('Wallset', 'Stairs')):
-        orig = names['%s %s' % (src, kind)]
+    H, chains = rtd.parse(r.entry(0)[2])
+    out = {}
+    for (new, src), idx in zip(pairs, free):
+        orig = names[src]
         _, attrib, payload = r.entry(orig)
         r.replace(idx, payload, attrib=attrib)
         r.data[r.blocks[idx // aesop.SLOTS] + 4 + idx % aesop.SLOTS] = r.data[r.blocks[orig // aesop.SLOTS] + 4 + orig % aesop.SLOTS]
-        added['Eighth ' + kind] = idx
-        ADDED['Eighth ' + kind] = '%s %s' % (src, kind)
-    H, chains = rtd.parse(r.entry(0)[2])
-    for tag, idx in added.items():
-        rtd.add(H, chains, tag.encode(), str(idx).encode())
+        rtd.add(H, chains, new.encode(), str(idx).encode())
+        ADDED[new] = src; out[new] = idx
+    assert len(out) == len(pairs), 'out of free resource slots'
     r.replace(0, rtd.build(H, chains)); r._names = None
-    ki = r.names()['kernel']
-    k = kernel_rules.add_wallset(r.entry(ki)[2], added['Eighth Wallset'], added['Eighth Stairs'])
+    return out
+
+
+def job_extra_wallset(r, job, pal):
+    """ENGINE EXTENSION: more wallsets (+ stairs) that "randomize graphics" can pick per level.
+
+    {"copy": "Rock", "count": 1}   (runs before palette_rules; later jobs fill "<name> Wallset/Stairs")
+    New resources (copies of the source wallset/stairs) get names from kernel_rules.WALLSETS[7:]
+    ("Eighth", "W08".."W15"). The kernel is extended (kernel_rules.add_wallsets; past 8 wallsets the
+    pairing masks are widened to 16 bit first), each new wallset gets the source's floor/palette
+    pairing bits (otherwise new-game creation would loop forever looking for a floor), "current pillar"
+    gets a longer per-wallset pillar table, and past 12 wallsets the decoration object's three
+    per-decoration tables grow (wallset w uses decoration indices 4w..4w+3; new ones reuse generic
+    decorations 28-47).
+    """
+    names = r.names()
+    count = job.get('count', 1)
+    ki = names['kernel']
+    k = r.entry(ki)[2]
+    n0 = kernel_rules.n_walls(k)
+    if 'Eighth Wallset' in names and job.get('count') is None:
+        return
+    src = job.get('copy', 'Rock')
+    new = kernel_rules.WALLSETS[n0:n0 + count]
+    added = _add_copies(r, [('%s %s' % (w, kind), '%s %s' % (src, kind)) for w in new for kind in ('Wallset', 'Stairs')])
+    if n0 + count > 8:
+        k = kernel_rules.widen_masks(k)
+    k = kernel_rules.add_wallsets(k, [added['%s Wallset' % w] for w in new], [added['%s Stairs' % w] for w in new])
     rules = kernel_rules.read(k)
-    w = kernel_rules.WALLSETS.index(src)
-    for key, n in (('floor_ok_for_wall', kernel_rules.N_FLOOR), ('wallpal_ok_for_wall', kernel_rules.N_PAL)):
+    ws = kernel_rules.WALLSETS.index(src)
+    for key, n in (('floor_ok_for_wall', rules['n_floors']), ('wallpal_ok_for_wall', kernel_rules.N_PAL)):
         for i in range(n):
-            if rules[key][i] >> w & 1:
-                rules[key][i] |= 1 << 7
+            if rules[key][i] >> ws & 1:
+                for w in range(n0, n0 + count):
+                    rules[key][i] |= 1 << w
     r.replace(ki, kernel_rules.write(k, rules))
+    n = n0 + count
+    # "current pillar": per-wallset pillar art table (LTDA "L:table14")
     pi = r.names()['current pillar']
     p = bytearray(r.entry(pi)[2])
-    op = p.find(bytes.fromhex('2a0e00')) + 1                  # LTDA "L:table14" (pillar art per wallset)
-    vals = struct.unpack_from('<7I', p, 14)
+    i = next(i for i in range(len(p) - 6) if p[i:i + 4] == bytes.fromhex('22002801') and p[i + 4:i + 6] == bytes.fromhex('2702'))  # SEND "wallset index"; AIS 2
+    op = i + 7                                      # LTDA operand
+    old = struct.unpack_from('<H', p, op)[0]
+    vals = list(struct.unpack_from('<%dI' % n0, p, old))
+    vals += [vals[ws]] * count
     struct.pack_into('<H', p, op, len(p))
-    p += struct.pack('<8I', *vals, vals[w])
+    p += struct.pack('<%dI' % n, *vals)
     r.replace(pi, bytes(p))
-    print('    added Eighth Wallset (%d) + Eighth Stairs (%d) as copies of %s; kernel picks rnd(0..7)'
-          % (added['Eighth Wallset'], added['Eighth Stairs'], src))
+    if 4 * n > 48:
+        di = r.names()['decoration']
+        d = bytearray(r.entry(di)[2])
+        # SEND "wall deco index" (22 01 17 01) followed by AIS 2; LTDA (art, text) or directly LTBA (flags)
+        send = bytes.fromhex('22011701')
+        sites = [(i + 6, 4) for i in range(len(d) - 8) if d[i:i + 4] == send and d[i + 4:i + 7] == bytes.fromhex('27022a')] + \
+                [(i + 4, 1) for i in range(len(d) - 6) if d[i:i + 4] == send and d[i + 4] == 0x28]
+        assert len(sites) == 3, 'decoration: expected 3 per-decoration tables, found %d' % len(sites)
+        for i, size in sites:
+            t = 'I' if size == 4 else 'B'
+            old = struct.unpack_from('<H', d, i + 1)[0]
+            vals = list(struct.unpack_from('<48' + t, d, old))
+            vals += [vals[28 + (j - 48) % 20] for j in range(48, 4 * n)]
+            struct.pack_into('<H', d, i + 1, len(d))
+            d += struct.pack('<%d%s' % (len(vals), t), *vals)
+        r.replace(di, bytes(d))
+    print('    added wallsets %s (copies of %s); kernel picks rnd(0..%d)%s' % (', '.join(new), src, n - 1, '; masks 16-bit' if n > 8 else ''))
+
+
+def job_extra_floors(r, job, pal):
+    """ENGINE EXTENSION: more floors (Floor-N + Ground-N), up to 16; widens the pairing masks.
+
+    {"copy": "Floor-2", "count": 8}   (runs before palette_rules; later floor jobs fill "Floor-8"...)
+    New floors get the source floor's pairing bits (same wallsets and palettes) until rules change them.
+    """
+    names = r.names()
+    ki = names['kernel']
+    k = kernel_rules.widen_masks(r.entry(ki)[2])
+    n0 = kernel_rules.n_floors(k)
+    count = job.get('count', 8)
+    src = int(job.get('copy', 'Floor-2').split('-')[1])
+    added = _add_copies(r, [('%s-%d' % (kind, n0 + i), '%s-%d' % (kind, src)) for i in range(count) for kind in ('Floor', 'Ground')])
+    k = kernel_rules.add_floors(k, [added['Floor-%d' % (n0 + i)] for i in range(count)], [added['Ground-%d' % (n0 + i)] for i in range(count)])
+    rules = kernel_rules.read(k)
+    for f in range(n0, n0 + count):
+        rules['floor_ok_for_wall'][f] = rules['floor_ok_for_wall'][src]
+        for p in range(kernel_rules.N_PAL):
+            if rules['floorpal_ok_for_floor'][p] >> src & 1:
+                rules['floorpal_ok_for_floor'][p] |= 1 << f
+    r.replace(ki, kernel_rules.write(k, rules))
+    print('    added floors %d-%d (copies of Floor-%d); kernel picks rnd(0..%d)' % (n0, n0 + count - 1, src, n0 + count - 1))
 
 
 def job_fix_ice_stairs(r, job, pal):
@@ -592,7 +651,7 @@ def job_eob_door(r, job, pal):
     base = gpath(game)
     px, _ = westwood.unpack(os.path.join(base, sheet_file))
     if game == 'eob1':
-        pal = np.array(westwood.eob1_palette(base, job.get('palette', 'BLUE.PAL')), np.uint8).reshape(-1, 3)
+        pal = np.array(westwood.eob1_palette(base, job.get('palette', eob_doors.EOB1_DOOR_PAL.get(job['kind'], 'BLUE.PAL'))), np.uint8).reshape(-1, 3)
     else:
         pal = np.array(westwood.read_pal(os.path.join(base, job.get('palette', eob_doors.EOB2_DOOR_PAL.get(job['kind'], 'DUNG.PAL')))), np.uint8).reshape(-1, 3)
     sheet = np.frombuffer(px[:64000], np.uint8).reshape(200, 320)
@@ -719,7 +778,8 @@ def reramp_floor(r, f):
     when the floor's palettes change between single- and two-ramp, map it like reramp does walls."""
     src = aesop.ResFile(os.path.join(paths.get_dh_dir(), 'HACK.RES'))
     old_rules = kernel_rules.read(src.entry(src.names()['kernel'])[2])
-    old_lums = [palette_lums(src, p) for p in range(21) if old_rules['floorpal_ok_for_floor'][p] >> f & 1]
+    f_old = int(ADDED['Floor-%d' % f].split('-')[1]) if 'Floor-%d' % f in ADDED else f   # added floors start as copies
+    old_lums = [palette_lums(src, p) for p in range(21) if old_rules['floorpal_ok_for_floor'][p] >> f_old & 1]
     new_prof, new_pals = ramp_profile(r, 'Floor-%d' % f)
     new_lums = [palette_lums(r, p) for p in new_pals]
     old_shape = {normalize.ramp_shape(l) for l in old_lums}; new_shape = {normalize.ramp_shape(l) for l in new_lums}
@@ -953,7 +1013,8 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'vmp_walls': job_vmp_walls, 'fix_unlock_shape': job_fix_unlock_shape, 'fix_ice_stairs': job_fix_ice_stairs,
         'eob_door': job_eob_door, 'vmp_deco': job_vmp_deco,
         'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset,
-        'game_music': job_game_music, 'extra_doors': job_extra_doors, 'paint_objects': job_paint_objects}
+        'game_music': job_game_music, 'extra_doors': job_extra_doors, 'paint_objects': job_paint_objects,
+        'extra_floors': job_extra_floors}
 
 
 def cmd_build(recipe_path, name):
@@ -975,12 +1036,12 @@ def cmd_build(recipe_path, name):
         print('  savegame:', note)
     for resname in ('HACK.RES', 'OPEN.RES'):
         jobs = [j for j in recipe['jobs'] if j.get('res', 'HACK.RES') == resname]
-        jobs.sort(key=lambda j: (j['type'] not in ('extra_wallset', 'extra_doors'), j['type'] != 'palette_rules', j['type'] == 'force_graphics'))  # engine extensions, rules first; force last
+        jobs.sort(key=lambda j: (j['type'] not in ('extra_wallset', 'extra_doors', 'extra_floors'), j['type'] != 'palette_rules', j['type'] == 'force_graphics'))  # engine extensions, rules first; force last
         if resname == 'HACK.RES':   # every wallset whose palette rules change gets its leftover DH art re-ramped
             have = {j['target'] for j in jobs if j['type'] == 'reramp'}
             ruled = [w.split()[0] for j in jobs if j['type'] == 'palette_rules' for w in j.get('wall_palettes', {})]
             ruled += ['Floor-%s' % f for j in jobs if j['type'] == 'palette_rules' for f in j.get('floor_palettes', {})]
-            n_rules = sum(j['type'] in ('palette_rules', 'extra_wallset', 'extra_doors') for j in jobs)
+            n_rules = sum(j['type'] in ('palette_rules', 'extra_wallset', 'extra_doors', 'extra_floors') for j in jobs)
             jobs[n_rules:n_rules] = [{'type': 'reramp', 'target': w} for w in dict.fromkeys(ruled) if w not in have]
         if not jobs:
             continue
@@ -1036,8 +1097,9 @@ def check_ramps(name):
         if after != before and (stairs_built is None or set(stairs_built) != after):
             print('  ramp check: %s ramp shape changed %s -> %s but %s Stairs kept its original art (add a reramp job)'
                   % (stem, before, after, stem)); ok = False
-    for f in range(kernel_rules.N_FLOOR):          # pits/holes (Ground-N) are floor-ramp DH art
-        b = {shape[p] for p in range(21) if old['floorpal_ok_for_floor'][p] >> f & 1}
+    for f in range(new['n_floors']):               # pits/holes (Ground-N) are floor-ramp DH art
+        f_old = int(copied['Floor-%d' % f].split('-')[1]) if 'Floor-%d' % f in copied else f
+        b = {shape[p] for p in range(21) if old['floorpal_ok_for_floor'][p] >> f_old & 1}
         a = {shape[p] for p in range(21) if new['floorpal_ok_for_floor'][p] >> f & 1}
         built = manifest.get('ramp_shapes', {}).get('Ground-%d' % f)
         if a != b and (built is None or set(built) != a):

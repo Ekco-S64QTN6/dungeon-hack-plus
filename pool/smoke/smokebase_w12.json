@@ -1,0 +1,20 @@
+{
+ "comment": "SMOKE base: 16/16 engine only, pinned to wallnum 12 (copy of Rock)",
+ "jobs": [
+  {
+   "type": "extra_wallset",
+   "copy": "Rock",
+   "count": 9
+  },
+  {
+   "type": "extra_floors",
+   "copy": "Floor-2",
+   "count": 8
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallnum": 12
+  }
+ ]
+}

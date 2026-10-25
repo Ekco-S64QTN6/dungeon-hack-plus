@@ -54,13 +54,18 @@ def retarget(job, old_stem, new_stem):
     return j
 
 
+NEW_SLOTS = kernel_rules.WALLSETS[7:16]          # Eighth, W08..W15 (engine extension)
 SEE_THROUGH_DOORS = {'grate', 'web', 'e2_bars'}
 EXTRA_DOORS = 16
 
 
-def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
-    """picks: optional {DH slot: source id} to pin (tests); the rest of the roll is unchanged.
-    eighth: add the 8th wallset (pipeline job extra_wallset) and always fill it with an external set."""
+N_WALLS, N_FLOORS = 16, 16          # engine extension: 16 wallsets and 16 floors per game (DH: 7 and 8)
+
+
+def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
+    """picks: optional {slot: source id} to pin (tests); the rest of the roll is unchanged.
+    With eighth (the engine extension, now 16 wallsets / 16 floors) every new slot (Eighth, W08-W15)
+    takes an external set, and `external` of DH's own 7 slots do too; the others keep DH art."""
     rng = random.Random(seed)
     dh = aesop.ResFile(os.path.join(ROOT, 'base_games', 'dungeon_hack', 'HACK.RES')); n = dh.names()
     kernel = dh.entry(n['kernel'])[2]
@@ -76,11 +81,13 @@ def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
         if pinned:
             picks = dict(pinned)
         else:
-            ext_slots = (['Eighth'] if eighth else []) + rng.sample(SLOTS, external)
+            ext_slots = (NEW_SLOTS if eighth else []) + rng.sample(SLOTS, external)
             picks = dict(zip(ext_slots, rng.sample(sources, len(ext_slots))))
         n_ext = len(picks)
-        floors = rng.sample(range(8), n_ext)
-        rules = kernel_rules.read(kernel_rules.add_wallset(kernel, 0, 0) if 'Eighth' in picks else kernel)
+        ext = any(sl in NEW_SLOTS for sl in picks)
+        nf = N_FLOORS if ext else 8
+        floors = rng.sample(range(nf), n_ext)
+        rules = kernel_rules.extended_rules(kernel, N_WALLS, N_FLOORS) if ext else kernel_rules.read(kernel)
         job = {'type': 'palette_rules', 'target': 'kernel', 'wall_palettes': {}, 'wall_floors': {},
                'floor_palettes': {}, 'allow_pairs': []}
         for (slot, src), floor in zip(picks.items(), floors):
@@ -97,7 +104,7 @@ def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
             job['wall_floors'][slot + ' Wallset'] = [floor]
             job['floor_palettes'][str(floor)] = match
             job['allow_pairs'].append([match, match])
-        free = [f for f in range(8) if f not in floors]
+        free = [f for f in range(8) if f not in floors]          # DH's own sets keep original floors
         ok = True
         for slot in SLOTS:
             if slot in picks:
@@ -121,9 +128,11 @@ def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
             break
     else:
         raise SystemExit('no valid wallset/floor assignment found')
-    jobs = ([{'type': 'extra_wallset', 'copy': 'Rock'}] if 'Eighth' in picks else []) + [job] + \
+    ext_jobs = [{'type': 'extra_wallset', 'copy': 'Rock', 'count': N_WALLS - 7},
+                {'type': 'extra_floors', 'copy': 'Floor-2', 'count': N_FLOORS - 8}] if any(sl in NEW_SLOTS for sl in picks) else []
+    jobs = ext_jobs + [job] + \
         [dict(j) for j in ec.FIX_JOBS] + ec.reramp_jobs(list(picks))   # before any art goes in
-    summary['wallsets'] = {slot: picks.get(slot, 'dh_' + slot.lower()) for slot in SLOTS + ['Eighth'] if slot != 'Eighth' or slot in picks}
+    summary['wallsets'] = {slot: picks.get(slot, 'dh_' + slot.lower()) for slot in SLOTS + NEW_SLOTS if slot in SLOTS or slot in picks}
     summary['floors'] = {}
     for (slot, src), floor in zip(picks.items(), floors):
         summary['floors'][floor] = src
@@ -144,7 +153,7 @@ def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
             jobs.append({'type': 'vmp_walls', 'target': '%s Wallset' % slot, 'game': game, 'set': vset,
                          'plain': [0, 1], 'frame': 2, 'frame_set': frame_set,
                          **({'stairs': '%s Stairs' % slot, 'stairs_set': stairs_set, 'stairs_down': 4, 'stairs_up': 3} if stairs_set else {})})
-            if vset != 'FOREST' and slot != 'Eighth':   # the 8th wallset's decorations are generic slots 29-32
+            if vset != 'FOREST' and slot in SLOTS:      # wallsets 8+ use generic decoration slots
                 jobs.append({'type': 'vmp_deco', 'target': '%s decorations' % slot, 'wallset': '%s Wallset' % slot,
                              'game': game, 'set': vset, 'deco': 5, 'base': 0})
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s_backdrop.png' % vset})
@@ -221,7 +230,7 @@ def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
         dh_ad = {'dh:Music Scene One Roland': 'dh:Music Scene One Adlib', 'dh:Music Scene Two Roland': 'dh:Music Scene Two Adlib/Pc',
                  'dh:Music End Roland': 'dh:Music End Adlib/Pc'}
         tracks = {}
-        for slot in SLOTS + (['Eighth'] if 'Eighth' in picks else []):
+        for slot in SLOTS + [sl for sl in NEW_SLOTS if sl in picks]:
             src = picks.get(slot, 'dh')
             own = [t for t in good if t.split(':')[0] == src.split('_')[0]]
             fresh = [t for t in own if t not in summary['music'].values()] or \

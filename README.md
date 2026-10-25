@@ -16,7 +16,8 @@ everything is built from them into a separate `build/` folder; your installs are
 Dungeon Hack picks a level's look at new-game start from fixed slots: 7 wallsets (each with
 its own stairs, door frame and decorations), 8 floors, 21 colour palettes, 16 doors, 20
 generic wall decorations and its monster list. Dungeon Hack+ patches the engine to pick from
-**8 wallsets**, and fills the slots from all the games:
+**16 wallsets, 16 floors and 35 doors**, and fills the slots from all the games (13 of the 19
+imported wall sets per game, plus 3 of Dungeon Hack's own):
 
 - **Wallsets**: hand-drawn EOB1/EOB2 walls are copied 1:1 from each view position
   (ScummVM's Kyra tables), EOB3 walls panel by panel. Each imported set gets its own floor

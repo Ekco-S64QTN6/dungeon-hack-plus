@@ -1,0 +1,80 @@
+{
+ "comment": "SMOKE: 16/16 engine, W12 = Menzo gold + Floor-12, pinned to wallnum 12",
+ "jobs": [
+  {
+   "type": "extra_wallset",
+   "copy": "Rock",
+   "count": 9
+  },
+  {
+   "type": "extra_floors",
+   "copy": "Floor-2",
+   "count": 8
+  },
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "W12 Wallset": [
+     11,
+     6,
+     1
+    ]
+   },
+   "wall_floors": {
+    "W12 Wallset": [
+     12
+    ]
+   },
+   "floor_palettes": {
+    "12": [
+     11,
+     6,
+     1
+    ]
+   },
+   "allow_pairs": [
+    [
+     [
+      11,
+      6,
+      1
+     ],
+     [
+      11,
+      6,
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "type": "wallset",
+   "target": "W12 Wallset",
+   "texture": "pool/walls/menzo_gold_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "W12 Wallset",
+   "texture": "pool/walls/menzo_gold_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "W12 Wallset",
+   "texture": "pool/walls/menzo_gold_v0.png",
+   "frames": "18-36,198-215"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-12",
+   "image": "pool/floors/menzo_gold.png"
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallnum": 12
+  }
+ ]
+}

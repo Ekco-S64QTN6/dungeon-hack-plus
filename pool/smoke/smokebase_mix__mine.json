@@ -2,13 +2,28 @@
  "comment": "SMOKE VARIANT (test only)",
  "jobs": [
   {
+   "type": "extra_doors",
+   "count": 16,
+   "copy": "Door-05"
+  },
+  {
+   "type": "extra_wallset",
+   "copy": "Rock",
+   "count": 9
+  },
+  {
+   "type": "extra_floors",
+   "copy": "Floor-2",
+   "count": 8
+  },
+  {
    "type": "force_graphics",
    "target": "kernel (TEST ONLY)",
    "wallset": "Mine Wallset",
    "stairs": "Mine Stairs",
-   "floor": "Floor-2",
-   "palette": "wall/floor palette 06",
-   "door": "Door-00"
+   "floor": "Floor-6",
+   "palette": "wall/floor palette 00",
+   "door": "Door-07"
   }
  ]
 }

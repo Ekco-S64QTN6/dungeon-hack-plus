@@ -29,7 +29,7 @@ def locate(kernel):
     pat = st.pack('<21I', *range(169, 190))
     p978 = kernel.find(pat)
     loads = {k: st.unpack_from('<H', kernel, _table_operand(kernel, pattern))[0]   # where the code reads them from
-             for k, pattern in (('wallset', LOAD_WALLSET), ('stairs', LOAD_STAIRSET))}
+             for k, pattern in (('wallset', LOAD_WALLSET), ('stairs', LOAD_STAIRSET), ('floor', LOAD_FLOOR))}
     if p978 < 0:
         # anchor overwritten on purpose (test-only force_graphics): every known kernel (ENG, FRE, GER;
         # extensions only append) keeps these tables at the same offsets
@@ -38,11 +38,12 @@ def locate(kernel):
     find = lambda vals: kernel.find(st.pack('<%dI' % len(vals), *vals))
     offs = {'palette': p978, 'floor_wall': p978 + 84, 'wallpal_wall': p978 + 92,
             'floorpal_floor': p978 + 113, 'wallpal_floorpal': p978 + 134,
-            'wallset': loads['wallset'], 'stairs': loads['stairs'], 'floor': find(range(153, 161)),
+            'wallset': loads['wallset'], 'stairs': loads['stairs'], 'floor': loads['floor'],
             'door': _door_table(kernel)}
     assert all(v >= 0 for v in offs.values()), offs
     return offs
-WALLSETS = ['Marble', 'Wood', 'Stone', 'Foil', 'Ice', 'Mine', 'Rock', 'Eighth']   # 'Eighth' only after add_wallset()
+WALLSETS = ['Marble', 'Wood', 'Stone', 'Foil', 'Ice', 'Mine', 'Rock', 'Eighth'] + ['W%02d' % i for i in range(8, 16)]
+# slots 7+ exist only after add_wallsets(); their resources are "<name> Wallset" / "<name> Stairs"
 N_FLOOR, N_PAL = 8, 21
 
 
@@ -71,28 +72,145 @@ def _table_operand(kernel, pattern):
         pos = i + 1
 
 
-def add_wallset(kernel, wallset_res, stairs_res):
-    """Engine extension: an 8th wallset. Appends 8-entry copies of the wallset and stairs tables
-    to the end of the kernel (LTDA takes absolute u16 offsets, and the program header has no
-    length field, so nothing else moves), repoints the two loads in "setup level graphics", and
-    makes "randomize graphics" pick rnd(0..7). The 8-bit floor/palette masks already have bit 7.
-    The debug "change wallset" handler's wrap-around is raised to 8 as well."""
+LOAD_FLOOR = (bytes.fromhex('3f3b0127022a'), bytes.fromhex('4b0e00'))     # LSBA floornum; AIS 2; LTDA; SXD "L:floorset"
+LOAD_GROUND = (bytes.fromhex('3f3b0127022a'), bytes.fromhex('4b1400'))    # ... SXD "L:groundset"
+# "randomize graphics" picks: rnd(0, n - 1) then SAW locVar_W:6; LAW locVar_W:6; <mask lookup>. The floor
+# pick is the first such call (palette picks use n = 21).
+RND_PICK_TAIL = bytes.fromhex('041d010a21023006002d0600')
+MASK_IDS = {'floor_wall': 0, 'wallpal_wall': 1, 'floorpal_floor': 2}
+MASK_ROWS = {'floor_wall': 16, 'wallpal_wall': 21, 'floorpal_floor': 21}   # word tables: room for 16 floors
+
+
+def _pick_sites(kernel):
+    out, pos = [], 0
+    while True:
+        i = kernel.find(RND_PICK_TAIL, pos)
+        if i < 0:
+            return out
+        out.append(i); pos = i + 1
+
+
+def n_floors(kernel):
+    i = next(i for i in _pick_sites(kernel) if kernel[i - 1] != 21 and kernel[i - 2] == 0x1d)
+    return kernel[i - 1]
+
+
+def wide_masks(kernel):
+    """{mask name: word-table offset} for masks widened by widen_masks() (found by their stub markers)."""
+    out = {}
+    for name, mid in MASK_IDS.items():
+        j = kernel.find(b'DHW' + bytes([mid]))
+        if j >= 0:
+            out[name] = struct.unpack_from('<H', kernel, j + 4)[0]
+    return out
+
+
+def widen_masks(kernel):
+    """Engine extension: the three 8-bit pairing masks (floor->wallsets, wall palette->wallsets,
+    floor palette->floors) become 16-bit, so up to 16 wallsets and 16 floors. Each LTBA lookup site in
+    "randomize graphics" is replaced by BRA to a stub: PUSH; SHTC 1; SHL (index*2); LTWA <word table>;
+    BRA back. A marker 'DHW' + id + u16 table offset follows each stub (never executed)."""
     k = bytearray(kernel)
-    assert n_walls(k) == 7, 'kernel already extended'
+    if wide_masks(k):
+        return bytes(k)
+    o = locate(kernel)
+    for name, mid in MASK_IDS.items():
+        old = o[name]
+        site_pat = b'\x28' + struct.pack('<H', old)
+        site = k.find(site_pat)
+        assert site >= 0 and k.find(site_pat, site + 1) < 0, 'mask lookup for %s not found uniquely' % name
+        n_old = N_FLOOR if name == 'floor_wall' else N_PAL
+        vals = list(k[old:old + n_old]) + [0] * (MASK_ROWS[name] - n_old)
+        table = len(k); k += struct.pack('<%dH' % len(vals), *vals)
+        stub = len(k)
+        k += b'\x04\x1d\x01\x13\x29' + struct.pack('<H', table) + b'\x02' + struct.pack('<H', site + 3)
+        k += b'DHW' + bytes([mid]) + struct.pack('<H', table)
+        k[site:site + 3] = b'\x02' + struct.pack('<H', stub)
+    assert len(k) < 0x10000
+    return bytes(k)
+
+
+def _extend_table(k, pattern, new_res):
+    """Append a copy of the long table that `pattern`'s LTDA reads, plus new_res; repoint that load."""
+    op = _table_operand(k, pattern)
+    old = struct.unpack_from('<H', k, op)[0]
+    return old, op
+
+
+def add_wallsets(kernel, wallset_res, stairs_res):
+    """Engine extension: more wallsets (8 fit the original 8-bit masks; up to 16 after widen_masks).
+    Copies of the wallset/stairs tables with the new resources are appended to the kernel, the two loads
+    in "setup level graphics" repointed, rnd(0..n-1) raised, and the debug "change wallset" wrap updated."""
+    k = bytearray(kernel)
+    n0 = n_walls(k); n = n0 + len(wallset_res)
+    assert n <= 8 or wide_masks(k), 'more than 8 wallsets needs widen_masks() first'
+    assert n <= 16
     for pattern, res in ((LOAD_WALLSET, wallset_res), (LOAD_STAIRSET, stairs_res)):
         op = _table_operand(k, pattern)
         old = struct.unpack_from('<H', k, op)[0]
-        vals = list(struct.unpack_from('<7I', k, old)) + [res]
-        new = len(k)
-        assert new + 32 < 0x10000
-        k += struct.pack('<8I', *vals)
+        vals = list(struct.unpack_from('<%dI' % n0, k, old)) + list(res)
+        new = len(k); k += struct.pack('<%dI' % n, *vals)
         struct.pack_into('<H', k, op, new)
-    i = k.find(RND_WALL[2:]); k[i - 1] = 8
-    wrap = bytes.fromhex('3f5401041d0717')               # "change wallset": if (wallnum == 7) wallnum = 0
-    j = k.find(wrap)
+    i = k.find(RND_WALL[2:]); k[i - 1] = n
+    j = k.find(bytes.fromhex('3f5401041d%02x17' % n0))          # "change wallset": if (wallnum == n) wallnum = 0
     if j >= 0:
-        k[j + 5] = 8
+        k[j + 5] = n
+    assert len(k) < 0x10000
     return bytes(k)
+
+
+def add_floors(kernel, floor_res, ground_res):
+    """Engine extension: more floors (needs widen_masks(); up to 16). Floor and ground-set tables are
+    extended like the wallset ones, and the floor pick becomes rnd(0..n-1)."""
+    k = bytearray(kernel)
+    assert wide_masks(k), 'more floors needs widen_masks() first'
+    n0 = n_floors(k); n = n0 + len(floor_res)
+    assert n <= 16
+    for pattern, res in ((LOAD_FLOOR, floor_res), (LOAD_GROUND, ground_res)):
+        op = _table_operand(k, pattern)
+        old = struct.unpack_from('<H', k, op)[0]
+        vals = list(struct.unpack_from('<%dI' % n0, k, old)) + list(res)
+        new = len(k); k += struct.pack('<%dI' % n, *vals)
+        struct.pack_into('<H', k, op, new)
+    i = next(i for i in _pick_sites(k) if k[i - 1] == n0 and k[i - 2] == 0x1d); k[i - 1] = n
+    j = k.find(bytes.fromhex('3f3b01041d%02x17' % n0))           # "change floorset" wrap
+    if j >= 0:
+        k[j + 5] = n
+    assert len(k) < 0x10000
+    return bytes(k)
+
+
+def extended_rules(kernel, n_walls_total, n_floors_total, wall_src='Rock', floor_src=2):
+    """Rules as the pipeline's extra_wallset / extra_floors jobs leave them (new wallsets copy the
+    pairing bits of `wall_src`, new floors those of Floor-`floor_src`), for validating a roll before
+    building it. Resource numbers are placeholders."""
+    k = kernel
+    if n_walls_total > 8 or n_floors_total > 8:
+        k = widen_masks(k)
+    w0, f0 = n_walls(k), n_floors(k)
+    if n_walls_total > w0:
+        k = add_wallsets(k, [0] * (n_walls_total - w0), [0] * (n_walls_total - w0))
+    if n_floors_total > f0:
+        k = add_floors(k, [0] * (n_floors_total - f0), [0] * (n_floors_total - f0))
+    rules = read(k)
+    ws = WALLSETS.index(wall_src)
+    for key, n in (('floor_ok_for_wall', f0), ('wallpal_ok_for_wall', N_PAL)):
+        for i in range(n):
+            if rules[key][i] >> ws & 1:
+                for w in range(w0, n_walls_total):
+                    rules[key][i] |= 1 << w
+    for f in range(f0, n_floors_total):
+        rules['floor_ok_for_wall'][f] = rules['floor_ok_for_wall'][floor_src]
+        for p in range(N_PAL):
+            if rules['floorpal_ok_for_floor'][p] >> floor_src & 1:
+                rules['floorpal_ok_for_floor'][p] |= 1 << f
+    return rules
+
+
+def add_wallset(kernel, wallset_res, stairs_res):
+    """The 8th wallset (fits the original 8-bit masks)."""
+    assert n_walls(kernel) == 7, 'kernel already extended'
+    return add_wallsets(kernel, [wallset_res], [stairs_res])
 
 
 # "randomize graphics": doornum = rnd(0, 19 - 1) -> SHTC 0; PUSH; SHTC n; PUSH; SHTC 1; SUB; CALL 2; SSBA "B:doornum"
@@ -140,20 +258,32 @@ def _door_table(kernel):
 
 def read(kernel):
     o = locate(kernel)
+    wide = wide_masks(kernel)
+    nf = n_floors(kernel)
+
+    def mask(name, rows, off):
+        if name in wide:
+            return list(struct.unpack_from('<%dH' % rows, kernel, wide[name]))
+        return list(kernel[off:off + rows])
     return {
-        'n_walls': n_walls(kernel),
-        'floor_ok_for_wall': list(kernel[o['floor_wall']:o['floor_wall'] + N_FLOOR]),           # [floor] -> wallset mask
-        'wallpal_ok_for_wall': list(kernel[o['wallpal_wall']:o['wallpal_wall'] + N_PAL]),       # [pal] -> wallset mask
-        'floorpal_ok_for_floor': list(kernel[o['floorpal_floor']:o['floorpal_floor'] + N_PAL]),  # [pal] -> floor mask
+        'n_walls': n_walls(kernel), 'n_floors': nf, 'wide': bool(wide),
+        'floor_ok_for_wall': mask('floor_wall', nf, o['floor_wall']),            # [floor] -> wallset mask
+        'wallpal_ok_for_wall': mask('wallpal_wall', N_PAL, o['wallpal_wall']),   # [pal] -> wallset mask
+        'floorpal_ok_for_floor': mask('floorpal_floor', N_PAL, o['floorpal_floor']),  # [pal] -> floor mask
         'wallpal_ok_with_floorpal': list(struct.unpack_from('<%dI' % N_PAL, kernel, o['wallpal_floorpal'])),
     }
 
 
 def write(kernel, rules):
     k = bytearray(kernel); o = locate(kernel)
-    k[o['floor_wall']:o['floor_wall'] + N_FLOOR] = bytes(rules['floor_ok_for_wall'])
-    k[o['wallpal_wall']:o['wallpal_wall'] + N_PAL] = bytes(rules['wallpal_ok_for_wall'])
-    k[o['floorpal_floor']:o['floorpal_floor'] + N_PAL] = bytes(rules['floorpal_ok_for_floor'])
+    wide = wide_masks(kernel)
+    for name, key, off in (('floor_wall', 'floor_ok_for_wall', o['floor_wall']), ('wallpal_wall', 'wallpal_ok_for_wall', o['wallpal_wall']),
+                           ('floorpal_floor', 'floorpal_ok_for_floor', o['floorpal_floor'])):
+        vals = rules[key]
+        if name in wide:
+            struct.pack_into('<%dH' % len(vals), k, wide[name], *[v & 0xFFFF for v in vals])
+        else:
+            k[off:off + len(vals)] = bytes(v & 0xFF for v in vals)
     struct.pack_into('<%dI' % N_PAL, k, o['wallpal_floorpal'], *rules['wallpal_ok_with_floorpal'])
     assert len(k) == len(kernel)
     return bytes(k)
@@ -163,7 +293,7 @@ def problems(rules):
     """Every reachable (wallset, floor, floorpal) must leave at least one choice at each step."""
     out = []
     for w in range(rules.get('n_walls', 7)):
-        floors = [f for f in range(N_FLOOR) if rules['floor_ok_for_wall'][f] >> w & 1]
+        floors = [f for f in range(rules.get('n_floors', N_FLOOR)) if rules['floor_ok_for_wall'][f] >> w & 1]
         if not floors:
             out.append('wallset %s: no compatible floor' % WALLSETS[w])
         for f in floors:
@@ -181,7 +311,7 @@ def describe(rules):
     lines = []
     for w, name in enumerate(WALLSETS[:rules.get('n_walls', 7)]):
         pals = [p for p in range(N_PAL) if rules['wallpal_ok_for_wall'][p] >> w & 1]
-        floors = [f for f in range(N_FLOOR) if rules['floor_ok_for_wall'][f] >> w & 1]
+        floors = [f for f in range(rules.get('n_floors', N_FLOOR)) if rules['floor_ok_for_wall'][f] >> w & 1]
         lines.append('%-7s wall palettes %s  floors %s' % (name, pals, floors))
     return '\n'.join(lines)
 
@@ -193,7 +323,7 @@ def set_wall_palettes(rules, wallset, palettes):
         if p in palettes:
             rules['wallpal_ok_for_wall'][p] |= 1 << w
         else:
-            rules['wallpal_ok_for_wall'][p] &= ~(1 << w) & 0xFF
+            rules['wallpal_ok_for_wall'][p] &= ~(1 << w) & 0xFFFF
     return rules
 
 
@@ -211,6 +341,8 @@ def force(kernel, **resources):
             n = n_walls(kernel)
         elif key == 'door':
             n = n_doors(kernel)
+        elif key == 'floor':
+            n = n_floors(kernel)
         vals = list(struct.unpack_from('<%dI' % n, k, off))
         vals = [res if v else 0 for v in vals]          # keep the door table's rejected (0) slots
         struct.pack_into('<%dI' % n, k, off, *vals)
@@ -221,11 +353,11 @@ def force(kernel, **resources):
 def set_wall_floors(rules, wallset, floors):
     """table1062: which Floor-N may appear with this wallset."""
     w = WALLSETS.index(wallset.replace(' Wallset', ''))
-    for f in range(N_FLOOR):
+    for f in range(rules.get('n_floors', N_FLOOR)):
         if f in floors:
             rules['floor_ok_for_wall'][f] |= 1 << w
         else:
-            rules['floor_ok_for_wall'][f] &= ~(1 << w) & 0xFF
+            rules['floor_ok_for_wall'][f] &= ~(1 << w) & 0xFFFF
     return rules
 
 
@@ -235,7 +367,7 @@ def set_floor_palettes(rules, floor, palettes):
         if p in palettes:
             rules['floorpal_ok_for_floor'][p] |= 1 << floor
         else:
-            rules['floorpal_ok_for_floor'][p] &= ~(1 << floor) & 0xFF
+            rules['floorpal_ok_for_floor'][p] &= ~(1 << floor) & 0xFFFF
     return rules
 
 
