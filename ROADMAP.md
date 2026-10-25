@@ -97,7 +97,7 @@ Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
 - [x] S  Infinite-retry hazards: floor/palette loops are validated by `kernel_rules.problems()`. Door loop (`doornum = rnd(0..18)` until `table718[doornum] != 0` and: door 8 not with wallnum 0/3, door 9 only with wallnum 2 or >3, wallnum 2 needs door ∈ {5,6,7,11,18}) is satisfiable for every wallset as long as `table718` and those constants are untouched — no job edits them (door 5 works everywhere). Decoration loops re-roll until two distinct picks from 4 (wallset) / 20 (generic) — always satisfiable. Any future job that edits `table718` or adds wallsets must re-check this
 - [ ] S  MAZE.EXE edge cases noted by Thirdeye (loops that never end on failure): document seeds that hang, and avoid them in testing
 - [x] S  Save/Continue crash (user report): base install lacked GOG's savegame template; builds are now seeded and rebuilds keep saves. Verified in game: save to slot → Continue → restore
-- [ ] S  Smoke plan for save → quit → Continue → restore (repro script in session scratch; fixture `fixtures/user_saved`)
+- [x] S  `smoke/save_restore.py BUILD`: camp → Save Game → slot 1 → quit → menu → Continue → restore, with file + screen checks. PASS on `mix`; `--no-template` negative control FAILS as it should (reproduces the GOG crash)
 - [x] S  FRE/GER builds: `dhplus.py --lang fre|ger …` (or `DHPLUS_DH_DIR`). Same 2,953 resources/indices; strings, ~15 UI images and the kernel differ (kernel 18 B shorter). `kernel_rules.locate()` now finds the graphics tables by content (identical offsets in all three, fallback for forced test kernels). Classic themes + fixes verify in FRE/GER; French Waterdeep passes the in-game gate
 
 ## Phase 5 — Modernization / Quality of Life
