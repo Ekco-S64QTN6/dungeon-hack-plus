@@ -685,6 +685,8 @@ def job_reramp(r, job, pal):
     luminance from the slot's original palettes to the new ones, like imported art is.
     No-op when the shape is unchanged.
     """
+    if job['target'].startswith('Floor-'):
+        return reramp_floor(r, int(job['target'].split('-')[1]))
     stem = job['target']
     w = kernel_rules.WALLSETS.index(ADDED['%s Wallset' % stem].split()[0]) if '%s Wallset' % stem in ADDED \
         else kernel_rules.WALLSETS.index(stem)                      # the 8th wallset starts as a copy
@@ -710,6 +712,29 @@ def job_reramp(r, job, pal):
         ramp_profile(r, t if t.endswith(('Wallset', 'Stairs')) else '%s Wallset' % stem)
         BUILT_SHAPES[t] = sorted(new_shape)
     print('    %s: %s -> %s ramps, re-ramped %s' % (stem, sorted(old_shape), sorted(new_shape), targets))
+
+
+def reramp_floor(r, f):
+    """Floor-N's ground set (Ground-N: pits and holes, drawn in the floor ramp 224-238) keeps DH art;
+    when the floor's palettes change between single- and two-ramp, map it like reramp does walls."""
+    src = aesop.ResFile(os.path.join(paths.get_dh_dir(), 'HACK.RES'))
+    old_rules = kernel_rules.read(src.entry(src.names()['kernel'])[2])
+    old_lums = [palette_lums(src, p) for p in range(21) if old_rules['floorpal_ok_for_floor'][p] >> f & 1]
+    new_prof, new_pals = ramp_profile(r, 'Floor-%d' % f)
+    new_lums = [palette_lums(r, p) for p in new_pals]
+    old_shape = {normalize.ramp_shape(l) for l in old_lums}; new_shape = {normalize.ramp_shape(l) for l in new_lums}
+    BUILT_SHAPES['Ground-%d' % f] = sorted(new_shape)
+    if old_shape == new_shape:
+        print('    Floor-%d: ramp shape unchanged %s, nothing to do' % (f, sorted(new_shape)))
+        return
+    old_prof = np.mean(old_lums, axis=0)[:15]
+    gray = np.repeat(old_prof[None, :, None], 3, axis=2)
+    lut = np.arange(256, dtype=np.uint8)
+    lut[224:239] = normalize.to_ramp_target(gray, new_prof, 224, dither=False, lohi=(old_prof.min(), old_prof.max()))[0]
+    idx = r.names()['Ground-%d' % f]
+    frames = [(fw, fh, bytearray(lut[np.frombuffer(bytes(px), np.uint8)].tobytes()), m) for fw, fh, px, m in aesop.decode_shapes(r.entry(idx)[2])]
+    r.replace(idx, aesop.encode_shapes(frames))
+    print('    Floor-%d: %s -> %s ramps, re-ramped Ground-%d' % (f, sorted(old_shape), sorted(new_shape), f))
 
 
 def job_eob_wall_deco(r, job, pal):
@@ -840,6 +865,9 @@ def job_sprites(r, job, pal):
         pal_file = os.path.join(WORK, 'aesop', 'dh_palette.json')
     meta = json.load(open(pal_file))
     allowed = set(meta['monster_indices']) - {0}
+    if job['target'] in ('Weird', 'Wraith2') and not job.get('force'):
+        raise SystemExit('%s draws with wall-ramp colours on purpose (palette-cycling effect); '
+                         'replacing it needs "force": true' % job['target'])
     idx = r.names()[job['target']]
     old = aesop.decode_shapes(r.entry(idx)[2])
     assert len(job['images']) == len(old), '%s needs %d frames' % (job['target'], len(old))
@@ -909,6 +937,7 @@ def cmd_build(recipe_path, name):
         if resname == 'HACK.RES':   # every wallset whose palette rules change gets its leftover DH art re-ramped
             have = {j['target'] for j in jobs if j['type'] == 'reramp'}
             ruled = [w.split()[0] for j in jobs if j['type'] == 'palette_rules' for w in j.get('wall_palettes', {})]
+            ruled += ['Floor-%s' % f for j in jobs if j['type'] == 'palette_rules' for f in j.get('floor_palettes', {})]
             n_rules = sum(j['type'] in ('palette_rules', 'extra_wallset', 'extra_doors') for j in jobs)
             jobs[n_rules:n_rules] = [{'type': 'reramp', 'target': w} for w in dict.fromkeys(ruled) if w not in have]
         if not jobs:
@@ -965,6 +994,12 @@ def check_ramps(name):
         if after != before and (stairs_built is None or set(stairs_built) != after):
             print('  ramp check: %s ramp shape changed %s -> %s but %s Stairs kept its original art (add a reramp job)'
                   % (stem, before, after, stem)); ok = False
+    for f in range(kernel_rules.N_FLOOR):          # pits/holes (Ground-N) are floor-ramp DH art
+        b = {shape[p] for p in range(21) if old['floorpal_ok_for_floor'][p] >> f & 1}
+        a = {shape[p] for p in range(21) if new['floorpal_ok_for_floor'][p] >> f & 1}
+        built = manifest.get('ramp_shapes', {}).get('Ground-%d' % f)
+        if a != b and (built is None or set(built) != a):
+            print('  ramp check: Floor-%d ramp shape changed %s -> %s but Ground-%d was not re-ramped' % (f, b, a, f)); ok = False
     print('  ramp check:', 'OK' if ok else 'FAILED')
     return ok
 

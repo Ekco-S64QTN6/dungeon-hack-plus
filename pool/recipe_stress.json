@@ -693,7 +693,8 @@
     "pool/monsters/eob1_kobold/2.png",
     "pool/monsters/eob1_kobold/4.png",
     "pool/monsters/eob1_kobold/5.png"
-   ]
+   ],
+   "force": true
   },
   {
    "type": "sprites",
@@ -741,7 +742,8 @@
     "pool/monsters/eob1_kobold/2.png",
     "pool/monsters/eob1_kobold/4.png",
     "pool/monsters/eob1_kobold/5.png"
-   ]
+   ],
+   "force": true
   },
   {
    "type": "sprites",
