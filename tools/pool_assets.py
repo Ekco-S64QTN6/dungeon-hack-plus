@@ -8,7 +8,8 @@ games, so a fresh clone runs this once after filling base_games/:
   pool/walls/<SET>_wt<N>_front.png   EOB1/EOB2 near front walls (used by the early presets)
   pool/floors/eob3_<set>.png         EOB3 backdrops (19th frame of each wall object)
   pool/walls/eob3_<set>_front.png    EOB3 near front wall (slot 36 texture)
-  pool/monsters/<name>/0..5.png      EOB1/EOB2 (tools/monsters.py) and EOB3 (tools/eob3_monsters.py)
+  pool/monsters/<name>/0..5.png      EOB1/EOB2 (tools/monsters.py; English EOB1's EOBDATA*.PAK is unpacked to work/ first) and EOB3 (tools/eob3_monsters.py)
+  pool/portraits/<game>_NN.png       EOB1/EOB2/EOB3 character portraits (tools/portraits.py)
   pool/sounds/raw|wav                EOB3 PCM (tools/sounds.py)
   pool/walls/menzo_*, pool/floors/menzo_*   Menzoberranzan walls and projected floors (tools/menzo_walls.py)
 """
@@ -66,8 +67,9 @@ def eob3_floors():
 def main():
     westwood_sets()
     eob3_floors()
-    import monsters, eob3_monsters, sounds
+    import monsters, eob3_monsters, sounds, portraits
     monsters.extract_all()
+    portraits.extract_all()
     eob3_monsters.extract_all()
     sounds.extract_all()
     if os.path.isdir(paths.get_game_dir('menzo')):

@@ -1,5 +1,18 @@
 # Dungeon Hack Cross-Engine Mashup — Plan & Findings
 
+> **Historical design document (written 2026-10-24, before any in-game testing).** Kept for its
+> format specs, compatibility matrix and palette model, which still hold. Superseded since:
+> * "Replace in place, never add slots" (§4): the engine now has 16 wallsets, 16 floors and 35
+>   doors, added in free resource slots (3,072 slots, 2,963 used; not 3,081). See `CLAUDE.md`.
+> * `pipeline.py roll` + `pool/pool.json`: replaced by the mix (`tools/mix.py`, `dhplus.py roll`).
+> * "Not verified yet / Xvfb not installed" (§5, §8, §10): the in-game gate is closed; DOSBox-Staging,
+>   Xvfb and the walker harness run every check in game (`smoke/`).
+> * EOB1/2 walls are copied 1:1 from EOB's hand-drawn view positions, not warped (§4 Path C);
+>   Menzo floors are projected (Path B); `SKELWAR.CPS` (RLE method 3) is supported (§7).
+> * The project moved from `` to the repository root; paths below are updated.
+>
+> Current status: `ROADMAP.md`. Working notes and engine facts: `CLAUDE.md`.
+
 Everything marked **✔ measured** was checked against the actual files in this folder
 (GOG *Forgotten Realms: The Archives* Collections One and Three) on 2026-10-24.
 Everything marked **◐ inferred** is a strong hypothesis still to be confirmed in game.
@@ -10,7 +23,7 @@ Everything marked **◐ inferred** is a strong hypothesis still to be confirmed 
 |---|---|
 | A Ravenloft game is in the folder | **No.** Collection Three contains only Dungeon Hack (ENG/FRE/GER) and Menzoberranzan. The top-level `Dungeon Hack/` is byte-identical to `Dungeon Hack-ENG` (`HACK.RES` cmp equal). |
 | Menzoberranzan ships `.CINE`, `.CGEN`, `.RAW` files | `CINE/` and `CGEN/` are **directories inside `GAME.ISO`** holding `*.DFA` animations. There are no `.RAW` files. On disk: `RES0`–`RES8`, `COLORS`, `LEVELS.DAT`, `OBJECTS.DAT`, `NPCS.DAT`. The ISO also has `RES3`, `RES6`, `RES9`, `RES10` (55 MB) and `DATA.A00/A01` (ARJ). |
-| LoftRES is the community tool | I found **no trace of LoftRES** online. The plan does not depend on it: `mashup/tools/dreamforge.py` reads the RES container and LZSS directly. If you have LoftRES, use it as a cross-check. |
+| LoftRES is the community tool | I found **no trace of LoftRES** online. The plan does not depend on it: `tools/dreamforge.py` reads the RES container and LZSS directly. If you have LoftRES, use it as a cross-check. |
 | XWE 1.11 / Game Extractor handle AESOP | Not verified. The tool that is verified and maintained is **daesop**, bundled with **Thirdeye** (GPLv3, github.com/psi29a/thirdeye). It extracts, replaces, converts bitmaps and creates DH `.TBL` files. |
 | EOB3 assets are directly portable to DH | **Different bitmap encoding, identical art layout.** ✔ GOG EOB3 runs **AESOP/32** with VFX **"1.10"** shape tables (312; decoder ported to `aesop.decode_vfx110`, all 312 decode). ✔ DH runs **AESOP/16 V1.00** with the old shape format plus a `.TBL`. ✔ Both use the **same 18-panel view-position unit in the same order** (EOB3 "19 shapes" = 18 panels + backdrop). ✔ EOB3 wall ramps (PAL_WALLS 0xB0–0xBF) follow DH's ramp convention. So EOB3 walls, stairs and doors copy 1:1 with an index remap (`panels` job). |
 | AESOP palettes are flat 768-byte blocks | ✔ They are structured resources: `u16 n, u16 off[12], RGB6[n], 11 shade tables[n]`. The base palette is 3610 B with n=256; the wall/floor palettes are 250 B with n=16. |
@@ -18,7 +31,7 @@ Everything marked **◐ inferred** is a strong hypothesis still to be confirmed 
 
 ## 1. Asset inventory (what is actually here)
 
-Run `python3 -I mashup/pipeline.py inventory`. It writes `mashup/work/inventory.md` and `inventory.json`.
+Run `python3 -I pipeline.py inventory`. It writes `work/inventory.md` and `inventory.json`.
 
 | Game | Path used | Engine | Key containers ✔ |
 |---|---|---|---|
@@ -128,7 +141,7 @@ DH monster = one shape table with 6 frames of 80×88. Order observed on Goblin: 
 
 ### AESOP (DH + EOB3)
 ```
-python3 -I mashup/pipeline.py extract          # does all three engines
+python3 -I pipeline.py extract          # does all three engines
 ```
 * `work/aesop/{hack,open,eye}/manifest.json`: every entry with index, name, kind, size, attrib.
 * `work/aesop/hack/*.png`: atlases of every DH shape table with frame numbers (wallsets: 9 columns).
@@ -136,7 +149,7 @@ python3 -I mashup/pipeline.py extract          # does all three engines
 * daesop equivalents (build Thirdeye with `-DBUILD_DAESOP=ON`): `daesop /i HACK.RES out.txt`, `/x` and `/xh` to extract, `/r` and `/rh` to replace, `/create_tbl HACK.RES HACK.TBL`, `/test_old_bitmaps`. Use daesop to cross-check every build (§5).
 
 ### DreamForge (Menzoberranzan)
-* Disk: `RES0-8`. CD-only: `7z x GAME.ISO RES9 RES10 -o mashup/work/iso/` (read-only extraction). Add them to the `range()` in `extract_dreamforge`.
+* Disk: `RES0-8`. CD-only: `7z x GAME.ISO RES9 RES10 -o work/iso/` (read-only extraction). Add them to the `range()` in `extract_dreamforge`.
 * Output `work/dreamforge/RESn/NNNN_tXX.{png,xmi,wav,bin}`. Textures are pre-rendered with `COLORS`.
 * Still to reverse: RES3/RES4 type 06 sprite records (`.bin`, already LZSS-unpacked), and the RES0–2/7/8 type 01/02 records (likely level/object data).
 
@@ -169,10 +182,10 @@ DH's generator is `MAZE.EXE` (layout, zones, item and feature counts; writes `LE
 2. Floors: `*_backdrop.png` → `floor` job (✔ demo: EOB1 BLUE → Floor-0).
 3. Monsters: CPS → `normalize.slice_sheet` → order [front, back, side, side, atk, atk] → `sprites` job (✔ demo: EOB1 KOBOLD → Goblin).
 
-## 5. Pipeline (implemented in `mashup/`)
+## 5. Pipeline
 
 ```
-mashup/
+(repository root)
   config.json          game paths (relative to the project root)
   pipeline.py          inventory | snapshot | extract | build | verify | roll
   tools/aesop.py       RES/TBL read+append-replace, names, palettes, old-shape decode/encode
@@ -185,11 +198,11 @@ mashup/
   backup/DH-<sha>/     pristine snapshot + SHA256SUMS
 ```
 ```bash
-python3 -I mashup/pipeline.py inventory
-python3 -I mashup/pipeline.py snapshot
-python3 -I mashup/pipeline.py extract
-python3 -I mashup/pipeline.py build mashup/pool/recipe_demo.json demo     # verify runs automatically
-python3 -I mashup/pipeline.py roll  mashup/pool/pool.json 1234 roll1234
+python3 -I pipeline.py inventory
+python3 -I pipeline.py snapshot
+python3 -I pipeline.py extract
+python3 -I pipeline.py build pool/recipe_demo.json demo     # verify runs automatically
+python3 -I pipeline.py roll  pool/pool.json 1234 roll1234
 ```
 Recipe job types: `wallset {target, texture, frames}`, `floor {target, image}`, `sprites {target, images[]}`, `raw {target, file, res?}`, `panels {target, target_first, source, source_first, count, source_palette, ramp_of?, keep_empty?}` (EOB3 → DH), `palette_rules {wall_palettes: {"Stone Wallset": [..]}}` (runs first, validated). Recipe-level `"compact": false` turns off RES compaction (on by default; useful for bisecting).
 Recipes: `recipe_demo.json` (first demo; its Stone reskin has the two-ramp bug), `recipe_demo2.json` (correct), `recipe_stress.json` (size ceiling), `pool.json` + `roll`.
@@ -218,7 +231,7 @@ dosbox -c "mount c "build/demo"" -c "c:" -c "HACK.BAT"
 
 Per-source matrix: run each category once with an EOB1, an EOB2, an EOB3 and a Menzo asset before mixing.
 
-**Rollback:** builds never touch `Dungeon Hack/`. `backup/DH-<sha>/` is a full copy with `SHA256SUMS`, so `sha256sum -c` restores confidence. Every build stores its recipe and `MASHUP_BUILD.json` (recipe hash), and rolled recipes are kept, so any build can be regenerated exactly. To version the pool, commit `mashup/pool/` + `config.json` + `tools/` to git (not `work/`/`build/`, which are regenerable, and not game data).
+**Rollback:** builds never touch `Dungeon Hack/`. `backup/DH-<sha>/` is a full copy with `SHA256SUMS`, so `sha256sum -c` restores confidence. Every build stores its recipe and `MASHUP_BUILD.json` (recipe hash), and rolled recipes are kept, so any build can be regenerated exactly. To version the pool, commit `pool/` + `config.json` + `tools/` to git (not `work/`/`build/`, which are regenerable, and not game data).
 
 ## 7. Risks & gotchas
 
@@ -237,7 +250,7 @@ Per-source matrix: run each category once with an EOB1, an EOB2, an EOB3 and a M
 11. **Language builds**: DH FRE/GER `HACK.RES` sizes differ (strings). Build from ENG only, or run the recipe per language.
 12. **Legal**: personal-use modding of games you own. Don't distribute patched RES files; share recipes and tools instead.
 
-## 8. Smoke testing (`mashup/smoke.py`)
+## 8. Smoke testing (`smoke.py`)
 * `boot NAME…`: headless DOSBox-Staging (bundled in `third_party/`, v0.83.0), runs `aesop hack phase-one`. A weak oracle (see 7b). ✔ base, demo, demo2 and stress all pass.
 * `fixture NAME`: after you create one character and enter the dungeon in a build, saves its `savegame/` as the shared starting state.
 * `shots STEPS NAME…`: Xvfb + xdotool + ImageMagick `import`. Runs `maze` + `aesop hack phase-two` from the fixture, uses `AUTOTYPE` for the copy-protection prompt, follows a step script (keys, clicks, screenshot points), then diffs each build against the base install. **Not run yet: Xvfb is not installed** (`sudo pacman -S xorg-server-xvfb`).

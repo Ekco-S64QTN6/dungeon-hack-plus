@@ -1,10 +1,12 @@
 # ROADMAP — "Dungeon Hack+"
 
-Goal: a stable, playable Dungeon Hack whose random dungeons draw on art, monsters, sound and music from EOB1, EOB2, EOB3 and Menzoberranzan, plus fixes and quality-of-life improvements. It ships as a **patcher that the user applies to their own copy**: recipes and tools only, never patched game files.
+Goal: a stable, playable Dungeon Hack whose random dungeons draw on art, monsters, sound and music from EOB1, EOB2, EOB3 and Menzoberranzan, plus fixes and quality-of-life improvements. It ships as a **patcher that the user applies to their own copy**: recipes and tools only, never patched game files. **The product is the `mix` preset** (`tools/mix.py`); single-game presets are stepping stones and tests.
+
+Status (2026-10-25): every asset port that can be verified without a human ear or a bytecode assembler is done and checked in game. Open: see "What's left" at the end.
 
 Legend: `[x]` done · `[~]` partly done / candidate · `[ ]` to do. **(G)** = gate: nothing after it starts until it passes.
 Effort: S ≈ hours, M ≈ a day or two, L ≈ several days, XL ≈ open-ended RE.
-Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
+Working notes, engine facts and test tooling are in `CLAUDE.md`; `PLAN.md` is the original design document.
 
 ---
 
@@ -27,7 +29,7 @@ Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
 - [x] S  Ear check: **measured** from a DOSBox audio capture of a door opening: the 1.55 s event only fits `DOOR 01` at 8,000 Hz (1.59 s); at 11,025 Hz no door sample is longer than 1.15 s (`smoke_runs/audio_rate_capture.md`)
 - [x] S  Automated in-game checks in place of the quick look: walls, door (3 stages), stairs up/down, floor, monster reskin (stress: the approaching monster renders as the EOB1 kobold, correct scale and anchoring)
 - [ ] S  Bug 1 leak measurement: needs a test-only probe reading `heapfree()` (runtime) into something visible; the fix itself is confirmed in bytecode and runs
-- [ ] S  Human playtest (≈15 min) of `mixed` or `eob3_complete`: feel, pacing, anything the screenshots can't judge
+- [~] S  Human playtest of `mix`: the user has played, saved and continued (that is how the save crash was found). More play is the best source of remaining issues
 - [x] **(G)** demo2, demo3, stress, eob3_complete (×4 wallsets), eob1_sewers, eob2_darkmoon and mixed pass the in-game gate (`smoke_runs/gate*/`). The panel pipeline is trusted; the warp pipeline now also reskins door frames (wall object 1). Remaining human playtest is non-blocking
 
 ## Phase 2 — Complete the asset ports (reskins only, no game-logic changes)
@@ -57,30 +59,30 @@ Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
 - [x] S  Monster sounds: EOB3 PCM (`STDOOR1`-style, raw u8) → DH monster sound slots (`raw` job); trim/resample if the rate differs (`tools/sounds.py` extracts 116 PCM sounds at 8,000 Hz, generates WAV previews, writes `pool/sounds/catalog.json` and verified `recipe_sounds.json`)
 
 **Items, portraits, UI art**
-- [x] M  Item icons and floor items (EOB1/2 ITEMICN/ITEMS1/ITEML1, EOB3 icons) → DH `Icon xx` and item shapes (confirmed DH icon size 17×17; `tools/icons.py` extracts 309 icons, centered/padded to 17×17 with DH base palette; `pool/icons/icons_sheet.png`)
-- [x] S  Portraits: EOB1/2 CHARGENA, EOB3 CHARPICS / `Portrait n` → DH 31×32 portrait slots (`tools/portraits.py` extracts 184 portraits from EOB1, EOB2, EOB3; quantized to DH base palette; `pool/portraits/portraits_sheet.png`)
+- [~] M  Item icons (Gemini): `tools/icons.py` extracts 309 EOB1/2/EOB3 icons padded to 17×17. **Audit:** extracted only, nothing uses them. A swapped icon must show the same kind of item (a sword stays a sword) or it misleads in play, and DH's icons are largely EOB3's already, so this needs a hand-labelled mapping; not planned for the mix yet
+- [x] S  Portraits: `tools/portraits.py` (Gemini) extracts 184 EOB1/EOB2/EOB3 portraits at 31×32; used by the mix (see "Pool and randomizer")
 - [ ] —  UI frames and screens: not planned (SOP hard-codes layout); optional full-screen art swaps only
 
 **Audio**
 - [x] S  Music: EOB3 and Menzo XMIDI → DH `OPEN.RES` intro/ending slots (Native `xmidi` job in `pipeline.py` supports both EOB3 XMIDI and Menzo RES5 tracks [104 tracks available]; `recipe_music.json` replaces intro/ending themes for Roland, AdLib, and PC Speaker; verified!)
 - [x] M  **In-game music** (`game_music` job): DH has no dungeon music by design (memory). Kernel patched to load the music driver on entering the game, play a track per wallset at level setup and loop it from the timer; verified in game (FluidSynth capture: original 0.0, music build 1.0 sounding). Track pool: DH + Menzo + EOB3 tracks vetted in game (`smoke/music_tracks.py`); AdLib setups get DH's own tracks only. Menzo files hold a silent stub sequence first; tracks are repackaged to the song only. Memory: start-up cliff unchanged (444 KB pass / 439 KB fail, same as the original)
-- [ ] L  EOB2 `.ADL` (Westwood AdLib) → MIDI converter so EOB2's intro/finale/area music can join the in-game pool (EOB1 has no music files)
+- [ ] L  EOB2 `.ADL` (Westwood AdLib programs) → MIDI converter so EOB2's music can join the in-game pool. Only INTRO, FINALE1 and FINALE2 are music (EOB2 has no dungeon music; EOB1 ships none); instrument mapping to General MIDI would be approximate. Waiting on the user's call
 
 **Menzoberranzan (DreamForge)**
-- [~] Wall textures exported (64×192); curate a stone/brick subset → `wallset` jobs
+- [x] Wall textures (64×192) → 6 wallsets in the mix (see "Pool and randomizer")
 - [ ] XL Reverse RES3/RES4 type-06 sprite records (drow etc.). Even then, monsters need re-projection; defer
 - [x] S  Extract CD-only `RES9`/`RES10` from `GAME.ISO`; check for portraits/UI art (Extracted and documented: `RES9` contains 469 animation/portrait records; `RES10` contains 274 voice tracks [55 MB])
 
 **Classic EOB themes**
 - [x] M  `eob3_mythdrannor` (in `tools/eob_classic.py`): EOB3 Mausoleum/Ruins/Forest walls + doors/stairs (from `recipe_eob3_complete`), the four EOB3 176×120 backdrops as floors, own-floor + hue-matched rules (two-ramp EOB3 sets matched to DH palettes 15–20), Shadow Hound. Door panels now use fixed colours. In-game gate ✔ (4 wallsets)
-- [x] M  `tools/eob_classic.py` → `recipe_eob2_darkmoon_classic.json` (DUNG/SILVER/CRIMSON/MEZZ/FOREST) and `recipe_eob1_waterdeep.json` (BLUE/BRICK/DROW/GREEN/XANATHA): hand-drawn walls+frames+stairs, each set's own floor, and kernel rules pairing each wallset with its own floor and its 3 hue-matched palettes (`kernel_rules.match_palettes`, `set_wall_floors`, `set_floor_palettes`, `allow_pairs`). In-game gate ✔ for all 10 wallsets (`smoke_runs/gate_eob*_classic__*`, `gate_eob1_waterdeep__*`); monsters ✔ in game (Darkmoon: EOB2 priestess, Waterdeep: kuo-toa). Darkmoon uses 21 EOB2 monsters. Doors are still DH's (EOB1/2 doors live in CPS, not VMP)
+- [x] M  `tools/eob_classic.py` → `recipe_eob2_darkmoon_classic.json` (DUNG/SILVER/CRIMSON/MEZZ/FOREST) and `recipe_eob1_waterdeep.json` (BLUE/BRICK/DROW/GREEN/XANATHA): hand-drawn walls+frames+stairs, each set's own floor, and kernel rules pairing each wallset with its own floor and its 3 hue-matched palettes (`kernel_rules.match_palettes`, `set_wall_floors`, `set_floor_palettes`, `allow_pairs`). In-game gate ✔ for all 10 wallsets (`smoke_runs/gate_eob*_classic__*`, `gate_eob1_waterdeep__*`); monsters ✔ in game (Darkmoon: EOB2 priestess, Waterdeep: kuo-toa). Darkmoon uses 21 EOB2 monsters. Doors: EOB's own (see the doors item above)
 - [x] S  Fix: original `Ice Stairs` stores its depth-3 stairs-down art in panel 12 and leaves panel 13 empty, so Ice stairs-down are **invisible from 3 squares away**. Confirmed in game (`smoke/ice_stairs.json`, fixture with stairs moved to a long corridor); `fix_ice_stairs` swaps them and the stairs appear; depths 2/1 unchanged
 
 **Pool and randomizer**
 - [x] S  Portraits in the mix: about half of DH's 45 replaced per roll by EOB1/EOB2/EOB3 faces of the same group (DH's chooser: men 0-31, women 29-44, 29-31 shared helmeted/hooded). EOB2 0-43 = EOB1's; EOB3's new faces are mostly DH's own (matched by image distance), so 61 genuinely new faces. Labelled by eye. In game ✔ (party portrait)
 - [x] S  Stairs for imported sets with no stair art (6 Menzo sets, EOB3 Forest/Ruins): `stairs_from` copies DH's closest original stair style (drow stone → Marble, planks → Wood, cave → Rock, forest → Ice, ruins → Stone) re-ramped to the slot's palettes. In game ✔ (W08/W11/W15/Rock variants of the mix)
 - [x] S  Test harness hardening: DOSBox windows found by process id (never another run's), Xvfb refuses a display already in use, SIGTERM (`timeout`) runs cleanup so no orphaned DOSBox keeps a build folder mounted; `SMOKE_DISPLAY` lets runs go in parallel on separate displays
-- [x] L  **`mix` = the main build** (`tools/mix.py`, `dhplus.py roll/launch --reroll`): the 7 wallset slots (5 external + 2 DH by default), 8 floors, 16 doors, 20 generic decorations and monster slots filled from DH + EOB1 + EOB2 + EOB3 by seed; each external set gets its own floor + hue-matched palettes; kept DH sets keep original rules on the leftover floors; rules validated with `problems()`. 25 random seeds build + verify clean; seed 1's 5 EOB slots pass the in-game gate. `MIX.TXT` lists the roll
+- [x] L  **`mix` = the main build** (`tools/mix.py`, `dhplus.py roll/launch --reroll`): wallset, floor, door, decoration, monster, portrait and music slots filled from DH + EOB1 + EOB2 + EOB3 + Menzo by seed; each external set gets its own floor + hue-matched palettes; kept DH sets keep original rules on the leftover floors; rules validated with `problems()`. Started with DH's 7/8/19 slots; now 16 wallsets (13 external), 16 floors, 35 doors (items below). 25 random seeds build + verify clean; all 13 external slots of seed 1 pass the in-game gate. `MIX.TXT` lists the roll
 - [x] M  `reramp` job, auto-inserted by `pipeline build` for every wallset whose palette rules change: DH art left in a slot (wallset objects 2-12 = arches/windows/pillars, stairs, decorations) is converted to the slot's new single/two-ramp shape. `check_ramps` now fails when a slot's shape changed and its stairs weren't built for the new shape (caught latent bugs in eob3_mythdrannor, eob3_ruins, demo2)
 - [x] S  EOB2 doors use the palette of the levels they appear on (`eob_doors.EOB2_DOOR_PAL`; glyph door runes were white under DUNG.PAL)
 - [x] S  Every playable recipe carries the fixes (`eob_classic.FIX_JOBS`); Ice Stairs' 48x38 depth-3 panel accepts 48x37 art (EOB stairs now fill it)
@@ -89,14 +91,14 @@ Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
 - [x] L  **8 wallsets per game** (`extra_wallset` job + `kernel_rules.add_wallset`): new Eighth Wallset/Stairs resources, kernel tables appended + loads repointed, rnd(0..7), pairing bits, "current pillar" table extended (would otherwise read code bytes as a resource on wallset 7). Every code resource disassembled to find wallnum users (only kernel + current pillar). In-game ✔ with the kernel pinned to wallset 7: walls, floor, stairs, doors (`smoke_eighth`), pillar at 1/2/3 squares + side (`smoke/pillar_views.json`, fixture `savegame_pillar`). The mix always fills the 8th slot
 - [x] L  **16 wallsets and 16 floors per game**: `kernel_rules.widen_masks` turns the three 8-bit pairing masks into 16-bit word tables (each LTBA lookup in "randomize graphics" → BRA to a stub `PUSH; SHTC 1; SHL; LTWA table; BRA back` + `DHW` marker), `add_wallsets`/`add_floors` extend the wallset/stairs/floor/ground tables and rnd() bounds; `extra_wallset` (count) also extends "current pillar" and the decoration object's three per-decoration tables (wallset w uses indices 4w..4w+3; 48+ reuse generic decorations); `extra_floors` adds Floor-N/Ground-N. Every user of wallnum/floornum audited across all 334 code resources. In-game ✔ on wallset 12 (`smoke_w12`: walls, floor 12, stairs, doors, pillar, decoration index 48+). The mix fills all 9 new slots plus 4 of DH's 7 with external sets (13 of 19 sources per game), each on its own floor
 - [x] M  **35 doors per game** (`extra_doors` job + `kernel_rules.add_doors`): 16 new door resources, door table appended and its 3 loads repointed, rnd(0..34). Only the kernel and the doors script use doornum (doors: 3/7/14/17 see-through). The mix gives every EOB door (22) a slot, see-through ones in 3/7/14/17. In-game ✔ with doornum pinned to 20 (EOB2 glyph door: views + opening)
-- [x] M  Curate `pool/pool.json` per category with source tags and per-asset `palette_rules` presets (All 57 DH monster targets mapped; 40 monster skins tagged with source & theme; self-contained `pool/walls` and `pool/floors`)
-- [x] S  `roll` covers panels/doors/stairs/decos/sounds, not just wallset/floor/monsters; keep ramp/rule consistency per roll (`tools/randomizer.py` builds comprehensive 98-job mashup with automated two-ramp rule patching)
+- [x] M  (Superseded by `tools/mix.py`) Curate `pool/pool.json` per category with source tags and per-asset `palette_rules` presets (All 57 DH monster targets mapped; 40 monster skins tagged with source & theme; self-contained `pool/walls` and `pool/floors`)
+- [x] S  (Superseded by `tools/mix.py`) `pipeline.py roll` covers panels/doors/stairs/decos/sounds, not just wallset/floor/monsters; keep ramp/rule consistency per roll (`tools/randomizer.py` builds comprehensive 98-job mashup with automated two-ramp rule patching)
 - [~] S  Theme presets: "EOB1 sewers", "EOB2 Darkmoon", "EOB3 Myth Drannor", "Mixed" (all build, verify and pass the in-game gate). **Audit:** `eob2_darkmoon` is mislabeled: its walls, doors, stairs and all but one monster are EOB3 (Mausoleum, Feyr, Death Knight…). A real Darkmoon preset needs EOB2 walls (needs the EOB1/2 hand-drawn wall item) + EOB2 monsters
 
 ## Phase 3 — *Adding* content (game-logic edits; needs the Phase 1 gate)
-- [x] M  Confirm the resource-slot ceiling (`.TBL` 3,081 slots, ~118 free; AESOP/32 `MAX_OBJ_TYPES 2450`) with a test that appends dummy resources (`tools/verify_ceiling.py`: populated all 3,072 slots across `HACK.RES`'s 24 blocks and booted cleanly into dungeon; report in `smoke_runs/slot_ceiling_report.md`)
+- [x] M  Confirm the resource-slot ceiling (3,072 directory slots, 2,963 used by DH, 109 free; the mix uses 69 of them, leaving 40; AESOP/32 `MAX_OBJ_TYPES 2450`) with a test that appends dummy resources (`tools/verify_ceiling.py`: populated all 3,072 slots across `HACK.RES`'s 24 blocks and booted cleanly into dungeon; report in `smoke_runs/slot_ceiling_report.md`)
 - [x] L  More wallsets than 7 / more floors than 8: done (16 / 16), see above
-- [ ] L  More floors/palettes: `rnd(0..7)` / `rnd(0..20)` constants and mask widths (table1112 is 32-bit, so palettes ≤ 32)
+- [ ] L  More palettes than 21: `rnd(0..20)` and the palette masks (table1112 is 32-bit, so ≤ 32 without widening). Floors are done (16)
 - [ ] XL New monster *types*: new SOP classes (stats, AI, spawn lists `mon_types[75]`). Needs a bytecode assembler for AESOP/16 (check Thirdeye `arc` / `aesop32/DEV` compiler; AESOP/16 vs /32 bytecode compatibility unknown)
 - [ ] XL New items / spells from EOB data (`ITEM.DAT`, EOB3 item classes): same assembler dependency
 - [x] S  Same-size byte patches catalogue (safe class): constants, tables, masks. Document each with before/after bytes (Documented in `smoke_runs/byte_patch_catalogue.md`: AESOP sample rate, copy protection auto-bypass, wallset pairing masks, SETTINGS.DAT binary flags)
@@ -132,7 +134,9 @@ Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
 - [x] S  Rollback command (`dhplus.py rollback <build>` safely removes synthesized builds and verifies base game integrity)
 - [x] S  Release contents: tools, recipes, presets, docs. **No game files and no patched RES files.** Credit Thirdeye/daesop, John Miles, ScummVM (`DUNGEON_HACK_DEEP_DIVE.md`, `README.md`, `base_games/README.md`, `.gitignore`, `LICENSE`)
 - [x] S  User docs: install, presets, known issues, how to roll new mashups (`README.md` and `base_games/README.md`)
-- [x] S  Regression suite in CI-like form: `dhplus.py test` automates building and verifying all 14 presets; verified ALL TESTS PASSED ✔
+- [x] S  Regression suite in CI-like form: `dhplus.py test` builds and verifies all 19 presets (ALL TESTS PASSED ✔ at the last commit)
 
-## Suggested order
-Phase 1 (gate) → EOB3 walls/stairs/doors (biggest visual payoff, ≈1:1) → EOB1/2 monsters + portraits → audio → EOB1/2 hand-drawn walls → pool/presets → Phase 5 zero-risk QoL + launcher → packaging → (optional) Phase 3 content additions and the assembler question → Menzo sprites last.
+## What's left
+- **Needs the user:** playtesting the mix; EOB2 music (ADL converter, 3 tracks, approximate instruments: worth it?); Menzo's 386 unnamed sound effects (listen and map, or reverse-engineer Menzo's scripts).
+- **Doable, smaller payoff:** Ground sets from EOB pit art; identifying wallset objects 3, 5-10, 12; Bug 1 leak measurement; a longer memory-margin walk; item icons with a hand-labelled mapping.
+- **Large engine projects:** a bytecode assembler (new monster types, items, spells, keyboard shortcuts); Thirdeye as a native runtime; Menzo monster sprites.

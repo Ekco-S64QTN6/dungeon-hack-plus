@@ -28,13 +28,19 @@ imported wall sets per game, plus 3 of Dungeon Hack's own):
   stages; EOB3 doors are converted directly.
 - **Decorations**: EOB1/EOB2 wall decorations are placed per view position exactly as EOB
   draws them; EOB3 decorations are converted directly.
+- **Details that match each set**: arches and door-frame posts take the set's own wall;
+  sets without stair art borrow Dungeon Hack's closest stair style (stone, wood, cave, forest);
+  pits, leftover objects and stairs are recoloured to each level's palettes.
 - **Monsters**: EOB1/EOB2 monsters, using the exact frame layouts from the games' own level
   scripts. (30 of EOB3's 31 monsters already *are* Dungeon Hack's monsters; the Shadow Hound
   is the one new one.)
+- **Portraits**: about half of the character portraits come from EOB1, EOB2 and EOB3
+  (61 faces Dungeon Hack doesn't already have), kept in Dungeon Hack's male/female groups.
 - **In-game music**: the original plays music only in the intro (it unloaded the music driver
   during play to save memory). Dungeon Hack+ patches the engine to load it, play a track per
-  wallset and loop it: Dungeon Hack's own, Menzoberranzan's and EOB3's tracks, each vetted in
+  wallset and loop it: 58 tracks from Dungeon Hack, Menzoberranzan and EOB3, each vetted in
   game. MT-32/General MIDI setups get the full pool; AdLib setups get DH's own tracks.
+  (EOB2's music is in Westwood's AdLib format and EOB1 ships none, so they aren't in the pool yet.)
 - **Sound**: EOB3 sound effects at DH's 8 kHz rate, and EOB3 music for the intro and ending.
 - **Fixes**: a resource-cache leak in item handling, Ice stairs that were invisible from three
   squares away, and save/continue crashing on installs that lack GOG's savegame template.
@@ -42,8 +48,9 @@ imported wall sets per game, plus 3 of Dungeon Hack's own):
 `dhplus.py roll` re-rolls which sets go into the slots, so new games keep looking different.
 
 Everything is checked twice: `verify` checks every resource and the pairing rules (a bad rule
-would hang new-game creation, so rule sets are validated before writing), and an in-game
-screenshot gate drives DOSBox headlessly through walls, stairs, doors and decorations.
+would hang new-game creation, so rule sets are validated before writing), and headless DOSBox
+runs check the result in game: screenshots of walls, stairs, doors, arches, pillars, pits and
+decorations, audio captures for the music, and a save → Continue → restore round trip.
 
 ---
 
@@ -51,7 +58,8 @@ screenshot gate drives DOSBox headlessly through walls, stairs, doors and decora
 
 Requirements: Linux (macOS/WSL should work), Python 3.10+ with `numpy` and `Pillow`, and
 [DOSBox-Staging](https://www.dosbox-staging.org/) (system install, or place it in
-`third_party/dosbox-staging/`).
+`third_party/dosbox-staging/`). For the full in-game music pool, give DOSBox a General MIDI
+synth (e.g. FluidSynth with a soundfont) and keep Dungeon Hack's MT-32/MPU-401 sound setting.
 
 1. **Copy your games into `base_games/`** (see [`base_games/README.md`](base_games/README.md)):
 
@@ -64,8 +72,9 @@ Requirements: Linux (macOS/WSL should work), Python 3.10+ with `numpy` and `Pill
    └── menzo/          Menzoberranzan
    ```
 
-   Sources: GOG, or Steam's *Forgotten Realms: The Archives* collections. Optional extra
-   languages go in `dungeon_hack_fre/` and `dungeon_hack_ger/`.
+   Sources: GOG, or Steam's *Forgotten Realms: The Archives* collections (EOB1's English
+   `EOBDATA*.PAK` files work as they are). Optional extra languages go in `dungeon_hack_fre/`
+   and `dungeon_hack_ger/`.
 
 2. **Check them and generate the art and sound pool** (once):
 
@@ -107,7 +116,7 @@ Requirements: Linux (macOS/WSL should work), Python 3.10+ with `numpy` and `Pill
 
 | Preset | What it is |
 |---|---|
-| `mix` | **The main build**: DH, EOB1, EOB2 and EOB3 in one game, plus fixes, sound and music. |
+| `mix` | **The main build**: Dungeon Hack, EOB1, EOB2, EOB3 and Menzoberranzan in one game, plus fixes, sound and music. |
 | `eob1_waterdeep` | All EOB1: five Waterdeep wallsets with their floors, doors, decorations, monsters. |
 | `eob2_darkmoon_classic` | All EOB2: Darkmoon, Silver, Crimson, Mezz and forest sets, doors, decorations, monsters. |
 | `eob3_mythdrannor` | All EOB3: Mausoleum, Ruins and Forest with their floors, doors and stairs. |
@@ -122,8 +131,9 @@ intended way to play.
 ## Documentation
 
 - [`ROADMAP.md`](ROADMAP.md): what is done, verified, and still open.
-- [`CLAUDE.md`](CLAUDE.md): working notes: formats, engine facts, gotchas, test tooling.
-- [`DUNGEON_HACK_DEEP_DIVE.md`](DUNGEON_HACK_DEEP_DIVE.md): reverse-engineering background.
+- [`CLAUDE.md`](CLAUDE.md): working notes: engine facts, engine extensions, formats, test tooling, gotchas.
+- [`PLAN.md`](PLAN.md): the original design document (formats, compatibility matrix, palette model).
+- [`DUNGEON_HACK_DEEP_DIVE.md`](DUNGEON_HACK_DEEP_DIVE.md): Dungeon Hack internals: file formats, view, palettes, bytecode, audio, limits.
 
 ## Credits
 

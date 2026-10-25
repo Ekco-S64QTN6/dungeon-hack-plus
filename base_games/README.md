@@ -1,70 +1,44 @@
-# Base Games Drop-In Directory
+# base_games: your game files go here
 
-Welcome to **Dungeon Hack+**!
+This repository contains code and recipes only, no game data. Dungeon Hack+ builds everything from
+your own copies of the games, which you place in the folders below. They are only ever read: builds
+go to `build/`, and anything unpacked goes to `work/`.
 
-To ensure full copyright compliance and legal distribution, this repository contains **only open-source patcher code, reverse-engineered format decoders, and procedural recipes**. It contains **zero proprietary game code, assets, audio, or graphics**.
+The GOG releases and Steam's *Forgotten Realms: The Archives* collections both work (Steam's Dungeon
+Hack files are byte-identical to GOG's). Copy the folder that contains the files named below.
 
-To build and play enhanced Dungeon Hack mashup builds, you must provide your own legally acquired game installations (such as those from GOG.com's *Forgotten Realms: The Archives* collections, or original retail floppy/CD-ROM releases).
+| Folder | Game | Needed? | Key file | Used for |
+|---|---|---|---|---|
+| `dungeon_hack/` | Dungeon Hack (English) | **required** | `HACK.RES`, `OPEN.RES`, `AESOP.EXE`, `MAZE.EXE` | the game itself |
+| `eob1/` | Eye of the Beholder | optional | `EOBPAL.COL`, or `EOBDATA*.PAK` | walls, floors, stairs, doors, decorations, monsters, portraits |
+| `eob2/` | Eye of the Beholder II | optional | `DUNG.PAL` | walls, floors, stairs, doors, decorations, monsters, portraits |
+| `eob3/` | Eye of the Beholder III | optional | `EYE.RES` | walls, floors, stairs, doors, portraits, sounds, intro/ending and in-game music |
+| `menzo/` | Menzoberranzan | optional | `RES0`-`RES8` | walls, floors, in-game music |
+| `dungeon_hack_fre/`, `dungeon_hack_ger/` | French / German Dungeon Hack | optional | `HACK.RES` | `dhplus.py --lang fre\|ger` |
 
----
+Notes:
+* **EOB1:** the English release packs its data in `EOBDATA*.PAK`; the German one has loose files.
+  Either works: the PAKs are unpacked once into `work/eob1_unpacked/` (the graphics are identical).
+* **Save games:** GOG keeps Dungeon Hack's savegame template (`SAVEGAME\SAVEGAME.DIR` and friends)
+  outside the game folder; without it Save and Continue crash. Builds find it automatically in a
+  `SAVEGAME` folder inside `dungeon_hack/`, in Steam's install, or in GOG/Heroic's support folder
+  (or set `dh_save_template` in `config.json`).
+* Paths can be changed in `config.json`, or per run with `DHPLUS_<GAME>_DIR`
+  (e.g. `DHPLUS_EOB1_DIR=/path/to/EYE`).
 
-## Supported Base Games & Directory Layout
-
-Drop your game files or folders into the corresponding subdirectories below:
-
-### 1. `base_games/dungeon_hack/` (REQUIRED)
-The core target game.
-- **Source**: GOG *Forgotten Realms: The Archives - Collection Three* (or retail MS-DOS floppy release).
-- **Key Files**:
-  - `HACK.RES` (Primary game archive, ~24.9 MB)
-  - `OPEN.RES` (Intro cinematic archive, ~608 KB)
-  - `AESOP.EXE` (16-bit real-mode AESOP engine executable)
-  - `MAZE.EXE` (Dungeon generator)
-  - `CONFIG.DAT`, `SETTINGS.DAT`, `HACK.BAT`, etc.
-- **Pristine SHA-256 Hashes**:
-  - `HACK.RES`: `207eaf4081eee453c718fc8f761a707ab5c36bf974255185e2bc90ebe84cac66`
-  - `OPEN.RES`: `7bc61e506cbf3aa144acc1b6dd6992ba0e2267d1f7b29294e9eaac83dcf61486`
-
-### 2. `base_games/eob3/` (OPTIONAL - Highly Recommended)
-*Eye of the Beholder III: Assault on Myth Drannor* (1993, AESOP/32 engine).
-- **Provides**: All 4 full wallsets (Marble, Mausoleum, Ruins, Forest), animated dungeon doors, wall decorations, niche items, keys, and 31 high-resolution monster sprites.
-- **Key Files**:
-  - `EYE.RES` (32-bit AESOP container)
-- **Pristine SHA-256 Hash**:
-  - `EYE.RES`: `dfdb3fcb089c2c62c3e414c81062b08a0d783a37ba772ee6b5f4c4cbe9e0fc02`
-
-### 3. `base_games/eob1/` (OPTIONAL)
-*Eye of the Beholder* (1991, Westwood Studios engine).
-- **Provides**: Classic Kobold, Skeleton, Zombie, Kuo-Toa, Kenku, Displacer Beast, Mind Flayer, Hellhound sprites, character portraits, and item icons.
-- **Key Files**:
-  - `EOBPAL.COL`, `*.CPS`, `*.PAK`
-
-### 4. `base_games/eob2/` (OPTIONAL)
-*Eye of the Beholder II: The Legend of Darkmoon* (1991, Westwood Studios engine).
-- **Provides**: Darkmoon dungeon palettes, additional monster variations, and high-detail character portraits.
-- **Key Files**:
-  - `DUNG.PAL`, `*.CPS`, `*.PAK`
-
-### 5. `base_games/menzo/` (OPTIONAL)
-*Menzoberranzan* (1994, DreamForge Intertainment).
-- **Provides**: Underdark caverns, high-depth wall tilesets, and sound effects.
-- **Key Files**:
-  - `RES0` through `RES8`, `GAME.ISO`
-
----
-
-## Verifying Your Installation
-
-Once you have placed your game files into these folders, run the verification tool from the project root:
+Check what was found, then generate the art and sound pool:
 
 ```bash
 python3 -I dhplus.py detect
+python3 -I dhplus.py assets
 ```
 
-The tool will scan your `base_games/` directory, verify SHA-256 hashes against known pristine retail and GOG distributions, and report the readiness of each asset source.
+Known hashes (`detect` compares them):
 
----
+| File | SHA-256 |
+|---|---|
+| `HACK.RES` (English) | `207eaf4081eee453c718fc8f761a707ab5c36bf974255185e2bc90ebe84cac66` |
+| `OPEN.RES` (English) | `7bc61e506cbf3aa144acc1b6dd6992ba0e2267d1f7b29294e9eaac83dcf61486` |
+| `EYE.RES` (GOG) | `a11d5a2150ce65225af99655dab029788128af242eaa18ef5eb876a15e2cf767` |
 
-## Git Safety
-
-The repository's `.gitignore` is configured to exclude all files inside `base_games/` (except `.gitkeep` placeholders). Your commercial game files will **never** be committed or pushed to your repository.
+Everything in this folder except this README is git-ignored, so game files are never committed.

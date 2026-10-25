@@ -174,6 +174,8 @@ def extract_all():
 
     for name, d, fn, pal in monsters:
         p = os.path.join(d, fn)
+        if not os.path.exists(p):                    # English EOB1 names some sheets <NAME>1 (same file)
+            p = os.path.join(d, fn[:-4] + '1.CPS')
         if not os.path.exists(p):
             continue
         px, _ = westwood.unpack(p)

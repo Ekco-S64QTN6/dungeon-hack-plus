@@ -7,6 +7,7 @@ Handles:
 - Verification of required game archives
 """
 import os
+import sys
 import json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -76,26 +77,50 @@ KEY_FILES = {
 }
 
 
+def unpacked_eob1(folder):
+    """EOB1's English release packs its data in EOBDATA*.PAK (the German one ships loose files;
+    the graphics are byte-identical). Unpack once into work/eob1_unpacked/<folder hash>/ and use
+    that; the game folder itself is never written."""
+    import glob
+    import hashlib
+    paks = sorted(glob.glob(os.path.join(folder, "[Ee][Oo][Bb][Dd][Aa][Tt][Aa]*.[Pp][Aa][Kk]")))
+    if not paks:
+        return None
+    tag = hashlib.sha1("|".join("%s:%d" % (os.path.basename(p), os.path.getsize(p)) for p in paks).encode()).hexdigest()[:10]
+    out = os.path.join(PROJECT_ROOT, "work", "eob1_unpacked", tag)
+    if not os.path.exists(os.path.join(out, KEY_FILES["eob1"])):
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import westwood
+        os.makedirs(out, exist_ok=True)
+        for p in paks:
+            for name, data in westwood.unpak(p).items():
+                open(os.path.join(out, name.upper()), "wb").write(data)
+    return out if os.path.exists(os.path.join(out, KEY_FILES["eob1"])) else None
+
+
 def get_game_dir(game_key):
     """Resolve the directory containing game assets for `game_key`.
-    DHPLUS_DH_DIR (env) overrides the Dungeon Hack install, e.g. base_games/dungeon_hack_fre."""
-    if game_key == "dh" and os.environ.get("DHPLUS_DH_DIR"):
-        return os.path.normpath(os.path.join(PROJECT_ROOT, os.environ["DHPLUS_DH_DIR"]))
+    DHPLUS_<KEY>_DIR (env) overrides it, e.g. DHPLUS_DH_DIR=base_games/dungeon_hack_fre."""
+    req_file = KEY_FILES.get(game_key)
+    ok = lambda d: os.path.exists(d) and (not req_file or os.path.exists(os.path.join(d, req_file)))
+    env = os.environ.get("DHPLUS_%s_DIR" % game_key.upper())
+    cands = [env] if env else []
     cfg = load_config()
-    # 1. Configured path
-    if "games" in cfg and game_key in cfg["games"]:
-        configured_rel = cfg["games"][game_key].get("path", "")
-        cand = os.path.normpath(os.path.join(PROJECT_ROOT, configured_rel))
-        req_file = KEY_FILES.get(game_key)
-        if os.path.exists(cand) and (not req_file or os.path.exists(os.path.join(cand, req_file))):
+    # 1. Configured path, 2. candidate fallbacks
+    if not env and "games" in cfg and game_key in cfg["games"]:
+        cands.append(cfg["games"][game_key].get("path", ""))
+    if not env:
+        cands += FALLBACKS.get(game_key, [])
+    cands = [os.path.normpath(os.path.join(PROJECT_ROOT, c)) for c in cands]
+    for cand in cands:
+        if ok(cand):
             return cand
-
-    # 2. Candidate fallbacks
-    for rel in FALLBACKS.get(game_key, []):
-        cand = os.path.normpath(os.path.join(PROJECT_ROOT, rel))
-        req_file = KEY_FILES.get(game_key)
-        if os.path.exists(cand) and (not req_file or os.path.exists(os.path.join(cand, req_file))):
-            return cand
+    if game_key == "eob1":
+        for cand in cands:
+            if os.path.isdir(cand) and unpacked_eob1(cand):
+                return unpacked_eob1(cand)
+    if env:
+        return cands[0]
 
     # Return default base_games location if not found
     return os.path.normpath(os.path.join(PROJECT_ROOT, "base_games", game_key if game_key != "dh" else "dungeon_hack"))

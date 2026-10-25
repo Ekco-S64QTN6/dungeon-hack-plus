@@ -30,7 +30,7 @@ import paths
 KNOWN_HASHES = {
     'HACK.RES': ('207eaf4081eee453c718fc8f761a707ab5c36bf974255185e2bc90ebe84cac66', 'Dungeon Hack main archive'),
     'OPEN.RES': ('7bc61e506cbf3aa144acc1b6dd6992ba0e2267d1f7b29294e9eaac83dcf61486', 'Dungeon Hack intro cinematic'),
-    'EYE.RES':  ('dfdb3fcb089c2c62c3e414c81062b08a0d783a37ba772ee6b5f4c4cbe9e0fc02', 'Eye of the Beholder III archive'),
+    'EYE.RES':  ('a11d5a2150ce65225af99655dab029788128af242eaa18ef5eb876a15e2cf767', 'Eye of the Beholder III archive'),
 }
 
 PRESET_RECIPES = {
@@ -93,9 +93,9 @@ def detect_install():
             print(f'    * {fn:<10}: {status} ({actual[:12]}...)')
         print(f'    Readiness: {"READY (Pristine Clean)" if all_dh_matched else "READY (Custom / Non-Standard)"}')
 
-    # 2. Eye of the Beholder III (Optional - Wallsets, Doors, Monsters)
+    # 2. Eye of the Beholder III (Optional - walls, doors, stairs, floors, sounds, music)
     eob3_dir = paths.get_game_dir('eob3')
-    print(f'\n[2] Eye of the Beholder III (Optional - Wallsets, Doors, Monsters)')
+    print(f'\n[2] Eye of the Beholder III (Optional - walls, doors, stairs, floors, sounds, music)')
     print(f'    Path: {eob3_dir}')
     eye_res = os.path.join(eob3_dir, 'EYE.RES')
     if os.path.exists(eye_res):
@@ -109,9 +109,9 @@ def detect_install():
         print('    * EYE.RES   : NOT FOUND')
         print('    Readiness: OPTIONAL (Drop EYE.RES into base_games/eob3/ for EOB3 content)')
 
-    # 3. Eye of the Beholder I (Optional - Classic Monsters, Icons)
+    # 3. Eye of the Beholder I (Optional - walls, doors, decorations, monsters, portraits)
     eob1_dir = paths.get_game_dir('eob1')
-    print(f'\n[3] Eye of the Beholder I (Optional - Classic Monsters, Icons)')
+    print(f'\n[3] Eye of the Beholder I (Optional - walls, doors, decorations, monsters, portraits)')
     print(f'    Path: {eob1_dir}')
     pal1 = os.path.join(eob1_dir, 'EOBPAL.COL')
     if os.path.exists(pal1):
@@ -122,9 +122,9 @@ def detect_install():
         print('    * EOBPAL.COL: NOT FOUND')
         print('    Readiness: OPTIONAL (Drop files into base_games/eob1/)')
 
-    # 4. Eye of the Beholder II (Optional - Darkmoon Palettes & Portraits)
+    # 4. Eye of the Beholder II (Optional - walls, doors, decorations, monsters, portraits)
     eob2_dir = paths.get_game_dir('eob2')
-    print(f'\n[4] Eye of the Beholder II (Optional - Darkmoon Palettes & Portraits)')
+    print(f'\n[4] Eye of the Beholder II (Optional - walls, doors, decorations, monsters, portraits)')
     print(f'    Path: {eob2_dir}')
     pal2 = os.path.join(eob2_dir, 'DUNG.PAL')
     if os.path.exists(pal2):
@@ -134,9 +134,9 @@ def detect_install():
         print('    * DUNG.PAL  : NOT FOUND')
         print('    Readiness: OPTIONAL (Drop files into base_games/eob2/)')
 
-    # 5. Menzoberranzan (Optional - Underdark Caverns, Audio)
+    # 5. Menzoberranzan (Optional - walls, floors, music)
     menzo_dir = paths.get_game_dir('menzo')
-    print(f'\n[5] Menzoberranzan (Optional - Underdark Caverns, Audio)')
+    print(f'\n[5] Menzoberranzan (Optional - walls, floors, music)')
     print(f'    Path: {menzo_dir}')
     res0 = os.path.join(menzo_dir, 'RES0')
     if os.path.exists(res0):

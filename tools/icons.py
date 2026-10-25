@@ -35,12 +35,7 @@ def extract_all():
     # Load DH base palette
     dh_res = aesop.ResFile(os.path.join(root, cfg['dh_install'], 'HACK.RES'))
     _, dh_base, _ = aesop.decode_palette(dh_res.entry(dh_res.names()['Main Base Palette'])[2])
-    pal_json = os.path.join(MASHUP, 'work', 'aesop', 'dh_palette.json')
-    if os.path.exists(pal_json):
-        meta = json.load(open(pal_json))
-        allowed = set(meta.get('monster_indices', range(1, 224)))
-    else:
-        allowed = set(range(1, 224))
+    allowed = normalize.dh_sprite_indices(dh_res)
 
     catalog = []
 

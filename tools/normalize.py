@@ -29,6 +29,22 @@ def to_ramp(rgb, base=240, levels=15, dither=True, stretch=(2, 98)):
     return (base + (levels - 1 - lvl)).astype(np.uint8)
 
 
+def dh_sprite_indices(res):
+    """Palette indices DH's own monster sprites use (80x88, 6 frames): fixed colours known to look
+    the same on every level. Portraits and icons are quantized to these."""
+    import aesop
+    out = set()
+    for i in res.indices():
+        p = res.entry(i)[2]
+        if aesop.kind(p, '') != 'old_shapes':
+            continue
+        fr = aesop.decode_shapes(p)
+        if len(fr) == 6 and fr[0][:2] == (80, 88):
+            for w, h, px, m in fr:
+                out.update(v for v, mm in zip(px, m) if mm)
+    return out
+
+
 def quantize_fixed(rgb, palette, allowed):
     """Nearest colour (redmean metric) restricted to `allowed` palette indices."""
     pal = np.array(palette, dtype=np.float32).reshape(-1, 3)
