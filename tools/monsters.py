@@ -50,7 +50,10 @@ def exact_frames(im_rgb, layout=None):
     most sprite pixels (ties -> fewest rectangles left empty). Frames are scaled by ONE factor (so a
     crouch stays smaller than a stand) and anchored bottom-centre in 80x88, DH's monster frame."""
     arr = np.asarray(im_rgb.convert('RGB'))
-    fg = np.any(arr != 0, axis=2)
+    # EOB sprites are transparent only where the colour INDEX is 0; dark shading uses other indices
+    # that are also (near) black, so testing RGB != 0 punched holes in dark fur, robes and bodies
+    idx = np.asarray(im_rgb) if im_rgb.mode == 'P' else None
+    fg = idx != 0 if idx is not None else np.any(arr != 0, axis=2)
     best = None
     for L, rects in enumerate(EOB_LAYOUTS):
         cover = np.zeros_like(fg)
@@ -69,7 +72,7 @@ def exact_frames(im_rgb, layout=None):
     for k in DH_FROM_EOB:
         x, y, w, h = rects[k]
         a = arr[y:y + h, x:x + w]
-        alpha = (np.any(a != 0, axis=2) * 255).astype(np.uint8)
+        alpha = (fg[y:y + h, x:x + w] * 255).astype(np.uint8)
         fr = Image.fromarray(np.dstack([a, alpha]), 'RGBA')
         if sc < 1.0:
             fr = fr.resize((max(1, round(w * sc)), max(1, round(h * sc))), Image.LANCZOS)
