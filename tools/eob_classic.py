@@ -200,6 +200,8 @@ def build_eob3():
         front = 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower()
         Image.fromarray(eob3_front(e3, wall, pal)).save(os.path.join(ROOT, front))
         jobs.append({'type': 'wallset', 'target': '%s Wallset' % dhw, 'texture': front, 'frames': '36,198-215'})
+        if not any(j['target'] == '%s Stairs' % dhw for j in base_jobs):
+            jobs.append({'type': 'stairs_from', 'target': '%s Stairs' % dhw, 'donor': {'Forest walls': 'Ice', 'Ruins walls': 'Stone'}.get(wall, dhw)})
     for wall, floors in EOB3_UNTOUCHED_FLOORS.items():
         rules['wall_floors']['%s Wallset' % wall] = floors
     jobs.append({'type': 'sprites', 'target': 'Wererat', 'images': ['pool/monsters/eob3_shadow_hound/%d.png' % i for i in range(6)]})

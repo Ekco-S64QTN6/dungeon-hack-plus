@@ -467,6 +467,11 @@
    "image": "pool/floors/menzo_gold.png"
   },
   {
+   "type": "stairs_from",
+   "target": "W08 Stairs",
+   "donor": "Marble"
+  },
+  {
    "type": "vmp_walls",
    "target": "W09 Wallset",
    "game": "eob2",
@@ -511,6 +516,11 @@
    "image": "pool/floors/menzo_purple.png"
   },
   {
+   "type": "stairs_from",
+   "target": "W10 Stairs",
+   "donor": "Marble"
+  },
+  {
    "type": "wallset",
    "target": "W11 Wallset",
    "texture": "pool/walls/menzo_cave_v0.png",
@@ -532,6 +542,11 @@
    "type": "floor",
    "target": "Floor-1",
    "image": "pool/floors/menzo_cave.png"
+  },
+  {
+   "type": "stairs_from",
+   "target": "W11 Stairs",
+   "donor": "Rock"
   },
   {
    "type": "vmp_walls",
@@ -615,6 +630,11 @@
    "target": "W15 Wallset",
    "texture": "pool/walls/eob3_forest_front.png",
    "frames": "36,198-215"
+  },
+  {
+   "type": "stairs_from",
+   "target": "W15 Stairs",
+   "donor": "Ice"
   },
   {
    "type": "panels",
@@ -717,6 +737,11 @@
    "image": "pool/floors/menzo_red.png"
   },
   {
+   "type": "stairs_from",
+   "target": "Mine Stairs",
+   "donor": "Marble"
+  },
+  {
    "type": "vmp_walls",
    "target": "Wood Wallset",
    "game": "eob1",
@@ -768,6 +793,11 @@
    "type": "floor",
    "target": "Floor-3",
    "image": "pool/floors/menzo_wood.png"
+  },
+  {
+   "type": "stairs_from",
+   "target": "Rock Stairs",
+   "donor": "Wood"
   },
   {
    "type": "panels",
@@ -1503,7 +1533,7 @@
    "stairs": "W08 Stairs",
    "floor": "Floor-15",
    "palette": "wall/floor palette 01",
-   "door": "Door-02"
+   "door": "Door-00"
   }
  ]
 }

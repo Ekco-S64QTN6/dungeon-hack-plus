@@ -725,6 +725,11 @@
    "frames": "36,198-215"
   },
   {
+   "type": "stairs_from",
+   "target": "Rock Stairs",
+   "donor": "Stone"
+  },
+  {
    "type": "floor",
    "target": "Floor-3",
    "image": "pool/floors/eob3_forest.png"
@@ -734,6 +739,11 @@
    "target": "Stone Wallset",
    "texture": "pool/walls/eob3_forest_front.png",
    "frames": "36,198-215"
+  },
+  {
+   "type": "stairs_from",
+   "target": "Stone Stairs",
+   "donor": "Ice"
   },
   {
    "type": "sprites",

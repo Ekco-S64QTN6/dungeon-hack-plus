@@ -34,6 +34,7 @@ WESTWOOD_SETS = [('eob1_' + s.lower(), 'eob1', s, f, st) for s, _, f, st in ec.T
 EOB3_SETS = [('eob3_mausoleum', 'Mausoleum walls', 'Mausoleum palette', 'Wood'),
              ('eob3_ruins', 'Ruins walls', 'Ruins palette', 'Rock'),
              ('eob3_forest', 'Forest walls', 'Forest palette', 'Stone')]
+EOB3_STAIR_DONOR = {'eob3_forest': 'Ice', 'eob3_ruins': 'Stone', 'eob3_mausoleum': 'Wood'}   # DH style, if no EOB3 stairs
 EOB3_DECOS = {'Wood': ['Wall Deco 09', 'Wall Deco 10', 'Wall Deco 11'], 'Rock': ['Wall Deco 12', 'Wall Deco 13', 'Wall Deco 14']}
 EOB3_DOORS = ['Door-05', 'Door-06', 'Door-07', 'Door-08', 'Door-09', 'Door-11', 'Door-18']
 
@@ -148,6 +149,8 @@ def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
                 jobs.append(dict(src_job, target=target, ramp_of=slot + ' Wallset'))
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/eob3_%s.png' % wall.split()[0].lower()})
             jobs.append({'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower(), 'frames': '36,198-215'})
+            if not any(j['target'] == '%s Stairs' % old for j in e3jobs):      # EOB3 Forest/Ruins have no stairs
+                jobs.append({'type': 'stairs_from', 'target': '%s Stairs' % slot, 'donor': EOB3_STAIR_DONOR[src]})
         else:
             _, game, vset, frame_set, stairs_set = next(s for s in WESTWOOD_SETS if s[0] == src)
             jobs.append({'type': 'vmp_walls', 'target': '%s Wallset' % slot, 'game': game, 'set': vset,

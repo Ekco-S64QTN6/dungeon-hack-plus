@@ -797,6 +797,45 @@ def reramp_floor(r, f):
     print('    Floor-%d: %s -> %s ramps, re-ramped Ground-%d' % (f, sorted(old_shape), sorted(new_shape), f))
 
 
+def job_stairs_from(r, job, pal):
+    """Stairs for imported sets that have none (Menzo, EOB3 Forest/Ruins): DH's closest stair style.
+
+    {"target": "W12 Stairs", "donor": "Marble"}
+    Copies the donor's ORIGINAL stairs (from the untouched game; with the Ice frame-order fix applied)
+    and maps its wall-ramp indices from the donor's palettes to the target slot's, like reramp.
+    """
+    src = aesop.ResFile(os.path.join(paths.get_dh_dir(), 'HACK.RES'))
+    donor = job['donor']
+    frames = aesop.decode_shapes(src.entry(src.names()['%s Stairs' % donor])[2])
+    if donor == 'Ice' and frames[12][:2] == (48, 38) and not any(frames[13][3]):
+        frames[12], frames[13] = frames[13], frames[12]          # same swap as fix_ice_stairs
+    old_rules = kernel_rules.read(src.entry(src.names()['kernel'])[2])
+    w = kernel_rules.WALLSETS.index(donor)
+    old_lums = [palette_lums(src, p) for p in range(21) if old_rules['wallpal_ok_for_wall'][p] >> w & 1]
+    stem = job['target'].split()[0]
+    new_prof, new_pals = ramp_profile(r, '%s Wallset' % stem)
+    old_prof = np.mean(old_lums, axis=0)[:15]
+    gray = np.repeat(old_prof[None, :, None], 3, axis=2)
+    lut = np.arange(256, dtype=np.uint8)
+    lut[240:255] = normalize.to_ramp_target(gray, new_prof, 240, dither=False, lohi=(old_prof.min(), old_prof.max()))[0]
+    idx = r.names()[job['target']]
+    target = aesop.decode_shapes(r.entry(idx)[2])
+    assert len(target) == len(frames)
+    out = []
+    for (tw, th, _, _), (fw, fh, px, m) in zip(target, frames):
+        a = lut[np.frombuffer(bytes(px), np.uint8)].reshape(fh, fw); mk = np.frombuffer(bytes(m), np.uint8).reshape(fh, fw)
+        if (fw, fh) != (tw, th):     # Ice's depth-3 panel is 48x38, the others 48x37: crop/pad bottom rows
+            assert fw == tw and abs(fh - th) <= 2, 'stair layouts differ: %s vs %s' % ((fw, fh), (tw, th))
+            pad = np.zeros((max(0, th - fh), fw), np.uint8)
+            a = np.vstack([a[:th], pad]); mk = np.vstack([mk[:th], pad])
+        out.append((tw, th, bytearray(a.tobytes()), bytearray(mk.tobytes())))
+    r.replace(idx, aesop.encode_shapes(out))
+    BUILT_SHAPES[job['target']] = sorted({normalize.ramp_shape(palette_lums(r, p)) for p in new_pals})
+    if job['target'] == 'Ice Stairs':
+        LAYOUT_FIXES.append('Ice Stairs')
+    print('    %s <- %s Stairs (original art, re-ramped)' % (job['target'], donor))
+
+
 def job_eob_wall_deco(r, job, pal):
     """One EOB1/2 decoration (.DAT/.DEC + sheet .CPS) as a DH wall decoration, placed per view
     position exactly as EOB draws it (tools/eob_decos.py). Coloured with DH fixed colours 1-223,
@@ -1014,7 +1053,7 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'eob_door': job_eob_door, 'vmp_deco': job_vmp_deco,
         'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset,
         'game_music': job_game_music, 'extra_doors': job_extra_doors, 'paint_objects': job_paint_objects,
-        'extra_floors': job_extra_floors}
+        'extra_floors': job_extra_floors, 'stairs_from': job_stairs_from}
 
 
 def cmd_build(recipe_path, name):

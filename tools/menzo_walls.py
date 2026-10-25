@@ -22,6 +22,9 @@ import dreamforge   # noqa: E402
 import paths        # noqa: E402
 
 # set -> plain strips (variant 0), decorated strips (variant 1), floor flat, ceiling flat (RES4 record ids)
+# DH stair style each set borrows (Menzo has no stair art): drow stone -> Marble, planks -> Wood, cave -> Rock
+STAIR_DONOR = {'menzo_blue': 'Marble', 'menzo_purple': 'Marble', 'menzo_red': 'Marble', 'menzo_gold': 'Marble',
+               'menzo_wood': 'Wood', 'menzo_cave': 'Rock'}
 SETS = {
     'menzo_blue':   {'v0': [237, 238, 239, 240], 'v1': [236, 241, 242, 239], 'floor': 1036, 'ceiling': 1034},
     'menzo_purple': {'v0': [517, 518, 519, 520], 'v1': [518, 534, 535, 519], 'floor': 1042, 'ceiling': 1041},
@@ -91,7 +94,8 @@ def jobs(name, slot, floor):
     return [{'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': w % 'v0', 'frames': '0-5,8,13,16'},
             {'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': w % 'v1', 'frames': '6,7,9-12'},
             {'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': w % 'v0', 'frames': '18-36,198-215'},   # + arch
-            {'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s.png' % name}]
+            {'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s.png' % name},
+            {'type': 'stairs_from', 'target': '%s Stairs' % slot, 'donor': STAIR_DONOR[name]}]
 
 
 if __name__ == '__main__':
