@@ -1,0 +1,14 @@
+{
+ "comment": "SMOKE (test only): Ice stairs, original",
+ "jobs": [
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Ice Wallset",
+   "stairs": "Ice Stairs",
+   "floor": "Floor-0",
+   "palette": "wall/floor palette 01",
+   "door": "Door-05"
+  }
+ ]
+}

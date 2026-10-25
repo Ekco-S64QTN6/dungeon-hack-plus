@@ -1,0 +1,1 @@
+{"comment": "Fix only: Ice Stairs depth-3 stairs-down art was in panel 12 instead of 13", "jobs": [{"type": "fix_ice_stairs", "target": "Ice Stairs"}]}

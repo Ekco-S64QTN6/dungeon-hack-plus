@@ -1,0 +1,28 @@
+{
+ "comment": "SMOKE VARIANT (test only)",
+ "jobs": [
+  {
+   "type": "vmp_walls",
+   "target": "Rock Wallset",
+   "game": "eob2",
+   "set": "DUNG",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "stairs": "Rock Stairs",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Rock Wallset",
+   "stairs": "Rock Stairs",
+   "floor": "Floor-0",
+   "palette": "wall/floor palette 00",
+   "door": "Door-05"
+  }
+ ]
+}

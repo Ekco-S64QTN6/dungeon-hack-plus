@@ -1,0 +1,30 @@
+{
+ "comment": "audio rate: record DOSBox output while the door at (25,6) opens",
+ "fixture": "fixtures/savegame_nomon",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "goto": [
+    25,
+    5
+   ],
+   "face": "S"
+  },
+  {
+   "hotkey": "ctrl+F6",
+   "settle": 1.0
+  },
+  {
+   "click": [
+    226,
+    73
+   ],
+   "wait": 4
+  },
+  {
+   "hotkey": "ctrl+F6",
+   "settle": 1.0
+  }
+ ]
+}

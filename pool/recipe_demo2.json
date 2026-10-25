@@ -1,0 +1,14 @@
+{
+  "comment": "Demo 2: EOB3 panels copied 1:1, palette pairing rules edited, target-aware ramps.",
+  "jobs": [
+    {"type": "palette_rules", "target": "kernel", "wall_palettes": {"Stone Wallset": [2, 5, 8, 9, 12]}},
+    {"type": "panels", "target": "Stone Wallset", "target_first": 0, "count": 18,
+     "source": "Marble walls", "source_first": 0, "source_palette": "Marble palette"},
+    {"type": "wallset", "target": "Wood Wallset", "frames": "0-35",
+     "texture": "pool/walls/DUNG_wt0_front.png"},
+    {"type": "floor", "target": "Floor-0", "image": "pool/floors/BLUE_backdrop.png"},
+    {"type": "sprites", "target": "Goblin",
+     "images": ["pool/monsters/eob1_kobold/0.png", "pool/monsters/eob1_kobold/3.png", "pool/monsters/eob1_kobold/1.png",
+                "pool/monsters/eob1_kobold/2.png", "pool/monsters/eob1_kobold/4.png", "pool/monsters/eob1_kobold/5.png"]}
+  ]
+}

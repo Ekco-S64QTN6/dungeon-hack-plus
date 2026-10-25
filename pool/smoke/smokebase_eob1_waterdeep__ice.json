@@ -1,0 +1,14 @@
+{
+ "comment": "SMOKE VARIANT (test only)",
+ "jobs": [
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Ice Wallset",
+   "stairs": "Ice Stairs",
+   "floor": "Floor-3",
+   "palette": "wall/floor palette 06",
+   "door": "Door-05"
+  }
+ ]
+}

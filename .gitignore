@@ -1,0 +1,98 @@
+# ==============================================================================
+# Dungeon Hack+ — Git Ignore Rules
+# ==============================================================================
+# Commercial game data and copyrighted assets are strictly excluded.
+# Users must supply their own legally acquired base games.
+# ==============================================================================
+
+# Drop-in base game directories (track only directory placeholders and docs)
+base_games/**
+!base_games/
+!base_games/**/
+!base_games/**/*.gitkeep
+!base_games/README.md
+
+# External/local game installs
+games/
+Dungeon Hack/
+Forgotten Realms*/
+Eye_of_the_Beholder*/
+
+# Proprietary archive and asset containers
+*.RES
+*.res
+*.TBL
+*.tbl
+*.CPS
+*.cps
+*.PAK
+*.pak
+*.VCN
+*.vcn
+*.VMP
+*.vmp
+*.COL
+*.col
+*.PAL
+*.pal
+*.ISO
+*.iso
+*.GOG
+*.gog
+*.BIN
+*.bin
+*.CUE
+*.cue
+*.DAT
+*.dat
+*.SAV
+*.sav
+
+# DOS game executables and scripts (exclude original binaries)
+*.EXE
+*.exe
+*.COM
+*.com
+*.BAT
+*.bat
+
+# Generated builds, temporary caches, and backup snapshots
+build/*
+!build/.gitkeep
+work/*
+!work/.gitkeep
+backup/*
+!backup/.gitkeep
+
+# Python bytecode and tooling caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Reference material (AESOP release, forum archives); local only
+reference/
+fixtures/
+# smoke-test output: keep the .md reports, ignore screenshots/logs (renders of game art)
+smoke_runs/*
+!smoke_runs/*.md
+
+# Game-derived assets in the pool (sprites, floors, walls, icons, portraits, sounds): users
+# regenerate them from their own games; only recipes (*.json) are tracked
+pool/**
+!pool/
+!pool/*.json
+!pool/smoke/
+!pool/smoke/*.json
+# Third-party binaries and disassembly of game scripts (fetched/generated locally, see README)
+third_party/
+# Local extraction scratch
+work/
+# Screenshot templates cropped from the game UI
+smoke/*.png

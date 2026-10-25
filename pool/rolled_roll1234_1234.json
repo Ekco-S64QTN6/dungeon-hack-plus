@@ -1,0 +1,57 @@
+{
+ "seed": 1234,
+ "pool": "mashup/pool/pool.json",
+ "jobs": [
+  {
+   "type": "wallset",
+   "target": "Marble Wallset",
+   "frames": "0-17",
+   "texture": "work/westwood/eob1/XANATHA_wt1_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Foil Wallset",
+   "frames": "0-17",
+   "texture": "work/westwood/eob2/MEZZ_wt1_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Mine Wallset",
+   "frames": "0-17",
+   "texture": "work/westwood/eob1/GREEN_wt0_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Rock Wallset",
+   "frames": "0-17",
+   "texture": "work/westwood/eob2/FOREST_wt0_front.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-1",
+   "image": "work/westwood/eob1/BLUE_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-2",
+   "image": "work/westwood/eob2/SILVER_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-3",
+   "image": "work/westwood/eob2/FOREST_backdrop.png"
+  },
+  {
+   "type": "sprites",
+   "target": "Goblin",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  }
+ ]
+}

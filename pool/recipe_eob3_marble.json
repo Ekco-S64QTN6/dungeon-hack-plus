@@ -1,0 +1,50 @@
+{
+ "comment": "EOB3 Marble complete port to Dungeon Hack",
+ "jobs": [
+  {
+   "type": "panels",
+   "target": "Marble Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble walls",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Marble Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Marble door",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-05",
+   "target_first": 0,
+   "count": 54,
+   "source": "Marble door",
+   "source_first": 18,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Marble Stairs",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble stairs down",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Marble Stairs",
+   "target_first": 18,
+   "count": 18,
+   "source": "Marble stairs up",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  }
+ ]
+}

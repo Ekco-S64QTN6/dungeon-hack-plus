@@ -1,0 +1,14 @@
+{
+ "comment": "EOB3 Forest complete port to Dungeon Hack",
+ "jobs": [
+  {
+   "type": "panels",
+   "target": "Stone Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Forest walls",
+   "source_first": 0,
+   "source_palette": "Forest palette"
+  }
+ ]
+}

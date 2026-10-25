@@ -1,0 +1,712 @@
+{
+ "comment": "SMOKE VARIANT (test only)",
+ "jobs": [
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Marble Wallset": [
+     5,
+     12,
+     2
+    ],
+    "Wood Wallset": [
+     17,
+     19,
+     20
+    ],
+    "Rock Wallset": [
+     17,
+     20,
+     15
+    ],
+    "Stone Wallset": [
+     15,
+     16,
+     20
+    ]
+   },
+   "wall_floors": {
+    "Marble Wallset": [
+     0
+    ],
+    "Wood Wallset": [
+     1
+    ],
+    "Rock Wallset": [
+     2
+    ],
+    "Stone Wallset": [
+     3
+    ],
+    "Foil Wallset": [
+     5,
+     7
+    ],
+    "Ice Wallset": [
+     6,
+     7
+    ],
+    "Mine Wallset": [
+     6,
+     7
+    ]
+   },
+   "floor_palettes": {
+    "0": [
+     5,
+     12,
+     2
+    ],
+    "1": [
+     17,
+     19,
+     20
+    ],
+    "2": [
+     17,
+     20,
+     15
+    ],
+    "3": [
+     15,
+     16,
+     20
+    ]
+   },
+   "allow_pairs": [
+    [
+     [
+      5,
+      12,
+      2
+     ],
+     [
+      5,
+      12,
+      2
+     ]
+    ],
+    [
+     [
+      17,
+      19,
+      20
+     ],
+     [
+      17,
+      19,
+      20
+     ]
+    ],
+    [
+     [
+      17,
+      20,
+      15
+     ],
+     [
+      17,
+      20,
+      15
+     ]
+    ],
+    [
+     [
+      15,
+      16,
+      20
+     ],
+     [
+      15,
+      16,
+      20
+     ]
+    ]
+   ]
+  },
+  {
+   "type": "panels",
+   "target": "Marble Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble walls",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Marble Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Marble door",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-05",
+   "target_first": 0,
+   "count": 54,
+   "source": "Marble door",
+   "source_first": 18,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Marble Stairs",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble stairs down",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Marble Stairs",
+   "target_first": 18,
+   "count": 18,
+   "source": "Marble stairs up",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum walls",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum skull door",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-06",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum skull door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-07",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum Star Trek(TM) door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Stairs",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum stairs down",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Stairs",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum stairs up",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Ruins walls",
+   "source_first": 0,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Ruins wooden door",
+   "source_first": 0,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-08",
+   "target_first": 0,
+   "count": 54,
+   "source": "Ruins wooden door",
+   "source_first": 18,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-09",
+   "target_first": 0,
+   "count": 54,
+   "source": "Ruins crystal door",
+   "source_first": 18,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Stone Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Forest walls",
+   "source_first": 0,
+   "source_palette": "Forest palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-11",
+   "target_first": 0,
+   "count": 54,
+   "source": "Temple gold door",
+   "source_first": 18,
+   "source_palette": "Fixed palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-18",
+   "target_first": 0,
+   "count": 54,
+   "source": "Temple mask door",
+   "source_first": 18,
+   "source_palette": "Fixed palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 00",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble elven tapestry",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 01",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble air tapestry",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 02",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble fire tapestry",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 03",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble water tapestry",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 04",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble earth tapestry",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 05",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble niche",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 06",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble plaque",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 07",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble valve",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 08",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble censer",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 09",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum plaque",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Wood Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 10",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum wall spikes",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Wood Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 11",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum nameplate",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Wood Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 12",
+   "target_first": 0,
+   "count": 18,
+   "source": "Ruins plaque",
+   "source_first": 0,
+   "source_palette": "Ruins palette",
+   "ramp_of": "Rock Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 13",
+   "target_first": 0,
+   "count": 18,
+   "source": "Ruins niche",
+   "source_first": 0,
+   "source_palette": "Ruins palette",
+   "ramp_of": "Rock Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 14",
+   "target_first": 0,
+   "count": 18,
+   "source": "Ruins square niche",
+   "source_first": 0,
+   "source_palette": "Ruins palette",
+   "ramp_of": "Rock Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 15",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple censer",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 16",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple font",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Wall Deco 17",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple niche",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 00",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble brass keyhole",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 01",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble copper keyhole",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 02",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble silver keyhole",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 03",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble crystal keyhole",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 04",
+   "target_first": 0,
+   "count": 18,
+   "source": "Ruins keyhole",
+   "source_first": 0,
+   "source_palette": "Ruins palette",
+   "ramp_of": "Rock Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 05",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple copper lock",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 06",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple iron lock",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 07",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple gold lock",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 08",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple crystal lock",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 09",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple fire lock",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 10",
+   "target_first": 0,
+   "count": 18,
+   "source": "Temple frost lock",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Keyhole 11",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum holy lock",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Wood Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Lever 00",
+   "target_first": 0,
+   "count": 36,
+   "source": "Marble lever",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Lever 01",
+   "target_first": 0,
+   "count": 36,
+   "source": "Marble magic lever",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Lever 02",
+   "target_first": 0,
+   "count": 36,
+   "source": "Marble rusted lever",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Lever 03",
+   "target_first": 0,
+   "count": 36,
+   "source": "Marble button",
+   "source_first": 0,
+   "source_palette": "Marble palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Lever 04",
+   "target_first": 0,
+   "count": 36,
+   "source": "Temple gold lever",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Lever 05",
+   "target_first": 0,
+   "count": 36,
+   "source": "Temple secret handle",
+   "source_first": 0,
+   "source_palette": "Fixed palette",
+   "ramp_of": "Marble Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Lever 06",
+   "target_first": 0,
+   "count": 36,
+   "source": "Mausoleum button",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Wood Wallset"
+  },
+  {
+   "type": "panels",
+   "target": "Lever 07",
+   "target_first": 0,
+   "count": 36,
+   "source": "Mausoleum drawers",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette",
+   "ramp_of": "Wood Wallset"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-0",
+   "image": "pool/floors/eob3_marble.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-1",
+   "image": "pool/floors/eob3_mausoleum.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-2",
+   "image": "pool/floors/eob3_ruins.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-3",
+   "image": "pool/floors/eob3_forest.png"
+  },
+  {
+   "type": "sprites",
+   "target": "Wererat",
+   "images": [
+    "pool/monsters/eob3_shadow_hound/0.png",
+    "pool/monsters/eob3_shadow_hound/1.png",
+    "pool/monsters/eob3_shadow_hound/2.png",
+    "pool/monsters/eob3_shadow_hound/3.png",
+    "pool/monsters/eob3_shadow_hound/4.png",
+    "pool/monsters/eob3_shadow_hound/5.png"
+   ]
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Stone Wallset",
+   "stairs": "Stone Stairs",
+   "floor": "Floor-3",
+   "palette": "wall/floor palette 15",
+   "door": "Door-08"
+  }
+ ]
+}

@@ -1,0 +1,143 @@
+{
+ "comment": "High-fidelity audio enhancement: authentic EOB3 stone doors, wood doors, levers, locks, and monster sound effects",
+ "jobs": [
+  {
+   "type": "raw",
+   "target": "DOOR 00",
+   "file": "pool/sounds/raw/stdoor1.raw",
+   "comment": "Heavy stone door slide"
+  },
+  {
+   "type": "raw",
+   "target": "S-DOOR",
+   "file": "pool/sounds/raw/stdoor1.raw",
+   "comment": "Stone secret door slide"
+  },
+  {
+   "type": "raw",
+   "target": "DOOR 01",
+   "file": "pool/sounds/raw/wddoor1.raw",
+   "comment": "Heavy wood door creak & open"
+  },
+  {
+   "type": "raw",
+   "target": "DOOR 02",
+   "file": "pool/sounds/raw/wddoor2.raw",
+   "comment": "Heavy wood door latch & close"
+  },
+  {
+   "type": "raw",
+   "target": "S-LEVER",
+   "file": "pool/sounds/raw/wdlever.raw",
+   "comment": "Iron mechanism lever clunk"
+  },
+  {
+   "type": "raw",
+   "target": "S-BUTTON",
+   "file": "pool/sounds/raw/stbutton.raw",
+   "comment": "Stone button mechanical press"
+  },
+  {
+   "type": "raw",
+   "target": "S-LOCK",
+   "file": "pool/sounds/raw/d-lock2.raw",
+   "comment": "Lock tumblers turning"
+  },
+  {
+   "type": "raw",
+   "target": "BONENAGA",
+   "file": "pool/sounds/raw/bonenag1.raw",
+   "comment": "Bone naga hiss and bone rattle"
+  },
+  {
+   "type": "raw",
+   "target": "CHIMERA",
+   "file": "pool/sounds/raw/chimera1.raw",
+   "comment": "Chimera three-headed roar"
+  },
+  {
+   "type": "raw",
+   "target": "CHIMERA ATK",
+   "file": "pool/sounds/raw/chimera2.raw",
+   "comment": "Chimera breath attack"
+  },
+  {
+   "type": "raw",
+   "target": "FEYR",
+   "file": "pool/sounds/raw/feyr2.raw",
+   "comment": "Feyr horrific screech"
+  },
+  {
+   "type": "raw",
+   "target": "GRAVEMIST ATK",
+   "file": "pool/sounds/raw/gravemis.raw",
+   "comment": "Grave mist spectral attack"
+  },
+  {
+   "type": "raw",
+   "target": "GRAVEMIST",
+   "file": "pool/sounds/raw/gravstp2.raw",
+   "comment": "Grave mist creeping sound"
+  },
+  {
+   "type": "raw",
+   "target": "MINOTAUR ATK",
+   "file": "pool/sounds/raw/minotar2.raw",
+   "comment": "Minotaur battle roar"
+  },
+  {
+   "type": "raw",
+   "target": "MOUND",
+   "file": "pool/sounds/raw/mound1.raw",
+   "comment": "Shambling mound shambling squelch"
+  },
+  {
+   "type": "raw",
+   "target": "SLUG",
+   "file": "pool/sounds/raw/slug1a.raw",
+   "comment": "Ogre slug movement"
+  },
+  {
+   "type": "raw",
+   "target": "SLUG ATK",
+   "file": "pool/sounds/raw/slug2a.raw",
+   "comment": "Ogre slug spit attack"
+  },
+  {
+   "type": "raw",
+   "target": "STEEL ATK",
+   "file": "pool/sounds/raw/steel1.raw",
+   "comment": "Steel shadow metallic attack"
+  },
+  {
+   "type": "raw",
+   "target": "TROLL ATK",
+   "file": "pool/sounds/raw/troll2.raw",
+   "comment": "Troll claw swipe"
+  },
+  {
+   "type": "raw",
+   "target": "WATEREL ATK",
+   "file": "pool/sounds/raw/waterel1.raw",
+   "comment": "Water elemental surging wave"
+  },
+  {
+   "type": "raw",
+   "target": "WIGHT",
+   "file": "pool/sounds/raw/white1.raw",
+   "comment": "Wight deathly wail"
+  },
+  {
+   "type": "raw",
+   "target": "WYVERN",
+   "file": "pool/sounds/raw/wyvren1.raw",
+   "comment": "Wyvern cry"
+  },
+  {
+   "type": "raw",
+   "target": "WYVERN ATK",
+   "file": "pool/sounds/raw/wyvren2.raw",
+   "comment": "Wyvern poison stinger attack"
+  }
+ ]
+}

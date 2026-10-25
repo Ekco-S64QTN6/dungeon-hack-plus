@@ -1,0 +1,14 @@
+{
+ "comment": "SMOKE VARIANT (test only)",
+ "jobs": [
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Stone Wallset",
+   "stairs": "Stone Stairs",
+   "floor": "Floor-0",
+   "palette": "wall/floor palette 15",
+   "door": "Door-08"
+  }
+ ]
+}

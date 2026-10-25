@@ -1,0 +1,18 @@
+{
+ "comment": "SMOKE (test only): Bug 1 fix",
+ "jobs": [
+  {
+   "type": "fix_unlock_shape",
+   "target": "items"
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Stone Wallset",
+   "stairs": "Stone Stairs",
+   "floor": "Floor-0",
+   "palette": "wall/floor palette 02",
+   "door": "Door-05"
+  }
+ ]
+}

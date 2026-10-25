@@ -1,0 +1,361 @@
+{
+ "comment": "SMOKE VARIANT (test only)",
+ "jobs": [
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Rock Wallset": [
+     5,
+     12,
+     10
+    ],
+    "Foil Wallset": [
+     0,
+     3,
+     1
+    ],
+    "Mine Wallset": [
+     7,
+     10,
+     12
+    ],
+    "Ice Wallset": [
+     13,
+     11,
+     6
+    ],
+    "Wood Wallset": [
+     12,
+     10,
+     7
+    ]
+   },
+   "wall_floors": {
+    "Rock Wallset": [
+     0
+    ],
+    "Foil Wallset": [
+     1
+    ],
+    "Mine Wallset": [
+     2
+    ],
+    "Ice Wallset": [
+     3
+    ],
+    "Wood Wallset": [
+     4
+    ],
+    "Stone Wallset": [
+     5,
+     6,
+     7
+    ],
+    "Marble Wallset": [
+     5,
+     7
+    ]
+   },
+   "floor_palettes": {
+    "0": [
+     5,
+     12,
+     10
+    ],
+    "1": [
+     0,
+     3,
+     1
+    ],
+    "2": [
+     7,
+     10,
+     12
+    ],
+    "3": [
+     13,
+     11,
+     6
+    ],
+    "4": [
+     12,
+     10,
+     7
+    ]
+   },
+   "allow_pairs": [
+    [
+     [
+      5,
+      12,
+      10
+     ],
+     [
+      5,
+      12,
+      10
+     ]
+    ],
+    [
+     [
+      0,
+      3,
+      1
+     ],
+     [
+      0,
+      3,
+      1
+     ]
+    ],
+    [
+     [
+      7,
+      10,
+      12
+     ],
+     [
+      7,
+      10,
+      12
+     ]
+    ],
+    [
+     [
+      13,
+      11,
+      6
+     ],
+     [
+      13,
+      11,
+      6
+     ]
+    ],
+    [
+     [
+      12,
+      10,
+      7
+     ],
+     [
+      12,
+      10,
+      7
+     ]
+    ]
+   ]
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Rock Wallset",
+   "game": "eob1",
+   "set": "BLUE",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "BLUE",
+   "stairs": "Rock Stairs",
+   "stairs_set": "BLUE",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-0",
+   "image": "pool/floors/BLUE_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Foil Wallset",
+   "game": "eob1",
+   "set": "BRICK",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "BRICK",
+   "stairs": "Foil Stairs",
+   "stairs_set": "BLUE",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-1",
+   "image": "pool/floors/BRICK_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Mine Wallset",
+   "game": "eob1",
+   "set": "DROW",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "DROW",
+   "stairs": "Mine Stairs",
+   "stairs_set": "DROW",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-2",
+   "image": "pool/floors/DROW_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Ice Wallset",
+   "game": "eob1",
+   "set": "GREEN",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "GREEN",
+   "stairs": "Ice Stairs",
+   "stairs_set": "GREEN",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-3",
+   "image": "pool/floors/GREEN_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Wood Wallset",
+   "game": "eob1",
+   "set": "XANATHA",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "XANATHA",
+   "stairs": "Wood Stairs",
+   "stairs_set": "BLUE",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-4",
+   "image": "pool/floors/XANATHA_backdrop.png"
+  },
+  {
+   "type": "sprites",
+   "target": "Goblin",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ghoul",
+   "images": [
+    "pool/monsters/eob1_skeleton/0.png",
+    "pool/monsters/eob1_skeleton/1.png",
+    "pool/monsters/eob1_skeleton/2.png",
+    "pool/monsters/eob1_skeleton/3.png",
+    "pool/monsters/eob1_skeleton/4.png",
+    "pool/monsters/eob1_skeleton/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shghoul",
+   "images": [
+    "pool/monsters/eob1_zombie/0.png",
+    "pool/monsters/eob1_zombie/1.png",
+    "pool/monsters/eob1_zombie/2.png",
+    "pool/monsters/eob1_zombie/3.png",
+    "pool/monsters/eob1_zombie/4.png",
+    "pool/monsters/eob1_zombie/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Orc",
+   "images": [
+    "pool/monsters/eob1_kuotoa/0.png",
+    "pool/monsters/eob1_kuotoa/1.png",
+    "pool/monsters/eob1_kuotoa/2.png",
+    "pool/monsters/eob1_kuotoa/3.png",
+    "pool/monsters/eob1_kuotoa/4.png",
+    "pool/monsters/eob1_kuotoa/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Hobgob",
+   "images": [
+    "pool/monsters/eob1_kenku/0.png",
+    "pool/monsters/eob1_kenku/1.png",
+    "pool/monsters/eob1_kenku/2.png",
+    "pool/monsters/eob1_kenku/3.png",
+    "pool/monsters/eob1_kenku/4.png",
+    "pool/monsters/eob1_kenku/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wight",
+   "images": [
+    "pool/monsters/eob1_disbeast/0.png",
+    "pool/monsters/eob1_disbeast/1.png",
+    "pool/monsters/eob1_disbeast/2.png",
+    "pool/monsters/eob1_disbeast/3.png",
+    "pool/monsters/eob1_disbeast/4.png",
+    "pool/monsters/eob1_disbeast/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadewiz",
+   "images": [
+    "pool/monsters/eob1_mflayer/0.png",
+    "pool/monsters/eob1_mflayer/1.png",
+    "pool/monsters/eob1_mflayer/2.png",
+    "pool/monsters/eob1_mflayer/3.png",
+    "pool/monsters/eob1_mflayer/4.png",
+    "pool/monsters/eob1_mflayer/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wererat",
+   "images": [
+    "pool/monsters/eob1_hellhound/0.png",
+    "pool/monsters/eob1_hellhound/1.png",
+    "pool/monsters/eob1_hellhound/2.png",
+    "pool/monsters/eob1_hellhound/3.png",
+    "pool/monsters/eob1_hellhound/4.png",
+    "pool/monsters/eob1_hellhound/5.png"
+   ]
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Mine Wallset",
+   "stairs": "Mine Stairs",
+   "floor": "Floor-2",
+   "palette": "wall/floor palette 07",
+   "door": "Door-05"
+  }
+ ]
+}

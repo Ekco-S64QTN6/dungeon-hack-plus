@@ -1,0 +1,46 @@
+{
+ "comment": "forced-graphics view walk: start, turn L, turn R x2, forward",
+ "seconds": 20,
+ "dos": [
+  "aesop hack phase-two"
+ ],
+ "autotype": "",
+ "steps": [
+  {
+   "at": 4,
+   "shot": "a_start"
+  },
+  {
+   "at": 4.5,
+   "key": "KP_7"
+  },
+  {
+   "at": 6,
+   "shot": "b_turnL"
+  },
+  {
+   "at": 6.5,
+   "key": "KP_9"
+  },
+  {
+   "at": 7.2,
+   "key": "KP_9"
+  },
+  {
+   "at": 8.7,
+   "shot": "c_turnR"
+  },
+  {
+   "at": 9.2,
+   "key": "KP_7"
+  },
+  {
+   "at": 9.8,
+   "key": "KP_8"
+  },
+  {
+   "at": 11.3,
+   "shot": "d_fwd"
+  }
+ ]
+}

@@ -1,0 +1,153 @@
+{
+  "comment": "EOB1 Sewers: Classic Waterdeep sewer labyrinth with original Westwood Kobolds, Skeletons, Zombies, and Kuo-Toa",
+  "jobs": [
+    {
+      "type": "wallset",
+      "target": "Rock Wallset",
+      "frames": "0-35",
+      "texture": "pool/walls/BRICK_wt0_front.png"
+    },
+    {
+      "type": "floor",
+      "target": "Floor-0",
+      "image": "pool/floors/BLUE_backdrop.png"
+    },
+    {
+      "type": "floor",
+      "target": "Floor-1",
+      "image": "pool/floors/GREEN_backdrop.png"
+    },
+    {
+      "type": "sprites",
+      "target": "Goblin",
+      "images": [
+        "pool/monsters/eob1_kobold/0.png",
+        "pool/monsters/eob1_kobold/3.png",
+        "pool/monsters/eob1_kobold/1.png",
+        "pool/monsters/eob1_kobold/2.png",
+        "pool/monsters/eob1_kobold/4.png",
+        "pool/monsters/eob1_kobold/5.png"
+      ]
+    },
+    {
+      "type": "sprites",
+      "target": "Orc",
+      "images": [
+        "pool/monsters/eob1_kuotoa/0.png",
+        "pool/monsters/eob1_kuotoa/1.png",
+        "pool/monsters/eob1_kuotoa/2.png",
+        "pool/monsters/eob1_kuotoa/3.png",
+        "pool/monsters/eob1_kuotoa/4.png",
+        "pool/monsters/eob1_kuotoa/5.png"
+      ]
+    },
+    {
+      "type": "sprites",
+      "target": "Hobgob",
+      "images": [
+        "pool/monsters/eob1_kenku/0.png",
+        "pool/monsters/eob1_kenku/1.png",
+        "pool/monsters/eob1_kenku/2.png",
+        "pool/monsters/eob1_kenku/3.png",
+        "pool/monsters/eob1_kenku/4.png",
+        "pool/monsters/eob1_kenku/5.png"
+      ]
+    },
+    {
+      "type": "sprites",
+      "target": "Ghoul",
+      "images": [
+        "pool/monsters/eob1_skeleton/0.png",
+        "pool/monsters/eob1_skeleton/1.png",
+        "pool/monsters/eob1_skeleton/2.png",
+        "pool/monsters/eob1_skeleton/3.png",
+        "pool/monsters/eob1_skeleton/4.png",
+        "pool/monsters/eob1_skeleton/5.png"
+      ]
+    },
+    {
+      "type": "sprites",
+      "target": "Shghoul",
+      "images": [
+        "pool/monsters/eob1_zombie/0.png",
+        "pool/monsters/eob1_zombie/1.png",
+        "pool/monsters/eob1_zombie/2.png",
+        "pool/monsters/eob1_zombie/3.png",
+        "pool/monsters/eob1_zombie/4.png",
+        "pool/monsters/eob1_zombie/5.png"
+      ]
+    },
+    {
+      "type": "sprites",
+      "target": "Wight",
+      "images": [
+        "pool/monsters/eob1_disbeast/0.png",
+        "pool/monsters/eob1_disbeast/1.png",
+        "pool/monsters/eob1_disbeast/2.png",
+        "pool/monsters/eob1_disbeast/3.png",
+        "pool/monsters/eob1_disbeast/4.png",
+        "pool/monsters/eob1_disbeast/5.png"
+      ]
+    },
+    {
+      "type": "sprites",
+      "target": "Shadewiz",
+      "images": [
+        "pool/monsters/eob1_mflayer/0.png",
+        "pool/monsters/eob1_mflayer/1.png",
+        "pool/monsters/eob1_mflayer/2.png",
+        "pool/monsters/eob1_mflayer/3.png",
+        "pool/monsters/eob1_mflayer/4.png",
+        "pool/monsters/eob1_mflayer/5.png"
+      ]
+    },
+    {
+      "type": "sprites",
+      "target": "Wererat",
+      "images": [
+        "pool/monsters/eob1_hellhound/0.png",
+        "pool/monsters/eob1_hellhound/1.png",
+        "pool/monsters/eob1_hellhound/2.png",
+        "pool/monsters/eob1_hellhound/3.png",
+        "pool/monsters/eob1_hellhound/4.png",
+        "pool/monsters/eob1_hellhound/5.png"
+      ]
+    },
+    {
+      "type": "raw",
+      "target": "DOOR 00",
+      "file": "pool/sounds/raw/stdoor1.raw",
+      "comment": "Heavy stone door slide"
+    },
+    {
+      "type": "raw",
+      "target": "S-DOOR",
+      "file": "pool/sounds/raw/stdoor1.raw",
+      "comment": "Stone secret door slide"
+    },
+    {
+      "type": "raw",
+      "target": "DOOR 01",
+      "file": "pool/sounds/raw/wddoor1.raw",
+      "comment": "Heavy wood door creak & open"
+    },
+    {
+      "type": "raw",
+      "target": "DOOR 02",
+      "file": "pool/sounds/raw/wddoor2.raw",
+      "comment": "Heavy wood door latch & close"
+    },
+    {
+      "type": "raw",
+      "target": "S-LEVER",
+      "file": "pool/sounds/raw/wdlever.raw",
+      "comment": "Iron mechanism lever clunk"
+    },
+    {
+      "type": "raw",
+      "target": "S-LOCK",
+      "file": "pool/sounds/raw/d-lock2.raw",
+      "comment": "Lock tumblers turning"
+    }
+  ]
+}

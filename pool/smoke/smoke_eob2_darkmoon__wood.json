@@ -1,0 +1,241 @@
+{
+ "comment": "SMOKE VARIANT (test only)",
+ "jobs": [
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Wood Wallset": [
+     15,
+     16,
+     17,
+     18,
+     19,
+     20
+    ]
+   }
+  },
+  {
+   "type": "panels",
+   "target": "Wood Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum walls",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum skull door",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-06",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum skull door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum Star Trek(TM) door",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-07",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum Star Trek(TM) door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Stairs",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum stairs down",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Stairs",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum stairs up",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "sprites",
+   "target": "Wererat",
+   "images": [
+    "pool/monsters/eob2_wolf/0.png",
+    "pool/monsters/eob2_wolf/1.png",
+    "pool/monsters/eob2_wolf/2.png",
+    "pool/monsters/eob2_wolf/3.png",
+    "pool/monsters/eob2_wolf/4.png",
+    "pool/monsters/eob2_wolf/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Gargoyle",
+   "images": [
+    "pool/monsters/eob3_feyr/0.png",
+    "pool/monsters/eob3_feyr/1.png",
+    "pool/monsters/eob3_feyr/2.png",
+    "pool/monsters/eob3_feyr/3.png",
+    "pool/monsters/eob3_feyr/4.png",
+    "pool/monsters/eob3_feyr/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Knight",
+   "images": [
+    "pool/monsters/eob3_death_knight/0.png",
+    "pool/monsters/eob3_death_knight/1.png",
+    "pool/monsters/eob3_death_knight/2.png",
+    "pool/monsters/eob3_death_knight/3.png",
+    "pool/monsters/eob3_death_knight/4.png",
+    "pool/monsters/eob3_death_knight/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Spectre",
+   "images": [
+    "pool/monsters/eob3_sword_wraith/0.png",
+    "pool/monsters/eob3_sword_wraith/1.png",
+    "pool/monsters/eob3_sword_wraith/2.png",
+    "pool/monsters/eob3_sword_wraith/3.png",
+    "pool/monsters/eob3_sword_wraith/4.png",
+    "pool/monsters/eob3_sword_wraith/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Bonenaga",
+   "images": [
+    "pool/monsters/eob3_bone_naga/0.png",
+    "pool/monsters/eob3_bone_naga/1.png",
+    "pool/monsters/eob3_bone_naga/2.png",
+    "pool/monsters/eob3_bone_naga/3.png",
+    "pool/monsters/eob3_bone_naga/4.png",
+    "pool/monsters/eob3_bone_naga/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Mummy",
+   "images": [
+    "pool/monsters/eob3_wight/0.png",
+    "pool/monsters/eob3_wight/1.png",
+    "pool/monsters/eob3_wight/2.png",
+    "pool/monsters/eob3_wight/3.png",
+    "pool/monsters/eob3_wight/4.png",
+    "pool/monsters/eob3_wight/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Lich",
+   "images": [
+    "pool/monsters/eob3_lich/0.png",
+    "pool/monsters/eob3_lich/1.png",
+    "pool/monsters/eob3_lich/2.png",
+    "pool/monsters/eob3_lich/3.png",
+    "pool/monsters/eob3_lich/4.png",
+    "pool/monsters/eob3_lich/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadow",
+   "images": [
+    "pool/monsters/eob3_shadow/0.png",
+    "pool/monsters/eob3_shadow/1.png",
+    "pool/monsters/eob3_shadow/2.png",
+    "pool/monsters/eob3_shadow/3.png",
+    "pool/monsters/eob3_shadow/4.png",
+    "pool/monsters/eob3_shadow/5.png"
+   ]
+  },
+  {
+   "type": "raw",
+   "target": "DOOR 00",
+   "file": "pool/sounds/raw/stdoor1.raw",
+   "comment": "Heavy stone door slide"
+  },
+  {
+   "type": "raw",
+   "target": "S-DOOR",
+   "file": "pool/sounds/raw/stdoor1.raw",
+   "comment": "Stone secret door slide"
+  },
+  {
+   "type": "raw",
+   "target": "DOOR 01",
+   "file": "pool/sounds/raw/wddoor1.raw",
+   "comment": "Heavy wood door creak & open"
+  },
+  {
+   "type": "raw",
+   "target": "DOOR 02",
+   "file": "pool/sounds/raw/wddoor2.raw",
+   "comment": "Heavy wood door latch & close"
+  },
+  {
+   "type": "raw",
+   "target": "S-LEVER",
+   "file": "pool/sounds/raw/wdlever.raw",
+   "comment": "Iron mechanism lever clunk"
+  },
+  {
+   "type": "raw",
+   "target": "S-LOCK",
+   "file": "pool/sounds/raw/d-lock2.raw",
+   "comment": "Lock tumblers turning"
+  },
+  {
+   "type": "raw",
+   "target": "BONENAGA",
+   "file": "pool/sounds/raw/bonenag1.raw",
+   "comment": "Bone naga rattle"
+  },
+  {
+   "type": "raw",
+   "target": "FEYR",
+   "file": "pool/sounds/raw/feyr2.raw",
+   "comment": "Feyr screech"
+  },
+  {
+   "type": "raw",
+   "target": "WIGHT",
+   "file": "pool/sounds/raw/white1.raw",
+   "comment": "Wight wail"
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Wood Wallset",
+   "stairs": "Wood Stairs",
+   "floor": "Floor-0",
+   "palette": "wall/floor palette 15",
+   "door": "Door-06"
+  }
+ ]
+}

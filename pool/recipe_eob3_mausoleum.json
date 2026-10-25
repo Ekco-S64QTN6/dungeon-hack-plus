@@ -1,0 +1,82 @@
+{
+ "comment": "EOB3 Mausoleum complete port to Dungeon Hack",
+ "jobs": [
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Wood Wallset": [
+     15,
+     16,
+     17,
+     18,
+     19,
+     20
+    ]
+   }
+  },
+  {
+   "type": "panels",
+   "target": "Wood Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum walls",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum skull door",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-06",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum skull door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum Star Trek(TM) door",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-07",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum Star Trek(TM) door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Stairs",
+   "target_first": 0,
+   "count": 18,
+   "source": "Mausoleum stairs down",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Wood Stairs",
+   "target_first": 18,
+   "count": 18,
+   "source": "Mausoleum stairs up",
+   "source_first": 0,
+   "source_palette": "Mausoleum palette"
+  }
+ ]
+}

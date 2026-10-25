@@ -1,0 +1,300 @@
+{
+ "comment": "Bug 1 functional: pick up / put back the hand item 40x (lock shape / unlock shape), then step",
+ "fixture": "fixtures/savegame_nomon",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "shot": "a_before"
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.6,
+   "shot": "b_holding"
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.6,
+   "shot": "c_placed"
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "click": [
+    50,
+    101
+   ],
+   "settle": 0.5
+  },
+  {
+   "shot": "d_after40"
+  },
+  {
+   "forward": 1,
+   "shot": "e_moved"
+  }
+ ]
+}

@@ -1,0 +1,3 @@
+{"comment": "TEST: EOB2 DUNG hand-drawn walls (VMP positions) on Rock Wallset + Rock Stairs",
+ "jobs": [{"type": "vmp_walls", "target": "Rock Wallset", "game": "eob2", "set": "DUNG", "plain": [0, 1], "frame": 2,
+           "stairs": "Rock Stairs", "stairs_down": 4, "stairs_up": 3}]}

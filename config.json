@@ -1,0 +1,13 @@
+{
+  "root": ".",
+  "base_games_dir": "base_games",
+  "dh_install": "base_games/dungeon_hack",
+  "games": {
+    "dh":    {"engine": "aesop16",    "path": "base_games/dungeon_hack", "res": ["HACK.RES", "OPEN.RES"]},
+    "eob3":  {"engine": "aesop32",    "path": "base_games/eob3",         "res": ["EYE.RES"]},
+    "eob1":  {"engine": "westwood",   "path": "base_games/eob1",         "default_pal": "EOBPAL.COL"},
+    "eob2":  {"engine": "westwood",   "path": "base_games/eob2",         "default_pal": "DUNG.PAL"},
+    "menzo": {"engine": "dreamforge", "path": "base_games/menzo",        "iso": "GAME.ISO"}
+  },
+  "pcm_rate_guess": 8000
+}

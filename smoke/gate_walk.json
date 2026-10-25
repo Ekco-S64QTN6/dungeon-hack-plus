@@ -1,0 +1,8 @@
+{"comment": "Phase-1 gate walk: stairs up behind the start, then the door at (25,6) from depth 2 and 1.",
+ "fixture": "fixtures/savegame_nomon", "level": 0, "boot": 5,
+ "checkpoints": [
+  {"shot": "1_start"},
+  {"face": "S", "shot": "2_stairs_up"},
+  {"goto": [25, 4], "face": "S", "shot": "3_door_d2"},
+  {"forward": 1, "shot": "4_door_d1"}
+ ]}

@@ -1,0 +1,277 @@
+{
+ "comment": "SMOKE VARIANT (test only)",
+ "jobs": [
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Rock Wallset": [
+     1,
+     11,
+     6
+    ],
+    "Foil Wallset": [
+     5,
+     12,
+     2
+    ],
+    "Mine Wallset": [
+     3,
+     1,
+     11
+    ],
+    "Ice Wallset": [
+     10,
+     14,
+     7
+    ],
+    "Wood Wallset": [
+     6,
+     7,
+     1
+    ]
+   },
+   "wall_floors": {
+    "Rock Wallset": [
+     0
+    ],
+    "Foil Wallset": [
+     1
+    ],
+    "Mine Wallset": [
+     2
+    ],
+    "Ice Wallset": [
+     3
+    ],
+    "Wood Wallset": [
+     4
+    ],
+    "Stone Wallset": [
+     5,
+     6,
+     7
+    ],
+    "Marble Wallset": [
+     5,
+     7
+    ]
+   },
+   "floor_palettes": {
+    "0": [
+     1,
+     11,
+     6
+    ],
+    "1": [
+     5,
+     12,
+     2
+    ],
+    "2": [
+     3,
+     1,
+     11
+    ],
+    "3": [
+     10,
+     14,
+     7
+    ],
+    "4": [
+     6,
+     7,
+     1
+    ]
+   },
+   "allow_pairs": [
+    [
+     [
+      1,
+      11,
+      6
+     ],
+     [
+      1,
+      11,
+      6
+     ]
+    ],
+    [
+     [
+      5,
+      12,
+      2
+     ],
+     [
+      5,
+      12,
+      2
+     ]
+    ],
+    [
+     [
+      3,
+      1,
+      11
+     ],
+     [
+      3,
+      1,
+      11
+     ]
+    ],
+    [
+     [
+      10,
+      14,
+      7
+     ],
+     [
+      10,
+      14,
+      7
+     ]
+    ],
+    [
+     [
+      6,
+      7,
+      1
+     ],
+     [
+      6,
+      7,
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Rock Wallset",
+   "game": "eob2",
+   "set": "DUNG",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "DUNG",
+   "stairs": "Rock Stairs",
+   "stairs_set": "DUNG",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-0",
+   "image": "pool/floors/DUNG_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Foil Wallset",
+   "game": "eob2",
+   "set": "SILVER",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "SILVER",
+   "stairs": "Foil Stairs",
+   "stairs_set": "SILVER",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-1",
+   "image": "pool/floors/SILVER_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Mine Wallset",
+   "game": "eob2",
+   "set": "CRIMSON",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "CRIMSON",
+   "stairs": "Mine Stairs",
+   "stairs_set": "CRIMSON",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-2",
+   "image": "pool/floors/CRIMSON_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Ice Wallset",
+   "game": "eob2",
+   "set": "MEZZ",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "MEZZ",
+   "stairs": "Ice Stairs",
+   "stairs_set": "MEZZ",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-3",
+   "image": "pool/floors/MEZZ_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Wood Wallset",
+   "game": "eob2",
+   "set": "FOREST",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "DUNG",
+   "stairs": "Wood Stairs",
+   "stairs_set": "DUNG",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-4",
+   "image": "pool/floors/FOREST_backdrop.png"
+  },
+  {
+   "type": "sprites",
+   "target": "Goblin",
+   "images": [
+    "pool/monsters/eob2_wolf/0.png",
+    "pool/monsters/eob2_wolf/1.png",
+    "pool/monsters/eob2_wolf/2.png",
+    "pool/monsters/eob2_wolf/3.png",
+    "pool/monsters/eob2_wolf/4.png",
+    "pool/monsters/eob2_wolf/5.png"
+   ]
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Mine Wallset",
+   "stairs": "Mine Stairs",
+   "floor": "Floor-2",
+   "palette": "wall/floor palette 01",
+   "door": "Door-05"
+  }
+ ]
+}

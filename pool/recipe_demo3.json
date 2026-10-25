@@ -1,0 +1,86 @@
+{
+ "comment": "Demo 3 (CANDIDATE, unverified in game): demo2 + EOB3 marble stairs + EOB3 marble door (frame -> wallset object 1, 3 stages -> Door-05).",
+ "jobs": [
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Stone Wallset": [
+     2,
+     5,
+     8,
+     9,
+     12
+    ]
+   }
+  },
+  {
+   "type": "panels",
+   "target": "Stone Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble walls",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "wallset",
+   "target": "Wood Wallset",
+   "frames": "0-35",
+   "texture": "pool/walls/DUNG_wt0_front.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-0",
+   "image": "pool/floors/BLUE_backdrop.png"
+  },
+  {
+   "type": "sprites",
+   "target": "Goblin",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "panels",
+   "target": "Stone Stairs",
+   "target_first": 0,
+   "count": 18,
+   "source": "Marble stairs down",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Stone Stairs",
+   "target_first": 18,
+   "count": 18,
+   "source": "Marble stairs up",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Stone Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Marble door",
+   "source_first": 0,
+   "source_palette": "Marble palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-05",
+   "target_first": 0,
+   "count": 54,
+   "source": "Marble door",
+   "source_first": 18,
+   "source_palette": "Marble palette"
+  }
+ ]
+}

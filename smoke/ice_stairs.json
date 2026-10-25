@@ -1,0 +1,20 @@
+{
+ "comment": "Ice stairs-down seen at depth 3, 2, 1 (fixture moves start to (15,1), stairs down to (12,1))",
+ "fixture": "fixtures/savegame_ice",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "face": "W",
+   "shot": "d3"
+  },
+  {
+   "forward": 1,
+   "shot": "d2"
+  },
+  {
+   "forward": 1,
+   "shot": "d1"
+  }
+ ]
+}

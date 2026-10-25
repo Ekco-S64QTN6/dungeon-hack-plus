@@ -1,0 +1,14 @@
+{
+ "comment": "SMOKE (test only): FRE base",
+ "jobs": [
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Rock Wallset",
+   "stairs": "Rock Stairs",
+   "floor": "Floor-0",
+   "palette": "wall/floor palette 05",
+   "door": "Door-00"
+  }
+ ]
+}

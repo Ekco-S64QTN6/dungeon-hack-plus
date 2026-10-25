@@ -1,0 +1,15 @@
+{
+ "comment": "stairs down: fixture with start moved beside the down-stairs (11,3)",
+ "fixture": "fixtures/savegame_nomon_stairsdown",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "shot": "0_start"
+  },
+  {
+   "face": "W",
+   "shot": "6_stairs_down"
+  }
+ ]
+}

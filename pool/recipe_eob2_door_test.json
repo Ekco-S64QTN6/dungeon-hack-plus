@@ -1,0 +1,50 @@
+{
+ "comment": "TEST: all nine EOB2 door kinds",
+ "jobs": [
+  {
+   "type": "eob_door",
+   "target": "Door-00",
+   "kind": "e2_iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-02",
+   "kind": "e2_bars"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-03",
+   "kind": "e2_mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-04",
+   "kind": "e2_darkmoon"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-05",
+   "kind": "e2_vines"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-06",
+   "kind": "e2_cross"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-07",
+   "kind": "e2_silver"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-08",
+   "kind": "e2_wood"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-09",
+   "kind": "e2_glyph"
+  }
+ ]
+}

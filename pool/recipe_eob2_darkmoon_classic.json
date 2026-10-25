@@ -1,0 +1,892 @@
+{
+ "comment": "EOB2 Darkmoon (classic): hand-drawn Darkmoon dungeon, silver halls, crimson temple, Mezz towers and forest, each with its own floor and hue-matched palettes",
+ "jobs": [
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Rock Wallset": [
+     1,
+     11,
+     6
+    ],
+    "Foil Wallset": [
+     5,
+     12,
+     2
+    ],
+    "Mine Wallset": [
+     3,
+     1,
+     11
+    ],
+    "Ice Wallset": [
+     10,
+     14,
+     7
+    ],
+    "Wood Wallset": [
+     6,
+     7,
+     1
+    ]
+   },
+   "wall_floors": {
+    "Rock Wallset": [
+     0
+    ],
+    "Foil Wallset": [
+     1
+    ],
+    "Mine Wallset": [
+     2
+    ],
+    "Ice Wallset": [
+     3
+    ],
+    "Wood Wallset": [
+     4
+    ],
+    "Stone Wallset": [
+     5,
+     6,
+     7
+    ],
+    "Marble Wallset": [
+     5,
+     7
+    ]
+   },
+   "floor_palettes": {
+    "0": [
+     1,
+     11,
+     6
+    ],
+    "1": [
+     5,
+     12,
+     2
+    ],
+    "2": [
+     3,
+     1,
+     11
+    ],
+    "3": [
+     10,
+     14,
+     7
+    ],
+    "4": [
+     6,
+     7,
+     1
+    ]
+   },
+   "allow_pairs": [
+    [
+     [
+      1,
+      11,
+      6
+     ],
+     [
+      1,
+      11,
+      6
+     ]
+    ],
+    [
+     [
+      5,
+      12,
+      2
+     ],
+     [
+      5,
+      12,
+      2
+     ]
+    ],
+    [
+     [
+      3,
+      1,
+      11
+     ],
+     [
+      3,
+      1,
+      11
+     ]
+    ],
+    [
+     [
+      10,
+      14,
+      7
+     ],
+     [
+      10,
+      14,
+      7
+     ]
+    ],
+    [
+     [
+      6,
+      7,
+      1
+     ],
+     [
+      6,
+      7,
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "type": "fix_unlock_shape",
+   "target": "items"
+  },
+  {
+   "type": "fix_ice_stairs",
+   "target": "Ice Stairs"
+  },
+  {
+   "type": "reramp",
+   "target": "Rock"
+  },
+  {
+   "type": "reramp",
+   "target": "Foil"
+  },
+  {
+   "type": "reramp",
+   "target": "Mine"
+  },
+  {
+   "type": "reramp",
+   "target": "Ice"
+  },
+  {
+   "type": "reramp",
+   "target": "Wood"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Rock Wallset",
+   "game": "eob2",
+   "set": "DUNG",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "DUNG",
+   "stairs": "Rock Stairs",
+   "stairs_set": "DUNG",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-0",
+   "image": "pool/floors/DUNG_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Foil Wallset",
+   "game": "eob2",
+   "set": "SILVER",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "SILVER",
+   "stairs": "Foil Stairs",
+   "stairs_set": "SILVER",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-1",
+   "image": "pool/floors/SILVER_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Mine Wallset",
+   "game": "eob2",
+   "set": "CRIMSON",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "CRIMSON",
+   "stairs": "Mine Stairs",
+   "stairs_set": "CRIMSON",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-2",
+   "image": "pool/floors/CRIMSON_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Ice Wallset",
+   "game": "eob2",
+   "set": "MEZZ",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "MEZZ",
+   "stairs": "Ice Stairs",
+   "stairs_set": "MEZZ",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-3",
+   "image": "pool/floors/MEZZ_backdrop.png"
+  },
+  {
+   "type": "vmp_walls",
+   "target": "Wood Wallset",
+   "game": "eob2",
+   "set": "FOREST",
+   "plain": [
+    0,
+    1
+   ],
+   "frame": 2,
+   "frame_set": "DUNG",
+   "stairs": "Wood Stairs",
+   "stairs_set": "DUNG",
+   "stairs_down": 4,
+   "stairs_up": 3
+  },
+  {
+   "type": "floor",
+   "target": "Floor-4",
+   "image": "pool/floors/FOREST_backdrop.png"
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Rock decorations",
+   "wallset": "Rock Wallset",
+   "game": "eob2",
+   "set": "DUNG",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Foil decorations",
+   "wallset": "Foil Wallset",
+   "game": "eob2",
+   "set": "SILVER",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Mine decorations",
+   "wallset": "Mine Wallset",
+   "game": "eob2",
+   "set": "CRIMSON",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "vmp_deco",
+   "target": "Ice decorations",
+   "wallset": "Ice Wallset",
+   "game": "eob2",
+   "set": "MEZZ",
+   "deco": 5,
+   "base": 0
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-00",
+   "kind": "e2_iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-02",
+   "kind": "e2_bars"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-03",
+   "kind": "e2_darkmoon"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-04",
+   "kind": "e2_vines"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-05",
+   "kind": "e2_cross"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-06",
+   "kind": "e2_silver"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-07",
+   "kind": "e2_wood"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-08",
+   "kind": "e2_mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-09",
+   "kind": "e2_glyph"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-11",
+   "kind": "e2_iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-12",
+   "kind": "e2_bars"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-14",
+   "kind": "e2_darkmoon"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-15",
+   "kind": "e2_vines"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-16",
+   "kind": "e2_cross"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-17",
+   "kind": "e2_silver"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-18",
+   "kind": "e2_wood"
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 29",
+   "game": "eob2",
+   "sheet": "BROWN2.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 35
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 30",
+   "game": "eob2",
+   "sheet": "BROWN2.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 36
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 31",
+   "game": "eob2",
+   "sheet": "BROWN2.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 8
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 32",
+   "game": "eob2",
+   "sheet": "BROWN1.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 43
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 33",
+   "game": "eob2",
+   "sheet": "BROWN1.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 32
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 34",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 19
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 35",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 27
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 36",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 49
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 37",
+   "game": "eob2",
+   "sheet": "MEZZ1.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 2
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 38",
+   "game": "eob2",
+   "sheet": "MEZZ1.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 12
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 39",
+   "game": "eob2",
+   "sheet": "MEZZ1.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 6
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 40",
+   "game": "eob2",
+   "sheet": "MEZZ2.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 59
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 41",
+   "game": "eob2",
+   "sheet": "MEZZ2.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 44
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 42",
+   "game": "eob2",
+   "sheet": "SILVER1.CPS",
+   "dec": "SILVER.DEC",
+   "pal": "SILVER.PAL",
+   "index": 21
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 43",
+   "game": "eob2",
+   "sheet": "SILVER1.CPS",
+   "dec": "SILVER.DEC",
+   "pal": "SILVER.PAL",
+   "index": 7
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 44",
+   "game": "eob2",
+   "sheet": "SILVER1.CPS",
+   "dec": "SILVER.DEC",
+   "pal": "SILVER.PAL",
+   "index": 27
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 45",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 24
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 46",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 37
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 47",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 40
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 48",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 40
+  },
+  {
+   "type": "sprites",
+   "target": "Wererat",
+   "images": [
+    "pool/monsters/eob2_wolf/0.png",
+    "pool/monsters/eob2_wolf/1.png",
+    "pool/monsters/eob2_wolf/2.png",
+    "pool/monsters/eob2_wolf/3.png",
+    "pool/monsters/eob2_wolf/4.png",
+    "pool/monsters/eob2_wolf/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Goblin",
+   "images": [
+    "pool/monsters/eob2_ant/0.png",
+    "pool/monsters/eob2_ant/1.png",
+    "pool/monsters/eob2_ant/2.png",
+    "pool/monsters/eob2_ant/3.png",
+    "pool/monsters/eob2_ant/4.png",
+    "pool/monsters/eob2_ant/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Hobgob",
+   "images": [
+    "pool/monsters/eob2_guard2/0.png",
+    "pool/monsters/eob2_guard2/1.png",
+    "pool/monsters/eob2_guard2/2.png",
+    "pool/monsters/eob2_guard2/3.png",
+    "pool/monsters/eob2_guard2/4.png",
+    "pool/monsters/eob2_guard2/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Cocatric",
+   "images": [
+    "pool/monsters/eob2_basilisk/0.png",
+    "pool/monsters/eob2_basilisk/1.png",
+    "pool/monsters/eob2_basilisk/2.png",
+    "pool/monsters/eob2_basilisk/3.png",
+    "pool/monsters/eob2_basilisk/4.png",
+    "pool/monsters/eob2_basilisk/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Umberhul",
+   "images": [
+    "pool/monsters/eob2_bulette/0.png",
+    "pool/monsters/eob2_bulette/1.png",
+    "pool/monsters/eob2_bulette/2.png",
+    "pool/monsters/eob2_bulette/3.png",
+    "pool/monsters/eob2_bulette/4.png",
+    "pool/monsters/eob2_bulette/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Orc",
+   "images": [
+    "pool/monsters/eob2_cleric3/0.png",
+    "pool/monsters/eob2_cleric3/1.png",
+    "pool/monsters/eob2_cleric3/2.png",
+    "pool/monsters/eob2_cleric3/3.png",
+    "pool/monsters/eob2_cleric3/4.png",
+    "pool/monsters/eob2_cleric3/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Bugbear",
+   "images": [
+    "pool/monsters/eob2_cleric2/0.png",
+    "pool/monsters/eob2_cleric2/1.png",
+    "pool/monsters/eob2_cleric2/2.png",
+    "pool/monsters/eob2_cleric2/3.png",
+    "pool/monsters/eob2_cleric2/4.png",
+    "pool/monsters/eob2_cleric2/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Knight",
+   "images": [
+    "pool/monsters/eob2_cleric1/0.png",
+    "pool/monsters/eob2_cleric1/1.png",
+    "pool/monsters/eob2_cleric1/2.png",
+    "pool/monsters/eob2_cleric1/3.png",
+    "pool/monsters/eob2_cleric1/4.png",
+    "pool/monsters/eob2_cleric1/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ettin",
+   "images": [
+    "pool/monsters/eob2_frgiant/0.png",
+    "pool/monsters/eob2_frgiant/1.png",
+    "pool/monsters/eob2_frgiant/2.png",
+    "pool/monsters/eob2_frgiant/3.png",
+    "pool/monsters/eob2_frgiant/4.png",
+    "pool/monsters/eob2_frgiant/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ankheg",
+   "images": [
+    "pool/monsters/eob2_fsnake/0.png",
+    "pool/monsters/eob2_fsnake/1.png",
+    "pool/monsters/eob2_fsnake/2.png",
+    "pool/monsters/eob2_fsnake/3.png",
+    "pool/monsters/eob2_fsnake/4.png",
+    "pool/monsters/eob2_fsnake/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Gargoyle",
+   "images": [
+    "pool/monsters/eob2_gargoyle/0.png",
+    "pool/monsters/eob2_gargoyle/1.png",
+    "pool/monsters/eob2_gargoyle/2.png",
+    "pool/monsters/eob2_gargoyle/3.png",
+    "pool/monsters/eob2_gargoyle/4.png",
+    "pool/monsters/eob2_gargoyle/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Otyugh",
+   "images": [
+    "pool/monsters/eob2_gasspore/0.png",
+    "pool/monsters/eob2_gasspore/1.png",
+    "pool/monsters/eob2_gasspore/2.png",
+    "pool/monsters/eob2_gasspore/3.png",
+    "pool/monsters/eob2_gasspore/4.png",
+    "pool/monsters/eob2_gasspore/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Tanar'ri",
+   "images": [
+    "pool/monsters/eob2_guardian/0.png",
+    "pool/monsters/eob2_guardian/1.png",
+    "pool/monsters/eob2_guardian/2.png",
+    "pool/monsters/eob2_guardian/3.png",
+    "pool/monsters/eob2_guardian/4.png",
+    "pool/monsters/eob2_guardian/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadewiz",
+   "images": [
+    "pool/monsters/eob2_mage/0.png",
+    "pool/monsters/eob2_mage/1.png",
+    "pool/monsters/eob2_mage/2.png",
+    "pool/monsters/eob2_mage/3.png",
+    "pool/monsters/eob2_mage/4.png",
+    "pool/monsters/eob2_mage/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Xill",
+   "images": [
+    "pool/monsters/eob2_mantis/0.png",
+    "pool/monsters/eob2_mantis/1.png",
+    "pool/monsters/eob2_mantis/2.png",
+    "pool/monsters/eob2_mantis/3.png",
+    "pool/monsters/eob2_mantis/4.png",
+    "pool/monsters/eob2_mantis/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Grmedusa",
+   "images": [
+    "pool/monsters/eob2_medusa/0.png",
+    "pool/monsters/eob2_medusa/1.png",
+    "pool/monsters/eob2_medusa/2.png",
+    "pool/monsters/eob2_medusa/3.png",
+    "pool/monsters/eob2_medusa/4.png",
+    "pool/monsters/eob2_medusa/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Carrion",
+   "images": [
+    "pool/monsters/eob2_spider/0.png",
+    "pool/monsters/eob2_spider/1.png",
+    "pool/monsters/eob2_spider/2.png",
+    "pool/monsters/eob2_spider/3.png",
+    "pool/monsters/eob2_spider/4.png",
+    "pool/monsters/eob2_spider/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Gravmist",
+   "images": [
+    "pool/monsters/eob2_willowis/0.png",
+    "pool/monsters/eob2_willowis/1.png",
+    "pool/monsters/eob2_willowis/2.png",
+    "pool/monsters/eob2_willowis/3.png",
+    "pool/monsters/eob2_willowis/4.png",
+    "pool/monsters/eob2_willowis/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ghost",
+   "images": [
+    "pool/monsters/eob2_aservant/0.png",
+    "pool/monsters/eob2_aservant/1.png",
+    "pool/monsters/eob2_aservant/2.png",
+    "pool/monsters/eob2_aservant/3.png",
+    "pool/monsters/eob2_aservant/4.png",
+    "pool/monsters/eob2_aservant/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Morph",
+   "images": [
+    "pool/monsters/eob2_mindflay/0.png",
+    "pool/monsters/eob2_mindflay/1.png",
+    "pool/monsters/eob2_mindflay/2.png",
+    "pool/monsters/eob2_mindflay/3.png",
+    "pool/monsters/eob2_mindflay/4.png",
+    "pool/monsters/eob2_mindflay/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Darktent",
+   "images": [
+    "pool/monsters/eob2_beholder/0.png",
+    "pool/monsters/eob2_beholder/1.png",
+    "pool/monsters/eob2_beholder/2.png",
+    "pool/monsters/eob2_beholder/3.png",
+    "pool/monsters/eob2_beholder/4.png",
+    "pool/monsters/eob2_beholder/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Livmuck",
+   "images": [
+    "pool/monsters/eob2_cube/0.png",
+    "pool/monsters/eob2_cube/1.png",
+    "pool/monsters/eob2_cube/2.png",
+    "pool/monsters/eob2_cube/3.png",
+    "pool/monsters/eob2_cube/4.png",
+    "pool/monsters/eob2_cube/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wyvern",
+   "images": [
+    "pool/monsters/eob2_salamndr/0.png",
+    "pool/monsters/eob2_salamndr/1.png",
+    "pool/monsters/eob2_salamndr/2.png",
+    "pool/monsters/eob2_salamndr/3.png",
+    "pool/monsters/eob2_salamndr/4.png",
+    "pool/monsters/eob2_salamndr/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wight",
+   "images": [
+    "pool/monsters/eob2_skelwar/0.png",
+    "pool/monsters/eob2_skelwar/1.png",
+    "pool/monsters/eob2_skelwar/2.png",
+    "pool/monsters/eob2_skelwar/3.png",
+    "pool/monsters/eob2_skelwar/4.png",
+    "pool/monsters/eob2_skelwar/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Mummy",
+   "images": [
+    "pool/monsters/eob2_guard1/0.png",
+    "pool/monsters/eob2_guard1/1.png",
+    "pool/monsters/eob2_guard1/2.png",
+    "pool/monsters/eob2_guard1/3.png",
+    "pool/monsters/eob2_guard1/4.png",
+    "pool/monsters/eob2_guard1/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Watchght",
+   "images": [
+    "pool/monsters/eob2_wasp/0.png",
+    "pool/monsters/eob2_wasp/1.png",
+    "pool/monsters/eob2_wasp/2.png",
+    "pool/monsters/eob2_wasp/3.png",
+    "pool/monsters/eob2_wasp/4.png",
+    "pool/monsters/eob2_wasp/5.png"
+   ]
+  }
+ ]
+}

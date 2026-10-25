@@ -1,0 +1,12 @@
+{
+ "comment": "decorated wall (14,10) south face at depth 1",
+ "fixture": "fixtures/savegame_deco",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "face": "N",
+   "shot": "deco_d1"
+  }
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "comment": "EOB3 Ruins complete port to Dungeon Hack",
+ "jobs": [
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Rock Wallset": [
+     15,
+     16,
+     17,
+     18,
+     19,
+     20
+    ]
+   }
+  },
+  {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "target_first": 0,
+   "count": 18,
+   "source": "Ruins walls",
+   "source_first": 0,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Ruins wooden door",
+   "source_first": 0,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-08",
+   "target_first": 0,
+   "count": 54,
+   "source": "Ruins wooden door",
+   "source_first": 18,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "target_first": 18,
+   "count": 18,
+   "source": "Ruins crystal door",
+   "source_first": 0,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-09",
+   "target_first": 0,
+   "count": 54,
+   "source": "Ruins crystal door",
+   "source_first": 18,
+   "source_palette": "Ruins palette"
+  }
+ ]
+}

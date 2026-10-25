@@ -1,0 +1,14 @@
+{
+ "comment": "monster check: stay at start with monsters on, capture as one approaches",
+ "fixture": "fixtures/savegame",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "wait": 8,
+   "burst": 10,
+   "every": 2.0,
+   "prefix": "m"
+  }
+ ]
+}

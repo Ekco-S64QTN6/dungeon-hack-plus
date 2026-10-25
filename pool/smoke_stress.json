@@ -1,0 +1,780 @@
+{
+ "comment": "SMOKE VARIANT (test only) of recipe_stress.json",
+ "jobs": [
+  {
+   "type": "wallset",
+   "target": "Marble Wallset",
+   "frames": "0-235",
+   "texture": "pool/walls/BLUE_wt0_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Wood Wallset",
+   "frames": "0-235",
+   "texture": "pool/walls/BRICK_wt0_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Stone Wallset",
+   "frames": "0-235",
+   "texture": "pool/walls/DROW_wt0_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Foil Wallset",
+   "frames": "0-235",
+   "texture": "pool/walls/GREEN_wt0_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Ice Wallset",
+   "frames": "0-235",
+   "texture": "pool/walls/XANATHA_wt0_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Mine Wallset",
+   "frames": "0-235",
+   "texture": "pool/walls/CRIMSON_wt0_front.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Rock Wallset",
+   "frames": "0-235",
+   "texture": "pool/walls/DUNG_wt0_front.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-0",
+   "image": "pool/floors/BLUE_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-1",
+   "image": "pool/floors/BRICK_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-2",
+   "image": "pool/floors/DROW_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-3",
+   "image": "pool/floors/GREEN_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-4",
+   "image": "pool/floors/XANATHA_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-5",
+   "image": "pool/floors/CRIMSON_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-6",
+   "image": "pool/floors/DUNG_backdrop.png"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-7",
+   "image": "pool/floors/FOREST_backdrop.png"
+  },
+  {
+   "type": "sprites",
+   "target": "Ankheg",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Banshee",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Bldragon",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Bonenaga",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Bugbear",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Carrion",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Chimera",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Cocatric",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Darkgod",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Darktent",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Eelement",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Elelord",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ettin",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Feyr",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Gargoyle",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ghost",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ghoul",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Goblin",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Golem",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Gravmist",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Greenhag",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Grmedusa",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Hobgob",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Knight",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Lich",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Livmuck",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Meazel",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Minotaur",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Morph",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Mound",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Mummy",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Ogreslug",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Orc",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Otyugh",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Scaladar",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Sdwraith",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadewar",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadewiz",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shadow",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Shghoul",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Spectre",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Sprtnaga",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Stlshado",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Tanar'ri",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Tlincall",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Troglody",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Troll",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Umberhul",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Undbeast",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Watchght",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Weird",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Welement",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wererat",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wight",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wraith2",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Wyvern",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Xill",
+   "images": [
+    "pool/monsters/eob1_kobold/0.png",
+    "pool/monsters/eob1_kobold/3.png",
+    "pool/monsters/eob1_kobold/1.png",
+    "pool/monsters/eob1_kobold/2.png",
+    "pool/monsters/eob1_kobold/4.png",
+    "pool/monsters/eob1_kobold/5.png"
+   ]
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Stone Wallset",
+   "stairs": "Stone Stairs",
+   "floor": "Floor-0",
+   "palette": "wall/floor palette 02",
+   "door": "Door-05"
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "comment": "turns and a step before the monster arrives",
+ "seconds": 20,
+ "dos": [
+  "aesop hack phase-two"
+ ],
+ "autotype": "",
+ "steps": [
+  {
+   "at": 4,
+   "shot": "a_start"
+  },
+  {
+   "at": 4.5,
+   "key": "Left"
+  },
+  {
+   "at": 6,
+   "shot": "b_left"
+  },
+  {
+   "at": 6.5,
+   "key": "Right"
+  },
+  {
+   "at": 7.2,
+   "key": "Right"
+  },
+  {
+   "at": 8.7,
+   "shot": "c_right"
+  },
+  {
+   "at": 9.2,
+   "key": "Left"
+  },
+  {
+   "at": 9.8,
+   "key": "Up"
+  },
+  {
+   "at": 11.3,
+   "shot": "d_fwd"
+  }
+ ]
+}

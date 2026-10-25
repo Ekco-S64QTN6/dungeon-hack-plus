@@ -1,0 +1,14 @@
+{
+  "comment": "Demo: one asset per source engine. Paths are relative to mashup/. Frame orders must be confirmed in-game.",
+  "jobs": [
+    {"type": "wallset", "target": "Stone Wallset", "frames": "0-35",
+     "texture": "pool/walls/DUNG_wt0_front.png"},
+    {"type": "wallset", "target": "Wood Wallset", "frames": "0-35",
+     "texture": "work/dreamforge/RES4/0430_t05.png"},
+    {"type": "floor", "target": "Floor-0",
+     "image": "pool/floors/BLUE_backdrop.png"},
+    {"type": "sprites", "target": "Goblin",
+     "images": ["pool/monsters/eob1_kobold/0.png", "pool/monsters/eob1_kobold/3.png", "pool/monsters/eob1_kobold/1.png",
+                "pool/monsters/eob1_kobold/2.png", "pool/monsters/eob1_kobold/4.png", "pool/monsters/eob1_kobold/5.png"]}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+ "comment": "door stages: walk to depth 1, click the door, burst-capture the opening",
+ "fixture": "fixtures/savegame_nomon",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "goto": [
+    25,
+    5
+   ],
+   "face": "S",
+   "shot": "4_door_d1"
+  },
+  {
+   "click": [
+    226,
+    73
+   ],
+   "burst": 12,
+   "every": 0.0,
+   "prefix": "5_open"
+  }
+ ]
+}

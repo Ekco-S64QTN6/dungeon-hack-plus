@@ -1,0 +1,44 @@
+{
+ "comment": "SMOKE (test only): EOB1 web door",
+ "jobs": [
+  {
+   "type": "eob_door",
+   "target": "Door-05",
+   "kind": "iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-06",
+   "kind": "grate"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-07",
+   "kind": "slab"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-08",
+   "kind": "web"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-09",
+   "kind": "mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-11",
+   "kind": "eye"
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallset": "Stone Wallset",
+   "stairs": "Stone Stairs",
+   "floor": "Floor-0",
+   "palette": "wall/floor palette 02",
+   "door": "Door-08"
+  }
+ ]
+}

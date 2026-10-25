@@ -1,0 +1,74 @@
+{
+ "comment": "exploration: no input, screenshot every 4 s",
+ "seconds": 70,
+ "dos": [
+  "aesop hack phase-two"
+ ],
+ "autotype": "",
+ "steps": [
+  {
+   "at": 4,
+   "shot": "t04"
+  },
+  {
+   "at": 8,
+   "shot": "t08"
+  },
+  {
+   "at": 12,
+   "shot": "t12"
+  },
+  {
+   "at": 16,
+   "shot": "t16"
+  },
+  {
+   "at": 20,
+   "shot": "t20"
+  },
+  {
+   "at": 24,
+   "shot": "t24"
+  },
+  {
+   "at": 28,
+   "shot": "t28"
+  },
+  {
+   "at": 32,
+   "shot": "t32"
+  },
+  {
+   "at": 36,
+   "shot": "t36"
+  },
+  {
+   "at": 40,
+   "shot": "t40"
+  },
+  {
+   "at": 44,
+   "shot": "t44"
+  },
+  {
+   "at": 48,
+   "shot": "t48"
+  },
+  {
+   "at": 52,
+   "shot": "t52"
+  },
+  {
+   "at": 56,
+   "shot": "t56"
+  },
+  {
+   "at": 60,
+   "shot": "t60"
+  },
+  {
+   "at": 64,
+   "shot": "t64"
+  }
+ ]
+}

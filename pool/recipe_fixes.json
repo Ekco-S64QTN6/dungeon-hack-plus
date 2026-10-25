@@ -1,0 +1,13 @@
+{
+ "comment": "Engine/data fixes only: Bug 1 (items 'unlock shape' calls unlock_resource) + Ice Stairs depth-3 panel swap. Both verified in game.",
+ "jobs": [
+  {
+   "type": "fix_unlock_shape",
+   "target": "items"
+  },
+  {
+   "type": "fix_ice_stairs",
+   "target": "Ice Stairs"
+  }
+ ]
+}

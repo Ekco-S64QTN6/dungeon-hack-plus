@@ -1,0 +1,1 @@
+{"comment": "Bug 1 fix only: items \"unlock shape\" now calls C:unlock_resource", "jobs": [{"type": "fix_unlock_shape", "target": "items"}]}

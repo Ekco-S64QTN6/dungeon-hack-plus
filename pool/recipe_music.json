@@ -1,0 +1,54 @@
+{
+  "comment": "Orchestral music replacement: swaps Dungeon Hack intro/ending music with epic EOB3 XMIDI suites",
+  "jobs": [
+    {
+      "type": "xmidi",
+      "res": "OPEN.RES",
+      "target": "Music Scene One Roland",
+      "source": "FORTR",
+      "comment": "EOB3 Myth Drannor Forest Theme (Roland MT-32)"
+    },
+    {
+      "type": "xmidi",
+      "res": "OPEN.RES",
+      "target": "Music Scene One Adlib",
+      "source": "FORAD",
+      "comment": "EOB3 Myth Drannor Forest Theme (AdLib FM)"
+    },
+    {
+      "type": "xmidi",
+      "res": "OPEN.RES",
+      "target": "Music Scene One Pc",
+      "source": "FORPC",
+      "comment": "EOB3 Myth Drannor Forest Theme (PC Speaker)"
+    },
+    {
+      "type": "xmidi",
+      "res": "OPEN.RES",
+      "target": "Music Scene Two Roland",
+      "source": "MAUS",
+      "comment": "EOB3 Mausoleum Crypt Theme (Roland MT-32)"
+    },
+    {
+      "type": "xmidi",
+      "res": "OPEN.RES",
+      "target": "Music Scene Two Adlib/Pc",
+      "source": "MAUAD",
+      "comment": "EOB3 Mausoleum Crypt Theme (AdLib FM)"
+    },
+    {
+      "type": "xmidi",
+      "res": "OPEN.RES",
+      "target": "Music End Roland",
+      "source": "CHGE",
+      "comment": "EOB3 Heroic Finale Theme (Roland MT-32)"
+    },
+    {
+      "type": "xmidi",
+      "res": "OPEN.RES",
+      "target": "Music End Adlib/Pc",
+      "source": "CHGEA",
+      "comment": "EOB3 Heroic Finale Theme (AdLib FM)"
+    }
+  ]
+}

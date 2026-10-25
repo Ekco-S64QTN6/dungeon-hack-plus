@@ -1,0 +1,35 @@
+{
+ "comment": "TEST: all six EOB1 door kinds",
+ "jobs": [
+  {
+   "type": "eob_door",
+   "target": "Door-05",
+   "kind": "iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-06",
+   "kind": "grate"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-07",
+   "kind": "slab"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-08",
+   "kind": "web"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-09",
+   "kind": "mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-11",
+   "kind": "eye"
+  }
+ ]
+}

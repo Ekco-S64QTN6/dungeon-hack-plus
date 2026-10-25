@@ -1,0 +1,23 @@
+{
+ "comment": "EOB3 Temple (Doors Only) complete port to Dungeon Hack",
+ "jobs": [
+  {
+   "type": "panels",
+   "target": "Door-11",
+   "target_first": 0,
+   "count": 54,
+   "source": "Temple gold door",
+   "source_first": 18,
+   "source_palette": "Fixed palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-18",
+   "target_first": 0,
+   "count": 54,
+   "source": "Temple mask door",
+   "source_first": 18,
+   "source_palette": "Fixed palette"
+  }
+ ]
+}

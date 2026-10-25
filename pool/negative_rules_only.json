@@ -1,0 +1,2 @@
+{"comment": "NEGATIVE CONTROL: re-pairs Stone to single ramps but keeps DH's original two-ramp Stone art. verify must FAIL.",
+ "jobs": [{"type": "palette_rules", "target": "kernel", "wall_palettes": {"Stone Wallset": [2, 5, 8, 9, 12]}}]}
