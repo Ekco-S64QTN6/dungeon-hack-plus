@@ -38,7 +38,7 @@ class Game:
         smoke.FIXTURE = os.path.join(os.path.dirname(HERE), fixture)
         self.dir = smoke.stage(name)
         self.proc, _ = smoke.dosbox(self.dir, ['aesop hack phase-two'], env, 0)
-        self.wid = smoke.window_id(env)
+        self.wid = smoke.window_id(env, self.proc.pid)
         self.tmp = tempfile.mkdtemp()
         self.templates = {d: np.asarray(Image.open(os.path.join(HERE, 'compass_%s.png' % d)).convert('L'), float)
                           for d in DIRS if os.path.exists(os.path.join(HERE, 'compass_%s.png' % d))}
@@ -169,7 +169,7 @@ def run(plan, name, env, outroot):
 
 if __name__ == '__main__':
     plan = json.load(open(sys.argv[1]))
-    x = subprocess.Popen(['Xvfb', smoke.DISPLAY, '-screen', '0', '1024x768x24'], stderr=subprocess.DEVNULL)
+    x = smoke.start_xvfb()
     env = dict(os.environ, DISPLAY=smoke.DISPLAY, SDL_VIDEODRIVER='x11', SDL_AUDIODRIVER='dummy')
     env.pop('WAYLAND_DISPLAY', None)
     outroot = os.path.join(smoke.RUNS, 'walks', os.path.splitext(os.path.basename(sys.argv[1]))[0])

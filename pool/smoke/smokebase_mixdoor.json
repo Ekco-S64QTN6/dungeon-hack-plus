@@ -1,0 +1,188 @@
+{
+ "comment": "SMOKE base: extensions only, door pinned to 20 (copy of Door-05)",
+ "jobs": [
+  {
+   "type": "extra_doors",
+   "count": 16,
+   "copy": "Door-05"
+  },
+  {
+   "type": "extra_wallset",
+   "copy": "Rock"
+  },
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Eighth Wallset": [
+     3,
+     0,
+     1
+    ],
+    "Wood Wallset": [
+     10,
+     7,
+     12
+    ],
+    "Ice Wallset": [
+     1,
+     11,
+     6
+    ],
+    "Marble Wallset": [
+     15,
+     16,
+     20
+    ],
+    "Stone Wallset": [
+     11,
+     6,
+     1
+    ],
+    "Mine Wallset": [
+     13,
+     11,
+     6
+    ]
+   },
+   "wall_floors": {
+    "Eighth Wallset": [
+     1
+    ],
+    "Wood Wallset": [
+     3
+    ],
+    "Ice Wallset": [
+     0
+    ],
+    "Marble Wallset": [
+     6
+    ],
+    "Stone Wallset": [
+     4
+    ],
+    "Mine Wallset": [
+     2
+    ],
+    "Foil Wallset": [
+     5,
+     7
+    ],
+    "Rock Wallset": [
+     7
+    ]
+   },
+   "floor_palettes": {
+    "1": [
+     3,
+     0,
+     1
+    ],
+    "3": [
+     10,
+     7,
+     12
+    ],
+    "0": [
+     1,
+     11,
+     6
+    ],
+    "6": [
+     15,
+     16,
+     20
+    ],
+    "4": [
+     11,
+     6,
+     1
+    ],
+    "2": [
+     13,
+     11,
+     6
+    ]
+   },
+   "allow_pairs": [
+    [
+     [
+      3,
+      0,
+      1
+     ],
+     [
+      3,
+      0,
+      1
+     ]
+    ],
+    [
+     [
+      10,
+      7,
+      12
+     ],
+     [
+      10,
+      7,
+      12
+     ]
+    ],
+    [
+     [
+      1,
+      11,
+      6
+     ],
+     [
+      1,
+      11,
+      6
+     ]
+    ],
+    [
+     [
+      15,
+      16,
+      20
+     ],
+     [
+      15,
+      16,
+      20
+     ]
+    ],
+    [
+     [
+      11,
+      6,
+      1
+     ],
+     [
+      11,
+      6,
+      1
+     ]
+    ],
+    [
+     [
+      13,
+      11,
+      6
+     ],
+     [
+      13,
+      11,
+      6
+     ]
+    ]
+   ]
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "doornum": 20
+  }
+ ]
+}

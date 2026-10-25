@@ -21,81 +21,112 @@
    "2": "eob1_green"
   },
   "doors": {
-   "Door-00": "eob1 iron",
-   "Door-02": "eob2 e2_glyph",
-   "Door-03": "eob2 e2_darkmoon",
-   "Door-04": "eob2 e2_bars",
-   "Door-05": "eob1 web",
-   "Door-06": "eob2 e2_cross",
-   "Door-07": "eob3 Door-18",
-   "Door-08": "eob3 Door-05",
-   "Door-09": "eob3 Door-11",
+   "Door-00": "eob2 e2_silver",
+   "Door-02": "eob1 slab",
+   "Door-03": "eob1 grate",
+   "Door-04": "eob3 Door-08",
+   "Door-05": "dh",
+   "Door-06": "dh",
+   "Door-07": "eob1 web",
+   "Door-08": "dh",
+   "Door-09": "dh",
    "Door-11": "dh",
-   "Door-12": "eob3 Door-06",
-   "Door-14": "eob3 Door-09",
-   "Door-15": "eob2 e2_mouth",
-   "Door-16": "eob2 e2_iron",
-   "Door-17": "eob3 Door-07",
-   "Door-18": "eob2 e2_vines"
+   "Door-12": "dh",
+   "Door-14": "eob2 e2_bars",
+   "Door-15": "dh",
+   "Door-16": "dh",
+   "Door-17": "dh",
+   "Door-18": "dh",
+   "Extra Door 00": "eob1 iron",
+   "Extra Door 01": "eob2 e2_glyph",
+   "Extra Door 02": "eob2 e2_darkmoon",
+   "Extra Door 03": "eob2 e2_cross",
+   "Extra Door 04": "eob3 Door-18",
+   "Extra Door 05": "eob3 Door-05",
+   "Extra Door 06": "eob3 Door-11",
+   "Extra Door 07": "eob3 Door-06",
+   "Extra Door 08": "eob3 Door-09",
+   "Extra Door 09": "eob2 e2_mouth",
+   "Extra Door 10": "eob2 e2_iron",
+   "Extra Door 11": "eob3 Door-07",
+   "Extra Door 12": "eob2 e2_vines",
+   "Extra Door 13": "eob1 eye",
+   "Extra Door 14": "eob2 e2_wood",
+   "Extra Door 15": "eob1 mouth"
   },
   "generic_decos": {
-   "Wall Deco 29": "eob2 MEZZ1 #6",
-   "Wall Deco 30": "eob2 AZURE1 #49",
-   "Wall Deco 31": "eob2 AZURE1 #40",
-   "Wall Deco 32": "eob2 SILVER1 #27",
+   "Wall Deco 29": "eob2 MEZZ2 #59",
+   "Wall Deco 30": "eob2 BROWN2 #36",
+   "Wall Deco 31": "eob2 AZURE1 #19",
+   "Wall Deco 32": "dh",
    "Wall Deco 33": "dh",
-   "Wall Deco 34": "dh",
-   "Wall Deco 35": "eob2 BROWN2 #35",
-   "Wall Deco 36": "eob2 BROWN1 #43",
-   "Wall Deco 37": "eob2 SILVER1 #7",
-   "Wall Deco 38": "eob2 MEZZ2 #44",
-   "Wall Deco 39": "dh",
-   "Wall Deco 40": "eob2 MEZZ1 #12",
-   "Wall Deco 41": "eob2 CRIMSON #37",
-   "Wall Deco 42": "eob2 AZURE1 #27",
-   "Wall Deco 43": "eob2 SILVER1 #21",
-   "Wall Deco 44": "eob2 CRIMSON #40",
-   "Wall Deco 45": "dh",
-   "Wall Deco 46": "eob1 BLUE #7",
-   "Wall Deco 47": "eob2 BROWN2 #36",
-   "Wall Deco 48": "eob1 DROW #14"
+   "Wall Deco 34": "eob2 CRIMSON #40",
+   "Wall Deco 35": "eob2 SILVER1 #27",
+   "Wall Deco 36": "dh",
+   "Wall Deco 37": "eob2 CRIMSON #24",
+   "Wall Deco 38": "eob2 MEZZ1 #2",
+   "Wall Deco 39": "eob2 BROWN1 #43",
+   "Wall Deco 40": "eob1 BLUE #7",
+   "Wall Deco 41": "eob2 AZURE1 #49",
+   "Wall Deco 42": "eob1 DROW #14",
+   "Wall Deco 43": "eob1 BLUE #10",
+   "Wall Deco 44": "eob2 BROWN1 #32",
+   "Wall Deco 45": "eob2 CRIMSON #37",
+   "Wall Deco 46": "eob1 DROW #27",
+   "Wall Deco 47": "dh",
+   "Wall Deco 48": "dh"
   },
   "monsters": {
    "Ankheg": "eob2_fsnake",
-   "Bugbear": "eob1_flind",
-   "Carrion": "eob2_spider",
+   "Bugbear": "eob2_cleric2",
+   "Carrion": "dh",
    "Cocatric": "dh",
-   "Darktent": "eob2_beholder",
+   "Darktent": "dh",
    "Ettin": "dh",
    "Gargoyle": "dh",
-   "Ghost": "eob2_aservant",
-   "Ghoul": "dh",
-   "Goblin": "eob1_kobold",
+   "Ghost": "dh",
+   "Ghoul": "eob1_zombie",
+   "Goblin": "eob2_ant",
    "Golem": "eob1_golem",
-   "Gravmist": "dh",
+   "Gravmist": "eob2_willowis",
    "Grmedusa": "eob2_medusa",
    "Hobgob": "eob1_kenku",
-   "Knight": "eob1_skelwar",
-   "Livmuck": "eob2_cube",
+   "Knight": "eob2_cleric1",
+   "Livmuck": "dh",
    "Morph": "eob1_mflayer",
    "Mummy": "dh",
    "Orc": "eob2_cleric3",
-   "Otyugh": "eob2_gasspore",
+   "Otyugh": "dh",
    "Shadewar": "eob1_drowelf",
-   "Shadewiz": "eob2_mage",
-   "Spectre": "dh",
-   "Tanar'ri": "dh",
+   "Shadewiz": "dh",
+   "Spectre": "eob1_mage",
+   "Tanar'ri": "eob2_guardian",
    "Troglody": "dh",
-   "Umberhul": "dh",
-   "Undbeast": "dh",
+   "Umberhul": "eob2_bulette",
+   "Undbeast": "eob1_disbeast",
    "Watchght": "eob2_wasp",
-   "Wererat": "dh",
-   "Wight": "eob2_skelwar",
+   "Wererat": "eob3_shadow_hound",
+   "Wight": "eob1_skeleton",
    "Wyvern": "dh",
-   "Xill": "dh"
+   "Xill": "eob2_mantis"
+  },
+  "music": {
+   "Marble": "menzo:27",
+   "Wood": "menzo:29",
+   "Stone": "menzo:26",
+   "Foil": "dh:Music End Roland",
+   "Ice": "menzo:29",
+   "Mine": "dh:Music Scene Two Roland",
+   "Rock": "dh:Music End Roland",
+   "Eighth": "menzo:29"
   }
  },
  "jobs": [
+  {
+   "type": "extra_doors",
+   "count": 16,
+   "copy": "Door-05"
+  },
   {
    "type": "extra_wallset",
    "copy": "Rock"
@@ -440,36 +471,60 @@
   {
    "type": "eob_door",
    "target": "Door-00",
-   "kind": "iron"
+   "kind": "e2_silver"
   },
   {
    "type": "eob_door",
    "target": "Door-02",
-   "kind": "e2_glyph"
+   "kind": "slab"
   },
   {
    "type": "eob_door",
    "target": "Door-03",
-   "kind": "e2_darkmoon"
+   "kind": "grate"
   },
   {
-   "type": "eob_door",
+   "type": "panels",
    "target": "Door-04",
-   "kind": "e2_bars"
+   "target_first": 0,
+   "count": 54,
+   "source": "Ruins wooden door",
+   "source_first": 18,
+   "source_palette": "Ruins palette"
   },
   {
    "type": "eob_door",
-   "target": "Door-05",
+   "target": "Door-07",
    "kind": "web"
   },
   {
    "type": "eob_door",
-   "target": "Door-06",
+   "target": "Door-14",
+   "kind": "e2_bars"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 00",
+   "kind": "iron"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 01",
+   "kind": "e2_glyph"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 02",
+   "kind": "e2_darkmoon"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 03",
    "kind": "e2_cross"
   },
   {
    "type": "panels",
-   "target": "Door-07",
+   "target": "Extra Door 04",
    "target_first": 0,
    "count": 54,
    "source": "Temple mask door",
@@ -478,7 +533,7 @@
   },
   {
    "type": "panels",
-   "target": "Door-08",
+   "target": "Extra Door 05",
    "target_first": 0,
    "count": 54,
    "source": "Marble door",
@@ -487,7 +542,7 @@
   },
   {
    "type": "panels",
-   "target": "Door-09",
+   "target": "Extra Door 06",
    "target_first": 0,
    "count": 54,
    "source": "Temple gold door",
@@ -496,7 +551,7 @@
   },
   {
    "type": "panels",
-   "target": "Door-12",
+   "target": "Extra Door 07",
    "target_first": 0,
    "count": 54,
    "source": "Mausoleum skull door",
@@ -505,7 +560,7 @@
   },
   {
    "type": "panels",
-   "target": "Door-14",
+   "target": "Extra Door 08",
    "target_first": 0,
    "count": 54,
    "source": "Ruins crystal door",
@@ -514,17 +569,17 @@
   },
   {
    "type": "eob_door",
-   "target": "Door-15",
+   "target": "Extra Door 09",
    "kind": "e2_mouth"
   },
   {
    "type": "eob_door",
-   "target": "Door-16",
+   "target": "Extra Door 10",
    "kind": "e2_iron"
   },
   {
    "type": "panels",
-   "target": "Door-17",
+   "target": "Extra Door 11",
    "target_first": 0,
    "count": 54,
    "source": "Mausoleum Star Trek(TM) door",
@@ -533,138 +588,36 @@
   },
   {
    "type": "eob_door",
-   "target": "Door-18",
+   "target": "Extra Door 12",
    "kind": "e2_vines"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 13",
+   "kind": "eye"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 14",
+   "kind": "e2_wood"
+  },
+  {
+   "type": "eob_door",
+   "target": "Extra Door 15",
+   "kind": "mouth"
   },
   {
    "type": "eob_wall_deco",
    "target": "Wall Deco 29",
    "game": "eob2",
-   "sheet": "MEZZ1.CPS",
+   "sheet": "MEZZ2.CPS",
    "dec": "MEZZ.DEC",
    "pal": "MEZZ.PAL",
-   "index": 6
+   "index": 59
   },
   {
    "type": "eob_wall_deco",
    "target": "Wall Deco 30",
-   "game": "eob2",
-   "sheet": "AZURE1.CPS",
-   "dec": "AZURE.DEC",
-   "pal": "AZURE.PAL",
-   "index": 49
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 31",
-   "game": "eob2",
-   "sheet": "AZURE1.CPS",
-   "dec": "AZURE.DEC",
-   "pal": "AZURE.PAL",
-   "index": 40
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 32",
-   "game": "eob2",
-   "sheet": "SILVER1.CPS",
-   "dec": "SILVER.DEC",
-   "pal": "SILVER.PAL",
-   "index": 27
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 35",
-   "game": "eob2",
-   "sheet": "BROWN2.CPS",
-   "dec": "BROWN.DEC",
-   "pal": "DUNG.PAL",
-   "index": 35
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 36",
-   "game": "eob2",
-   "sheet": "BROWN1.CPS",
-   "dec": "BROWN.DEC",
-   "pal": "DUNG.PAL",
-   "index": 43
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 37",
-   "game": "eob2",
-   "sheet": "SILVER1.CPS",
-   "dec": "SILVER.DEC",
-   "pal": "SILVER.PAL",
-   "index": 7
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 38",
-   "game": "eob2",
-   "sheet": "MEZZ2.CPS",
-   "dec": "MEZZ.DEC",
-   "pal": "MEZZ.PAL",
-   "index": 44
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 40",
-   "game": "eob2",
-   "sheet": "MEZZ1.CPS",
-   "dec": "MEZZ.DEC",
-   "pal": "MEZZ.PAL",
-   "index": 12
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 41",
-   "game": "eob2",
-   "sheet": "CRIMSON.CPS",
-   "dec": "CRIMSON.DEC",
-   "pal": "CRIMSON.PAL",
-   "index": 37
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 42",
-   "game": "eob2",
-   "sheet": "AZURE1.CPS",
-   "dec": "AZURE.DEC",
-   "pal": "AZURE.PAL",
-   "index": 27
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 43",
-   "game": "eob2",
-   "sheet": "SILVER1.CPS",
-   "dec": "SILVER.DEC",
-   "pal": "SILVER.PAL",
-   "index": 21
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 44",
-   "game": "eob2",
-   "sheet": "CRIMSON.CPS",
-   "dec": "CRIMSON.DEC",
-   "pal": "CRIMSON.PAL",
-   "index": 40
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 46",
-   "game": "eob1",
-   "sheet": "BLUE.CPS",
-   "dec": "BLUE.DAT",
-   "pal": "BLUE.PAL",
-   "index": 7
-  },
-  {
-   "type": "eob_wall_deco",
-   "target": "Wall Deco 47",
    "game": "eob2",
    "sheet": "BROWN2.CPS",
    "dec": "BROWN.DEC",
@@ -673,12 +626,120 @@
   },
   {
    "type": "eob_wall_deco",
-   "target": "Wall Deco 48",
+   "target": "Wall Deco 31",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 19
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 34",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 40
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 35",
+   "game": "eob2",
+   "sheet": "SILVER1.CPS",
+   "dec": "SILVER.DEC",
+   "pal": "SILVER.PAL",
+   "index": 27
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 37",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 24
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 38",
+   "game": "eob2",
+   "sheet": "MEZZ1.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 2
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 39",
+   "game": "eob2",
+   "sheet": "BROWN1.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 43
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 40",
+   "game": "eob1",
+   "sheet": "BLUE.CPS",
+   "dec": "BLUE.DAT",
+   "pal": "BLUE.PAL",
+   "index": 7
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 41",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 49
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 42",
    "game": "eob1",
    "sheet": "DROW.CPS",
    "dec": "DROW.DAT",
    "pal": "DROW.PAL",
    "index": 14
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 43",
+   "game": "eob1",
+   "sheet": "BLUE.CPS",
+   "dec": "BLUE.DAT",
+   "pal": "BLUE.PAL",
+   "index": 10
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 44",
+   "game": "eob2",
+   "sheet": "BROWN1.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 32
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 45",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 37
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 46",
+   "game": "eob1",
+   "sheet": "DROW.CPS",
+   "dec": "DROW.DAT",
+   "pal": "DROW.PAL",
+   "index": 27
   },
   {
    "type": "sprites",
@@ -696,60 +757,36 @@
    "type": "sprites",
    "target": "Bugbear",
    "images": [
-    "pool/monsters/eob1_flind/0.png",
-    "pool/monsters/eob1_flind/1.png",
-    "pool/monsters/eob1_flind/2.png",
-    "pool/monsters/eob1_flind/3.png",
-    "pool/monsters/eob1_flind/4.png",
-    "pool/monsters/eob1_flind/5.png"
+    "pool/monsters/eob2_cleric2/0.png",
+    "pool/monsters/eob2_cleric2/1.png",
+    "pool/monsters/eob2_cleric2/2.png",
+    "pool/monsters/eob2_cleric2/3.png",
+    "pool/monsters/eob2_cleric2/4.png",
+    "pool/monsters/eob2_cleric2/5.png"
    ]
   },
   {
    "type": "sprites",
-   "target": "Carrion",
+   "target": "Ghoul",
    "images": [
-    "pool/monsters/eob2_spider/0.png",
-    "pool/monsters/eob2_spider/1.png",
-    "pool/monsters/eob2_spider/2.png",
-    "pool/monsters/eob2_spider/3.png",
-    "pool/monsters/eob2_spider/4.png",
-    "pool/monsters/eob2_spider/5.png"
-   ]
-  },
-  {
-   "type": "sprites",
-   "target": "Darktent",
-   "images": [
-    "pool/monsters/eob2_beholder/0.png",
-    "pool/monsters/eob2_beholder/1.png",
-    "pool/monsters/eob2_beholder/2.png",
-    "pool/monsters/eob2_beholder/3.png",
-    "pool/monsters/eob2_beholder/4.png",
-    "pool/monsters/eob2_beholder/5.png"
-   ]
-  },
-  {
-   "type": "sprites",
-   "target": "Ghost",
-   "images": [
-    "pool/monsters/eob2_aservant/0.png",
-    "pool/monsters/eob2_aservant/1.png",
-    "pool/monsters/eob2_aservant/2.png",
-    "pool/monsters/eob2_aservant/3.png",
-    "pool/monsters/eob2_aservant/4.png",
-    "pool/monsters/eob2_aservant/5.png"
+    "pool/monsters/eob1_zombie/0.png",
+    "pool/monsters/eob1_zombie/1.png",
+    "pool/monsters/eob1_zombie/2.png",
+    "pool/monsters/eob1_zombie/3.png",
+    "pool/monsters/eob1_zombie/4.png",
+    "pool/monsters/eob1_zombie/5.png"
    ]
   },
   {
    "type": "sprites",
    "target": "Goblin",
    "images": [
-    "pool/monsters/eob1_kobold/0.png",
-    "pool/monsters/eob1_kobold/1.png",
-    "pool/monsters/eob1_kobold/2.png",
-    "pool/monsters/eob1_kobold/3.png",
-    "pool/monsters/eob1_kobold/4.png",
-    "pool/monsters/eob1_kobold/5.png"
+    "pool/monsters/eob2_ant/0.png",
+    "pool/monsters/eob2_ant/1.png",
+    "pool/monsters/eob2_ant/2.png",
+    "pool/monsters/eob2_ant/3.png",
+    "pool/monsters/eob2_ant/4.png",
+    "pool/monsters/eob2_ant/5.png"
    ]
   },
   {
@@ -762,6 +799,18 @@
     "pool/monsters/eob1_golem/3.png",
     "pool/monsters/eob1_golem/4.png",
     "pool/monsters/eob1_golem/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Gravmist",
+   "images": [
+    "pool/monsters/eob2_willowis/0.png",
+    "pool/monsters/eob2_willowis/1.png",
+    "pool/monsters/eob2_willowis/2.png",
+    "pool/monsters/eob2_willowis/3.png",
+    "pool/monsters/eob2_willowis/4.png",
+    "pool/monsters/eob2_willowis/5.png"
    ]
   },
   {
@@ -792,24 +841,12 @@
    "type": "sprites",
    "target": "Knight",
    "images": [
-    "pool/monsters/eob1_skelwar/0.png",
-    "pool/monsters/eob1_skelwar/1.png",
-    "pool/monsters/eob1_skelwar/2.png",
-    "pool/monsters/eob1_skelwar/3.png",
-    "pool/monsters/eob1_skelwar/4.png",
-    "pool/monsters/eob1_skelwar/5.png"
-   ]
-  },
-  {
-   "type": "sprites",
-   "target": "Livmuck",
-   "images": [
-    "pool/monsters/eob2_cube/0.png",
-    "pool/monsters/eob2_cube/1.png",
-    "pool/monsters/eob2_cube/2.png",
-    "pool/monsters/eob2_cube/3.png",
-    "pool/monsters/eob2_cube/4.png",
-    "pool/monsters/eob2_cube/5.png"
+    "pool/monsters/eob2_cleric1/0.png",
+    "pool/monsters/eob2_cleric1/1.png",
+    "pool/monsters/eob2_cleric1/2.png",
+    "pool/monsters/eob2_cleric1/3.png",
+    "pool/monsters/eob2_cleric1/4.png",
+    "pool/monsters/eob2_cleric1/5.png"
    ]
   },
   {
@@ -838,18 +875,6 @@
   },
   {
    "type": "sprites",
-   "target": "Otyugh",
-   "images": [
-    "pool/monsters/eob2_gasspore/0.png",
-    "pool/monsters/eob2_gasspore/1.png",
-    "pool/monsters/eob2_gasspore/2.png",
-    "pool/monsters/eob2_gasspore/3.png",
-    "pool/monsters/eob2_gasspore/4.png",
-    "pool/monsters/eob2_gasspore/5.png"
-   ]
-  },
-  {
-   "type": "sprites",
    "target": "Shadewar",
    "images": [
     "pool/monsters/eob1_drowelf/0.png",
@@ -862,14 +887,50 @@
   },
   {
    "type": "sprites",
-   "target": "Shadewiz",
+   "target": "Spectre",
    "images": [
-    "pool/monsters/eob2_mage/0.png",
-    "pool/monsters/eob2_mage/1.png",
-    "pool/monsters/eob2_mage/2.png",
-    "pool/monsters/eob2_mage/3.png",
-    "pool/monsters/eob2_mage/4.png",
-    "pool/monsters/eob2_mage/5.png"
+    "pool/monsters/eob1_mage/0.png",
+    "pool/monsters/eob1_mage/1.png",
+    "pool/monsters/eob1_mage/2.png",
+    "pool/monsters/eob1_mage/3.png",
+    "pool/monsters/eob1_mage/4.png",
+    "pool/monsters/eob1_mage/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Tanar'ri",
+   "images": [
+    "pool/monsters/eob2_guardian/0.png",
+    "pool/monsters/eob2_guardian/1.png",
+    "pool/monsters/eob2_guardian/2.png",
+    "pool/monsters/eob2_guardian/3.png",
+    "pool/monsters/eob2_guardian/4.png",
+    "pool/monsters/eob2_guardian/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Umberhul",
+   "images": [
+    "pool/monsters/eob2_bulette/0.png",
+    "pool/monsters/eob2_bulette/1.png",
+    "pool/monsters/eob2_bulette/2.png",
+    "pool/monsters/eob2_bulette/3.png",
+    "pool/monsters/eob2_bulette/4.png",
+    "pool/monsters/eob2_bulette/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Undbeast",
+   "images": [
+    "pool/monsters/eob1_disbeast/0.png",
+    "pool/monsters/eob1_disbeast/1.png",
+    "pool/monsters/eob1_disbeast/2.png",
+    "pool/monsters/eob1_disbeast/3.png",
+    "pool/monsters/eob1_disbeast/4.png",
+    "pool/monsters/eob1_disbeast/5.png"
    ]
   },
   {
@@ -886,15 +947,76 @@
   },
   {
    "type": "sprites",
+   "target": "Wererat",
+   "images": [
+    "pool/monsters/eob3_shadow_hound/0.png",
+    "pool/monsters/eob3_shadow_hound/1.png",
+    "pool/monsters/eob3_shadow_hound/2.png",
+    "pool/monsters/eob3_shadow_hound/3.png",
+    "pool/monsters/eob3_shadow_hound/4.png",
+    "pool/monsters/eob3_shadow_hound/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
    "target": "Wight",
    "images": [
-    "pool/monsters/eob2_skelwar/0.png",
-    "pool/monsters/eob2_skelwar/1.png",
-    "pool/monsters/eob2_skelwar/2.png",
-    "pool/monsters/eob2_skelwar/3.png",
-    "pool/monsters/eob2_skelwar/4.png",
-    "pool/monsters/eob2_skelwar/5.png"
+    "pool/monsters/eob1_skeleton/0.png",
+    "pool/monsters/eob1_skeleton/1.png",
+    "pool/monsters/eob1_skeleton/2.png",
+    "pool/monsters/eob1_skeleton/3.png",
+    "pool/monsters/eob1_skeleton/4.png",
+    "pool/monsters/eob1_skeleton/5.png"
    ]
+  },
+  {
+   "type": "sprites",
+   "target": "Xill",
+   "images": [
+    "pool/monsters/eob2_mantis/0.png",
+    "pool/monsters/eob2_mantis/1.png",
+    "pool/monsters/eob2_mantis/2.png",
+    "pool/monsters/eob2_mantis/3.png",
+    "pool/monsters/eob2_mantis/4.png",
+    "pool/monsters/eob2_mantis/5.png"
+   ]
+  },
+  {
+   "type": "game_music",
+   "tracks": {
+    "Marble": {
+     "la": "menzo:27",
+     "ad": "dh:Music Scene One Adlib"
+    },
+    "Wood": {
+     "la": "menzo:29",
+     "ad": "dh:Music End Adlib/Pc"
+    },
+    "Stone": {
+     "la": "menzo:26",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    },
+    "Foil": {
+     "la": "dh:Music End Roland",
+     "ad": "dh:Music End Adlib/Pc"
+    },
+    "Ice": {
+     "la": "menzo:29",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    },
+    "Mine": {
+     "la": "dh:Music Scene Two Roland",
+     "ad": "dh:Music Scene Two Adlib/Pc"
+    },
+    "Rock": {
+     "la": "dh:Music End Roland",
+     "ad": "dh:Music End Adlib/Pc"
+    },
+    "Eighth": {
+     "la": "menzo:29",
+     "ad": "dh:Music Scene One Adlib"
+    }
+   }
   },
   {
    "type": "raw",

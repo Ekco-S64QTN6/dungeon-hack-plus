@@ -1,0 +1,22 @@
+{
+ "comment": "TEST music: play constant track at enter",
+ "jobs": [
+  {
+   "type": "extra_wallset",
+   "copy": "Rock"
+  },
+  {
+   "type": "game_music",
+   "default": {
+    "la": "dh:Music Scene Two Roland",
+    "ad": "dh:Music Scene Two Adlib/Pc"
+   },
+   "tracks": {},
+   "hooks": [
+    "enter",
+    "enter_play",
+    "const"
+   ]
+  }
+ ]
+}

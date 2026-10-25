@@ -26,6 +26,7 @@ import dreamforge   # noqa: E402
 import kernel_rules  # noqa: E402
 import rtd           # noqa: E402
 import eob_decos     # noqa: E402
+import game_music    # noqa: E402
 import eob_doors     # noqa: E402
 import normalize    # noqa: E402
 import westwood     # noqa: E402
@@ -317,6 +318,11 @@ def job_force_graphics(r, job, pal):
     names = r.names(); idx = names['kernel']
     res = {k: names[v] for k, v in job.items() if k in kernel_rules.TABLES}
     r.replace(idx, kernel_rules.force(r.entry(idx)[2], **res))
+    if 'doornum' in job:            # same for the door pick (SHTC min; PUSH; SHTC count; ...)
+        k = bytearray(r.entry(idx)[2]); i = k.find(kernel_rules.RND_DOOR_TAIL)
+        assert k[i - 5:i - 3] == b'\x1d\x00' and k[i - 2] == 0x1d
+        k[i - 4] = job['doornum']; k[i - 1] = job['doornum'] + 1
+        r.replace(idx, bytes(k))
     if 'wallnum' in job:            # pin "randomize graphics" to rnd(n, n): exercises the real per-level path
         k = bytearray(r.entry(idx)[2]); i = k.find(kernel_rules.RND_WALL[2:])
         assert k[i - 5:i - 3] == b'\x1d\x00' and k[i - 2] == 0x1d     # SHTC 0; PUSH; SHTC n (min, count)
@@ -380,6 +386,106 @@ def job_panels(r, job, pal):
             continue
         dst[t] = (w, h, bytearray(lut[np.frombuffer(spx, np.uint8)].tobytes()), bytearray(smask))
     r.replace(idx, aesop.encode_shapes(dst))
+
+
+def add_runtime_import(r, code_name, func):
+    """Make runtime function `func` (e.g. 'C:load_music') callable from code resource `code_name`:
+    adds it to <code>.IMPT at the next free external-reference offset (the runtime sizes the
+    thunk from the IMPT entries; C entries are 4 bytes, variables 2) and returns that offset,
+    which is the RCRS operand. Returns the existing offset if it is already imported."""
+    impt_i = r.names()['%s.IMPT' % code_name]
+    H, chains = rtd.parse(r.entry(impt_i)[2])
+    ents = {t.decode(): v.decode() for _, c in chains for t, v in c}
+    if func in ents:
+        return int(ents[func].split(',')[0])
+    slot = sum(4 if t[0] == 'C' else 2 for t in ents if t[0] in 'CBWL')
+    assert slot == max(int(v.split(',')[0]) + (4 if t[0] == 'C' else 2) for t, v in ents.items() if t[0] in 'CBWL')
+    rtd.add(H, chains, func.encode(), str(slot).encode())
+    r.replace(impt_i, rtd.build(H, chains))
+    return slot
+
+
+def job_extra_doors(r, job, pal):
+    """ENGINE EXTENSION (kernel_rules.add_doors): more door types per game.
+
+    {"count": 16, "copy": "Door-05"}   (runs with the other engine extensions, before the art jobs)
+    Adds "Extra Door NN" resources (copies of `copy`, which later eob_door/panels jobs reskin) in free
+    directory slots and appends them to the kernel's door table; randomize then picks rnd(0..18+n).
+    New door numbers are ordinary blocking doors (see-through types are only 3/7/14/17).
+    """
+    names = r.names()
+    if 'Extra Door 00' in names:
+        return
+    src = names[job.get('copy', 'Door-05')]
+    _, attrib, payload = r.entry(src)
+    free = [i for i, p in enumerate(r.ptrs) if not p]
+    H, chains = rtd.parse(r.entry(0)[2])
+    added = []
+    for n, idx in enumerate(free[:job.get('count', 16)]):
+        r.replace(idx, payload, attrib=attrib)
+        r.data[r.blocks[idx // aesop.SLOTS] + 4 + idx % aesop.SLOTS] = r.data[r.blocks[src // aesop.SLOTS] + 4 + src % aesop.SLOTS]
+        name = 'Extra Door %02d' % n
+        rtd.add(H, chains, name.encode(), str(idx).encode())
+        ADDED[name] = job.get('copy', 'Door-05'); added.append(idx)
+    r.replace(0, rtd.build(H, chains)); r._names = None
+    ki = r.names()['kernel']
+    r.replace(ki, kernel_rules.add_doors(r.entry(ki)[2], added))
+    print('    added %d doors (%s ... %s); kernel picks rnd(0..%d)' % (len(added), added[0], added[-1], 18 + len(added)))
+
+
+def job_game_music(r, job, pal):
+    """In-game music (tools/game_music.py): each wallset plays its own track, looping.
+
+    {"tracks": {"Marble": {"la": "dh:Music Scene Two Roland", "ad": "dh:Music Scene Two Adlib/Pc"},
+                "Eighth": {"la": "menzo:31", "ad": "menzo:83"}, ...},
+     "default": {"la": ..., "ad": ...}}
+    Sources: "dh:<OPEN.RES name>", "menzo:<RES5 record>" or "eob3:<EYE.RES name>". la = MT-32/GM version,
+    ad = AdLib (also used for PC speaker). Runs after extra_wallset (tables cover every wallset).
+    """
+    n = r.names()
+    ki = n['kernel']
+    nw = kernel_rules.n_walls(r.entry(ki)[2])
+    menzo = {}
+
+    def load(spec):
+        kind, _, key = spec.partition(':')
+        if kind == 'dh':
+            o = aesop.ResFile(os.path.join(paths.get_dh_dir(), 'OPEN.RES'))
+            data = o.entry(o.names()[key])[2]
+        elif kind == 'eob3':
+            e3 = aesop.ResFile(os.path.join(gpath('eob3'), 'EYE.RES'))
+            data = e3.entry(e3.names()[key])[2]
+        elif kind == 'menzo':
+            if not menzo:
+                for rec, typ, flags, payload in dreamforge.records(os.path.join(gpath('menzo'), 'RES5')):
+                    if typ == 0x03:
+                        menzo[rec] = payload
+            data = menzo[int(key)]
+        else:
+            raise ValueError(spec)
+        data = game_music.single_sequence(data)
+        assert data[:4] == b'FORM' and len(data) <= game_music.MAX_TRACK, '%s: not an XMIDI track that fits the %d-byte buffer' % (spec, game_music.MAX_TRACK)
+        return data
+    added, free = {}, [i for i, p in enumerate(r.ptrs) if not p]
+    H, chains = rtd.parse(r.entry(0)[2])
+
+    def resource(spec):
+        if spec not in added:
+            idx = free.pop(0)
+            r.replace(idx, load(spec), attrib=r.entry(n['Music Scene One Roland'])[1] if 'Music Scene One Roland' in n else 0x10)
+            name = 'Game Music %d' % len(added)
+            rtd.add(H, chains, name.encode(), str(idx).encode())
+            ADDED[name] = None                    # new data, not a copy of an original resource
+            added[spec] = idx
+        return added[spec]
+    la, ad = [], []
+    for w in kernel_rules.WALLSETS[:nw]:
+        t = job['tracks'].get(w, job.get('default'))
+        la.append(resource(t['la'])); ad.append(resource(t['ad']))
+    r.replace(0, rtd.build(H, chains)); r._names = None
+    slots = {f: add_runtime_import(r, 'kernel', 'C:' + f) for f in ('load_music', 'play_sequence', 'sequence_playing')}
+    r.replace(ki, game_music.patch_kernel(r.entry(ki)[2], slots, la, ad, job.get('hooks', ('enter', 'setup', 'tick'))))
+    print('    in-game music: %d tracks for %d wallsets; imports %s' % (len(added), nw, slots))
 
 
 def job_fix_unlock_shape(r, job, pal):
@@ -776,7 +882,8 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'panels': job_panels, 'xmidi': job_xmidi, 'palette_rules': job_palette_rules, 'force_graphics': job_force_graphics,
         'vmp_walls': job_vmp_walls, 'fix_unlock_shape': job_fix_unlock_shape, 'fix_ice_stairs': job_fix_ice_stairs,
         'eob_door': job_eob_door, 'vmp_deco': job_vmp_deco,
-        'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset}
+        'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset,
+        'game_music': job_game_music, 'extra_doors': job_extra_doors}
 
 
 def cmd_build(recipe_path, name):
@@ -798,11 +905,11 @@ def cmd_build(recipe_path, name):
         print('  savegame:', note)
     for resname in ('HACK.RES', 'OPEN.RES'):
         jobs = [j for j in recipe['jobs'] if j.get('res', 'HACK.RES') == resname]
-        jobs.sort(key=lambda j: (j['type'] != 'extra_wallset', j['type'] != 'palette_rules', j['type'] == 'force_graphics'))  # engine extension, rules first; force last
+        jobs.sort(key=lambda j: (j['type'] not in ('extra_wallset', 'extra_doors'), j['type'] != 'palette_rules', j['type'] == 'force_graphics'))  # engine extensions, rules first; force last
         if resname == 'HACK.RES':   # every wallset whose palette rules change gets its leftover DH art re-ramped
             have = {j['target'] for j in jobs if j['type'] == 'reramp'}
             ruled = [w.split()[0] for j in jobs if j['type'] == 'palette_rules' for w in j.get('wall_palettes', {})]
-            n_rules = sum(j['type'] in ('palette_rules', 'extra_wallset') for j in jobs)
+            n_rules = sum(j['type'] in ('palette_rules', 'extra_wallset', 'extra_doors') for j in jobs)
             jobs[n_rules:n_rules] = [{'type': 'reramp', 'target': w} for w in dict.fromkeys(ruled) if w not in have]
         if not jobs:
             continue
@@ -874,12 +981,16 @@ def cmd_verify(name):
         mpath = os.path.join(dst, 'MASHUP_BUILD.json')
         manifest = json.load(open(mpath)) if os.path.exists(mpath) else {}
         fixes = set(manifest.get('layout_fixes', []))
-        added = {i: o.names().get(manifest.get('added', {}).get(names_r.get(i), '')) for i in r.indices()
-                 if i >= len(o.ptrs) or not o.ptrs[i]}
-        shape_err = [(i, 'added resource with no recorded source') for i, src_i in added.items() if src_i is None]
-        changed = [i for i in r.indices() if i in added or r.entry(i)[2] != o.entry(i)[2]]
+        recorded = manifest.get('added', {})
+        new_idx = [i for i in r.indices() if i >= len(o.ptrs) or not o.ptrs[i]]
+        shape_err = [(i, 'added resource not recorded in the manifest') for i in new_idx if names_r.get(i) not in recorded]
+        added = {i: o.names()[recorded[names_r[i]]] for i in new_idx if recorded.get(names_r.get(i))}   # copies
+        fresh = {i for i in new_idx if names_r.get(i) in recorded and not recorded[names_r[i]]}        # new data
+        changed = [i for i in r.indices() if i in new_idx or r.entry(i)[2] != o.entry(i)[2]]
         for i in changed:
             p = r.entry(i)[2]
+            if i in fresh:
+                continue
             if aesop.kind(p) == 'old_shapes':
                 try:
                     new = aesop.decode_shapes(p); old = aesop.decode_shapes(o.entry(added.get(i, i))[2])
@@ -888,7 +999,7 @@ def cmd_verify(name):
                         shape_err.append((i, 'frame count/size differs'))
                 except Exception as e:
                     shape_err.append((i, repr(e)))
-        grow = sum(len(r.entry(i)[2]) - len(o.entry(added.get(i, i))[2]) for i in changed)
+        grow = sum(len(r.entry(i)[2]) - (0 if i in fresh else len(o.entry(added.get(i, i))[2])) for i in changed)
         print('%s: %d changed, tbl mismatches %d, shape errors %s, payload growth %+d bytes, size %d'
               % (resname, len(changed), len(bad), shape_err or 'none', grow, len(r.data)))
         ok &= not bad and not shape_err

@@ -27,7 +27,7 @@ DOSBOX = os.path.join(HERE, 'third_party', 'dosbox-staging', 'dosbox')
 RUNS = os.path.join(HERE, 'smoke_runs')
 FIXTURE = os.path.join(HERE, 'fixtures', 'savegame')
 BASE_DIR = os.path.join(HERE, 'base_games', 'dungeon_hack')
-DISPLAY = ':77'
+DISPLAY = os.environ.get('SMOKE_DISPLAY', ':77')   # separate displays let runs go in parallel
 WIN = (640, 400)
 
 
@@ -46,15 +46,18 @@ def stage(name):
     return dst
 
 
-def dosbox(dir_, commands, env, seconds):
+def dosbox(dir_, commands, env, seconds, settings=()):
     args = [DOSBOX, '--noprimaryconf', '--nolocalconf', '--set', 'cpu_cycles=max',
+            *[a for kv in settings for a in ('--set', kv)],
             '--set', 'window_size=%dx%d' % WIN, '--set', 'shader=none', '--set', 'mouse_capture=seamless', '--set', 'capture_dir=%s' % os.path.join(dir_, 'capture'),
             '-c', 'mount c "%s"' % dir_, '-c', 'c:']
     for c in commands:
         args += ['-c', c]
     args += ['-c', 'exit']
     log = open(os.path.join(dir_, 'SMOKE_DOSBOX.LOG'), 'w')
-    return subprocess.Popen(args, env=env, stdout=log, stderr=subprocess.STDOUT), seconds
+    p = subprocess.Popen(args, env=env, stdout=log, stderr=subprocess.STDOUT)
+    _CHILDREN.append(p)
+    return p, seconds
 
 
 def cmd_boot(*names):
@@ -84,13 +87,57 @@ def need(tool):
         sys.exit('%s not found; install it first (Arch: sudo pacman -S xorg-server-xvfb xdotool imagemagick)' % tool)
 
 
-def window_id(env):
+def window_id(env, pid=None):
+    """The DOSBox window to drive. With `pid`, only that process's window (never another
+    harness's DOSBox); without, the class search must find exactly one."""
     for _ in range(50):
-        r = subprocess.run(['xdotool', 'search', '--class', 'dosbox'], env=env, capture_output=True, text=True)
-        if r.stdout.strip():
-            return r.stdout.split()[0]
+        cmd = ['xdotool', 'search', '--pid', str(pid)] if pid else ['xdotool', 'search', '--class', 'dosbox']
+        ids = subprocess.run(cmd, env=env, capture_output=True, text=True).stdout.split()
+        if pid and ids:
+            # SDL creates helper windows too; keep the one with the dosbox class
+            cls = set(subprocess.run(['xdotool', 'search', '--class', 'dosbox'], env=env, capture_output=True, text=True).stdout.split())
+            ids = [i for i in ids if i in cls] or ids
+            return ids[0]
+        if not pid and ids:
+            if len(ids) > 1:
+                raise RuntimeError('%d DOSBox windows on %s: another run is using this display' % (len(ids), env.get('DISPLAY')))
+            return ids[0]
         time.sleep(0.2)
     return None
+
+
+# Cleanup: every DOSBox/Xvfb a harness starts is killed when it exits, also under `timeout`
+# (SIGTERM would otherwise end Python without running finally blocks, leaving orphans that
+# keep a build folder mounted and a window on the shared display).
+import atexit, signal   # noqa: E402
+_CHILDREN = []
+
+
+def _cleanup():
+    for p in _CHILDREN:
+        if p.poll() is None:
+            p.kill()
+
+
+atexit.register(_cleanup)
+signal.signal(signal.SIGTERM, lambda *a: sys.exit(143))
+
+
+def start_xvfb(display=None, screen='1024x768x24'):
+    """Start a private Xvfb; refuse if a live one already holds the display (another harness)."""
+    display = display or DISPLAY
+    lock = '/tmp/.X%s-lock' % display.lstrip(':')
+    if os.path.exists(lock):
+        try:
+            pid = int(open(lock).read().strip())
+            os.kill(pid, 0)
+            raise RuntimeError('display %s is in use by Xvfb pid %d (another test run?)' % (display, pid))
+        except (ProcessLookupError, ValueError):
+            os.remove(lock)                                  # stale lock from a killed run
+    x = subprocess.Popen(['Xvfb', display, '-screen', '0', screen], stderr=subprocess.DEVNULL)
+    _CHILDREN.append(x)
+    time.sleep(1)
+    return x
 
 
 def run_steps(name, spec, env):
@@ -98,7 +145,7 @@ def run_steps(name, spec, env):
     shots = os.path.join(RUNS, 'shots', name); os.makedirs(shots, exist_ok=True)
     cmds = (['autotype ' + spec['autotype']] if spec.get('autotype') else []) + spec['dos']
     p, secs = dosbox(d, cmds, env, spec.get('seconds', 120))
-    t0 = time.time(); wid = window_id(env)
+    t0 = time.time(); wid = window_id(env, p.pid)
     for st in sorted(spec['steps'], key=lambda s: s['at']):
         time.sleep(max(0, st['at'] - (time.time() - t0)))
         if 'key' in st:                     # hold briefly: DH polls the keyboard and drops instant taps
@@ -119,7 +166,7 @@ def cmd_shots(steps_path, *names):
     for t in ('Xvfb', 'xdotool', 'import'):
         need(t)
     spec = json.load(open(steps_path))
-    xvfb = subprocess.Popen(['Xvfb', DISPLAY, '-screen', '0', '1024x768x24'])
+    xvfb = start_xvfb()
     env = dict(os.environ, DISPLAY=DISPLAY, SDL_VIDEODRIVER='x11', SDL_AUDIODRIVER='dummy')
     env.pop('WAYLAND_DISPLAY', None)
     try:

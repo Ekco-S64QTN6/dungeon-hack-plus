@@ -44,7 +44,7 @@ class Session:
                 '--set', 'cpu_cycles=max', '--set', 'mouse_capture=seamless', '--set', 'capture_dir=%s' % out,
                 '-c', 'mount c "%s"' % d, '-c', 'c:', '-c', command]
         self.p = subprocess.Popen(args, env=env, stdout=open(os.path.join(out, 'dosbox.log'), 'a'), stderr=subprocess.STDOUT)
-        self.wid = smoke.window_id(env)
+        self.wid = smoke.window_id(env, self.p.pid)
 
     def shot(self, name):
         path = os.path.join(self.out, name + '.png')
@@ -87,7 +87,7 @@ def main():
     open(os.path.join(d, 'MENU.BAT'), 'w').write(MENU_BAT.replace('\n', '\r\n'))
     out = os.path.join(smoke.RUNS, 'save_restore', a.build + ('_notemplate' if a.no_template else ''))
     shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
-    x = subprocess.Popen(['Xvfb', smoke.DISPLAY, '-screen', '0', '1600x1200x24'], stderr=subprocess.DEVNULL)
+    x = smoke.start_xvfb(screen='1600x1200x24')
     env = dict(os.environ, DISPLAY=smoke.DISPLAY, SDL_VIDEODRIVER='x11', SDL_AUDIODRIVER='dummy'); env.pop('WAYLAND_DISPLAY', None)
     results = []
     try:

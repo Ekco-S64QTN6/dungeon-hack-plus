@@ -54,7 +54,11 @@ def retarget(job, old_stem, new_stem):
     return j
 
 
-def roll(seed=1, external=5, picks=None, eighth=True):
+SEE_THROUGH_DOORS = {'grate', 'web', 'e2_bars'}
+EXTRA_DOORS = 16
+
+
+def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
     """picks: optional {DH slot: source id} to pin (tests); the rest of the roll is unchanged.
     eighth: add the 8th wallset (pipeline job extra_wallset) and always fill it with an external set."""
     rng = random.Random(seed)
@@ -144,15 +148,32 @@ def roll(seed=1, external=5, picks=None, eighth=True):
                              'game': game, 'set': vset, 'deco': 5, 'base': 0})
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s_backdrop.png' % vset})
 
-    # ---- doors: each of the 16 door slots keeps DH art (1 in 4) or takes an EOB door
+    # ---- doors (with extra_doors: 16 more door numbers). Every EOB door gets a slot: see-through
+    # kinds go to DH's see-through door numbers 3/7/14/17 (the doors script only lets those show
+    # what is behind them), the rest fill the new slots first; DH keeps its other original slots.
     door_pool = [('eob1', k) for k in ec.THEMES['eob1_waterdeep']['doors']] + \
                 [('eob2', k) for k in ec.THEMES['eob2_darkmoon_classic']['doors']] + [('eob3', d) for d in EOB3_DOORS]
     rng.shuffle(door_pool)
+    see_through = [d for d in door_pool if d[1] in SEE_THROUGH_DOORS]
+    solid = [d for d in door_pool if d[1] not in SEE_THROUGH_DOORS]
+    extra = ['Extra Door %02d' % n for n in range(EXTRA_DOORS)] if extra_doors else []
+    if extra:
+        jobs.insert(0, {'type': 'extra_doors', 'count': EXTRA_DOORS, 'copy': 'Door-05'})
+    assign = {}
+    for slot, d in zip(['Door-03', 'Door-07', 'Door-14', 'Door-17'], see_through):
+        assign[slot] = d
+    solid += see_through[4:]
+    for slot in extra + [s_ for s_ in ec.DH_DOORS if s_ not in assign]:
+        if not solid:
+            break
+        if slot in ec.DH_DOORS and not extra and rng.random() < 0.25:
+            continue                           # without extra slots, DH keeps about a quarter of its doors
+        assign[slot] = solid.pop()
     summary['doors'] = {}
-    for slot in ec.DH_DOORS:
-        if rng.random() < 0.25 or not door_pool:
+    for slot in ec.DH_DOORS + extra:
+        if slot not in assign:
             summary['doors'][slot] = 'dh'; continue
-        game, what = door_pool.pop()
+        game, what = assign[slot]
         summary['doors'][slot] = '%s %s' % (game, what)
         if game == 'eob3':
             jobs.append(dict(next(j for j in e3jobs if j['target'] == what), target=slot))
@@ -190,11 +211,35 @@ def roll(seed=1, external=5, picks=None, eighth=True):
         else:
             summary['monsters'][slot] = 'dh'
 
+    # ---- in-game music (tools/game_music.py): one track per wallset, looping. MT-32/GM versions come
+    # from every source whose tracks passed smoke/music_tracks.py (fits the buffer, no missing timbres,
+    # sounds); the AdLib version is always one of DH's own, the only tracks DH's timbre library covers
+    summary['music'] = {}
+    good = music_pool()
+    if good:
+        dh_ad = {'dh:Music Scene One Roland': 'dh:Music Scene One Adlib', 'dh:Music Scene Two Roland': 'dh:Music Scene Two Adlib/Pc',
+                 'dh:Music End Roland': 'dh:Music End Adlib/Pc'}
+        tracks = {}
+        for slot in SLOTS + (['Eighth'] if 'Eighth' in picks else []):
+            src = picks.get(slot, 'dh')
+            own = [t for t in good if t.split(':')[0] == src.split('_')[0]]
+            la = rng.choice(own or good)
+            tracks[slot] = {'la': la, 'ad': dh_ad.get(la) or rng.choice(sorted(dh_ad.values()))}
+            summary['music'][slot] = la
+        jobs.append({'type': 'game_music', 'tracks': tracks})
+
     # ---- audio: EOB3 sound effects and music (fixed, not rolled)
     for rec in ('recipe_sounds.json', 'recipe_music.json'):
         jobs += json.load(open(os.path.join(ROOT, 'pool', rec)))['jobs']
     return {'comment': 'Dungeon Hack+ mix, seed %d: graphics slots filled from DH, EOB1, EOB2, EOB3 (see "mix")' % seed,
             'mix': summary, 'jobs': jobs}
+
+
+def music_pool():
+    """Track specs that passed the in-game track test (tools/music_tracks.json, from smoke/music_tracks.py)."""
+    path = os.path.join(HERE, 'music_tracks.json')
+    res = json.load(open(path)) if os.path.exists(path) else {}
+    return sorted(t for t, v in res.items() if isinstance(v, float) and v >= 0.5)
 
 
 def ec_deco_slots(slot):
@@ -209,6 +254,8 @@ def describe(summary):
     lines += ['', 'Doors:'] + ['  %s  %s' % (k, v) for k, v in summary['doors'].items()]
     lines += ['', 'Generic decorations:'] + ['  %s  %s' % (k, v) for k, v in summary['generic_decos'].items()]
     lines += ['', 'Monsters:'] + ['  %-9s %s' % (k, v) for k, v in summary['monsters'].items()]
+    if summary.get('music'):
+        lines += ['', 'In-game music (per wallset):'] + ['  %-7s %s' % (k, v) for k, v in summary['music'].items()]
     return '\n'.join(lines) + '\n'
 
 

@@ -1,7 +1,7 @@
 # Dungeon Hack+
 
-A patcher for the 1993 roguelike **Dungeon Hack** that rebuilds its graphics, monsters and sound
-from its sister games: *Eye of the Beholder* I, II and III and (in progress) *Menzoberranzan*.
+A patcher for the 1993 roguelike **Dungeon Hack** that rebuilds its graphics, monsters, sound and
+music from its sister games: *Eye of the Beholder* I, II and III and *Menzoberranzan*.
 Start a new game and every dungeon level can be built from a different game's art: EOB1's
 Waterdeep sewers, EOB2's Darkmoon halls, EOB3's Myth Drannor ruins, or Dungeon Hack's own
 walls, with doors, decorations and monsters drawn from all of them.
@@ -15,12 +15,14 @@ everything is built from them into a separate `build/` folder; your installs are
 
 Dungeon Hack picks a level's look at new-game start from fixed slots: 7 wallsets (each with
 its own stairs, door frame and decorations), 8 floors, 21 colour palettes, 16 doors, 20
-generic wall decorations and its monster list. Dungeon Hack+ fills those slots from all the
-games:
+generic wall decorations and its monster list. Dungeon Hack+ patches the engine to pick from
+**8 wallsets**, and fills the slots from all the games:
 
 - **Wallsets**: hand-drawn EOB1/EOB2 walls are copied 1:1 from each view position
   (ScummVM's Kyra tables), EOB3 walls panel by panel. Each imported set gets its own floor
   (the set's own floor/ceiling backdrop) and palettes matched to its colours.
+- **Menzoberranzan walls**: texture strips warped onto every DH view panel, with floors and
+  ceilings projected from Menzo's flats using DH's own view geometry.
 - **Doors**: EOB1/EOB2 doors are cut from their door sheets and animated as DH's three door
   stages; EOB3 doors are converted directly.
 - **Decorations**: EOB1/EOB2 wall decorations are placed per view position exactly as EOB
@@ -28,8 +30,11 @@ games:
 - **Monsters**: EOB1/EOB2 monsters, using the exact frame layouts from the games' own level
   scripts. (30 of EOB3's 31 monsters already *are* Dungeon Hack's monsters; the Shadow Hound
   is the one new one.)
-- **Sound and music**: EOB3 sound effects at DH's 8 kHz rate, and EOB3 music for the intro and
-  ending.
+- **In-game music**: the original plays music only in the intro (it unloaded the music driver
+  during play to save memory). Dungeon Hack+ patches the engine to load it, play a track per
+  wallset and loop it: Dungeon Hack's own, Menzoberranzan's and EOB3's tracks, each vetted in
+  game. MT-32/General MIDI setups get the full pool; AdLib setups get DH's own tracks.
+- **Sound**: EOB3 sound effects at DH's 8 kHz rate, and EOB3 music for the intro and ending.
 - **Fixes**: a resource-cache leak in item handling, Ice stairs that were invisible from three
   squares away, and save/continue crashing on installs that lack GOG's savegame template.
 

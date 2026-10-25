@@ -48,7 +48,7 @@ def main():
     plan = json.load(open(plan_path))
     root = os.path.join(smoke.RUNS, 'gate' if base == 'smoke_base' else 'gate_' + base.replace('smokebase_', ''))
     shutil.rmtree(root, ignore_errors=True)
-    x = subprocess.Popen(['Xvfb', smoke.DISPLAY, '-screen', '0', '1024x768x24'], stderr=subprocess.DEVNULL)
+    x = smoke.start_xvfb()
     env = dict(os.environ, DISPLAY=smoke.DISPLAY, SDL_VIDEODRIVER='x11', SDL_AUDIODRIVER='dummy')
     env.pop('WAYLAND_DISPLAY', None)
     logs = {}

@@ -70,7 +70,8 @@ def test_config(build, eat_kb=0, xms=True, memsize=16, env=None):
     args += ['-c', 'exit']
 
     proc = subprocess.Popen(args, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    wid = find_window(env, timeout=8)
+    smoke._CHILDREN.append(proc)
+    wid = smoke.window_id(env, proc.pid)
     if not wid:
         proc.kill()
         return False, 'Failed: DOSBox window did not open (crashed on startup)'
@@ -153,8 +154,7 @@ def find_cliff(build, xms=True, env=None):
 
 
 def run_full_suite():
-    subprocess.run(['pkill', '-f', f'Xvfb {DISPLAY}'])
-    xvfb = subprocess.Popen(['Xvfb', DISPLAY, '-screen', '0', '1024x768x24'], stderr=subprocess.DEVNULL)
+    xvfb = smoke.start_xvfb(DISPLAY)
     env = dict(os.environ, DISPLAY=DISPLAY, SDL_VIDEODRIVER='x11', SDL_AUDIODRIVER='dummy')
     env.pop('WAYLAND_DISPLAY', None)
 

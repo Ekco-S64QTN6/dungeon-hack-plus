@@ -33,13 +33,13 @@ def locate(kernel):
     if p978 < 0 and len(kernel) - 64 * (n_walls(kernel) == 8) in KNOWN_KERNEL_SIZES:
         # anchor overwritten on purpose (test-only force_graphics); all known kernels (ENG 15446,
         # FRE/GER 15428 bytes) keep these tables at the same offsets
-        return dict(DEFAULT_OFFSETS, **loads)
+        return dict(DEFAULT_OFFSETS, door=_door_table(kernel), **loads)
     assert p978 >= 0 and kernel.find(pat, p978 + 1) < 0, 'palette table not found uniquely'
     find = lambda vals: kernel.find(st.pack('<%dI' % len(vals), *vals))
     offs = {'palette': p978, 'floor_wall': p978 + 84, 'wallpal_wall': p978 + 92,
             'floorpal_floor': p978 + 113, 'wallpal_floorpal': p978 + 134,
             'wallset': loads['wallset'], 'stairs': loads['stairs'], 'floor': find(range(153, 161)),
-            'door': find([122, 0, 123, 124, 125, 126])}
+            'door': _door_table(kernel)}
     assert all(v >= 0 for v in offs.values()), offs
     return offs
 WALLSETS = ['Marble', 'Wood', 'Stone', 'Foil', 'Ice', 'Mine', 'Rock', 'Eighth']   # 'Eighth' only after add_wallset()
@@ -93,6 +93,49 @@ def add_wallset(kernel, wallset_res, stairs_res):
     if j >= 0:
         k[j + 5] = 8
     return bytes(k)
+
+
+# "randomize graphics": doornum = rnd(0, 19 - 1) -> SHTC 0; PUSH; SHTC n; PUSH; SHTC 1; SUB; CALL 2; SSBA "B:doornum"
+RND_DOOR_TAIL = bytes.fromhex('041d010a2102429f01')
+
+
+def n_doors(kernel):
+    i = kernel.find(RND_DOOR_TAIL)
+    assert i >= 2 and kernel.count(RND_DOOR_TAIL) == 1 and kernel[i - 2] == 0x1d, 'door rnd() not found'
+    return kernel[i - 1]
+
+
+def add_doors(kernel, door_res):
+    """Engine extension: more doors. The 19-entry door table (index = doornum, 0 = never picked) is
+    copied to the end of the kernel with the new resources appended, all three LTDA loads (level
+    setup, randomize's rejection check, debug "change doorset") are repointed, and the randomize
+    bound rnd(0..18) becomes rnd(0..18+n). Door rules only test doornum 5-9, 11 and 18; the doors
+    script only tests 3/7/14/17 (see-through types), so new numbers are plain blocking doors."""
+    k = bytearray(kernel)
+    n0 = n_doors(k)
+    old = _door_table(k)
+    vals = list(struct.unpack_from('<%dI' % n0, k, old)) + list(door_res)
+    assert len(vals) < 256, 'doornum is a byte'
+    new = len(k); k += struct.pack('<%dI' % len(vals), *vals)
+    assert new + 4 * len(vals) < 0x10000
+    pat = b'\x2a' + struct.pack('<H', old)
+    sites = [i for i in range(len(k) - 2) if k[i:i + 3] == pat]
+    assert len(sites) == 3, 'expected 3 door table loads, found %d' % len(sites)
+    for i in sites:
+        struct.pack_into('<H', k, i + 1, new)
+    i = k.find(RND_DOOR_TAIL); k[i - 1] = len(vals)
+    wrap = bytes.fromhex('3f9f01041d%02x17' % n0)          # "change doorset": if (doornum == 19) doornum = 0
+    j = k.find(wrap)
+    if j >= 0:
+        k[j + 5] = len(vals)
+    return bytes(k)
+
+
+def _door_table(kernel):
+    """Offset of the door table the code currently reads (content-found original, or the appended copy)."""
+    i = kernel.find(bytes.fromhex('3f9f0127022a'))         # LSBA "B:doornum"; AIS 2; LTDA <table> (level setup)
+    assert i >= 0
+    return struct.unpack_from('<H', kernel, i + 6)[0]
 
 
 def read(kernel):
@@ -166,6 +209,8 @@ def force(kernel, **resources):
         _, n = TABLES[key]; off = o[key]
         if key in ('wallset', 'stairs'):
             n = n_walls(kernel)
+        elif key == 'door':
+            n = n_doors(kernel)
         vals = list(struct.unpack_from('<%dI' % n, k, off))
         vals = [res if v else 0 for v in vals]          # keep the door table's rejected (0) slots
         struct.pack_into('<%dI' % n, k, off, *vals)

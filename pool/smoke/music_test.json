@@ -1,0 +1,30 @@
+{
+ "comment": "TEST: in-game music on otherwise original DH + 8th wallset",
+ "jobs": [
+  {
+   "type": "extra_wallset",
+   "copy": "Rock"
+  },
+  {
+   "type": "game_music",
+   "default": {
+    "la": "dh:Music Scene Two Roland",
+    "ad": "dh:Music Scene Two Adlib/Pc"
+   },
+   "tracks": {
+    "Marble": {
+     "la": "dh:Music Scene One Roland",
+     "ad": "dh:Music Scene One Adlib"
+    },
+    "Rock": {
+     "la": "menzo:31",
+     "ad": "menzo:83"
+    },
+    "Eighth": {
+     "la": "menzo:41",
+     "ad": "menzo:93"
+    }
+   }
+  }
+ ]
+}

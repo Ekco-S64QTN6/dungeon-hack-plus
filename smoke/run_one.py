@@ -3,7 +3,7 @@ import json, os, subprocess, sys, time
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import smoke
 spec = json.load(open(sys.argv[1]))
-x = subprocess.Popen(['Xvfb', smoke.DISPLAY, '-screen', '0', '1024x768x24'], stderr=subprocess.DEVNULL)
+x = smoke.start_xvfb()
 env = dict(os.environ, DISPLAY=smoke.DISPLAY, SDL_VIDEODRIVER='x11', SDL_AUDIODRIVER='dummy'); env.pop('WAYLAND_DISPLAY', None)
 try:
     time.sleep(1)
