@@ -1,0 +1,207 @@
+{
+ "comment": "every wallset's furniture in one session: AESOP_DIAG F3 (\"change wallset\", wraps at the build's wallset count) 16 times, clicking the pillar in front each time; each shot shows the \"wall N\" debug line, the art and the click text. Build with force_graphics {\"pillar_state\": 1} to see the second state (rubble/table/grave...), which is the one with text.",
+ "fixture": "fixtures/savegame_pillar",
+ "level": 0,
+ "boot": 5,
+ "hide_mouse": true,
+ "dos_pre": [
+  "set AESOP_DIAG=1"
+ ],
+ "checkpoints": [
+  {
+   "face": "N"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s00"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s01"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s02"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s03"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s04"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s05"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s06"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s07"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s08"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s09"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s10"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s11"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s12"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s13"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s14"
+  },
+  {
+   "key": "F3",
+   "settle": 4
+  },
+  {
+   "click": [
+    226,
+    75
+   ],
+   "settle": 1.5,
+   "shot": "s15"
+  }
+ ]
+}

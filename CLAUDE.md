@@ -90,7 +90,9 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   922 stairsets, 950 wallsets, 978 palettes (21), masks 1062 floor→wallsets, 1070 wall palette→wallsets,
   1091 floor palette→floors, 1112 wall palette→floor palettes (32-bit). Per-level picks: statics
   `wallnum/floornum/wallpal/floorpal/doornum/levernum[25]`, `wdeco[100]`.
-* "randomize graphics" runs at new-game start (time-seeded): wallnum = rnd, floor until mask, floor
+* "randomize graphics" is sent by the kernel's `create`, i.e. every time phase-two starts: new game AND every
+  Continue (the picks are not in the save, so every level's look is re-rolled per session; same in original DH,
+  seen in game: three boots of one save, three looks). Time-seeded: wallnum = rnd, floor until mask, floor
   palette until mask, wall palette until masks; door until table718 != 0 plus rules on doornum 5-9/11/18
   vs wallnum 0/2/3; decorations wdeco = wallnum·4 + rnd(0..3) and 28 + rnd(0..19). The retry loops never
   give up, so `kernel_rules.problems()` must pass for every rule set.
@@ -129,7 +131,10 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   track tables. Tracks ≤ 8,112 B (fixed sequence buffer); Menzo files are repackaged to their song
   sequence (sequence 0 is a silent stub). `play_sequence` aborts the game on a missing timbre:
   AdLib versions are always DH's own; MT-32/GM tracks are vetted (`tools/music_tracks.json`).
-* Test pins in `force_graphics`: `"wallnum": n`, `"doornum": n` (pin the real rnd path), `wall_deco`.
+* Test pins in `force_graphics`: tables `wallset`, `stairs`, `floor`, `ground` (pits: pin it too, or the pit art
+  is whichever floor the run rolled), `palette`, `door`; `"wallnum": n`, `"doornum": n` (pin the real rnd path,
+  new game only), `wall_deco`, `"pillar_state": 0|1`. Table pins leave wallnum itself random, so anything
+  indexed by wallnum (pillar text, wallset decorations) follows the roll, not the pinned art.
 * **Resource slots:** 3,072 directory slots; the mix uses 3,032 (40 free). New resources take free
   slots (`_add_copies`); plan any further extension against that limit.
 * **Writing bytecode** (opcodes: AIS 0x27, LTBA 0x28, LTWA 0x29, LTDA 0x2a, BRF 0x01, BRA 0x02,
@@ -158,6 +163,10 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
 * Menzo: walls = RES4 64×192 strips (4 per DH face), floors = 64×64 flats projected with DH's view
   geometry (faces at z = n + 0.59, horizon y 39.2); RES5 = XMIDI; RES6 = 386 unnamed PCM (not used).
 * EOB2 music is Westwood `.ADL` (AdLib programs; only INTRO/FINALE1/FINALE2 are music); EOB1 ships none.
+* EOB3 furniture with DH's wallset canvases: Ruins rubble (pillar state 2), Ruins niche (shelf), Forest grave
+  (intact / opened = pillar states), Mausoleum pit/ceiling pit (Ground layout); the second state's click text from
+  EOB3's own string ("rubble description", "violated grave"), added as a new resource (`pillar_text` job).
+  Mausoleum drawers / pedestal and the statues are wall objects with their own logic: not used.
 * Portraits: DH's chooser gives men 0-31, women 29-44 (29-31 shared helmeted/hooded).
 * Portraits/icons are quantized to the colours DH's own monster sprites use (`normalize.dh_sprite_indices`).
 
@@ -183,6 +192,9 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   Ctrl+F6 audio capture; sounding fraction), `smoke/music_tracks.py SPEC|@FILE` (track vetting),
   `smoke/maze_seeds.py` (MAZE hang hunt: 1,000 seeds, none hang), `smoke/mem_margin.py` (start-up cliff).
 * `dhplus.py test`: builds and verifies all 19 presets.
+* `smoke/wallset_cycle.json`: F3 (AESOP_DIAG) through all 16 wallsets in one session, clicking the pillar each
+  time (shot shows the `wall N` debug line, the art and its text). Plans can set `"hide_mouse": true`.
+* `smoke/showcase.py smoke/showcase.json OUT.png`: titled grid of real captures for showing the project off.
 * Heap: test-only job `heap_probe` (`tools/heap_probe.py`) makes the game rewrite HEAP.LOG every tick
   (tick, heapfree, heapfree after flushing the cache = slack beyond what is locked, xmsfree, level);
   `smoke/heap_log.py PLAN BUILD...` walks and polls it. Plans `heap_levels` (F7 through the levels with

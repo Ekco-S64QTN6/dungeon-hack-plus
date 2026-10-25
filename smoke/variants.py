@@ -33,7 +33,8 @@ def main(preset, wallsets=None):
         allowed = ['Floor-%d' % f for f in range(rules['n_floors']) if rules['floor_ok_for_wall'][f] >> widx & 1]
         floor = next((f for f in allowed if f in floors), allowed[0] if allowed else floors[0])
         force = {"type": "force_graphics", "target": "kernel (TEST ONLY)", "wallset": w, "stairs": "%s Stairs" % stem,
-                 "floor": floor, "palette": "wall/floor palette %02d" % pal, "door": doors[k % len(doors)]}
+                 "floor": floor, "ground": floor.replace('Floor', 'Ground'), "palette": "wall/floor palette %02d" % pal,
+                 "door": doors[k % len(doors)]}
         tag = '%s__%s' % (preset, stem.lower())
         engine = [j for j in jobs if j['type'] in ('extra_wallset', 'extra_floors', 'extra_doors')]   # base = same engine, DH art
         for name, js in (('smoke_' + tag, jobs + [force]), ('smokebase_' + tag, engine + [force])):

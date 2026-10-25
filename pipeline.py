@@ -329,6 +329,12 @@ def job_force_graphics(r, job, pal):
         assert k[i - 5:i - 3] == b'\x1d\x00' and k[i - 2] == 0x1d     # SHTC 0; PUSH; SHTC n (min, count)
         k[i - 4] = job['wallnum']; k[i - 1] = job['wallnum'] + 1
         r.replace(idx, bytes(k))
+    if 'pillar_state' in job:       # "current pillar" create: set state rnd(0, 1) -> rnd(s, s)
+        pi = names['current pillar']; p = bytearray(r.entry(pi)[2])
+        i = p.find(bytes.fromhex('041d00041d012102'))           # PUSH; SHTC 0; PUSH; SHTC 1; CALL 2
+        assert i > 0 and p.find(bytes.fromhex('041d00041d012102'), i + 1) < 0
+        p[i + 2] = p[i + 5] = job['pillar_state']
+        r.replace(pi, bytes(p))
     if 'wall_deco' in job:          # decoration object's table14 (deco index -> resource), 48 longs at 14
         di = names['decoration']; d = bytearray(r.entry(di)[2])
         vals = struct.unpack_from('<48I', d, 14)
@@ -561,6 +567,29 @@ def pillar_text_operand(p):
     description strings (u32 resource numbers; "user click" prints one for pillar state 2)."""
     i = next(i for i in range(len(p) - 6) if p[i:i + 4] == bytes.fromhex('22002801') and p[i + 4:i + 6] == bytes.fromhex('2702'))  # SEND "wallset index"; AIS 2
     return i + 7
+
+
+def set_pillar_text(r, wallset, text_res):
+    """Point `wallset`'s entry of the "current pillar" text table at string resource `text_res`."""
+    tp = bytearray(r.entry(r.names()['current pillar'])[2])
+    w = kernel_rules.WALLSETS.index(wallset.split()[0])
+    struct.pack_into('<I', tp, struct.unpack_from('<H', tp, pillar_text_operand(tp))[0] + 4 * w, text_res)
+    r.replace(r.names()['current pillar'], bytes(tp))
+
+
+def job_pillar_text(r, job, pal):
+    """The text shown on clicking the second pillar state, from an EOB3 string resource (same "S:" format).
+
+    {"target": "W15 Wallset", "eob3_string": "violated grave"}   -> new resource "EOB3 violated grave"
+    """
+    name = 'EOB3 %s' % job['eob3_string']
+    if name not in r.names():
+        e3 = eob3_res()
+        idx = _add_copies(r, [(name, 'DW19')])[name]           # a pillar text: string resource type and attributes
+        r.replace(idx, e3.entry(e3.names()[job['eob3_string']])[2], attrib=r.entry(idx)[1])
+        ADDED[name] = None
+    set_pillar_text(r, job['target'], r.names()[name])
+    print('    %s pillar text <- EOB3 "%s"' % (job['target'], job['eob3_string']))
 
 
 def job_extra_wallset(r, job, pal):
@@ -887,11 +916,8 @@ def job_furniture_from(r, job, pal):
         target[k] = (tw, th, bytearray(a.tobytes()), bytearray(mk.tobytes()))
     r.replace(idx, aesop.encode_shapes(target))
     # the text shown on clicking the second pillar state (basin, table, rubble...) follows the art
-    sp, tp = src.entry(src.names()['current pillar'])[2], bytearray(r.entry(r.names()['current pillar'])[2])
-    text = struct.unpack_from('<I', sp, struct.unpack_from('<H', sp, pillar_text_operand(sp))[0] + 4 * kernel_rules.WALLSETS.index(donor))[0]
-    w = kernel_rules.WALLSETS.index(job['target'].split()[0])
-    struct.pack_into('<I', tp, struct.unpack_from('<H', tp, pillar_text_operand(tp))[0] + 4 * w, text)
-    r.replace(r.names()['current pillar'], bytes(tp))
+    sp = src.entry(src.names()['current pillar'])[2]
+    set_pillar_text(r, job['target'], struct.unpack_from('<I', sp, struct.unpack_from('<H', sp, pillar_text_operand(sp))[0] + 4 * kernel_rules.WALLSETS.index(donor))[0])
     print('    %s <- %s Wallset window/shelf/pillars (original art, re-ramped) + pillar text' % (job['target'], donor))
 
 
@@ -1161,7 +1187,7 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'game_music': job_game_music, 'extra_doors': job_extra_doors, 'paint_objects': job_paint_objects,
         'extra_floors': job_extra_floors, 'stairs_from': job_stairs_from,
         'furniture_from': job_furniture_from, 'heap_probe': job_heap_probe,
-        'eob_pits': job_eob_pits}
+        'eob_pits': job_eob_pits, 'pillar_text': job_pillar_text}
 
 
 def cmd_build(recipe_path, name):

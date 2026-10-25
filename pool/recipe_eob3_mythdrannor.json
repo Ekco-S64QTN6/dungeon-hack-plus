@@ -735,6 +735,29 @@
    "image": "pool/floors/eob3_ruins.png"
   },
   {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "source": "Ruins rubble",
+   "source_palette": "Ruins palette",
+   "count": 18,
+   "source_first": 0,
+   "target_first": 218
+  },
+  {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "source": "Ruins niche",
+   "source_palette": "Ruins palette",
+   "count": 18,
+   "source_first": 0,
+   "target_first": 91
+  },
+  {
+   "type": "pillar_text",
+   "target": "Rock Wallset",
+   "eob3_string": "rubble description"
+  },
+  {
    "type": "wallset",
    "target": "Rock Wallset",
    "texture": "pool/walls/eob3_ruins_front.png",
@@ -749,6 +772,29 @@
    "type": "floor",
    "target": "Floor-3",
    "image": "pool/floors/eob3_forest.png"
+  },
+  {
+   "type": "panels",
+   "target": "Stone Wallset",
+   "source": "Forest grave",
+   "source_palette": "Forest palette",
+   "count": 18,
+   "source_first": 0,
+   "target_first": 145
+  },
+  {
+   "type": "panels",
+   "target": "Stone Wallset",
+   "source": "Forest grave",
+   "source_palette": "Forest palette",
+   "count": 18,
+   "source_first": 18,
+   "target_first": 218
+  },
+  {
+   "type": "pillar_text",
+   "target": "Stone Wallset",
+   "eob3_string": "violated grave"
   },
   {
    "type": "wallset",

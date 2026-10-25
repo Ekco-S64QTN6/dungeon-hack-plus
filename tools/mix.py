@@ -182,6 +182,9 @@ def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s_backdrop.png' % vset})
             jobs += ec.pit_jobs(game, vset, floor)
         jobs.append({'type': 'furniture_from', 'target': '%s Wallset' % slot, 'donor': FURNITURE_DONOR[src]})
+        if src.startswith('eob3'):                       # EOB3's own rubble / niche / grave on top
+            _, wall, pal, _ = next(s for s in EOB3_SETS if s[0] == src)
+            jobs += ec.eob3_furniture_jobs(wall, pal, slot)
 
     # ---- doors (with extra_doors: 16 more door numbers). Every EOB door gets a slot: see-through
     # kinds go to DH's see-through door numbers 3/7/14/17 (the doors script only lets those show

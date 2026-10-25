@@ -1,0 +1,81 @@
+{
+ "title": "DUNGEON  HACK +",
+ "subtitle": "Eye of the Beholder I \u00b7 II \u00b7 III and Menzoberranzan, rebuilt inside Dungeon Hack (1993)",
+ "note": "New in this patch: every imported dungeon brings its own pits, plus matching pillars, windows and arches",
+ "footer": "Real in-game captures (DOSBox), built from the player\u2019s own game files \u00b7 github.com/Ekco-S64QTN6/dungeon-hack-plus",
+ "cols": 4,
+ "tiles": [
+  {
+   "shot": "smoke_runs/walks/show_pits/smoke_mix__eighth/pit_d1.png",
+   "game": "eob1",
+   "name": "Blue sewers",
+   "what": "its own pit, from EOB\u2019s decoration sheets"
+  },
+  {
+   "shot": "smoke_runs/walks/show_pits/smoke_eob1_waterdeep__foil/pit_d1.png",
+   "game": "eob1",
+   "name": "Red brick halls",
+   "what": "brick walls, brick-rimmed pit"
+  },
+  {
+   "shot": "smoke_runs/walks/show_pits/smoke_mix__w12/pit_d1.png",
+   "game": "eob2",
+   "name": "Mezzanine",
+   "what": "a ladder shaft cut in its own floor"
+  },
+  {
+   "shot": "smoke_runs/walks/show_pits/smoke_eob2_darkmoon_classic__foil/ceil_d1.png",
+   "game": "eob2",
+   "name": "Silver Tower",
+   "what": "its own ceiling hole overhead"
+  },
+  {
+   "shot": "smoke_runs/walks/show_pits/smoke_eob2_darkmoon_classic__wood/pit_d1.png",
+   "game": "eob2",
+   "name": "Darkmoon forest",
+   "what": "a hole in the forest floor"
+  },
+  {
+   "shot": "smoke_runs/walks/show_pits/smoke_mix__foil/pit_d1.png",
+   "game": "eob3",
+   "name": "Mausoleum",
+   "what": "EOB3\u2019s own pit, frame for frame"
+  },
+  {
+   "shot": "smoke_runs/walks/show_pillars/smoke_mix__w15/pillar_d1.png",
+   "game": "eob3",
+   "name": "Myth Drannor forest",
+   "what": "graves stand where pillars were"
+  },
+  {
+   "shot": "smoke_runs/walks/show_pillars/smoke_mix__w09/pillar_d1.png",
+   "game": "eob2",
+   "name": "Crimson tower",
+   "what": "carved panels meet DH\u2019s columns"
+  },
+  {
+   "shot": "smoke_runs/walks/show_arch/smoke_mix__w13/window_d1.png",
+   "game": "eob1",
+   "name": "Rough-stone halls",
+   "what": "a crumbling window to match"
+  },
+  {
+   "shot": "smoke_runs/walks/show_arch/smoke_mix__w09/arch_d1.png",
+   "game": "eob2",
+   "name": "Crimson tower",
+   "what": "an arch cut from its own wall"
+  },
+  {
+   "shot": "smoke_runs/walks/show_arch/smoke_mix__rock/window_d1.png",
+   "game": "menzo",
+   "name": "Menzoberranzan planks",
+   "what": "drow woodwork, wooden window grille"
+  },
+  {
+   "shot": "smoke_runs/walks/show_arch/smoke_mix__w08/window_d1.png",
+   "game": "menzo",
+   "name": "Menzoberranzan gold",
+   "what": "drow stone, a barred marble window"
+  }
+ ]
+}

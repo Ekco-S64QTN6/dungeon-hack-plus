@@ -126,6 +126,30 @@
    ]
   },
   {
+   "type": "fix_unlock_shape",
+   "target": "items"
+  },
+  {
+   "type": "fix_ice_stairs",
+   "target": "Ice Stairs"
+  },
+  {
+   "type": "reramp",
+   "target": "Marble"
+  },
+  {
+   "type": "reramp",
+   "target": "Wood"
+  },
+  {
+   "type": "reramp",
+   "target": "Rock"
+  },
+  {
+   "type": "reramp",
+   "target": "Stone"
+  },
+  {
    "type": "panels",
    "target": "Marble Wallset",
    "target_first": 0,
@@ -276,7 +300,7 @@
    "count": 54,
    "source": "Temple gold door",
    "source_first": 18,
-   "source_palette": "Fixed palette"
+   "source_palette": "Marble palette"
   },
   {
    "type": "panels",
@@ -285,7 +309,7 @@
    "count": 54,
    "source": "Temple mask door",
    "source_first": 18,
-   "source_palette": "Fixed palette"
+   "source_palette": "Marble palette"
   },
   {
    "type": "panels",
@@ -444,7 +468,7 @@
    "count": 18,
    "source": "Temple censer",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -454,7 +478,7 @@
    "count": 18,
    "source": "Temple font",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -464,7 +488,7 @@
    "count": 18,
    "source": "Temple niche",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -524,7 +548,7 @@
    "count": 18,
    "source": "Temple copper lock",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -534,7 +558,7 @@
    "count": 18,
    "source": "Temple iron lock",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -544,7 +568,7 @@
    "count": 18,
    "source": "Temple gold lock",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -554,7 +578,7 @@
    "count": 18,
    "source": "Temple crystal lock",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -564,7 +588,7 @@
    "count": 18,
    "source": "Temple fire lock",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -574,7 +598,7 @@
    "count": 18,
    "source": "Temple frost lock",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -634,7 +658,7 @@
    "count": 36,
    "source": "Temple gold lever",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -644,7 +668,7 @@
    "count": 36,
    "source": "Temple secret handle",
    "source_first": 0,
-   "source_palette": "Fixed palette",
+   "source_palette": "Marble palette",
    "ramp_of": "Marble Wallset"
   },
   {
@@ -673,9 +697,37 @@
    "image": "pool/floors/eob3_marble.png"
   },
   {
+   "type": "wallset",
+   "target": "Marble Wallset",
+   "texture": "pool/walls/eob3_marble_front.png",
+   "frames": "36,199-217"
+  },
+  {
    "type": "floor",
    "target": "Floor-1",
    "image": "pool/floors/eob3_mausoleum.png"
+  },
+  {
+   "type": "panels",
+   "target": "Ground-1",
+   "source": "Mausoleum pit",
+   "source_palette": "Mausoleum palette",
+   "count": 19,
+   "target_first": 0
+  },
+  {
+   "type": "panels",
+   "target": "Ground-1",
+   "source": "Mausoleum ceiling pit",
+   "source_palette": "Mausoleum palette",
+   "count": 19,
+   "target_first": 19
+  },
+  {
+   "type": "wallset",
+   "target": "Wood Wallset",
+   "texture": "pool/walls/eob3_mausoleum_front.png",
+   "frames": "36,199-217"
   },
   {
    "type": "floor",
@@ -683,9 +735,77 @@
    "image": "pool/floors/eob3_ruins.png"
   },
   {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "source": "Ruins rubble",
+   "source_palette": "Ruins palette",
+   "count": 18,
+   "source_first": 0,
+   "target_first": 218
+  },
+  {
+   "type": "panels",
+   "target": "Rock Wallset",
+   "source": "Ruins niche",
+   "source_palette": "Ruins palette",
+   "count": 18,
+   "source_first": 0,
+   "target_first": 91
+  },
+  {
+   "type": "pillar_text",
+   "target": "Rock Wallset",
+   "eob3_string": "rubble description"
+  },
+  {
+   "type": "wallset",
+   "target": "Rock Wallset",
+   "texture": "pool/walls/eob3_ruins_front.png",
+   "frames": "36,199-217"
+  },
+  {
+   "type": "stairs_from",
+   "target": "Rock Stairs",
+   "donor": "Stone"
+  },
+  {
    "type": "floor",
    "target": "Floor-3",
    "image": "pool/floors/eob3_forest.png"
+  },
+  {
+   "type": "panels",
+   "target": "Stone Wallset",
+   "source": "Forest grave",
+   "source_palette": "Forest palette",
+   "count": 18,
+   "source_first": 0,
+   "target_first": 145
+  },
+  {
+   "type": "panels",
+   "target": "Stone Wallset",
+   "source": "Forest grave",
+   "source_palette": "Forest palette",
+   "count": 18,
+   "source_first": 18,
+   "target_first": 218
+  },
+  {
+   "type": "pillar_text",
+   "target": "Stone Wallset",
+   "eob3_string": "violated grave"
+  },
+  {
+   "type": "wallset",
+   "target": "Stone Wallset",
+   "texture": "pool/walls/eob3_forest_front.png",
+   "frames": "36,199-217"
+  },
+  {
+   "type": "stairs_from",
+   "target": "Stone Stairs",
+   "donor": "Ice"
   },
   {
    "type": "sprites",
@@ -705,8 +825,9 @@
    "wallset": "Rock Wallset",
    "stairs": "Rock Stairs",
    "floor": "Floor-2",
+   "ground": "Ground-2",
    "palette": "wall/floor palette 15",
-   "door": "Door-07"
+   "door": "Door-05"
   }
  ]
 }

@@ -7,8 +7,9 @@
    "wallset": "Rock Wallset",
    "stairs": "Rock Stairs",
    "floor": "Floor-2",
+   "ground": "Ground-2",
    "palette": "wall/floor palette 15",
-   "door": "Door-07"
+   "door": "Door-05"
   }
  ]
 }

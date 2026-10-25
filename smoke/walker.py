@@ -117,6 +117,8 @@ def run(plan, name, env, outroot):
     log = []
     try:
         time.sleep(plan.get('boot', 5))
+        if plan.get('hide_mouse'):              # park the pointer on the UI frame, outside the 3D view
+            subprocess.run(['xdotool', 'mousemove', '--window', g.wid, '4', '476'], env=env); time.sleep(0.3)
         for cp in plan['checkpoints']:
             if 'goto' in cp:
                 doors = {(r[1], r[2]) for r in recs if r[0] == 1}

@@ -727,6 +727,29 @@
   },
   {
    "type": "panels",
+   "target": "W15 Wallset",
+   "source": "Forest grave",
+   "source_palette": "Forest palette",
+   "count": 18,
+   "source_first": 0,
+   "target_first": 145
+  },
+  {
+   "type": "panels",
+   "target": "W15 Wallset",
+   "source": "Forest grave",
+   "source_palette": "Forest palette",
+   "count": 18,
+   "source_first": 18,
+   "target_first": 218
+  },
+  {
+   "type": "pillar_text",
+   "target": "W15 Wallset",
+   "eob3_string": "violated grave"
+  },
+  {
+   "type": "panels",
    "target": "Foil Wallset",
    "target_first": 0,
    "count": 18,
@@ -795,6 +818,22 @@
    "type": "floor",
    "target": "Floor-7",
    "image": "pool/floors/eob3_mausoleum.png"
+  },
+  {
+   "type": "panels",
+   "target": "Ground-7",
+   "source": "Mausoleum pit",
+   "source_palette": "Mausoleum palette",
+   "count": 19,
+   "target_first": 0
+  },
+  {
+   "type": "panels",
+   "target": "Ground-7",
+   "source": "Mausoleum ceiling pit",
+   "source_palette": "Mausoleum palette",
+   "count": 19,
+   "target_first": 19
   },
   {
    "type": "wallset",
@@ -1936,6 +1975,7 @@
    "wallset": "W12 Wallset",
    "stairs": "W12 Stairs",
    "floor": "Floor-2",
+   "ground": "Ground-2",
    "palette": "wall/floor palette 07",
    "door": "Door-02"
   }

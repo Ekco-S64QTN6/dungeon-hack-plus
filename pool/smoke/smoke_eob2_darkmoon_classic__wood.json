@@ -938,6 +938,7 @@
    "wallset": "Wood Wallset",
    "stairs": "Wood Stairs",
    "floor": "Floor-4",
+   "ground": "Ground-4",
    "palette": "wall/floor palette 01",
    "door": "Door-02"
   }

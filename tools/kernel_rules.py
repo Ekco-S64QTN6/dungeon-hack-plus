@@ -29,7 +29,7 @@ def locate(kernel):
     pat = st.pack('<21I', *range(169, 190))
     p978 = kernel.find(pat)
     loads = {k: st.unpack_from('<H', kernel, _table_operand(kernel, pattern))[0]   # where the code reads them from
-             for k, pattern in (('wallset', LOAD_WALLSET), ('stairs', LOAD_STAIRSET), ('floor', LOAD_FLOOR))}
+             for k, pattern in (('wallset', LOAD_WALLSET), ('stairs', LOAD_STAIRSET), ('floor', LOAD_FLOOR), ('ground', LOAD_GROUND))}
     if p978 < 0:
         # anchor overwritten on purpose (test-only force_graphics): every known kernel (ENG, FRE, GER;
         # extensions only append) keeps these tables at the same offsets
@@ -38,7 +38,7 @@ def locate(kernel):
     find = lambda vals: kernel.find(st.pack('<%dI' % len(vals), *vals))
     offs = {'palette': p978, 'floor_wall': p978 + 84, 'wallpal_wall': p978 + 92,
             'floorpal_floor': p978 + 113, 'wallpal_floorpal': p978 + 134,
-            'wallset': loads['wallset'], 'stairs': loads['stairs'], 'floor': loads['floor'],
+            'wallset': loads['wallset'], 'stairs': loads['stairs'], 'floor': loads['floor'], 'ground': loads['ground'],
             'door': _door_table(kernel)}
     assert all(v >= 0 for v in offs.values()), offs
     return offs
@@ -330,7 +330,7 @@ def set_wall_palettes(rules, wallset, palettes):
 # --- test-only: make level graphics deterministic for screenshot diffs -------
 # "setup level graphics" resolves resources through these long tables; pointing
 # every entry at one resource removes the time-seeded per-level randomization.
-TABLES = {'wallset': (950, 7), 'stairs': (922, 7), 'floor': (794, 8), 'palette': (978, 21), 'door': (718, 19)}
+TABLES = {'wallset': (950, 7), 'stairs': (922, 7), 'floor': (794, 8), 'ground': (826, 8), 'palette': (978, 21), 'door': (718, 19)}
 
 
 def force(kernel, **resources):
@@ -341,7 +341,7 @@ def force(kernel, **resources):
             n = n_walls(kernel)
         elif key == 'door':
             n = n_doors(kernel)
-        elif key == 'floor':
+        elif key in ('floor', 'ground'):
             n = n_floors(kernel)
         vals = list(struct.unpack_from('<%dI' % n, k, off))
         vals = [res if v else 0 for v in vals]          # keep the door table's rejected (0) slots

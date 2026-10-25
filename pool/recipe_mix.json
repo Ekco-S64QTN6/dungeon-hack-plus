@@ -908,6 +908,29 @@
   },
   {
    "type": "panels",
+   "target": "W15 Wallset",
+   "source": "Forest grave",
+   "source_palette": "Forest palette",
+   "count": 18,
+   "source_first": 0,
+   "target_first": 145
+  },
+  {
+   "type": "panels",
+   "target": "W15 Wallset",
+   "source": "Forest grave",
+   "source_palette": "Forest palette",
+   "count": 18,
+   "source_first": 18,
+   "target_first": 218
+  },
+  {
+   "type": "pillar_text",
+   "target": "W15 Wallset",
+   "eob3_string": "violated grave"
+  },
+  {
+   "type": "panels",
    "target": "Foil Wallset",
    "target_first": 0,
    "count": 18,

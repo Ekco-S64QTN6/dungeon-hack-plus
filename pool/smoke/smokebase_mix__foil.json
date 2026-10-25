@@ -22,8 +22,9 @@
    "wallset": "Foil Wallset",
    "stairs": "Foil Stairs",
    "floor": "Floor-7",
+   "ground": "Ground-7",
    "palette": "wall/floor palette 17",
-   "door": "Door-00"
+   "door": "Door-07"
   }
  ]
 }

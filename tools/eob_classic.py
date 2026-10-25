@@ -114,6 +114,22 @@ def pit_jobs(game, vset, floor):
              'pal': epal, 'floor': fpit, 'ceiling': cpit, 'backdrop': 'pool/floors/%s_backdrop.png' % vset}]
 
 
+# EOB3 free-standing objects and niches with DH's wallset layout (same canvases): Ruins rubble as the second
+# pillar state, Ruins niche as the shelf, Forest grave (intact / opened) as both pillar states; the second
+# state's click text from EOB3's matching description. Everything else comes from furniture_from / DH.
+EOB3_FURNITURE = {'Ruins walls': ([('Ruins rubble', 0, 218), ('Ruins niche', 0, 91)], 'rubble description'),
+                  'Forest walls': ([('Forest grave', 0, 145), ('Forest grave', 18, 218)], 'violated grave')}
+
+
+def eob3_furniture_jobs(wall, pal, slot):
+    if wall not in EOB3_FURNITURE:
+        return []
+    parts, text = EOB3_FURNITURE[wall]
+    return [{'type': 'panels', 'target': '%s Wallset' % slot, 'source': res, 'source_palette': pal, 'count': 18,
+             'source_first': first, 'target_first': at} for res, first, at in parts] + \
+           [{'type': 'pillar_text', 'target': '%s Wallset' % slot, 'eob3_string': text}]
+
+
 def eob3_pit_jobs(wall, pal, floor):
     """EOB3 pits: only the Mausoleum has pit art (same 19-frame layout as Ground-N)."""
     if wall != 'Mausoleum walls':
@@ -224,7 +240,7 @@ def build_eob3():
         rules['floor_palettes'][str(floor)] = match
         rules['allow_pairs'].append([match, match])
         jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': path})
-        jobs += eob3_pit_jobs(wall, pal, floor)
+        jobs += eob3_pit_jobs(wall, pal, floor) + eob3_furniture_jobs(wall, pal, dhw)
         front = 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower()
         Image.fromarray(eob3_front(e3, wall, pal)).save(os.path.join(ROOT, front))
         jobs.append({'type': 'wallset', 'target': '%s Wallset' % dhw, 'texture': front, 'frames': '36,199-217'})
