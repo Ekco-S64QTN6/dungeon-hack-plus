@@ -75,7 +75,8 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   DH's 7 take external sets (13 of 19: EOB1 ×5, EOB2 ×5, EOB3 Mausoleum/Ruins/Forest, Menzo ×6),
   each on its own floor with hue-matched palettes; the other 3 slots keep DH's art.
 * Per external set: walls + door frame (+ slot 36 post, arch), stairs (own art, or `stairs_from` a
-  matching DH style), decorations (own, else cosmetic EOB ones in DH's slots), floor backdrop.
+  matching DH style), window/shelf/pillars (`furniture_from` the DH style in `mix.FURNITURE_DONOR`),
+  decorations (own, else cosmetic EOB ones in DH's slots), floor backdrop.
 * Doors: every EOB door (22) gets a slot; see-through ones in DH's see-through numbers 3/7/14/17.
 * Generic decorations 29-48, monsters (~half of the slots with an EOB counterpart), portraits (~half,
   same sex group), in-game music per wallset (58 vetted tracks), EOB3 sounds and intro music.
@@ -94,7 +95,7 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   vs wallnum 0/2/3; decorations wdeco = wallnum·4 + rnd(0..3) and 28 + rnd(0..19). The retry loops never
   give up, so `kernel_rules.problems()` must pass for every rule set.
 * Who uses what (audited across all code resources): wallnum → kernel + "current pillar" (per-wallset
-  pillar table); floornum → kernel only; doornum → kernel + doors ("blocks view": 3/7/14/17 see-through);
+  text for the second pillar state); floornum → kernel only; doornum → kernel + doors ("blocks view": 3/7/14/17 see-through);
   decoration index → the decoration object's table14 (art), table206 (text), table398 (flags).
 * FEA records (8 B): 0 party start (edit to place the party), 1 door (byte 3: 0x05 N/S, 0x0a E/W),
   2 door-frame button, 3 illusionary wall, 4/5 stairs up/down, 6/7 buttons, 8 lever, 9-11 locks,
@@ -102,9 +103,13 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   18 spikes, 19 floor pit (`13 x y 0f dx dy dlevel 03`), 20 ceiling pit, 21 teleporter, 22 spinner,
   23 arch, 24 window, 25 pillar, 26 shelf, 27 healer, 28 floor deco, 29/30 special window/pillar.
   `LEVELS.DAT` = u32 seed + n × 32×32 (0xFF open).
-* Wallset resource = 13 objects × 18 panels + 2 specials. Object 0 walls (variant 0/1), 1 door frame
-  (windows sit inside it), 2 panel 0 (= frame 36) the doorway jamb post, 4 window grille, 11 arch face;
-  others unidentified (`paint_objects` job + a view plan identifies any). Stairs = [down 0-17][up 18-35].
+* Wallset resource = 236 frames; a feature draws base + view position (0-17, 18 = standing in it), base
+  from its script (report 3101 or a constant; `pipeline.py` comment above `ARCH_FRAMES`): 0-17 walls
+  (variant 0/1 side panels), 18-35 door frame, 36 doorway jamb post, 37-72 door-frame button off/on,
+  73-90 window panel (over the door frame), 91-108 shelf, 109-144 hidden button off/on, 145-162 pillar,
+  163-198 wall button off/on, 199-216 arch, 217 arch post (standing in it), 218-235 pillar state 2
+  (rubble/table/crate/fountain; `current pillar` rolls the state; its table14 is description text).
+  Canvases are identical in all 7 DH sets (except 80). Stairs = [down 0-17][up 18-35].
   Doors = 3 stages × 18 panels, only front panels 8/16/13 used; stage = maxstate − state.
 * Report attributes: 4 art resource, 3101 frame base, 3002 door stages + 1, 5/7 automap glyph/char.
 * Original DH has no dungeon music on purpose (SOUND32.C `unload_music` "to conserve heap resources").

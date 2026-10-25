@@ -35,6 +35,14 @@ EOB3_SETS = [('eob3_mausoleum', 'Mausoleum walls', 'Mausoleum palette', 'Wood'),
              ('eob3_ruins', 'Ruins walls', 'Ruins palette', 'Rock'),
              ('eob3_forest', 'Forest walls', 'Forest palette', 'Stone')]
 EOB3_STAIR_DONOR = {'eob3_forest': 'Ice', 'eob3_ruins': 'Stone', 'eob3_mausoleum': 'Wood'}   # DH style, if no EOB3 stairs
+# DH style whose window, shelf and pillars (incl. the rubble/table/crate second state) each imported set
+# borrows; no source game has these features. By material: rough stone -> Stone, smooth/drow stone ->
+# Marble, carved panels -> Foil, forest -> Ice (bark), cave -> Rock, planks -> Wood.
+FURNITURE_DONOR = {'eob1_blue': 'Stone', 'eob1_brick': 'Stone', 'eob1_green': 'Stone', 'eob1_drow': 'Marble',
+                   'eob1_xanatha': 'Foil', 'eob2_dung': 'Stone', 'eob2_mezz': 'Marble', 'eob2_silver': 'Foil',
+                   'eob2_crimson': 'Foil', 'eob2_forest': 'Ice', 'eob3_mausoleum': 'Marble', 'eob3_ruins': 'Stone',
+                   'eob3_forest': 'Ice', 'menzo_blue': 'Marble', 'menzo_purple': 'Marble', 'menzo_red': 'Marble',
+                   'menzo_gold': 'Marble', 'menzo_cave': 'Rock', 'menzo_wood': 'Wood'}
 EOB3_DECOS = {'Wood': ['Wall Deco 09', 'Wall Deco 10', 'Wall Deco 11'], 'Rock': ['Wall Deco 12', 'Wall Deco 13', 'Wall Deco 14']}
 EOB3_DOORS = ['Door-05', 'Door-06', 'Door-07', 'Door-08', 'Door-09', 'Door-11', 'Door-18']
 
@@ -159,7 +167,7 @@ def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
                 src_job = next(j for j in e3jobs if j['target'] == deco)
                 jobs.append(dict(src_job, target=target, ramp_of=slot + ' Wallset'))
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/eob3_%s.png' % wall.split()[0].lower()})
-            jobs.append({'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower(), 'frames': '36,198-215'})
+            jobs.append({'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower(), 'frames': '36,199-217'})
             if not any(j['target'] == '%s Stairs' % old for j in e3jobs):      # EOB3 Forest/Ruins have no stairs
                 jobs.append({'type': 'stairs_from', 'target': '%s Stairs' % slot, 'donor': EOB3_STAIR_DONOR[src]})
         else:
@@ -171,6 +179,7 @@ def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
                 jobs.append({'type': 'vmp_deco', 'target': '%s decorations' % slot, 'wallset': '%s Wallset' % slot,
                              'game': game, 'set': vset, 'deco': 5, 'base': 0})
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s_backdrop.png' % vset})
+        jobs.append({'type': 'furniture_from', 'target': '%s Wallset' % slot, 'donor': FURNITURE_DONOR[src]})
 
     # ---- doors (with extra_doors: 16 more door numbers). Every EOB door gets a slot: see-through
     # kinds go to DH's see-through door numbers 3/7/14/17 (the doors script only lets those show

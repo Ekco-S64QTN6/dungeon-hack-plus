@@ -540,6 +540,13 @@ def _add_copies(r, pairs):
     return out
 
 
+def pillar_text_operand(p):
+    """Offset of the LTDA operand in "current pillar" that addresses its per-wallset table of
+    description strings (u32 resource numbers; "user click" prints one for pillar state 2)."""
+    i = next(i for i in range(len(p) - 6) if p[i:i + 4] == bytes.fromhex('22002801') and p[i + 4:i + 6] == bytes.fromhex('2702'))  # SEND "wallset index"; AIS 2
+    return i + 7
+
+
 def job_extra_wallset(r, job, pal):
     """ENGINE EXTENSION: more wallsets (+ stairs) that "randomize graphics" can pick per level.
 
@@ -574,11 +581,10 @@ def job_extra_wallset(r, job, pal):
                     rules[key][i] |= 1 << w
     r.replace(ki, kernel_rules.write(k, rules))
     n = n0 + count
-    # "current pillar": per-wallset pillar art table (LTDA "L:table14")
+    # "current pillar": per-wallset table of the text shown when the second pillar state is clicked
     pi = r.names()['current pillar']
     p = bytearray(r.entry(pi)[2])
-    i = next(i for i in range(len(p) - 6) if p[i:i + 4] == bytes.fromhex('22002801') and p[i + 4:i + 6] == bytes.fromhex('2702'))  # SEND "wallset index"; AIS 2
-    op = i + 7                                      # LTDA operand
+    op = pillar_text_operand(p)
     old = struct.unpack_from('<H', p, op)[0]
     vals = list(struct.unpack_from('<%dI' % n0, p, old))
     vals += [vals[ws]] * count
@@ -797,6 +803,20 @@ def reramp_floor(r, f):
     print('    Floor-%d: %s -> %s ramps, re-ramped Ground-%d' % (f, sorted(old_shape), sorted(new_shape), f))
 
 
+def donor_lut(src, donor, r, slot):
+    """Index map taking art drawn for DH style `donor`'s original palettes to wallset `slot`'s
+    current palettes (wall ramp only; fixed colours stay). -> (lut, the slot's palettes)."""
+    old_rules = kernel_rules.read(src.entry(src.names()['kernel'])[2])
+    w = kernel_rules.WALLSETS.index(donor)
+    old_lums = [palette_lums(src, p) for p in range(21) if old_rules['wallpal_ok_for_wall'][p] >> w & 1]
+    new_prof, new_pals = ramp_profile(r, '%s Wallset' % slot)
+    old_prof = np.mean(old_lums, axis=0)[:15]
+    gray = np.repeat(old_prof[None, :, None], 3, axis=2)
+    lut = np.arange(256, dtype=np.uint8)
+    lut[240:255] = normalize.to_ramp_target(gray, new_prof, 240, dither=False, lohi=(old_prof.min(), old_prof.max()))[0]
+    return lut, new_pals
+
+
 def job_stairs_from(r, job, pal):
     """Stairs for imported sets that have none (Menzo, EOB3 Forest/Ruins): DH's closest stair style.
 
@@ -809,15 +829,7 @@ def job_stairs_from(r, job, pal):
     frames = aesop.decode_shapes(src.entry(src.names()['%s Stairs' % donor])[2])
     if donor == 'Ice' and frames[12][:2] == (48, 38) and not any(frames[13][3]):
         frames[12], frames[13] = frames[13], frames[12]          # same swap as fix_ice_stairs
-    old_rules = kernel_rules.read(src.entry(src.names()['kernel'])[2])
-    w = kernel_rules.WALLSETS.index(donor)
-    old_lums = [palette_lums(src, p) for p in range(21) if old_rules['wallpal_ok_for_wall'][p] >> w & 1]
-    stem = job['target'].split()[0]
-    new_prof, new_pals = ramp_profile(r, '%s Wallset' % stem)
-    old_prof = np.mean(old_lums, axis=0)[:15]
-    gray = np.repeat(old_prof[None, :, None], 3, axis=2)
-    lut = np.arange(256, dtype=np.uint8)
-    lut[240:255] = normalize.to_ramp_target(gray, new_prof, 240, dither=False, lohi=(old_prof.min(), old_prof.max()))[0]
+    lut, new_pals = donor_lut(src, donor, r, job['target'].split()[0])
     idx = r.names()[job['target']]
     target = aesop.decode_shapes(r.entry(idx)[2])
     assert len(target) == len(frames)
@@ -834,6 +846,37 @@ def job_stairs_from(r, job, pal):
     if job['target'] == 'Ice Stairs':
         LAYOUT_FIXES.append('Ice Stairs')
     print('    %s <- %s Stairs (original art, re-ramped)' % (job['target'], donor))
+
+
+def job_furniture_from(r, job, pal):
+    """Window, shelf and pillars of an imported set from DH's closest style (no source game has them).
+
+    {"target": "W12 Wallset", "donor": "Stone"}
+    Copies FURNITURE_FRAMES of the donor's ORIGINAL wallset (same canvases in every DH set, except
+    window panel 80: 23 or 24 px wide, nearly empty; fitted to the slot's), re-ramped to the slot's palettes like stairs_from.
+    """
+    src = aesop.ResFile(os.path.join(paths.get_dh_dir(), 'HACK.RES'))
+    donor = job['donor']
+    frames = aesop.decode_shapes(src.entry(src.names()['%s Wallset' % donor])[2])
+    lut, _ = donor_lut(src, donor, r, job['target'].split()[0])
+    idx = r.names()[job['target']]
+    target = aesop.decode_shapes(r.entry(idx)[2])
+    for k in FURNITURE_FRAMES:
+        fw, fh, px, m = frames[k]
+        tw, th = target[k][:2]
+        a, mk = (np.zeros((th, tw), np.uint8) for _ in range(2))
+        h, w = min(fh, th), min(fw, tw)          # keep the slot's canvas (verify checks layouts)
+        a[:h, :w] = lut[np.frombuffer(bytes(px), np.uint8)].reshape(fh, fw)[:h, :w]
+        mk[:h, :w] = np.frombuffer(bytes(m), np.uint8).reshape(fh, fw)[:h, :w]
+        target[k] = (tw, th, bytearray(a.tobytes()), bytearray(mk.tobytes()))
+    r.replace(idx, aesop.encode_shapes(target))
+    # the text shown on clicking the second pillar state (basin, table, rubble...) follows the art
+    sp, tp = src.entry(src.names()['current pillar'])[2], bytearray(r.entry(r.names()['current pillar'])[2])
+    text = struct.unpack_from('<I', sp, struct.unpack_from('<H', sp, pillar_text_operand(sp))[0] + 4 * kernel_rules.WALLSETS.index(donor))[0]
+    w = kernel_rules.WALLSETS.index(job['target'].split()[0])
+    struct.pack_into('<I', tp, struct.unpack_from('<H', tp, pillar_text_operand(tp))[0] + 4 * w, text)
+    r.replace(r.names()['current pillar'], bytes(tp))
+    print('    %s <- %s Wallset window/shelf/pillars (original art, re-ramped) + pillar text' % (job['target'], donor))
 
 
 def job_eob_wall_deco(r, job, pal):
@@ -921,10 +964,10 @@ def job_vmp_walls(r, job, pal):
             new, mask = normalize.warp_to_mask(tex, m, w, h)
             frames[36] = (w, h, bytearray(new.tobytes()), m)
             full = normalize.to_ramp_target(rgb_of(tpx).reshape(th, tw, 3), profile, 240, job.get('dither', False), lohi=tuple(lohi))
-            for k in ARCH_FRAMES:               # object 11 = arch face: the set's own wall
+            for k in [*ARCH_FRAMES, ARCH_POST]:     # arch face (and its inside post): the set's own wall
                 if any(frames[k][3]):
                     w, h, _, m = frames[k]
-                    new, mask = normalize.warp_to_mask(full, m, w, h)
+                    new, mask = normalize.warp_to_mask(tex if k == ARCH_POST else full, m, w, h)
                     frames[k] = (w, h, bytearray(new.tobytes()), m)
         r.replace(idx, aesop.encode_shapes(frames))
 
@@ -950,11 +993,17 @@ def job_vmp_walls(r, job, pal):
         fill(job['stairs'], st)
 
 
-# Wallset objects, identified in game by painting each a solid fixed colour (job paint_objects,
-# smoke/arch_window.json): 11 (frames 198-215) = arch face around its opening; 4 = window grille,
-# drawn inside object 1 (the door frame). The arch takes the set's own wall; the grille stays (re-ramped)
-# DH art so bars stay bars. Object 8 did not show at the arch or the window; left alone.
-ARCH_FRAMES = range(198, 216)
+# Wallset frames (236): each feature draws base + view position (0-17; 18 = standing in it) with the
+# base from its script (report 3101 or a constant): 0-17 walls, 18-35 door frame, 36 door frame seen
+# from inside the doorway, 37-54/55-72 door-frame button (off/pressed), 73-90 window panel (drawn over
+# the door frame), 91-108 shelf, 109-126/127-144 hidden button, 145-162 pillar, 163-180/181-198 wall
+# button, 199-216 arch, 217 arch seen from inside it, 218-235 second pillar state (rubble, table, crate...;
+# "current pillar" picks the state at random). Arches take the set's own wall; window, shelf and pillars
+# come from DH's closest style (furniture_from); buttons stay (re-ramped) DH art.
+ARCH_FRAMES = range(199, 217)
+ARCH_POST = 217
+POST_FRAMES = (36, ARCH_POST)
+FURNITURE_FRAMES = [*range(73, 109), *range(145, 163), *range(218, 236)]
 
 
 def job_paint_objects(r, job, pal):
@@ -970,7 +1019,7 @@ def job_paint_objects(r, job, pal):
 
 
 def post_slice(tex):
-    """Slot 36 (the door-frame jamb seen from inside the doorway) is a ~30 px post at full height;
+    """Slot 36 (the door-frame jamb seen from inside the doorway; 217 is the arch's) is a ~30 px post at full height;
     use a vertical slice a quarter of the face wide so stones/planks keep their proportions."""
     w = tex.shape[1]
     return tex[:, w * 3 // 8:w * 5 // 8]
@@ -985,7 +1034,7 @@ def job_wallset(r, job, pal):
         w, h, px, m = frames[k]
         if not any(m):
             continue
-        new, mask = normalize.warp_to_mask(post_slice(tex) if k == 36 else tex, m, w, h)
+        new, mask = normalize.warp_to_mask(post_slice(tex) if k in POST_FRAMES else tex, m, w, h)
         frames[k] = (w, h, bytearray(new.tobytes()), m)
     r.replace(idx, aesop.encode_shapes(frames))
 
@@ -1053,7 +1102,8 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'eob_door': job_eob_door, 'vmp_deco': job_vmp_deco,
         'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset,
         'game_music': job_game_music, 'extra_doors': job_extra_doors, 'paint_objects': job_paint_objects,
-        'extra_floors': job_extra_floors, 'stairs_from': job_stairs_from}
+        'extra_floors': job_extra_floors, 'stairs_from': job_stairs_from,
+        'furniture_from': job_furniture_from}
 
 
 def cmd_build(recipe_path, name):

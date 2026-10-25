@@ -625,6 +625,11 @@
    "image": "pool/floors/BLUE_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "Eighth Wallset",
+   "donor": "Stone"
+  },
+  {
    "type": "wallset",
    "target": "W08 Wallset",
    "texture": "pool/walls/menzo_gold_v0.png",
@@ -640,7 +645,7 @@
    "type": "wallset",
    "target": "W08 Wallset",
    "texture": "pool/walls/menzo_gold_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -650,6 +655,11 @@
   {
    "type": "stairs_from",
    "target": "W08 Stairs",
+   "donor": "Marble"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W08 Wallset",
    "donor": "Marble"
   },
   {
@@ -674,6 +684,11 @@
    "image": "pool/floors/CRIMSON_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "W09 Wallset",
+   "donor": "Foil"
+  },
+  {
    "type": "wallset",
    "target": "W10 Wallset",
    "texture": "pool/walls/menzo_purple_v0.png",
@@ -689,7 +704,7 @@
    "type": "wallset",
    "target": "W10 Wallset",
    "texture": "pool/walls/menzo_purple_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -699,6 +714,11 @@
   {
    "type": "stairs_from",
    "target": "W10 Stairs",
+   "donor": "Marble"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W10 Wallset",
    "donor": "Marble"
   },
   {
@@ -717,7 +737,7 @@
    "type": "wallset",
    "target": "W11 Wallset",
    "texture": "pool/walls/menzo_cave_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -727,6 +747,11 @@
   {
    "type": "stairs_from",
    "target": "W11 Stairs",
+   "donor": "Rock"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W11 Wallset",
    "donor": "Rock"
   },
   {
@@ -751,6 +776,11 @@
    "image": "pool/floors/MEZZ_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "W12 Wallset",
+   "donor": "Marble"
+  },
+  {
    "type": "vmp_walls",
    "target": "W13 Wallset",
    "game": "eob1",
@@ -770,6 +800,11 @@
    "type": "floor",
    "target": "Floor-4",
    "image": "pool/floors/GREEN_backdrop.png"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W13 Wallset",
+   "donor": "Stone"
   },
   {
    "type": "vmp_walls",
@@ -793,6 +828,11 @@
    "image": "pool/floors/DUNG_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "W14 Wallset",
+   "donor": "Stone"
+  },
+  {
    "type": "panels",
    "target": "W15 Wallset",
    "target_first": 0,
@@ -810,11 +850,16 @@
    "type": "wallset",
    "target": "W15 Wallset",
    "texture": "pool/walls/eob3_forest_front.png",
-   "frames": "36,198-215"
+   "frames": "36,199-217"
   },
   {
    "type": "stairs_from",
    "target": "W15 Stairs",
+   "donor": "Ice"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W15 Wallset",
    "donor": "Ice"
   },
   {
@@ -892,7 +937,12 @@
    "type": "wallset",
    "target": "Foil Wallset",
    "texture": "pool/walls/eob3_mausoleum_front.png",
-   "frames": "36,198-215"
+   "frames": "36,199-217"
+  },
+  {
+   "type": "furniture_from",
+   "target": "Foil Wallset",
+   "donor": "Marble"
   },
   {
    "type": "wallset",
@@ -910,7 +960,7 @@
    "type": "wallset",
    "target": "Mine Wallset",
    "texture": "pool/walls/menzo_red_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -920,6 +970,11 @@
   {
    "type": "stairs_from",
    "target": "Mine Stairs",
+   "donor": "Marble"
+  },
+  {
+   "type": "furniture_from",
+   "target": "Mine Wallset",
    "donor": "Marble"
   },
   {
@@ -953,6 +1008,11 @@
    "image": "pool/floors/XANATHA_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "Wood Wallset",
+   "donor": "Foil"
+  },
+  {
    "type": "wallset",
    "target": "Rock Wallset",
    "texture": "pool/walls/menzo_wood_v0.png",
@@ -968,7 +1028,7 @@
    "type": "wallset",
    "target": "Rock Wallset",
    "texture": "pool/walls/menzo_wood_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -978,6 +1038,11 @@
   {
    "type": "stairs_from",
    "target": "Rock Stairs",
+   "donor": "Wood"
+  },
+  {
+   "type": "furniture_from",
+   "target": "Rock Wallset",
    "donor": "Wood"
   },
   {

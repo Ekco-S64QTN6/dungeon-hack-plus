@@ -93,7 +93,7 @@ def jobs(name, slot, floor):
     w = 'pool/walls/%s_%%s.png' % name
     return [{'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': w % 'v0', 'frames': '0-5,8,13,16'},
             {'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': w % 'v1', 'frames': '6,7,9-12'},
-            {'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': w % 'v0', 'frames': '18-36,198-215'},   # + arch
+            {'type': 'wallset', 'target': '%s Wallset' % slot, 'texture': w % 'v0', 'frames': '18-36,199-217'},   # + arch
             {'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s.png' % name},
             {'type': 'stairs_from', 'target': '%s Stairs' % slot, 'donor': STAIR_DONOR[name]}]
 

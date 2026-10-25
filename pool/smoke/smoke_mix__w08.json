@@ -444,6 +444,11 @@
    "image": "pool/floors/BLUE_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "Eighth Wallset",
+   "donor": "Stone"
+  },
+  {
    "type": "wallset",
    "target": "W08 Wallset",
    "texture": "pool/walls/menzo_gold_v0.png",
@@ -459,7 +464,7 @@
    "type": "wallset",
    "target": "W08 Wallset",
    "texture": "pool/walls/menzo_gold_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -469,6 +474,11 @@
   {
    "type": "stairs_from",
    "target": "W08 Stairs",
+   "donor": "Marble"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W08 Wallset",
    "donor": "Marble"
   },
   {
@@ -493,6 +503,11 @@
    "image": "pool/floors/CRIMSON_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "W09 Wallset",
+   "donor": "Foil"
+  },
+  {
    "type": "wallset",
    "target": "W10 Wallset",
    "texture": "pool/walls/menzo_purple_v0.png",
@@ -508,7 +523,7 @@
    "type": "wallset",
    "target": "W10 Wallset",
    "texture": "pool/walls/menzo_purple_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -518,6 +533,11 @@
   {
    "type": "stairs_from",
    "target": "W10 Stairs",
+   "donor": "Marble"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W10 Wallset",
    "donor": "Marble"
   },
   {
@@ -536,7 +556,7 @@
    "type": "wallset",
    "target": "W11 Wallset",
    "texture": "pool/walls/menzo_cave_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -546,6 +566,11 @@
   {
    "type": "stairs_from",
    "target": "W11 Stairs",
+   "donor": "Rock"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W11 Wallset",
    "donor": "Rock"
   },
   {
@@ -570,6 +595,11 @@
    "image": "pool/floors/MEZZ_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "W12 Wallset",
+   "donor": "Marble"
+  },
+  {
    "type": "vmp_walls",
    "target": "W13 Wallset",
    "game": "eob1",
@@ -589,6 +619,11 @@
    "type": "floor",
    "target": "Floor-4",
    "image": "pool/floors/GREEN_backdrop.png"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W13 Wallset",
+   "donor": "Stone"
   },
   {
    "type": "vmp_walls",
@@ -612,6 +647,11 @@
    "image": "pool/floors/DUNG_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "W14 Wallset",
+   "donor": "Stone"
+  },
+  {
    "type": "panels",
    "target": "W15 Wallset",
    "target_first": 0,
@@ -629,11 +669,16 @@
    "type": "wallset",
    "target": "W15 Wallset",
    "texture": "pool/walls/eob3_forest_front.png",
-   "frames": "36,198-215"
+   "frames": "36,199-217"
   },
   {
    "type": "stairs_from",
    "target": "W15 Stairs",
+   "donor": "Ice"
+  },
+  {
+   "type": "furniture_from",
+   "target": "W15 Wallset",
    "donor": "Ice"
   },
   {
@@ -711,7 +756,12 @@
    "type": "wallset",
    "target": "Foil Wallset",
    "texture": "pool/walls/eob3_mausoleum_front.png",
-   "frames": "36,198-215"
+   "frames": "36,199-217"
+  },
+  {
+   "type": "furniture_from",
+   "target": "Foil Wallset",
+   "donor": "Marble"
   },
   {
    "type": "wallset",
@@ -729,7 +779,7 @@
    "type": "wallset",
    "target": "Mine Wallset",
    "texture": "pool/walls/menzo_red_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -739,6 +789,11 @@
   {
    "type": "stairs_from",
    "target": "Mine Stairs",
+   "donor": "Marble"
+  },
+  {
+   "type": "furniture_from",
+   "target": "Mine Wallset",
    "donor": "Marble"
   },
   {
@@ -772,6 +827,11 @@
    "image": "pool/floors/XANATHA_backdrop.png"
   },
   {
+   "type": "furniture_from",
+   "target": "Wood Wallset",
+   "donor": "Foil"
+  },
+  {
    "type": "wallset",
    "target": "Rock Wallset",
    "texture": "pool/walls/menzo_wood_v0.png",
@@ -787,7 +847,7 @@
    "type": "wallset",
    "target": "Rock Wallset",
    "texture": "pool/walls/menzo_wood_v0.png",
-   "frames": "18-36,198-215"
+   "frames": "18-36,199-217"
   },
   {
    "type": "floor",
@@ -797,6 +857,11 @@
   {
    "type": "stairs_from",
    "target": "Rock Stairs",
+   "donor": "Wood"
+  },
+  {
+   "type": "furniture_from",
+   "target": "Rock Wallset",
    "donor": "Wood"
   },
   {
@@ -1091,16 +1156,76 @@
    "index": 21
   },
   {
-   "type": "sprites",
-   "target": "Ankheg",
-   "images": [
-    "pool/monsters/eob2_fsnake/0.png",
-    "pool/monsters/eob2_fsnake/1.png",
-    "pool/monsters/eob2_fsnake/2.png",
-    "pool/monsters/eob2_fsnake/3.png",
-    "pool/monsters/eob2_fsnake/4.png",
-    "pool/monsters/eob2_fsnake/5.png"
-   ]
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 16",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 19
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 17",
+   "game": "eob2",
+   "sheet": "MEZZ1.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 6
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 18",
+   "game": "eob2",
+   "sheet": "BROWN2.CPS",
+   "dec": "BROWN.DEC",
+   "pal": "DUNG.PAL",
+   "index": 35
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 19",
+   "game": "eob2",
+   "sheet": "AZURE1.CPS",
+   "dec": "AZURE.DEC",
+   "pal": "AZURE.PAL",
+   "index": 49
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 20",
+   "game": "eob2",
+   "sheet": "MEZZ1.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 12
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 21",
+   "game": "eob2",
+   "sheet": "MEZZ2.CPS",
+   "dec": "MEZZ.DEC",
+   "pal": "MEZZ.PAL",
+   "index": 44
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 22",
+   "game": "eob1",
+   "sheet": "DROW.CPS",
+   "dec": "DROW.DAT",
+   "pal": "DROW.PAL",
+   "index": 14
+  },
+  {
+   "type": "eob_wall_deco",
+   "target": "Wall Deco 23",
+   "game": "eob2",
+   "sheet": "CRIMSON.CPS",
+   "dec": "CRIMSON.DEC",
+   "pal": "CRIMSON.PAL",
+   "index": 24
   },
   {
    "type": "sprites",
@@ -1118,12 +1243,24 @@
    "type": "sprites",
    "target": "Carrion",
    "images": [
-    "pool/monsters/eob2_spider/0.png",
-    "pool/monsters/eob2_spider/1.png",
-    "pool/monsters/eob2_spider/2.png",
-    "pool/monsters/eob2_spider/3.png",
-    "pool/monsters/eob2_spider/4.png",
-    "pool/monsters/eob2_spider/5.png"
+    "pool/monsters/eob1_leech/0.png",
+    "pool/monsters/eob1_leech/1.png",
+    "pool/monsters/eob1_leech/2.png",
+    "pool/monsters/eob1_leech/3.png",
+    "pool/monsters/eob1_leech/4.png",
+    "pool/monsters/eob1_leech/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Gargoyle",
+   "images": [
+    "pool/monsters/eob2_gargoyle/0.png",
+    "pool/monsters/eob2_gargoyle/1.png",
+    "pool/monsters/eob2_gargoyle/2.png",
+    "pool/monsters/eob2_gargoyle/3.png",
+    "pool/monsters/eob2_gargoyle/4.png",
+    "pool/monsters/eob2_gargoyle/5.png"
    ]
   },
   {
@@ -1140,6 +1277,54 @@
   },
   {
    "type": "sprites",
+   "target": "Goblin",
+   "images": [
+    "pool/monsters/eob2_ant/0.png",
+    "pool/monsters/eob2_ant/1.png",
+    "pool/monsters/eob2_ant/2.png",
+    "pool/monsters/eob2_ant/3.png",
+    "pool/monsters/eob2_ant/4.png",
+    "pool/monsters/eob2_ant/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Golem",
+   "images": [
+    "pool/monsters/eob1_golem/0.png",
+    "pool/monsters/eob1_golem/1.png",
+    "pool/monsters/eob1_golem/2.png",
+    "pool/monsters/eob1_golem/3.png",
+    "pool/monsters/eob1_golem/4.png",
+    "pool/monsters/eob1_golem/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Gravmist",
+   "images": [
+    "pool/monsters/eob2_willowis/0.png",
+    "pool/monsters/eob2_willowis/1.png",
+    "pool/monsters/eob2_willowis/2.png",
+    "pool/monsters/eob2_willowis/3.png",
+    "pool/monsters/eob2_willowis/4.png",
+    "pool/monsters/eob2_willowis/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Grmedusa",
+   "images": [
+    "pool/monsters/eob2_medusa/0.png",
+    "pool/monsters/eob2_medusa/1.png",
+    "pool/monsters/eob2_medusa/2.png",
+    "pool/monsters/eob2_medusa/3.png",
+    "pool/monsters/eob2_medusa/4.png",
+    "pool/monsters/eob2_medusa/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
    "target": "Hobgob",
    "images": [
     "pool/monsters/eob1_kenku/0.png",
@@ -1152,14 +1337,14 @@
   },
   {
    "type": "sprites",
-   "target": "Livmuck",
+   "target": "Knight",
    "images": [
-    "pool/monsters/eob2_cube/0.png",
-    "pool/monsters/eob2_cube/1.png",
-    "pool/monsters/eob2_cube/2.png",
-    "pool/monsters/eob2_cube/3.png",
-    "pool/monsters/eob2_cube/4.png",
-    "pool/monsters/eob2_cube/5.png"
+    "pool/monsters/eob1_skelwar/0.png",
+    "pool/monsters/eob1_skelwar/1.png",
+    "pool/monsters/eob1_skelwar/2.png",
+    "pool/monsters/eob1_skelwar/3.png",
+    "pool/monsters/eob1_skelwar/4.png",
+    "pool/monsters/eob1_skelwar/5.png"
    ]
   },
   {
@@ -1176,6 +1361,30 @@
   },
   {
    "type": "sprites",
+   "target": "Orc",
+   "images": [
+    "pool/monsters/eob1_kuotoa/0.png",
+    "pool/monsters/eob1_kuotoa/1.png",
+    "pool/monsters/eob1_kuotoa/2.png",
+    "pool/monsters/eob1_kuotoa/3.png",
+    "pool/monsters/eob1_kuotoa/4.png",
+    "pool/monsters/eob1_kuotoa/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Otyugh",
+   "images": [
+    "pool/monsters/eob2_gasspore/0.png",
+    "pool/monsters/eob2_gasspore/1.png",
+    "pool/monsters/eob2_gasspore/2.png",
+    "pool/monsters/eob2_gasspore/3.png",
+    "pool/monsters/eob2_gasspore/4.png",
+    "pool/monsters/eob2_gasspore/5.png"
+   ]
+  },
+  {
+   "type": "sprites",
    "target": "Shadewar",
    "images": [
     "pool/monsters/eob1_drowelf/0.png",
@@ -1188,62 +1397,50 @@
   },
   {
    "type": "sprites",
-   "target": "Shadewiz",
+   "target": "Spectre",
    "images": [
-    "pool/monsters/eob1_shindia/0.png",
-    "pool/monsters/eob1_shindia/1.png",
-    "pool/monsters/eob1_shindia/2.png",
-    "pool/monsters/eob1_shindia/3.png",
-    "pool/monsters/eob1_shindia/4.png",
-    "pool/monsters/eob1_shindia/5.png"
+    "pool/monsters/eob1_mage/0.png",
+    "pool/monsters/eob1_mage/1.png",
+    "pool/monsters/eob1_mage/2.png",
+    "pool/monsters/eob1_mage/3.png",
+    "pool/monsters/eob1_mage/4.png",
+    "pool/monsters/eob1_mage/5.png"
    ]
   },
   {
    "type": "sprites",
-   "target": "Umberhul",
+   "target": "Troglody",
    "images": [
-    "pool/monsters/eob2_bulette/0.png",
-    "pool/monsters/eob2_bulette/1.png",
-    "pool/monsters/eob2_bulette/2.png",
-    "pool/monsters/eob2_bulette/3.png",
-    "pool/monsters/eob2_bulette/4.png",
-    "pool/monsters/eob2_bulette/5.png"
+    "pool/monsters/eob1_dwarf/0.png",
+    "pool/monsters/eob1_dwarf/1.png",
+    "pool/monsters/eob1_dwarf/2.png",
+    "pool/monsters/eob1_dwarf/3.png",
+    "pool/monsters/eob1_dwarf/4.png",
+    "pool/monsters/eob1_dwarf/5.png"
    ]
   },
   {
    "type": "sprites",
-   "target": "Watchght",
+   "target": "Undbeast",
    "images": [
-    "pool/monsters/eob2_wasp/0.png",
-    "pool/monsters/eob2_wasp/1.png",
-    "pool/monsters/eob2_wasp/2.png",
-    "pool/monsters/eob2_wasp/3.png",
-    "pool/monsters/eob2_wasp/4.png",
-    "pool/monsters/eob2_wasp/5.png"
+    "pool/monsters/eob1_disbeast/0.png",
+    "pool/monsters/eob1_disbeast/1.png",
+    "pool/monsters/eob1_disbeast/2.png",
+    "pool/monsters/eob1_disbeast/3.png",
+    "pool/monsters/eob1_disbeast/4.png",
+    "pool/monsters/eob1_disbeast/5.png"
    ]
   },
   {
    "type": "sprites",
    "target": "Wererat",
    "images": [
-    "pool/monsters/eob2_wolf/0.png",
-    "pool/monsters/eob2_wolf/1.png",
-    "pool/monsters/eob2_wolf/2.png",
-    "pool/monsters/eob2_wolf/3.png",
-    "pool/monsters/eob2_wolf/4.png",
-    "pool/monsters/eob2_wolf/5.png"
-   ]
-  },
-  {
-   "type": "sprites",
-   "target": "Wight",
-   "images": [
-    "pool/monsters/eob1_skeleton/0.png",
-    "pool/monsters/eob1_skeleton/1.png",
-    "pool/monsters/eob1_skeleton/2.png",
-    "pool/monsters/eob1_skeleton/3.png",
-    "pool/monsters/eob1_skeleton/4.png",
-    "pool/monsters/eob1_skeleton/5.png"
+    "pool/monsters/eob1_hellhound/0.png",
+    "pool/monsters/eob1_hellhound/1.png",
+    "pool/monsters/eob1_hellhound/2.png",
+    "pool/monsters/eob1_hellhound/3.png",
+    "pool/monsters/eob1_hellhound/4.png",
+    "pool/monsters/eob1_hellhound/5.png"
    ]
   },
   {
@@ -1259,26 +1456,14 @@
    ]
   },
   {
-   "type": "sprites",
-   "target": "Xill",
-   "images": [
-    "pool/monsters/eob1_mantis/0.png",
-    "pool/monsters/eob1_mantis/1.png",
-    "pool/monsters/eob1_mantis/2.png",
-    "pool/monsters/eob1_mantis/3.png",
-    "pool/monsters/eob1_mantis/4.png",
-    "pool/monsters/eob1_mantis/5.png"
-   ]
-  },
-  {
    "type": "game_music",
    "tracks": {
     "Marble": {
-     "la": "dh:Music Scene One Roland",
-     "ad": "dh:Music Scene One Adlib"
+     "la": "dh:Music End Roland",
+     "ad": "dh:Music End Adlib/Pc"
     },
     "Wood": {
-     "la": "eob3:CUE5",
+     "la": "menzo:85",
      "ad": "dh:Music End Adlib/Pc"
     },
     "Stone": {
@@ -1286,58 +1471,233 @@
      "ad": "dh:Music Scene Two Adlib/Pc"
     },
     "Foil": {
-     "la": "eob3:SAGEGH",
-     "ad": "dh:Music Scene One Adlib"
+     "la": "eob3:XYZ",
+     "ad": "dh:Music Scene Two Adlib/Pc"
     },
     "Ice": {
-     "la": "dh:Music End Roland",
-     "ad": "dh:Music End Adlib/Pc"
-    },
-    "Mine": {
-     "la": "menzo:39",
+     "la": "dh:Music Scene One Roland",
      "ad": "dh:Music Scene One Adlib"
     },
+    "Mine": {
+     "la": "menzo:96",
+     "ad": "dh:Music End Adlib/Pc"
+    },
     "Rock": {
-     "la": "menzo:31",
+     "la": "menzo:94",
      "ad": "dh:Music Scene One Adlib"
     },
     "Eighth": {
-     "la": "menzo:93",
+     "la": "eob3:SSS",
      "ad": "dh:Music Scene Two Adlib/Pc"
     },
     "W08": {
-     "la": "menzo:42",
-     "ad": "dh:Music Scene Two Adlib/Pc"
+     "la": "menzo:24",
+     "ad": "dh:Music Scene One Adlib"
     },
     "W09": {
-     "la": "menzo:41",
-     "ad": "dh:Music End Adlib/Pc"
+     "la": "menzo:90",
+     "ad": "dh:Music Scene Two Adlib/Pc"
     },
     "W10": {
-     "la": "menzo:46",
-     "ad": "dh:Music End Adlib/Pc"
+     "la": "menzo:78",
+     "ad": "dh:Music Scene Two Adlib/Pc"
     },
     "W11": {
-     "la": "menzo:90",
+     "la": "menzo:91",
      "ad": "dh:Music End Adlib/Pc"
     },
     "W12": {
-     "la": "eob3:CUE1",
-     "ad": "dh:Music Scene Two Adlib/Pc"
+     "la": "menzo:29",
+     "ad": "dh:Music End Adlib/Pc"
     },
     "W13": {
-     "la": "eob3:MAG",
-     "ad": "dh:Music Scene One Adlib"
+     "la": "eob3:SAGEGH",
+     "ad": "dh:Music End Adlib/Pc"
     },
     "W14": {
-     "la": "menzo:81",
-     "ad": "dh:Music Scene Two Adlib/Pc"
+     "la": "menzo:32",
+     "ad": "dh:Music End Adlib/Pc"
     },
     "W15": {
-     "la": "eob3:CUE8",
-     "ad": "dh:Music Scene Two Adlib/Pc"
+     "la": "eob3:THY",
+     "ad": "dh:Music End Adlib/Pc"
     }
    }
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 1",
+   "images": [
+    "pool/portraits/eob1_09.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 3",
+   "images": [
+    "pool/portraits/eob3_52.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 5",
+   "images": [
+    "pool/portraits/eob3_65.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 7",
+   "images": [
+    "pool/portraits/eob1_24.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 8",
+   "images": [
+    "pool/portraits/eob1_05.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 9",
+   "images": [
+    "pool/portraits/eob1_13.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 13",
+   "images": [
+    "pool/portraits/eob1_19.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 14",
+   "images": [
+    "pool/portraits/eob1_08.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 15",
+   "images": [
+    "pool/portraits/eob1_04.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 16",
+   "images": [
+    "pool/portraits/eob1_00.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 17",
+   "images": [
+    "pool/portraits/eob1_18.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 24",
+   "images": [
+    "pool/portraits/eob1_01.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 25",
+   "images": [
+    "pool/portraits/eob1_25.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 26",
+   "images": [
+    "pool/portraits/eob1_06.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 27",
+   "images": [
+    "pool/portraits/eob1_15.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 29",
+   "images": [
+    "pool/portraits/eob1_27.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 30",
+   "images": [
+    "pool/portraits/eob3_74.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 33",
+   "images": [
+    "pool/portraits/eob3_54.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 34",
+   "images": [
+    "pool/portraits/eob2_44.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 36",
+   "images": [
+    "pool/portraits/eob1_33.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 38",
+   "images": [
+    "pool/portraits/eob2_48.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 39",
+   "images": [
+    "pool/portraits/eob2_47.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 40",
+   "images": [
+    "pool/portraits/eob1_32.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 42",
+   "images": [
+    "pool/portraits/eob1_39.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 43",
+   "images": [
+    "pool/portraits/eob1_30.png"
+   ]
   },
   {
    "type": "raw",
