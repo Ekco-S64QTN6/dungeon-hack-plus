@@ -152,6 +152,33 @@
    "W13": "eob3:SAGEGH",
    "W14": "menzo:32",
    "W15": "eob3:THY"
+  },
+  "portraits": {
+   "Portrait 1": "eob1_09",
+   "Portrait 3": "eob3_52",
+   "Portrait 5": "eob3_65",
+   "Portrait 7": "eob1_24",
+   "Portrait 8": "eob1_05",
+   "Portrait 9": "eob1_13",
+   "Portrait 13": "eob1_19",
+   "Portrait 14": "eob1_08",
+   "Portrait 15": "eob1_04",
+   "Portrait 16": "eob1_00",
+   "Portrait 17": "eob1_18",
+   "Portrait 24": "eob1_01",
+   "Portrait 25": "eob1_25",
+   "Portrait 26": "eob1_06",
+   "Portrait 27": "eob1_15",
+   "Portrait 29": "eob1_27",
+   "Portrait 30": "eob3_74",
+   "Portrait 33": "eob3_54",
+   "Portrait 34": "eob2_44",
+   "Portrait 36": "eob1_33",
+   "Portrait 38": "eob2_48",
+   "Portrait 39": "eob2_47",
+   "Portrait 40": "eob1_32",
+   "Portrait 42": "eob1_39",
+   "Portrait 43": "eob1_30"
   }
  },
  "jobs": [
@@ -1612,6 +1639,181 @@
      "ad": "dh:Music End Adlib/Pc"
     }
    }
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 1",
+   "images": [
+    "pool/portraits/eob1_09.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 3",
+   "images": [
+    "pool/portraits/eob3_52.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 5",
+   "images": [
+    "pool/portraits/eob3_65.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 7",
+   "images": [
+    "pool/portraits/eob1_24.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 8",
+   "images": [
+    "pool/portraits/eob1_05.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 9",
+   "images": [
+    "pool/portraits/eob1_13.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 13",
+   "images": [
+    "pool/portraits/eob1_19.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 14",
+   "images": [
+    "pool/portraits/eob1_08.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 15",
+   "images": [
+    "pool/portraits/eob1_04.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 16",
+   "images": [
+    "pool/portraits/eob1_00.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 17",
+   "images": [
+    "pool/portraits/eob1_18.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 24",
+   "images": [
+    "pool/portraits/eob1_01.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 25",
+   "images": [
+    "pool/portraits/eob1_25.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 26",
+   "images": [
+    "pool/portraits/eob1_06.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 27",
+   "images": [
+    "pool/portraits/eob1_15.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 29",
+   "images": [
+    "pool/portraits/eob1_27.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 30",
+   "images": [
+    "pool/portraits/eob3_74.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 33",
+   "images": [
+    "pool/portraits/eob3_54.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 34",
+   "images": [
+    "pool/portraits/eob2_44.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 36",
+   "images": [
+    "pool/portraits/eob1_33.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 38",
+   "images": [
+    "pool/portraits/eob2_48.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 39",
+   "images": [
+    "pool/portraits/eob2_47.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 40",
+   "images": [
+    "pool/portraits/eob1_32.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 42",
+   "images": [
+    "pool/portraits/eob1_39.png"
+   ]
+  },
+  {
+   "type": "sprites",
+   "target": "Portrait 43",
+   "images": [
+    "pool/portraits/eob1_30.png"
+   ]
   },
   {
    "type": "raw",

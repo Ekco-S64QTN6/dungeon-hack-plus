@@ -57,6 +57,17 @@ def retarget(job, old_stem, new_stem):
 
 NEW_SLOTS = kernel_rules.WALLSETS[7:16]          # Eighth, W08..W15 (engine extension)
 SEE_THROUGH_DOORS = {'grate', 'web', 'e2_bars'}
+# Character portraits. DH's chooser pages 16 at a time: men get 0-31, women 29 + box (29-44); 29-31 are
+# shared (helmeted/hooded). Candidates labelled by eye from the extracted sheets, minus EOB2 0-43 (= EOB1)
+# and EOB3 faces that are already DH's own (DH reused EOB3's portraits; matched by image distance).
+PORTRAITS = {
+    'male': ['eob1_%02d' % i for i in list(range(0, 14)) + list(range(15, 26)) + [28]] + ['eob2_49'] +
+            ['eob3_%02d' % i for i in (50, 51, 52, 65)],
+    'female': ['eob1_%02d' % i for i in range(29, 44)] + ['eob2_%02d' % i for i in (44, 46, 47, 48)] +
+              ['eob3_%02d' % i for i in (54, 59, 62, 64)],
+    'shared': ['eob1_14', 'eob1_26', 'eob1_27', 'eob2_45', 'eob3_55', 'eob3_73', 'eob3_74'],
+}
+PORTRAIT_SLOTS = {'male': range(0, 29), 'shared': range(29, 32), 'female': range(32, 45)}
 EXTRA_DOORS = 16
 
 
@@ -266,6 +277,16 @@ def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
             tracks[slot] = {'la': la, 'ad': dh_ad.get(la) or rng.choice(sorted(dh_ad.values()))}
             summary['music'][slot] = la
         jobs.append({'type': 'game_music', 'tracks': tracks})
+
+    # ---- character portraits: about half of DH's, same group (men / women / helmeted-hooded)
+    summary['portraits'] = {}
+    for group, slots in PORTRAIT_SLOTS.items():
+        pool = list(PORTRAITS[group]); rng.shuffle(pool)
+        for slot in slots:
+            if pool and rng.random() < 0.5:
+                face = pool.pop()
+                summary['portraits']['Portrait %d' % slot] = face
+                jobs.append({'type': 'sprites', 'target': 'Portrait %d' % slot, 'images': ['pool/portraits/%s.png' % face]})
 
     # ---- audio: EOB3 sound effects and music (fixed, not rolled)
     for rec in ('recipe_sounds.json', 'recipe_music.json'):
