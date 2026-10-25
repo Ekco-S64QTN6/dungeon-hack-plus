@@ -1,0 +1,12 @@
+{
+ "comment": "floor pit added at (23,1) on level 1 (fixture savegame_pit), seen from the start (23,2) facing N",
+ "fixture": "fixtures/savegame_pit",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "face": "N",
+   "shot": "1_pit_d1"
+  }
+ ]
+}
