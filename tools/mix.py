@@ -207,6 +207,30 @@ def roll(seed=1, external=4, picks=None, eighth=True, extra_doors=True):
         jobs.append({'type': 'eob_wall_deco', 'target': target, 'game': game, 'sheet': sheet + '.CPS',
                      'dec': dec + ('.DAT' if game == 'eob1' else '.DEC'), 'pal': epal + '.PAL', 'index': index})
 
+    # ---- wallset decorations: an imported set in one of DH's own 7 slots inherits that slot's 4 decoration
+    # resources. EOB1/EOB2 sets replace them (vmp_deco), EOB3 Mausoleum/Ruins 3 of them; Menzo sets, EOB3
+    # Forest and EOB2's forest have none, so DH's carvings for that slot would sit on foreign walls. Those
+    # get cosmetic EOB decorations (fixed colours, so they suit any wall) instead.
+    full = [('eob1', d) for d in ec.THEMES['eob1_waterdeep']['wall_decos']] + \
+           [('eob2', d) for d in ec.THEMES['eob2_darkmoon_classic']['wall_decos']]
+    rng.shuffle(full)
+    summary['slot_decos'] = {}
+    k = 0
+    for slot, src in picks.items():
+        if slot not in SLOTS:
+            continue
+        if src.startswith('eob3'):
+            own = len(EOB3_DECOS.get(next(s3 for s3 in EOB3_SETS if s3[0] == src)[3], []))
+        elif src.startswith('menzo'):
+            own = 0
+        else:
+            own = 0 if next(s2 for s2 in WESTWOOD_SETS if s2[0] == src)[2] == 'FOREST' else 4
+        for target in ec_deco_slots(slot)[own:]:
+            game, (sheet, dec, epal, index) = full[k % len(full)]; k += 1
+            summary['slot_decos'][target] = '%s %s #%d' % (game, sheet, index)
+            jobs.append({'type': 'eob_wall_deco', 'target': target, 'game': game, 'sheet': sheet + '.CPS',
+                         'dec': dec + ('.DAT' if game == 'eob1' else '.DEC'), 'pal': epal + '.PAL', 'index': index})
+
     # ---- monsters: each DH monster with an EOB counterpart keeps its art or takes one of them
     cands = {}
     for theme in ('eob1_waterdeep', 'eob2_darkmoon_classic'):
