@@ -317,6 +317,11 @@ def job_force_graphics(r, job, pal):
     names = r.names(); idx = names['kernel']
     res = {k: names[v] for k, v in job.items() if k in kernel_rules.TABLES}
     r.replace(idx, kernel_rules.force(r.entry(idx)[2], **res))
+    if 'wallnum' in job:            # pin "randomize graphics" to rnd(n, n): exercises the real per-level path
+        k = bytearray(r.entry(idx)[2]); i = k.find(kernel_rules.RND_WALL[2:])
+        assert k[i - 5:i - 3] == b'\x1d\x00' and k[i - 2] == 0x1d     # SHTC 0; PUSH; SHTC n (min, count)
+        k[i - 4] = job['wallnum']; k[i - 1] = job['wallnum'] + 1
+        r.replace(idx, bytes(k))
     if 'wall_deco' in job:          # decoration object's table14 (deco index -> resource), 48 longs at 14
         di = names['decoration']; d = bytearray(r.entry(di)[2])
         vals = struct.unpack_from('<48I', d, 14)
@@ -408,6 +413,54 @@ def job_fix_unlock_shape(r, job, pal):
 
 
 LAYOUT_FIXES = []    # resources whose frame ORDER a fix job changes on purpose (verify accepts permutations)
+ADDED = {}           # resources an engine extension added: new name -> original it was copied from
+
+
+def job_extra_wallset(r, job, pal):
+    """ENGINE EXTENSION: an 8th wallset (+ stairs) that "randomize graphics" can pick per level.
+
+    {"copy": "Rock"}   (runs before palette_rules; later jobs fill "Eighth Wallset"/"Eighth Stairs")
+    Adds two resources in free directory slots (copies of the source wallset/stairs) with their
+    names, extends the kernel (kernel_rules.add_wallset: tables appended, loads repointed,
+    rnd(0..7)), gives wallset 7 the source's floor/palette pairing bits (otherwise new-game
+    creation would loop forever looking for a floor), and appends an 8-entry copy of
+    "current pillar"'s per-wallset pillar table (its 7-entry table would be read past the end).
+    """
+    names = r.names()
+    if 'Eighth Wallset' in names:
+        return
+    src = job.get('copy', 'Rock')
+    free = [i for i, p in enumerate(r.ptrs) if not p]
+    added = {}
+    for idx, kind in zip(free[:2], ('Wallset', 'Stairs')):
+        orig = names['%s %s' % (src, kind)]
+        _, attrib, payload = r.entry(orig)
+        r.replace(idx, payload, attrib=attrib)
+        r.data[r.blocks[idx // aesop.SLOTS] + 4 + idx % aesop.SLOTS] = r.data[r.blocks[orig // aesop.SLOTS] + 4 + orig % aesop.SLOTS]
+        added['Eighth ' + kind] = idx
+        ADDED['Eighth ' + kind] = '%s %s' % (src, kind)
+    H, chains = rtd.parse(r.entry(0)[2])
+    for tag, idx in added.items():
+        rtd.add(H, chains, tag.encode(), str(idx).encode())
+    r.replace(0, rtd.build(H, chains)); r._names = None
+    ki = r.names()['kernel']
+    k = kernel_rules.add_wallset(r.entry(ki)[2], added['Eighth Wallset'], added['Eighth Stairs'])
+    rules = kernel_rules.read(k)
+    w = kernel_rules.WALLSETS.index(src)
+    for key, n in (('floor_ok_for_wall', kernel_rules.N_FLOOR), ('wallpal_ok_for_wall', kernel_rules.N_PAL)):
+        for i in range(n):
+            if rules[key][i] >> w & 1:
+                rules[key][i] |= 1 << 7
+    r.replace(ki, kernel_rules.write(k, rules))
+    pi = r.names()['current pillar']
+    p = bytearray(r.entry(pi)[2])
+    op = p.find(bytes.fromhex('2a0e00')) + 1                  # LTDA "L:table14" (pillar art per wallset)
+    vals = struct.unpack_from('<7I', p, 14)
+    struct.pack_into('<H', p, op, len(p))
+    p += struct.pack('<8I', *vals, vals[w])
+    r.replace(pi, bytes(p))
+    print('    added Eighth Wallset (%d) + Eighth Stairs (%d) as copies of %s; kernel picks rnd(0..7)'
+          % (added['Eighth Wallset'], added['Eighth Stairs'], src))
 
 
 def job_fix_ice_stairs(r, job, pal):
@@ -527,7 +580,8 @@ def job_reramp(r, job, pal):
     No-op when the shape is unchanged.
     """
     stem = job['target']
-    w = kernel_rules.WALLSETS.index(stem)
+    w = kernel_rules.WALLSETS.index(ADDED['%s Wallset' % stem].split()[0]) if '%s Wallset' % stem in ADDED \
+        else kernel_rules.WALLSETS.index(stem)                      # the 8th wallset starts as a copy
     src = aesop.ResFile(os.path.join(paths.get_dh_dir(), 'HACK.RES'))
     old_rules = kernel_rules.read(src.entry(src.names()['kernel'])[2])
     old_lums = [palette_lums(src, p) for p in range(21) if old_rules['wallpal_ok_for_wall'][p] >> w & 1]
@@ -722,7 +776,7 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'panels': job_panels, 'xmidi': job_xmidi, 'palette_rules': job_palette_rules, 'force_graphics': job_force_graphics,
         'vmp_walls': job_vmp_walls, 'fix_unlock_shape': job_fix_unlock_shape, 'fix_ice_stairs': job_fix_ice_stairs,
         'eob_door': job_eob_door, 'vmp_deco': job_vmp_deco,
-        'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp}
+        'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset}
 
 
 def cmd_build(recipe_path, name):
@@ -744,11 +798,11 @@ def cmd_build(recipe_path, name):
         print('  savegame:', note)
     for resname in ('HACK.RES', 'OPEN.RES'):
         jobs = [j for j in recipe['jobs'] if j.get('res', 'HACK.RES') == resname]
-        jobs.sort(key=lambda j: (j['type'] != 'palette_rules', j['type'] == 'force_graphics'))  # rules first, force last
+        jobs.sort(key=lambda j: (j['type'] != 'extra_wallset', j['type'] != 'palette_rules', j['type'] == 'force_graphics'))  # engine extension, rules first; force last
         if resname == 'HACK.RES':   # every wallset whose palette rules change gets its leftover DH art re-ramped
             have = {j['target'] for j in jobs if j['type'] == 'reramp'}
             ruled = [w.split()[0] for j in jobs if j['type'] == 'palette_rules' for w in j.get('wall_palettes', {})]
-            n_rules = sum(j['type'] == 'palette_rules' for j in jobs)
+            n_rules = sum(j['type'] in ('palette_rules', 'extra_wallset') for j in jobs)
             jobs[n_rules:n_rules] = [{'type': 'reramp', 'target': w} for w in dict.fromkeys(ruled) if w not in have]
         if not jobs:
             continue
@@ -761,7 +815,7 @@ def cmd_build(recipe_path, name):
         r.save(os.path.join(dst, resname))
         tbl = os.path.join(src, resname.replace('.RES', '.TBL'))
         open(os.path.join(dst, os.path.basename(tbl)), 'wb').write(r.tbl_bytes(os.path.getsize(tbl)))
-    json.dump({'recipe': recipe, 'recipe_sha': sha(recipe_path, 12), 'ramp_shapes': BUILT_SHAPES, 'layout_fixes': LAYOUT_FIXES},
+    json.dump({'recipe': recipe, 'recipe_sha': sha(recipe_path, 12), 'ramp_shapes': BUILT_SHAPES, 'layout_fixes': LAYOUT_FIXES, 'added': ADDED},
               open(os.path.join(dst, 'MASHUP_BUILD.json'), 'w'), indent=1)
     print('built', dst)
     cmd_verify(name)
@@ -782,11 +836,14 @@ def check_ramps(name):
     mpath = os.path.join(HERE, 'build', name, 'MASHUP_BUILD.json')
     manifest = json.load(open(mpath)) if os.path.exists(mpath) else {}
     ok = True
-    for w, stem in enumerate(kernel_rules.WALLSETS):
-        before = {shape[p] for p in range(21) if old['wallpal_ok_for_wall'][p] >> w & 1}
+    copied = manifest.get('added', {})
+    for w, stem in enumerate(kernel_rules.WALLSETS[:new['n_walls']]):
+        w_old = kernel_rules.WALLSETS.index(copied['%s Wallset' % stem].split()[0]) if '%s Wallset' % stem in copied else w
+        before = {shape[p] for p in range(21) if old['wallpal_ok_for_wall'][p] >> w_old & 1}
         after = {shape[p] for p in range(21) if new['wallpal_ok_for_wall'][p] >> w & 1}
         idx = dst.names()['%s Wallset' % stem]
-        reskinned = dst.entry(idx)[2] != src.entry(idx)[2]
+        src_idx = src.names()[copied.get('%s Wallset' % stem, '%s Wallset' % stem)]
+        reskinned = dst.entry(idx)[2] != src.entry(src_idx)[2]
         if len(after) > 1:
             print('  ramp check: %s Wallset pairs with mixed ramp shapes %s' % (stem, after)); ok = False
         built = manifest.get('ramp_shapes', {}).get('%s Wallset' % stem)
@@ -813,22 +870,25 @@ def cmd_verify(name):
         r = aesop.ResFile(os.path.join(dst, resname))
         o = aesop.ResFile(os.path.join(src, resname))
         bad, n = r.check_tbl(os.path.join(dst, resname.replace('.RES', '.TBL')))
-        changed = [i for i in r.indices() if r.entry(i)[2] != o.entry(i)[2]]
-        shape_err = []
         names_r = r.index_names()
         mpath = os.path.join(dst, 'MASHUP_BUILD.json')
-        fixes = set(json.load(open(mpath)).get('layout_fixes', [])) if os.path.exists(mpath) else set()
+        manifest = json.load(open(mpath)) if os.path.exists(mpath) else {}
+        fixes = set(manifest.get('layout_fixes', []))
+        added = {i: o.names().get(manifest.get('added', {}).get(names_r.get(i), '')) for i in r.indices()
+                 if i >= len(o.ptrs) or not o.ptrs[i]}
+        shape_err = [(i, 'added resource with no recorded source') for i, src_i in added.items() if src_i is None]
+        changed = [i for i in r.indices() if i in added or r.entry(i)[2] != o.entry(i)[2]]
         for i in changed:
             p = r.entry(i)[2]
             if aesop.kind(p) == 'old_shapes':
                 try:
-                    new = aesop.decode_shapes(p); old = aesop.decode_shapes(o.entry(i)[2])
+                    new = aesop.decode_shapes(p); old = aesop.decode_shapes(o.entry(added.get(i, i))[2])
                     dn, do = [f[:2] for f in new], [f[:2] for f in old]
                     if dn != do and not (names_r.get(i) in fixes and sorted(dn) == sorted(do)):
                         shape_err.append((i, 'frame count/size differs'))
                 except Exception as e:
                     shape_err.append((i, repr(e)))
-        grow = sum(len(r.entry(i)[2]) - len(o.entry(i)[2]) for i in changed)
+        grow = sum(len(r.entry(i)[2]) - len(o.entry(added.get(i, i))[2]) for i in changed)
         print('%s: %d changed, tbl mismatches %d, shape errors %s, payload growth %+d bytes, size %d'
               % (resname, len(changed), len(bad), shape_err or 'none', grow, len(r.data)))
         ok &= not bad and not shape_err

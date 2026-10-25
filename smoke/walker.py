@@ -88,7 +88,7 @@ class Game:
 
 def path_to(lv, recs, start, goal, through_doors=False):
     open_ = lambda x, y: 0 <= x < 32 and 0 <= y < 32 and lv[y * 32 + x] == 0xFF
-    blocked = {(r[1], r[2]) for r in recs if r[0] in ((4, 5) if through_doors else (1, 4, 5))} - {goal}
+    blocked = {(r[1], r[2]) for r in recs if r[0] in ((4, 5, 25) if through_doors else (1, 4, 5, 25))} - {goal}   # 25 = pillar
     prev = {start: None}; q = collections.deque([start])
     while q:
         c = q.popleft()

@@ -9,6 +9,7 @@ games, so a fresh clone runs this once after filling base_games/:
   pool/floors/eob3_<set>.png         EOB3 backdrops (19th frame of each wall object)
   pool/monsters/<name>/0..5.png      EOB1/EOB2 (tools/monsters.py) and EOB3 (tools/eob3_monsters.py)
   pool/sounds/raw|wav                EOB3 PCM (tools/sounds.py)
+  pool/walls/menzo_*, pool/floors/menzo_*   Menzoberranzan walls and projected floors (tools/menzo_walls.py)
 """
 import os
 import sys
@@ -67,6 +68,9 @@ def main():
     monsters.extract_all()
     eob3_monsters.extract_all()
     sounds.extract_all()
+    if os.path.isdir(paths.get_game_dir('menzo')):
+        import menzo_walls
+        menzo_walls.export()
     print('pool assets regenerated')
 
 

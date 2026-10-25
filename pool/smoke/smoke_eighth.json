@@ -1,0 +1,74 @@
+{
+ "comment": "SMOKE: 8th wallset = Menzo red, kernel pinned to wallnum 7",
+ "jobs": [
+  {
+   "type": "extra_wallset",
+   "copy": "Rock"
+  },
+  {
+   "type": "palette_rules",
+   "target": "kernel",
+   "wall_palettes": {
+    "Eighth Wallset": [
+     3,
+     0,
+     1
+    ]
+   },
+   "wall_floors": {
+    "Eighth Wallset": [
+     7
+    ]
+   },
+   "floor_palettes": {
+    "7": [
+     3,
+     0,
+     1
+    ]
+   },
+   "allow_pairs": [
+    [
+     [
+      3,
+      0,
+      1
+     ],
+     [
+      3,
+      0,
+      1
+     ]
+    ]
+   ]
+  },
+  {
+   "type": "wallset",
+   "target": "Eighth Wallset",
+   "texture": "pool/walls/menzo_red_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "Eighth Wallset",
+   "texture": "pool/walls/menzo_red_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "Eighth Wallset",
+   "texture": "pool/walls/menzo_red_v0.png",
+   "frames": "18-36"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-7",
+   "image": "pool/floors/menzo_red.png"
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallnum": 7
+  }
+ ]
+}

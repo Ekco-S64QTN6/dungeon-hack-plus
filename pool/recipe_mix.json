@@ -3,38 +3,40 @@
  "mix": {
   "seed": 1,
   "wallsets": {
-   "Marble": "eob3_ruins",
-   "Wood": "eob2_crimson",
-   "Stone": "eob2_silver",
+   "Marble": "eob3_forest",
+   "Wood": "menzo_purple",
+   "Stone": "menzo_gold",
    "Foil": "dh_foil",
-   "Ice": "eob3_forest",
+   "Ice": "menzo_wood",
    "Mine": "eob1_green",
-   "Rock": "dh_rock"
+   "Rock": "dh_rock",
+   "Eighth": "menzo_red"
   },
   "floors": {
-   "1": "eob2_crimson",
-   "3": "eob3_forest",
-   "0": "eob3_ruins",
-   "6": "eob2_silver",
-   "4": "eob1_green"
+   "1": "menzo_red",
+   "3": "menzo_purple",
+   "0": "menzo_wood",
+   "6": "eob3_forest",
+   "4": "menzo_gold",
+   "2": "eob1_green"
   },
   "doors": {
-   "Door-00": "eob3 Door-09",
-   "Door-02": "eob1 iron",
-   "Door-03": "eob2 e2_glyph",
-   "Door-04": "eob2 e2_darkmoon",
-   "Door-05": "eob2 e2_bars",
-   "Door-06": "eob1 web",
-   "Door-07": "eob2 e2_cross",
-   "Door-08": "eob3 Door-11",
-   "Door-09": "eob3 Door-18",
+   "Door-00": "eob1 iron",
+   "Door-02": "eob2 e2_glyph",
+   "Door-03": "eob2 e2_darkmoon",
+   "Door-04": "eob2 e2_bars",
+   "Door-05": "eob1 web",
+   "Door-06": "eob2 e2_cross",
+   "Door-07": "eob3 Door-18",
+   "Door-08": "eob3 Door-05",
+   "Door-09": "eob3 Door-11",
    "Door-11": "dh",
-   "Door-12": "eob2 e2_mouth",
-   "Door-14": "eob3 Door-05",
-   "Door-15": "eob3 Door-08",
-   "Door-16": "eob2 e2_wood",
-   "Door-17": "eob2 e2_iron",
-   "Door-18": "eob3 Door-06"
+   "Door-12": "eob3 Door-06",
+   "Door-14": "eob3 Door-09",
+   "Door-15": "eob2 e2_mouth",
+   "Door-16": "eob2 e2_iron",
+   "Door-17": "eob3 Door-07",
+   "Door-18": "eob2 e2_vines"
   },
   "generic_decos": {
    "Wall Deco 29": "eob2 MEZZ1 #6",
@@ -95,28 +97,37 @@
  },
  "jobs": [
   {
+   "type": "extra_wallset",
+   "copy": "Rock"
+  },
+  {
    "type": "palette_rules",
    "target": "kernel",
    "wall_palettes": {
-    "Wood Wallset": [
+    "Eighth Wallset": [
      3,
-     1,
-     11
+     0,
+     1
+    ],
+    "Wood Wallset": [
+     10,
+     7,
+     12
     ],
     "Ice Wallset": [
+     1,
+     11,
+     6
+    ],
+    "Marble Wallset": [
      15,
      16,
      20
     ],
-    "Marble Wallset": [
-     17,
-     20,
-     15
-    ],
     "Stone Wallset": [
-     5,
-     12,
-     2
+     11,
+     6,
+     1
     ],
     "Mine Wallset": [
      13,
@@ -125,53 +136,59 @@
     ]
    },
    "wall_floors": {
-    "Wood Wallset": [
+    "Eighth Wallset": [
      1
     ],
-    "Ice Wallset": [
+    "Wood Wallset": [
      3
     ],
-    "Marble Wallset": [
+    "Ice Wallset": [
      0
     ],
-    "Stone Wallset": [
+    "Marble Wallset": [
      6
     ],
-    "Mine Wallset": [
+    "Stone Wallset": [
      4
     ],
+    "Mine Wallset": [
+     2
+    ],
     "Foil Wallset": [
-     2,
      5,
      7
     ],
     "Rock Wallset": [
-     2,
      7
     ]
    },
    "floor_palettes": {
     "1": [
      3,
-     1,
-     11
+     0,
+     1
     ],
     "3": [
+     10,
+     7,
+     12
+    ],
+    "0": [
+     1,
+     11,
+     6
+    ],
+    "6": [
      15,
      16,
      20
     ],
-    "0": [
-     17,
-     20,
-     15
-    ],
-    "6": [
-     5,
-     12,
-     2
-    ],
     "4": [
+     11,
+     6,
+     1
+    ],
+    "2": [
      13,
      11,
      6
@@ -181,13 +198,37 @@
     [
      [
       3,
-      1,
-      11
+      0,
+      1
      ],
      [
       3,
+      0,
+      1
+     ]
+    ],
+    [
+     [
+      10,
+      7,
+      12
+     ],
+     [
+      10,
+      7,
+      12
+     ]
+    ],
+    [
+     [
       1,
-      11
+      11,
+      6
+     ],
+     [
+      1,
+      11,
+      6
      ]
     ],
     [
@@ -204,26 +245,14 @@
     ],
     [
      [
-      17,
-      20,
-      15
+      11,
+      6,
+      1
      ],
      [
-      17,
-      20,
-      15
-     ]
-    ],
-    [
-     [
-      5,
-      12,
-      2
-     ],
-     [
-      5,
-      12,
-      2
+      11,
+      6,
+      1
      ]
     ],
     [
@@ -250,6 +279,10 @@
   },
   {
    "type": "reramp",
+   "target": "Eighth"
+  },
+  {
+   "type": "reramp",
    "target": "Wood"
   },
   {
@@ -269,38 +302,77 @@
    "target": "Mine"
   },
   {
-   "type": "vmp_walls",
-   "target": "Wood Wallset",
-   "game": "eob2",
-   "set": "CRIMSON",
-   "plain": [
-    0,
-    1
-   ],
-   "frame": 2,
-   "frame_set": "CRIMSON",
-   "stairs": "Wood Stairs",
-   "stairs_set": "CRIMSON",
-   "stairs_down": 4,
-   "stairs_up": 3
+   "type": "wallset",
+   "target": "Eighth Wallset",
+   "texture": "pool/walls/menzo_red_v0.png",
+   "frames": "0-5,8,13,16"
   },
   {
-   "type": "vmp_deco",
-   "target": "Wood decorations",
-   "wallset": "Wood Wallset",
-   "game": "eob2",
-   "set": "CRIMSON",
-   "deco": 5,
-   "base": 0
+   "type": "wallset",
+   "target": "Eighth Wallset",
+   "texture": "pool/walls/menzo_red_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "Eighth Wallset",
+   "texture": "pool/walls/menzo_red_v0.png",
+   "frames": "18-36"
   },
   {
    "type": "floor",
    "target": "Floor-1",
-   "image": "pool/floors/CRIMSON_backdrop.png"
+   "image": "pool/floors/menzo_red.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Wood Wallset",
+   "texture": "pool/walls/menzo_purple_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "Wood Wallset",
+   "texture": "pool/walls/menzo_purple_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "Wood Wallset",
+   "texture": "pool/walls/menzo_purple_v0.png",
+   "frames": "18-36"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-3",
+   "image": "pool/floors/menzo_purple.png"
+  },
+  {
+   "type": "wallset",
+   "target": "Ice Wallset",
+   "texture": "pool/walls/menzo_wood_v0.png",
+   "frames": "0-5,8,13,16"
+  },
+  {
+   "type": "wallset",
+   "target": "Ice Wallset",
+   "texture": "pool/walls/menzo_wood_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "Ice Wallset",
+   "texture": "pool/walls/menzo_wood_v0.png",
+   "frames": "18-36"
+  },
+  {
+   "type": "floor",
+   "target": "Floor-0",
+   "image": "pool/floors/menzo_wood.png"
   },
   {
    "type": "panels",
-   "target": "Ice Wallset",
+   "target": "Marble Wallset",
    "target_first": 0,
    "count": 18,
    "source": "Forest walls",
@@ -309,91 +381,31 @@
   },
   {
    "type": "floor",
-   "target": "Floor-3",
+   "target": "Floor-6",
    "image": "pool/floors/eob3_forest.png"
   },
   {
-   "type": "panels",
-   "target": "Marble Wallset",
-   "target_first": 0,
-   "count": 18,
-   "source": "Ruins walls",
-   "source_first": 0,
-   "source_palette": "Ruins palette"
-  },
-  {
-   "type": "panels",
-   "target": "Marble Wallset",
-   "target_first": 18,
-   "count": 18,
-   "source": "Ruins wooden door",
-   "source_first": 0,
-   "source_palette": "Ruins palette"
-  },
-  {
-   "type": "panels",
-   "target": "Wall Deco 00",
-   "target_first": 0,
-   "count": 18,
-   "source": "Ruins plaque",
-   "source_first": 0,
-   "source_palette": "Ruins palette",
-   "ramp_of": "Marble Wallset"
-  },
-  {
-   "type": "panels",
-   "target": "Wall Deco 01",
-   "target_first": 0,
-   "count": 18,
-   "source": "Ruins niche",
-   "source_first": 0,
-   "source_palette": "Ruins palette",
-   "ramp_of": "Marble Wallset"
-  },
-  {
-   "type": "panels",
-   "target": "Wall Deco 02",
-   "target_first": 0,
-   "count": 18,
-   "source": "Ruins square niche",
-   "source_first": 0,
-   "source_palette": "Ruins palette",
-   "ramp_of": "Marble Wallset"
-  },
-  {
-   "type": "floor",
-   "target": "Floor-0",
-   "image": "pool/floors/eob3_ruins.png"
-  },
-  {
-   "type": "vmp_walls",
+   "type": "wallset",
    "target": "Stone Wallset",
-   "game": "eob2",
-   "set": "SILVER",
-   "plain": [
-    0,
-    1
-   ],
-   "frame": 2,
-   "frame_set": "SILVER",
-   "stairs": "Stone Stairs",
-   "stairs_set": "SILVER",
-   "stairs_down": 4,
-   "stairs_up": 3
+   "texture": "pool/walls/menzo_gold_v0.png",
+   "frames": "0-5,8,13,16"
   },
   {
-   "type": "vmp_deco",
-   "target": "Stone decorations",
-   "wallset": "Stone Wallset",
-   "game": "eob2",
-   "set": "SILVER",
-   "deco": 5,
-   "base": 0
+   "type": "wallset",
+   "target": "Stone Wallset",
+   "texture": "pool/walls/menzo_gold_v1.png",
+   "frames": "6,7,9-12"
+  },
+  {
+   "type": "wallset",
+   "target": "Stone Wallset",
+   "texture": "pool/walls/menzo_gold_v0.png",
+   "frames": "18-36"
   },
   {
    "type": "floor",
-   "target": "Floor-6",
-   "image": "pool/floors/SILVER_backdrop.png"
+   "target": "Floor-4",
+   "image": "pool/floors/menzo_gold.png"
   },
   {
    "type": "vmp_walls",
@@ -422,60 +434,42 @@
   },
   {
    "type": "floor",
-   "target": "Floor-4",
+   "target": "Floor-2",
    "image": "pool/floors/GREEN_backdrop.png"
   },
   {
-   "type": "panels",
-   "target": "Door-00",
-   "target_first": 0,
-   "count": 54,
-   "source": "Ruins crystal door",
-   "source_first": 18,
-   "source_palette": "Ruins palette"
-  },
-  {
    "type": "eob_door",
-   "target": "Door-02",
+   "target": "Door-00",
    "kind": "iron"
   },
   {
    "type": "eob_door",
-   "target": "Door-03",
+   "target": "Door-02",
    "kind": "e2_glyph"
   },
   {
    "type": "eob_door",
-   "target": "Door-04",
+   "target": "Door-03",
    "kind": "e2_darkmoon"
   },
   {
    "type": "eob_door",
-   "target": "Door-05",
+   "target": "Door-04",
    "kind": "e2_bars"
   },
   {
    "type": "eob_door",
-   "target": "Door-06",
+   "target": "Door-05",
    "kind": "web"
   },
   {
    "type": "eob_door",
-   "target": "Door-07",
+   "target": "Door-06",
    "kind": "e2_cross"
   },
   {
    "type": "panels",
-   "target": "Door-08",
-   "target_first": 0,
-   "count": 54,
-   "source": "Temple gold door",
-   "source_first": 18,
-   "source_palette": "Marble palette"
-  },
-  {
-   "type": "panels",
-   "target": "Door-09",
+   "target": "Door-07",
    "target_first": 0,
    "count": 54,
    "source": "Temple mask door",
@@ -483,13 +477,8 @@
    "source_palette": "Marble palette"
   },
   {
-   "type": "eob_door",
-   "target": "Door-12",
-   "kind": "e2_mouth"
-  },
-  {
    "type": "panels",
-   "target": "Door-14",
+   "target": "Door-08",
    "target_first": 0,
    "count": 54,
    "source": "Marble door",
@@ -498,31 +487,54 @@
   },
   {
    "type": "panels",
-   "target": "Door-15",
+   "target": "Door-09",
    "target_first": 0,
    "count": 54,
-   "source": "Ruins wooden door",
+   "source": "Temple gold door",
    "source_first": 18,
-   "source_palette": "Ruins palette"
-  },
-  {
-   "type": "eob_door",
-   "target": "Door-16",
-   "kind": "e2_wood"
-  },
-  {
-   "type": "eob_door",
-   "target": "Door-17",
-   "kind": "e2_iron"
+   "source_palette": "Marble palette"
   },
   {
    "type": "panels",
-   "target": "Door-18",
+   "target": "Door-12",
    "target_first": 0,
    "count": 54,
    "source": "Mausoleum skull door",
    "source_first": 18,
    "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "panels",
+   "target": "Door-14",
+   "target_first": 0,
+   "count": 54,
+   "source": "Ruins crystal door",
+   "source_first": 18,
+   "source_palette": "Ruins palette"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-15",
+   "kind": "e2_mouth"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-16",
+   "kind": "e2_iron"
+  },
+  {
+   "type": "panels",
+   "target": "Door-17",
+   "target_first": 0,
+   "count": 54,
+   "source": "Mausoleum Star Trek(TM) door",
+   "source_first": 18,
+   "source_palette": "Mausoleum palette"
+  },
+  {
+   "type": "eob_door",
+   "target": "Door-18",
+   "kind": "e2_vines"
   },
   {
    "type": "eob_wall_deco",

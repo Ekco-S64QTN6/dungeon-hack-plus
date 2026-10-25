@@ -1,0 +1,14 @@
+{
+ "comment": "SMOKE: 8th wallset = copy of Rock, kernel pinned to wallnum 7",
+ "jobs": [
+  {
+   "type": "extra_wallset",
+   "copy": "Rock"
+  },
+  {
+   "type": "force_graphics",
+   "target": "kernel (TEST ONLY)",
+   "wallnum": 7
+  }
+ ]
+}

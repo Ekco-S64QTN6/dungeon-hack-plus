@@ -23,6 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import aesop, kernel_rules   # noqa: E402
 import eob_classic as ec     # noqa: E402
+import menzo_walls          # noqa: E402
 
 SLOTS = ['Marble', 'Wood', 'Stone', 'Foil', 'Ice', 'Mine', 'Rock']        # kernel wallnum order
 
@@ -53,7 +54,9 @@ def retarget(job, old_stem, new_stem):
     return j
 
 
-def roll(seed=1, external=5):
+def roll(seed=1, external=5, picks=None, eighth=True):
+    """picks: optional {DH slot: source id} to pin (tests); the rest of the roll is unchanged.
+    eighth: add the 8th wallset (pipeline job extra_wallset) and always fill it with an external set."""
     rng = random.Random(seed)
     dh = aesop.ResFile(os.path.join(ROOT, 'base_games', 'dungeon_hack', 'HACK.RES')); n = dh.names()
     kernel = dh.entry(n['kernel'])[2]
@@ -63,16 +66,23 @@ def roll(seed=1, external=5):
     summary = {'seed': seed}
 
     # ---- wallsets: which DH slots get external sets, and which sets
-    sources = [s[0] for s in WESTWOOD_SETS] + [s[0] for s in EOB3_SETS]
+    sources = [s[0] for s in WESTWOOD_SETS] + [s[0] for s in EOB3_SETS] + list(menzo_walls.SETS)
+    pinned = dict(picks or {})
     for attempt in range(500):
-        ext_slots = rng.sample(SLOTS, external)
-        picks = dict(zip(ext_slots, rng.sample(sources, external)))
-        floors = rng.sample(range(8), external)
-        rules = kernel_rules.read(kernel)
+        if pinned:
+            picks = dict(pinned)
+        else:
+            ext_slots = (['Eighth'] if eighth else []) + rng.sample(SLOTS, external)
+            picks = dict(zip(ext_slots, rng.sample(sources, len(ext_slots))))
+        n_ext = len(picks)
+        floors = rng.sample(range(8), n_ext)
+        rules = kernel_rules.read(kernel_rules.add_wallset(kernel, 0, 0) if 'Eighth' in picks else kernel)
         job = {'type': 'palette_rules', 'target': 'kernel', 'wall_palettes': {}, 'wall_floors': {},
                'floor_palettes': {}, 'allow_pairs': []}
         for (slot, src), floor in zip(picks.items(), floors):
-            if src.startswith('eob3'):
+            if src.startswith('menzo'):
+                match = kernel_rules.match_palettes(menzo_walls.colours(src), pals)
+            elif src.startswith('eob3'):
                 _, wall, pal, _ = next(s for s in EOB3_SETS if s[0] == src)
                 img, two = ec.eob3_colours(e3, wall, pal)
                 match = kernel_rules.match_palettes(img.reshape(-1, 3), pals, candidates=range(15, 21) if two else range(15))
@@ -107,12 +117,15 @@ def roll(seed=1, external=5):
             break
     else:
         raise SystemExit('no valid wallset/floor assignment found')
-    jobs = [job] + [dict(j) for j in ec.FIX_JOBS] + ec.reramp_jobs(list(picks))   # before any art goes in
-    summary['wallsets'] = {slot: picks.get(slot, 'dh_' + slot.lower()) for slot in SLOTS}
+    jobs = ([{'type': 'extra_wallset', 'copy': 'Rock'}] if 'Eighth' in picks else []) + [job] + \
+        [dict(j) for j in ec.FIX_JOBS] + ec.reramp_jobs(list(picks))   # before any art goes in
+    summary['wallsets'] = {slot: picks.get(slot, 'dh_' + slot.lower()) for slot in SLOTS + ['Eighth'] if slot != 'Eighth' or slot in picks}
     summary['floors'] = {}
     for (slot, src), floor in zip(picks.items(), floors):
         summary['floors'][floor] = src
-        if src.startswith('eob3'):
+        if src.startswith('menzo'):
+            jobs += menzo_walls.jobs(src, slot, floor)
+        elif src.startswith('eob3'):
             _, wall, pal, old = next(s for s in EOB3_SETS if s[0] == src)
             for j in e3jobs:
                 if j['target'] in ('%s Wallset' % old, '%s Stairs' % old):
@@ -126,7 +139,7 @@ def roll(seed=1, external=5):
             jobs.append({'type': 'vmp_walls', 'target': '%s Wallset' % slot, 'game': game, 'set': vset,
                          'plain': [0, 1], 'frame': 2, 'frame_set': frame_set,
                          **({'stairs': '%s Stairs' % slot, 'stairs_set': stairs_set, 'stairs_down': 4, 'stairs_up': 3} if stairs_set else {})})
-            if vset != 'FOREST':
+            if vset != 'FOREST' and slot != 'Eighth':   # the 8th wallset's decorations are generic slots 29-32
                 jobs.append({'type': 'vmp_deco', 'target': '%s decorations' % slot, 'wallset': '%s Wallset' % slot,
                              'game': game, 'set': vset, 'deco': 5, 'base': 0})
             jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': 'pool/floors/%s_backdrop.png' % vset})
@@ -187,7 +200,7 @@ def roll(seed=1, external=5):
 def ec_deco_slots(slot):
     sys.path.insert(0, ROOT)
     from pipeline import WALL_DECOS        # wallset -> its decoration resources (decoration object's table14)
-    return WALL_DECOS[slot]
+    return WALL_DECOS.get(slot, [])        # 'Eighth' has none of its own
 
 
 def describe(summary):
