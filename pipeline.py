@@ -27,6 +27,7 @@ import kernel_rules  # noqa: E402
 import rtd           # noqa: E402
 import eob_decos     # noqa: E402
 import game_music    # noqa: E402
+import heap_probe    # noqa: E402
 import eob_doors     # noqa: E402
 import normalize    # noqa: E402
 import westwood     # noqa: E402
@@ -486,6 +487,16 @@ def job_game_music(r, job, pal):
     slots = {f: add_runtime_import(r, 'kernel', 'C:' + f) for f in ('load_music', 'play_sequence', 'sequence_playing')}
     r.replace(ki, game_music.patch_kernel(r.entry(ki)[2], slots, la, ad, job.get('hooks', ('enter', 'setup', 'tick'))))
     print('    in-game music: %d tracks for %d wallsets; imports %s' % (len(added), nw, slots))
+
+
+def job_heap_probe(r, job, pal):
+    """TEST ONLY (tools/heap_probe.py): the game writes (tick, heapfree, heapfree after flushing the
+    cache, xmsfree, level) to HEAP.LOG every `every` timer ticks (default 1). Read with smoke/heap_log.py."""
+    ki = r.names()['kernel']
+    slots = {f: add_runtime_import(r, 'kernel', 'C:' + f) for f in
+             ('update_file', 'close_file', 'write_long_to_file', 'heapfree', 'flush_cache', 'xmsfree')}
+    r.replace(ki, heap_probe.patch_kernel(r.entry(ki)[2], slots, job.get('every', 1)))
+    print('    heap probe: imports %s' % slots)
 
 
 def job_fix_unlock_shape(r, job, pal):
@@ -1103,7 +1114,7 @@ JOBS = {'wallset': job_wallset, 'floor': job_floor, 'sprites': job_sprites, 'raw
         'eob_wall_deco': job_eob_wall_deco, 'reramp': job_reramp, 'extra_wallset': job_extra_wallset,
         'game_music': job_game_music, 'extra_doors': job_extra_doors, 'paint_objects': job_paint_objects,
         'extra_floors': job_extra_floors, 'stairs_from': job_stairs_from,
-        'furniture_from': job_furniture_from}
+        'furniture_from': job_furniture_from, 'heap_probe': job_heap_probe}
 
 
 def cmd_build(recipe_path, name):
@@ -1125,7 +1136,7 @@ def cmd_build(recipe_path, name):
         print('  savegame:', note)
     for resname in ('HACK.RES', 'OPEN.RES'):
         jobs = [j for j in recipe['jobs'] if j.get('res', 'HACK.RES') == resname]
-        jobs.sort(key=lambda j: (j['type'] not in ('extra_wallset', 'extra_doors', 'extra_floors'), j['type'] != 'palette_rules', j['type'] == 'force_graphics'))  # engine extensions, rules first; force last
+        jobs.sort(key=lambda j: (j['type'] not in ('extra_wallset', 'extra_doors', 'extra_floors'), j['type'] != 'palette_rules', j['type'] in ('force_graphics', 'heap_probe')))  # engine extensions, rules first; force last
         if resname == 'HACK.RES':   # every wallset whose palette rules change gets its leftover DH art re-ramped
             have = {j['target'] for j in jobs if j['type'] == 'reramp'}
             ruled = [w.split()[0] for j in jobs if j['type'] == 'palette_rules' for w in j.get('wall_palettes', {})]

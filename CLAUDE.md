@@ -170,7 +170,8 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   ["W12 Wallset" ...]` (forced per-wallset variants, base = same engine with DH art). The mechanical
   diff is weak when only part of the graphics is pinned: review `gate_report.png`.
 * Plans: gate_walk (start, stairs, door at 2 and 1), door_open, stairs_down, ice_stairs, monsters,
-  deco_views, pillar_views, doorway (slot 36), arch_window, pit_views, item_juggle, audio_rate.
+  deco_views, pillar_views, doorway (slot 36), arch_window (+ standing in it), pit_views, item_juggle(_pack),
+  audio_rate, heap_levels, heap_levels_deep. Walker keys: `{"key": "F7"}` (held like a real press).
 * Fixtures: `savegame` (Rhenovia, seed 000E6986), `savegame_nomon` (no creatures; start (23,2) N,
   stairs up behind, door (25,6)); variants with the start moved or a record added: `_stairsdown`,
   `_ice`, `_deco` (14,11), `_pillar` (5,11), `_archwin` (27,11), `_pit` (pit at (23,1)).
@@ -178,6 +179,15 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   Ctrl+F6 audio capture; sounding fraction), `smoke/music_tracks.py SPEC|@FILE` (track vetting),
   `smoke/maze_seeds.py` (MAZE hang hunt: 1,000 seeds, none hang), `smoke/mem_margin.py` (start-up cliff).
 * `dhplus.py test`: builds and verifies all 19 presets.
+* Heap: test-only job `heap_probe` (`tools/heap_probe.py`) makes the game rewrite HEAP.LOG every tick
+  (tick, heapfree, heapfree after flushing the cache = slack beyond what is locked, xmsfree, level);
+  `smoke/heap_log.py PLAN BUILD...` walks and polls it. Plans `heap_levels` (F7 through the levels with
+  monsters; a level-1 party dies on level 5) and `heap_levels_deep` (armageddon on arrival, all 10).
+* `AESOP_DIAG=1` (plan `"dos_pre": ["set AESOP_DIAG=1"]`) enables the kernel's debug keys: F2/F3 change
+  floorset/wallset, F4/F5 floor/wall palette, F6 re-randomize graphics, F7/F8 level down/up (same x,y),
+  F9 print memory (dprint: invisible), a/A armageddon, x/X experience, o cheat object, t/T text mode,
+  i/I impedance, E endgame now. The first level change of a session shows the manual-word prompt
+  (needs a non-empty word: plans type `q`, Return).
 
 ## Gotchas
 * **Save/Continue need GOG's savegame template** (`SAVEGAME.DIR` etc., shipped outside the game folder).

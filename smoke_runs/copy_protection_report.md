@@ -71,3 +71,15 @@ Disassembly of `validity checker` at bytecode offset `0x04C0`:
   1. The user explicitly requested: *"Don't remove it unless the user asks"*.
   2. The prompt functions without friction (press Enter or any key).
   3. The headless smoke test harness (`smoke/route.py` and `AUTOTYPE`) easily satisfies the prompt deterministically.
+
+---
+
+## 5. Correction (2026-10-25, checked in game and in the kernel bytecode)
+
+* The prompt is **not** only in `phase-one`. The kernel's `move` handler, on any level change, calls
+  `flush_cache(200000)` and sends `validity check`, which runs the `validity checker` unless `B:passed` is
+  already set. So in `phase-two` (continuing a save) the prompt appears on the **first level change of each
+  session**, then never again in that session. Seen in game with F7 (`AESOP_DIAG`) on the fixture save.
+* An **empty** Enter is ignored; any non-empty word followed by Enter passes (this release's `auto_on`).
+  Test plans type `q` (with `AESOP_DIAG` set, `a`/`A` = armageddon, `x`/`X`, `o`, `t`/`T`, `i`/`I`, `E`
+  are debug keys).

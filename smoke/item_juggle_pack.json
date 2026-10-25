@@ -1,0 +1,297 @@
+{
+ "comment": "Bug 1 (heap_probe): pick up / put back the top-left backpack item 20x (\"left-click inventory\" sends items \"lock shape\"/\"unlock shape\")",
+ "fixture": "fixtures/savegame_nomon",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "shot": "a_before"
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8,
+   "shot": "b_holding"
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8,
+   "shot": "c_placed"
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "click": [
+    27,
+    7
+   ],
+   "settle": 0.8
+  },
+  {
+   "wait": 3,
+   "shot": "d_after20"
+  }
+ ]
+}

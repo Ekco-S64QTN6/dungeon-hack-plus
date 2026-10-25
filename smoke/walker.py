@@ -33,17 +33,19 @@ DIRS = 'NESW'
 
 
 class Game:
-    def __init__(self, name, fixture, env):
+    def __init__(self, name, fixture, env, dos_pre=()):
         self.env = env
         smoke.FIXTURE = os.path.join(os.path.dirname(HERE), fixture)
         self.dir = smoke.stage(name)
-        self.proc, _ = smoke.dosbox(self.dir, ['aesop hack phase-two'], env, 0)
+        self.proc, _ = smoke.dosbox(self.dir, [*dos_pre, 'aesop hack phase-two'], env, 0)
         self.wid = smoke.window_id(env, self.proc.pid)
         self.tmp = tempfile.mkdtemp()
         self.templates = {d: np.asarray(Image.open(os.path.join(HERE, 'compass_%s.png' % d)).convert('L'), float)
                           for d in DIRS if os.path.exists(os.path.join(HERE, 'compass_%s.png' % d))}
 
     def shot(self):
+        if self.proc.poll() is not None:        # the game quit (party death, abort): don't wait on a dead window
+            raise RuntimeError('DOSBox exited')
         p = os.path.join(self.tmp, 's.png')
         subprocess.run(['import', '-window', self.wid, p], env=self.env)
         return np.asarray(Image.open(p).convert('RGB'))
@@ -110,7 +112,7 @@ def run(plan, name, env, outroot):
     fixture = plan.get('fixture', 'fixtures/savegame')
     lv, recs = route.load(os.path.join(os.path.dirname(HERE), fixture), plan.get('level', 0))
     pos = next((r[1], r[2]) for r in recs if r[0] == 0)
-    g = Game(name, fixture, env)
+    g = Game(name, fixture, env, plan.get('dos_pre', ()))       # e.g. ["set AESOP_DIAG=1"]: F7/F8 = level down/up
     out = os.path.join(outroot, name); os.makedirs(out, exist_ok=True)
     log = []
     try:
@@ -146,6 +148,9 @@ def run(plan, name, env, outroot):
                 subprocess.run(['xdotool', 'mousedown', '--window', g.wid, '1'], env=env); time.sleep(0.12)
                 subprocess.run(['xdotool', 'mouseup', '--window', g.wid, '1'], env=env)
                 time.sleep(cp.get('settle', 0.0))
+            if 'key' in cp:                     # game keys, held like a real press (e.g. F7 with AESOP_DIAG)
+                for _ in range(cp.get('times', 1)):
+                    g.key(cp['key'], settle=cp.get('settle', 1.1))
             if 'hotkey' in cp:                  # DOSBox hotkeys, e.g. ctrl+F6 = start/stop audio capture
                 subprocess.run(['xdotool', 'key', '--window', g.wid, cp['hotkey']], env=env)
                 time.sleep(cp.get('settle', 0.5))
@@ -159,8 +164,11 @@ def run(plan, name, env, outroot):
             if 'shot' in cp:
                 img = g.shot(); g.save(img, os.path.join(out, cp['shot'] + '.png'))
                 log.append('%s at %s facing %s' % (cp['shot'], pos, g.facing(img)[0]))
-    except RuntimeError:
-        g.save(g.shot(), os.path.join(out, 'FAILED.png'))
+    except RuntimeError as e:
+        if g.proc.poll() is None:
+            g.save(g.shot(), os.path.join(out, 'FAILED.png'))
+        else:
+            log.append('%s at %s' % (e, pos))
     finally:
         g.close()
     open(os.path.join(out, 'walk.log'), 'w').write('\n'.join(log) + '\n')

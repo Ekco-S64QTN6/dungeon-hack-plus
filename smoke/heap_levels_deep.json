@@ -1,0 +1,339 @@
+{
+ "comment": "heap_levels with \"armageddon\" (AESOP_DIAG key a: kills the level's monsters) on arrival, so the level-1 party survives to level 10; covers every level's graphics, less of its monster art. heap/memory walk (smoke/heap_log.py): AESOP_DIAG=1 makes F7 move the party one level down (kernel \"elevator down\", same x,y); on each of the 10 levels look all four ways; the level change shows the manual-word prompt, which this release accepts with any non-empty word (\"q\", Return; with AESOP_DIAG the letters I E a A t T x X o are debug keys; an empty Return is ignored)",
+ "fixture": "fixtures/savegame",
+ "level": 0,
+ "boot": 5,
+ "dos_pre": [
+  "set AESOP_DIAG=1"
+ ],
+ "checkpoints": [
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L0"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L1"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L2"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L3"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L4"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L5"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L6"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L7"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L8"
+  },
+  {
+   "key": "F7",
+   "settle": 5
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 4
+  },
+  {
+   "key": "a",
+   "settle": 2
+  },
+  {
+   "wait": 4
+  },
+  {
+   "face": "E"
+  },
+  {
+   "face": "S"
+  },
+  {
+   "face": "W"
+  },
+  {
+   "face": "N"
+  },
+  {
+   "shot": "L9"
+  }
+ ]
+}
