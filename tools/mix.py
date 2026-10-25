@@ -223,7 +223,9 @@ def roll(seed=1, external=5, picks=None, eighth=True, extra_doors=True):
         for slot in SLOTS + (['Eighth'] if 'Eighth' in picks else []):
             src = picks.get(slot, 'dh')
             own = [t for t in good if t.split(':')[0] == src.split('_')[0]]
-            la = rng.choice(own or good)
+            fresh = [t for t in own if t not in summary['music'].values()] or \
+                    [t for t in good if t not in summary['music'].values()] or own or good   # distinct while the pool lasts
+            la = rng.choice(fresh)
             tracks[slot] = {'la': la, 'ad': dh_ad.get(la) or rng.choice(sorted(dh_ad.values()))}
             summary['music'][slot] = la
         jobs.append({'type': 'game_music', 'tracks': tracks})

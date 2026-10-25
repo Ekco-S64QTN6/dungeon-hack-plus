@@ -111,14 +111,14 @@
    "Xill": "eob2_mantis"
   },
   "music": {
-   "Marble": "eob3:CUE8",
-   "Wood": "menzo:78",
-   "Stone": "menzo:24",
+   "Marble": "eob3:FLAR",
+   "Wood": "menzo:24",
+   "Stone": "menzo:39",
    "Foil": "dh:Music Scene Two Roland",
-   "Ice": "menzo:37",
-   "Mine": "menzo:79",
-   "Rock": "dh:Music End Roland",
-   "Eighth": "menzo:96"
+   "Ice": "menzo:40",
+   "Mine": "menzo:97",
+   "Rock": "dh:Music Scene One Roland",
+   "Eighth": "menzo:27"
   }
  },
  "jobs": [
@@ -985,36 +985,36 @@
    "type": "game_music",
    "tracks": {
     "Marble": {
-     "la": "eob3:CUE8",
-     "ad": "dh:Music Scene Two Adlib/Pc"
-    },
-    "Wood": {
-     "la": "menzo:78",
+     "la": "eob3:FLAR",
      "ad": "dh:Music Scene One Adlib"
     },
-    "Stone": {
+    "Wood": {
      "la": "menzo:24",
      "ad": "dh:Music End Adlib/Pc"
+    },
+    "Stone": {
+     "la": "menzo:39",
+     "ad": "dh:Music Scene Two Adlib/Pc"
     },
     "Foil": {
      "la": "dh:Music Scene Two Roland",
      "ad": "dh:Music Scene Two Adlib/Pc"
     },
     "Ice": {
-     "la": "menzo:37",
-     "ad": "dh:Music Scene Two Adlib/Pc"
+     "la": "menzo:40",
+     "ad": "dh:Music End Adlib/Pc"
     },
     "Mine": {
-     "la": "menzo:79",
-     "ad": "dh:Music End Adlib/Pc"
+     "la": "menzo:97",
+     "ad": "dh:Music Scene Two Adlib/Pc"
     },
     "Rock": {
-     "la": "dh:Music End Roland",
-     "ad": "dh:Music End Adlib/Pc"
+     "la": "dh:Music Scene One Roland",
+     "ad": "dh:Music Scene One Adlib"
     },
     "Eighth": {
-     "la": "menzo:96",
-     "ad": "dh:Music Scene One Adlib"
+     "la": "menzo:27",
+     "ad": "dh:Music Scene Two Adlib/Pc"
     }
    }
   },
