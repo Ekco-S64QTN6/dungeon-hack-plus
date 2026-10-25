@@ -1,0 +1,35 @@
+{
+ "comment": "stand inside an open doorway (25,6): the door-frame jamb post (wallset slot 36) is drawn",
+ "fixture": "fixtures/savegame_nomon",
+ "level": 0,
+ "boot": 5,
+ "checkpoints": [
+  {
+   "goto": [
+    25,
+    5
+   ],
+   "face": "S",
+   "shot": "1_door_closed"
+  },
+  {
+   "click": [
+    226,
+    73
+   ],
+   "wait": 5
+  },
+  {
+   "forward": 1,
+   "shot": "2_in_doorway"
+  },
+  {
+   "face": "E",
+   "shot": "3_in_doorway_E"
+  },
+  {
+   "face": "W",
+   "shot": "4_in_doorway_W"
+  }
+ ]
+}

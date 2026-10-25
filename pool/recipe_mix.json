@@ -417,6 +417,12 @@
   },
   {
    "type": "wallset",
+   "target": "Marble Wallset",
+   "texture": "pool/walls/eob3_forest_front.png",
+   "frames": "36"
+  },
+  {
+   "type": "wallset",
    "target": "Stone Wallset",
    "texture": "pool/walls/menzo_gold_v0.png",
    "frames": "0-5,8,13,16"

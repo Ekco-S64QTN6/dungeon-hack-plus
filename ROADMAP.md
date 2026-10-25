@@ -33,7 +33,7 @@ Specs live in `PLAN.md`; session notes and gotchas in `CLAUDE.md`.
 **Walls, stairs, doors (EOB3, ≈1:1)**
 - [x] M  Map every EOB3 wall object: Marble/Forest/Mausoleum/Ruins walls → 4 of DH's 7 wallsets, each with matching `palette_rules` (`tools/eob3_mapping.py` + `recipe_eob3_complete.json`). **In-game gate ✔ (all four).** Finding: DH's own Marble wallset *is* EOB3 Marble walls (pixel-identical in game), so Marble→Marble is a no-op; to add EOB3 Marble, target a different wallset
 - [x] M  EOB3 stairs (all sets) → the matching DH stairsets; EOB3 doors (Marble, Mausoleum ×2, Ruins ×2, Temple ×2) → DH Door-xx slots (frame → wallset object 1, 3 stages; drop the Ruins "bashed" block; `tools/eob3_mapping.py`)
-- [ ] S  Slot 36 (frame seen from inside the doorway): synthesize from the EOB3 frame panels, or accept the mismatch
+- [x] S  Slot 36 (the door-frame jamb post seen when standing in a doorway facing along the wall): EOB1/2 sets warp a quarter-width slice of their own near front wall onto it (`vmp_walls`), EOB3 sets their exported front panel, Menzo sets their wall face. Identified in game by painting it (`smoke/doorway.json`), then checked
 - [x] M  Wall decorations, keyholes, levers, gem holes, special decos: map EOB3 decoration resources (all 18-panel) onto DH `Wall Deco nn` / `Keyhole nn` / lever resources (`tools/eob3_mapping.py` maps 18 decos, 12 keyholes, 8 levers; `recipe_eob3_decorations.json` built & verified with -118 KB payload savings)
 - [ ] M  Other wallset objects 2–12 (overlays such as cracks and moss): identify which DH script draws each, then source equivalents
 

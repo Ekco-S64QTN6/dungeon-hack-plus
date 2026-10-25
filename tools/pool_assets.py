@@ -7,6 +7,7 @@ games, so a fresh clone runs this once after filling base_games/:
   pool/floors/<SET>_backdrop.png     EOB1/EOB2 floor/ceiling backdrops (VMP backdrop entries)
   pool/walls/<SET>_wt<N>_front.png   EOB1/EOB2 near front walls (used by the early presets)
   pool/floors/eob3_<set>.png         EOB3 backdrops (19th frame of each wall object)
+  pool/walls/eob3_<set>_front.png    EOB3 near front wall (slot 36 texture)
   pool/monsters/<name>/0..5.png      EOB1/EOB2 (tools/monsters.py) and EOB3 (tools/eob3_monsters.py)
   pool/sounds/raw|wav                EOB3 PCM (tools/sounds.py)
   pool/walls/menzo_*, pool/floors/menzo_*   Menzoberranzan walls and projected floors (tools/menzo_walls.py)
@@ -58,6 +59,7 @@ def eob3_floors():
     for wall, pal, _ in eob_classic.EOB3_SETS:
         img, _ = eob_classic.eob3_colours(e3, wall, pal)
         Image.fromarray(img).save(os.path.join(POOL, 'floors', 'eob3_%s.png' % wall.split()[0].lower()))
+        Image.fromarray(eob_classic.eob3_front(e3, wall, pal)).save(os.path.join(POOL, 'walls', 'eob3_%s_front.png' % wall.split()[0].lower()))
     print('eob3 floors -> pool/floors')
 
 

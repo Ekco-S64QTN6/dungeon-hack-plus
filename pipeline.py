@@ -790,7 +790,7 @@ def job_vmp_walls(r, job, pal):
         return blocks, ent, lambda px: pal[np.array([remap[16 + v] for v in px], np.uint8)]
     sets = {name: load_set(name) for name in {job['set'], job.get('frame_set', job['set']), job.get('stairs_set', job['set'])}}
 
-    def fill(target, plan):            # plan: [(dh_panel_index, set, walltype, pos)]
+    def fill(target, plan, post=None):    # plan: [(dh_panel_index, set, walltype, pos)]; post: (set, walltype) for slot 36
         idx = r.names()[target]
         frames = aesop.decode_shapes(r.entry(idx)[2])
         got = []
@@ -811,6 +811,16 @@ def job_vmp_walls(r, job, pal):
                 continue
             ramp = normalize.to_ramp_target(c.reshape(h, w, 3), profile, 240, job.get('dither', False), lohi=tuple(lohi))
             frames[k] = (w, h, bytearray((ramp.reshape(-1) * mk).tobytes()), bytearray(mk.tobytes()))
+        if post is not None and len(frames) > 36 and any(frames[36][3]):
+            # slot 36 = the door-frame jamb seen from inside the doorway: no EOB view shows it, so the
+            # set's own near front wall is warped onto DH's post shape (same brightness stretch)
+            blocks, ent, rgb_of = sets[post[0]]
+            tw, th, tpx, _ = westwood.render_position(blocks, ent, post[1], 'front_d1')
+            tex = normalize.to_ramp_target(rgb_of(tpx).reshape(th, tw, 3), profile, 240, job.get('dither', False), lohi=tuple(lohi))
+            tex = post_slice(tex)
+            w, h, _, m = frames[36]
+            new, mask = normalize.warp_to_mask(tex, m, w, h)
+            frames[36] = (w, h, bytearray(new.tobytes()), m)
         r.replace(idx, aesop.encode_shapes(frames))
 
     wall_plan, frame_plan = [], []
@@ -822,7 +832,7 @@ def job_vmp_walls(r, job, pal):
             wall_plan.append((p1, vs, v1, pos))
         if job.get('frame') is not None:
             frame_plan += [(18 + p0, fs, job['frame'], pos)] + ([(18 + p1, fs, job['frame'], pos)] if p1 is not None else [])
-    fill(job['target'], wall_plan + frame_plan)
+    fill(job['target'], wall_plan + frame_plan, post=(vs, v0) if job.get('frame') is not None else None)
     if job.get('stairs'):
         st = []
         for base_k, wt in ((0, job.get('stairs_down')), (18, job.get('stairs_up'))):
@@ -835,6 +845,13 @@ def job_vmp_walls(r, job, pal):
         fill(job['stairs'], st)
 
 
+def post_slice(tex):
+    """Slot 36 (the door-frame jamb seen from inside the doorway) is a ~30 px post at full height;
+    use a vertical slice a quarter of the face wide so stones/planks keep their proportions."""
+    w = tex.shape[1]
+    return tex[:, w * 3 // 8:w * 5 // 8]
+
+
 def job_wallset(r, job, pal):
     idx = r.names()[job['target']]
     frames = aesop.decode_shapes(r.entry(idx)[2])
@@ -844,7 +861,7 @@ def job_wallset(r, job, pal):
         w, h, px, m = frames[k]
         if not any(m):
             continue
-        new, mask = normalize.warp_to_mask(tex, m, w, h)
+        new, mask = normalize.warp_to_mask(post_slice(tex) if k == 36 else tex, m, w, h)
         frames[k] = (w, h, bytearray(new.tobytes()), m)
     r.replace(idx, aesop.encode_shapes(frames))
 

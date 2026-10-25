@@ -159,6 +159,16 @@ def eob3_colours(e3, wall, pal):
     return img, shape_two
 
 
+def eob3_front(e3, wall, pal):
+    """EOB3 wall object panel 8 (near front wall, 128x96) in the set's colours: texture for slot 36."""
+    en = e3.names()
+    _, fx, _ = aesop.decode_palette(e3.entry(en['Fixed palette'])[2])
+    _, rp, _ = aesop.decode_palette(e3.entry(en[pal])[2])
+    P = np.array(fx, np.uint8).reshape(-1, 3).copy(); P[176:192] = np.array(rp, np.uint8).reshape(-1, 3)
+    w, h, px, m, _ = aesop.decode_vfx110(e3.entry(en[wall])[2])[8]
+    return P[np.frombuffer(bytes(px), np.uint8)].reshape(h, w, 3)
+
+
 def kernel_rules_shape(rgb16):
     lum = [0.299 * rgb16[i] + 0.587 * rgb16[i + 1] + 0.114 * rgb16[i + 2] for i in range(0, 45, 3)]
     return any(b > a + 3 for a, b in zip(lum, lum[1:]))   # rises somewhere -> two-ramp
@@ -187,6 +197,9 @@ def build_eob3():
         rules['floor_palettes'][str(floor)] = match
         rules['allow_pairs'].append([match, match])
         jobs.append({'type': 'floor', 'target': 'Floor-%d' % floor, 'image': path})
+        front = 'pool/walls/eob3_%s_front.png' % wall.split()[0].lower()
+        Image.fromarray(eob3_front(e3, wall, pal)).save(os.path.join(ROOT, front))
+        jobs.append({'type': 'wallset', 'target': '%s Wallset' % dhw, 'texture': front, 'frames': '36'})
     for wall, floors in EOB3_UNTOUCHED_FLOORS.items():
         rules['wall_floors']['%s Wallset' % wall] = floors
     jobs.append({'type': 'sprites', 'target': 'Wererat', 'images': ['pool/monsters/eob3_shadow_hound/%d.png' % i for i in range(6)]})
