@@ -2,7 +2,7 @@
 
 Goal: a stable, playable Dungeon Hack whose random dungeons draw on art, monsters, sound and music from EOB1, EOB2, EOB3 and Menzoberranzan, plus fixes and quality-of-life improvements. It ships as a **patcher that the user applies to their own copy**: recipes and tools only, never patched game files. **The product is the `mix` preset** (`tools/mix.py`); single-game presets are stepping stones and tests.
 
-Status (2026-10-25): every asset port that can be verified without a human ear or a bytecode assembler is done and checked in game. Open: see "What's left" at the end.
+Status (2026-10-31): the mix is a complete, playable game, checked end to end in game: launcher, intro, menu, new game, MAZE, all ten levels to the won ending on several rolls (English, French, German), stairs, save/Continue, heap margin; 1,000 rolls validate. Open: see "What's left" at the end (mostly decisions for the user).
 
 Legend: `[x]` done · `[~]` partly done / candidate · `[ ]` to do. **(G)** = gate: nothing after it starts until it passes.
 Effort: S ≈ hours, M ≈ a day or two, L ≈ several days, XL ≈ open-ended RE.
