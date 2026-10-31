@@ -29,8 +29,11 @@ imported wall sets per game, plus 3 of Dungeon Hack's own):
 - **Decorations**: EOB1/EOB2 wall decorations are placed per view position exactly as EOB
   draws them; EOB3 decorations are converted directly.
 - **Details that match each set**: arches and door-frame posts take the set's own wall;
-  sets without stair art borrow Dungeon Hack's closest stair style (stone, wood, cave, forest);
-  pits, leftover objects and stairs are recoloured to each level's palettes.
+  pits and ceiling holes are the set's own (EOB1, EOB2 and EOB3 pit art) where it has some;
+  pillars, windows and shelves come from Dungeon Hack's closest style (stone column, marble
+  slab, carved columns, wooden post...) or, for EOB3's ruins and forest, from EOB3 itself
+  (rubble, niches, graves, with EOB3's own descriptions); sets without stair art borrow
+  Dungeon Hack's closest stair style; everything is recoloured to each level's palettes.
 - **Monsters**: EOB1/EOB2 monsters, using the exact frame layouts from the games' own level
   scripts. (30 of EOB3's 31 monsters already *are* Dungeon Hack's monsters; the Shadow Hound
   is the one new one.)
@@ -50,7 +53,10 @@ imported wall sets per game, plus 3 of Dungeon Hack's own):
 Everything is checked twice: `verify` checks every resource and the pairing rules (a bad rule
 would hang new-game creation, so rule sets are validated before writing), and headless DOSBox
 runs check the result in game: screenshots of walls, stairs, doors, arches, pillars, pits and
-decorations, audio captures for the music, and a save → Continue → restore round trip.
+decorations, audio captures for the music, a save → Continue → restore round trip, the
+whole new-game path through the launcher (intro, menu, character, MAZE, dungeon), real stairs,
+all ten levels through to the won ending on several rolls and in English, French and German,
+and the engine's own heap measured in play (the mix keeps at least 263 KB free).
 
 ---
 
@@ -93,7 +99,8 @@ synth (e.g. FluidSynth with a soundfont) and keep Dungeon Hack's MT-32/MPU-401 s
    python3 -I dhplus.py launch mix --reroll --skip-intro
    ```
 
-`MIX.TXT` in the build folder lists which game each slot came from.
+`MIX.TXT` in the build folder lists which game each slot came from. In the game window, the
+first click captures the mouse; a middle click releases it.
 
 ---
 
