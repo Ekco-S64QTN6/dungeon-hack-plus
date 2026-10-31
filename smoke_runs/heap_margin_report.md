@@ -26,8 +26,9 @@ on; same as `dosbox-dh.conf`), fixture `savegame` (Rhenovia), music on (MT-32 dr
 * "Free with cache" is just how full the resource cache is (it evicts on demand); the mix fills it more.
 * With monsters left alive (plan `heap_levels`, levels 0-4, where the level-1 party dies), slack minimum:
   DH 286,112, mix 263,328, mix forced to W13 / W15 (largest imported sets) 263,328 each.
-* Both builds quit ~25 s into level 9, identically (not inspected; the party is poisoned and low by then, so most
-  likely death), so level 9 is a short sample.
+* Both builds quit ~25 s into level 9, identically: armageddon (pressed on arrival) kills the final monster, which
+  wins the game ("I've bested the final monster! And the orb -- I see it right there!", then High Scores; seen
+  in game 2026-10-31). So level 9 is a short sample. (An earlier note here guessed death; that was wrong.)
 
 ## Bug 1 (`items` "unlock shape" calls `lock_resource`)
 

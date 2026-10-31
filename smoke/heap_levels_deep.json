@@ -12,7 +12,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -31,7 +31,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -46,7 +46,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -65,7 +65,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -80,7 +80,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -99,7 +99,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -114,7 +114,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -133,7 +133,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -148,7 +148,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -167,7 +167,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -182,7 +182,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -201,7 +201,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -216,7 +216,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -235,7 +235,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -250,7 +250,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -269,7 +269,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -284,7 +284,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"
@@ -303,7 +303,7 @@
   },
   {
    "key": "F7",
-   "settle": 5
+   "settle": 3
   },
   {
    "key": "q",
@@ -318,7 +318,7 @@
    "settle": 2
   },
   {
-   "wait": 4
+   "wait": 1
   },
   {
    "face": "E"

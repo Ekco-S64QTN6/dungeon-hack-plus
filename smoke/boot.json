@@ -1,0 +1,12 @@
+{
+ "comment": "boot the fixture into the dungeon and take one shot (pointer parked); used to compare boots of one save",
+ "fixture": "fixtures/savegame",
+ "level": 0,
+ "boot": 6,
+ "hide_mouse": true,
+ "checkpoints": [
+  {
+   "shot": "start"
+  }
+ ]
+}

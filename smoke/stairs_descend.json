@@ -1,0 +1,52 @@
+{
+ "comment": "take the real stairs down (fixture savegame_nomon_stairsdown, stairs at (11,3) west of the start): step in, answer the first-level-change prompt, look around on level 2, then climb back",
+ "fixture": "fixtures/savegame_nomon_stairsdown",
+ "level": 0,
+ "boot": 5,
+ "hide_mouse": true,
+ "checkpoints": [
+  {
+   "face": "W",
+   "shot": "1_stairs_ahead"
+  },
+  {
+   "forward": 1,
+   "wait": 4
+  },
+  {
+   "shot": "2_after_step"
+  },
+  {
+   "key": "q",
+   "settle": 1
+  },
+  {
+   "key": "Return",
+   "settle": 5
+  },
+  {
+   "shot": "3_level2"
+  },
+  {
+   "key": "KP_9",
+   "settle": 1.5
+  },
+  {
+   "shot": "4_turn"
+  },
+  {
+   "key": "KP_9",
+   "settle": 1.5
+  },
+  {
+   "shot": "5_turn"
+  },
+  {
+   "key": "KP_9",
+   "settle": 1.5
+  },
+  {
+   "shot": "6_turn"
+  }
+ ]
+}

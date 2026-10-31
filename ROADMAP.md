@@ -29,7 +29,7 @@ Working notes, engine facts and test tooling are in `CLAUDE.md`; `PLAN.md` is th
 - [x] S  Ear check: **measured** from a DOSBox audio capture of a door opening: the 1.55 s event only fits `DOOR 01` at 8,000 Hz (1.59 s); at 11,025 Hz no door sample is longer than 1.15 s (`smoke_runs/audio_rate_capture.md`)
 - [x] S  Automated in-game checks in place of the quick look: walls, door (3 stages), stairs up/down, floor, monster reskin (stress: the approaching monster renders as the EOB1 kobold, correct scale and anchoring)
 - [x] S  Bug 1 leak measurement (`heap_probe`, plans `item_juggle`/`item_juggle_pack`): fixed and unfixed builds behave identically (icon locked in a slot, released in hand, no growth), so no leak is measurable on these paths; the fix stays
-- [~] S  Human playtest of `mix`: the user has played, saved and continued (that is how the save crash was found). More play is the best source of remaining issues
+- [~] S  Human playtest of `mix`: the user has played, saved and continued (that is how the save crash was found). More play is the best source of remaining issues Automated end-to-end coverage (2026-10-31): `launch.py` → intro → menu → premade character → difficulty → MAZE → dungeon on a fresh roll; real stairs down; all 10 levels and the won ending (High Scores) on three mix rolls (seeds 1-3); save → Continue → restore
 - [x] **(G)** demo2, demo3, stress, eob3_complete (×4 wallsets), eob1_sewers, eob2_darkmoon and mixed pass the in-game gate (`smoke_runs/gate*/`). The panel pipeline is trusted; the warp pipeline now also reskins door frames (wall object 1). Remaining human playtest is non-blocking
 
 ## Phase 2 — Complete the asset ports (reskins only, no game-logic changes)
@@ -139,5 +139,5 @@ Working notes, engine facts and test tooling are in `CLAUDE.md`; `PLAN.md` is th
 
 ## What's left
 - **Needs the user:** playtesting the mix; EOB2 music (ADL converter, 3 tracks, approximate instruments: worth it?); Menzo's 386 unnamed sound effects (listen and map, or reverse-engineer Menzo's scripts).
-- **Doable, smaller payoff:** keep each level's graphics across Continue (DH re-rolls them every session; a kernel patch could seed "randomize graphics" from the dungeon seed); item icons with a hand-labelled mapping.
+- **Doable, smaller payoff:** item icons with a hand-labelled mapping.
 - **Large engine projects:** a bytecode assembler (new monster types, items, spells, keyboard shortcuts); Thirdeye as a native runtime; Menzo monster sprites.

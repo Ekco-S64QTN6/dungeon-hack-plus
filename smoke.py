@@ -43,6 +43,10 @@ def stage(name):
         shutil.rmtree(sg, ignore_errors=True)
         shutil.copytree(FIXTURE, sg)
     os.makedirs(sg, exist_ok=True)
+    if name != 'base':          # like every build (and launch.py): GOG's savegame files, incl. the high scores
+        sys.path.insert(0, os.path.join(HERE, 'tools'))
+        import paths
+        paths.seed_savegame(dst)
     return dst
 
 

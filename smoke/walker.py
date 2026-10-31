@@ -54,6 +54,8 @@ class Game:
         Image.fromarray(img).save(path)
 
     def key(self, k, hold=0.12, settle=1.1):
+        if self.proc.poll() is not None:
+            raise RuntimeError('DOSBox exited')
         subprocess.run(['xdotool', 'keydown', '--window', self.wid, k], env=self.env)
         time.sleep(hold)
         subprocess.run(['xdotool', 'keyup', '--window', self.wid, k], env=self.env)

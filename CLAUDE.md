@@ -90,9 +90,11 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
   922 stairsets, 950 wallsets, 978 palettes (21), masks 1062 floor→wallsets, 1070 wall palette→wallsets,
   1091 floor palette→floors, 1112 wall palette→floor palettes (32-bit). Per-level picks: statics
   `wallnum/floornum/wallpal/floorpal/doornum/levernum[25]`, `wdeco[100]`.
-* "randomize graphics" is sent by the kernel's `create`, i.e. every time phase-two starts: new game AND every
-  Continue (the picks are not in the save, so every level's look is re-rolled per session; same in original DH,
-  seen in game: three boots of one save, three looks). Time-seeded: wallnum = rnd, floor until mask, floor
+* "randomize graphics" is sent by the kernel's `create`, i.e. every time phase-two starts (time-seeded). Restoring
+  a save slot (Continue) then brings the saved picks back: same look before saving and after restoring
+  (`save_restore.py`, two runs, two different looks). Booting phase-two straight from savegame/ files, as the
+  fixtures do (= the new-game path after MAZE), keeps the fresh roll: three boots of one fixture, three looks
+  (original DH too). So fixture screenshots need `force_graphics`. wallnum = rnd, floor until mask, floor
   palette until mask, wall palette until masks; door until table718 != 0 plus rules on doornum 5-9/11/18
   vs wallnum 0/2/3; decorations wdeco = wallnum·4 + rnd(0..3) and 28 + rnd(0..19). The retry loops never
   give up, so `kernel_rules.problems()` must pass for every rule set.
@@ -198,7 +200,16 @@ Code, recipes and docs only. Ignored: `base_games/`, `build/`, `pool/**` except 
 * Heap: test-only job `heap_probe` (`tools/heap_probe.py`) makes the game rewrite HEAP.LOG every tick
   (tick, heapfree, heapfree after flushing the cache = slack beyond what is locked, xmsfree, level);
   `smoke/heap_log.py PLAN BUILD...` walks and polls it. Plans `heap_levels` (F7 through the levels with
-  monsters; a level-1 party dies on level 5) and `heap_levels_deep` (armageddon on arrival, all 10).
+  monsters; a level-1 party dies on level 5) and `heap_levels_deep` (armageddon on arrival, all 10; on the last
+  level armageddon kills the final monster = the game is won, High Scores, DOSBox exits: "DOSBox exited" there
+  is the ending, not a crash).
+* `smoke/launch_check.py BUILD [--skip-intro] --events "13:click:630/510,19:shot,..."`: the player's path
+  (`launch.py`, `dosbox-dh.conf` with seamless mouse, HACK.BAT) with timed clicks/keys/shots. New game on a
+  1280x960 window: menu Choose Character (630,510), its OK (1090,410), difficulty Easy (195,245); in the dungeon
+  ~40 s after launch. `smoke/boot.json` (one shot after boot), `smoke/stairs_descend.json` (real stairs:
+  `forward`, the session's copy-protection word, level 2).
+* `smoke.stage` seeds GOG's savegame files into fixture runs (without HISCORE.* the High Scores show garbage,
+  in original DH too).
 * `AESOP_DIAG=1` (plan `"dos_pre": ["set AESOP_DIAG=1"]`) enables the kernel's debug keys: F2/F3 change
   floorset/wallset, F4/F5 floor/wall palette, F6 re-randomize graphics, F7/F8 level down/up (same x,y),
   F9 print memory (dprint: invisible), a/A armageddon, x/X experience, o cheat object, t/T text mode,
